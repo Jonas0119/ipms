@@ -10,17 +10,7 @@
  * +----------------------------------------------------------------------
  */
 
-import uploadService from './upload';
-
-/**
- * OSS兼容层 - 保持原有接口不变
- * 内部使用新的统一上传服务
- */
-export default async function(filename) {
-    try {
-        return await uploadService.getOSSConfig(filename);
-    } catch (error) {
-        console.error('获取上传配置失败:', error);
-        throw error;
-    }
-}
+export * from './oss-upload';
+export * from './local-upload';
+export * from './upload-factory';
+export { UploadServiceFactory as uploadService } from './upload-factory';

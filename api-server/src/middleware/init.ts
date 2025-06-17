@@ -20,7 +20,7 @@ function InitMiddleware(): Middleware<DefaultState, DefaultContext> {
     return async (ctx: DefaultContext, next) => {
         const isInitAction = /^\/pc\/init\/\w+$/.test(ctx.request.path);
 
-        if (!config.inited && !/^\/pc\/upload\/sign$/.test(ctx.request.path)) {
+        if (!config.inited && !/^\/pc\/(upload\/(sign|local)|storage\/(config|upload))$/.test(ctx.request.path)) {
             const total = utils.sql.countReader(
                 await ctx.model
                     .from('ejyy_property_company_user')

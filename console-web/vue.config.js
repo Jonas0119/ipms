@@ -37,6 +37,10 @@ module.exports = {
             '/cws': {
                 target: 'ws://127.0.0.1:6688',
                 ws: true
+            },
+            '/static': {
+                target: 'http://127.0.0.1:6688',
+                changeOrigin: true
             }
         }
     }

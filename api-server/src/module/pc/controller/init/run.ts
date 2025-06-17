@@ -53,8 +53,14 @@ const PcInitRunAction = <Action>{
             {
                 name: 'banner',
                 required: true,
-                max: 128,
-                regex: /^\/community_banner\/[a-z0-9]{32}\.(jpg|jpeg|png)$/
+                max: 200,
+                validator: val => {
+                    // 支持OSS格式: /community_banner/hash.ext
+                    const ossPattern = /^\/community_banner\/[a-z0-9]{32}\.(jpg|jpeg|png)$/;
+                    // 支持本地上传格式: http://localhost:6688/static/filename.ext
+                    const localPattern = /^https?:\/\/.+\.(jpg|jpeg|png)$/;
+                    return ossPattern.test(val) || localPattern.test(val);
+                }
             },
             {
                 name: 'province',
@@ -125,8 +131,14 @@ const PcInitRunAction = <Action>{
             {
                 name: 'avatar_url',
                 required: true,
-                max: 128,
-                validator: val => /^\/avatar\/[a-z0-9]{32}|default\.(jpg|jpeg|png)$/.test(val)
+                max: 200,
+                validator: val => {
+                    // 支持OSS格式: /avatar/hash.ext 或 /avatar/default.ext
+                    const ossPattern = /^\/avatar\/[a-z0-9]{32}|default\.(jpg|jpeg|png)$/;
+                    // 支持本地上传格式: http://localhost:6688/static/filename.ext
+                    const localPattern = /^https?:\/\/.+\.(jpg|jpeg|png)$/;
+                    return ossPattern.test(val) || localPattern.test(val);
+                }
             },
             {
                 name: 'phone',

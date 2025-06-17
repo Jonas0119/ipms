@@ -10,17 +10,23 @@
  * +----------------------------------------------------------------------
  */
 
-import uploadService from './upload';
+import { Action } from '~/types/action';
+import { SUCCESS } from '~/constant/code';
 
-/**
- * OSS兼容层 - 保持原有接口不变
- * 内部使用新的统一上传服务
- */
-export default async function(filename) {
-    try {
-        return await uploadService.getOSSConfig(filename);
-    } catch (error) {
-        console.error('获取上传配置失败:', error);
-        throw error;
+// 这个接口已废弃，存储配置应该在后端配置文件中设置
+// 前端只需要从 /storage/config 接口获取存储配置信息
+const PcInitStorageAction = <Action>{
+    router: {
+        path: '/init/storage',
+        method: 'post',
+        authRequired: false
+    },
+    response: async ctx => {
+        ctx.body = {
+            code: SUCCESS,
+            message: '此接口已废弃，请在后端配置文件中设置存储配置'
+        };
     }
-}
+};
+
+export default PcInitStorageAction;

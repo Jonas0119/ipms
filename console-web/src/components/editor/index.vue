@@ -23,9 +23,7 @@
 import { Message } from 'view-design';
 import Emitter from 'view-design/src/mixins/emitter';
 import WangEditor from 'wangeditor';
-import { ASSET_HOST } from '@/config';
 import * as utils from '@/utils';
-import axios from 'axios';
 
 export default {
     name: 'Editor',
@@ -111,41 +109,25 @@ export default {
             const sender = index => {
                 const file = files[index];
 
-                utils.image.parse(file).then(
-                    img => {
-                        const key = `${this.dir}/${img.hash}${img.ext}`;
+                // 使用统一上传服务
+                utils.upload
+                    .upload(file, {
+                        dir: this.dir
+                    })
+                    .then(response => {
+                        if (response.code === 200) {
+                            insertImg(response.data.url);
 
-                        utils.oss(key).then(res => {
-                            const fd = new FormData();
-
-                            for (let key in res) {
-                                fd.append(key, res[key]);
+                            if (index < files.length - 1) {
+                                sender(++index);
                             }
-
-                            fd.append('file', file);
-
-                            axios({
-                                url: ASSET_HOST,
-                                method: 'post',
-                                headers: {
-                                    'Content-Type': 'multipart/form-data'
-                                },
-                                data: fd
-                            })
-                                .then(() => {
-                                    insertImg(`${ASSET_HOST}/${key}`);
-
-                                    if (index < files.length - 1) {
-                                        sender(++index);
-                                    }
-                                })
-                                .catch(() => {
-                                    Message.error(`${file.name}上传失败`);
-                                });
-                        });
-                    },
-                    () => this.onUploadError(file)
-                );
+                        } else {
+                            throw new Error(response.message || '上传失败');
+                        }
+                    })
+                    .catch(error => {
+                        Message.error(`${file.name}上传失败: ${error.message}`);
+                    });
             };
 
             sender(index);

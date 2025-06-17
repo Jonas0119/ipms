@@ -15,7 +15,7 @@
             <FormField title="身份证号码：" prop="idcard" width="300">
                 <Input v-model="form.idcard" placeholder="请输入您的身份证号码" />
             </FormField>
-            <FormField prop="avatar_url" title="头像：" label="请上传200*200以上尺寸图片">
+            <FormField prop="avatar_url" title="头像：" label="请上传您的头像图片">
                 <AvatarCrop dir="avatar" circle v-model="form.avatar_url" />
             </FormField>
             <FormField title="手机号码：" prop="phone" width="200">
@@ -77,8 +77,23 @@ export default {
                 avatar_url: [
                     {
                         required: true,
-                        pattern: /^\/avatar\/[a-z0-9]{32}\.(jpg|jpeg|png)$/,
-                        message: '请上传您的头像，建议使用实拍照片'
+                        validator: (rule, value, callback) => {
+                            if (!value) {
+                                callback(new Error('请上传您的头像，建议使用实拍照片'));
+                                return;
+                            }
+
+                            // 支持OSS上传格式: /avatar/hash.ext
+                            const ossPattern = /^\/avatar\/[a-z0-9]{32}\.(jpg|jpeg|png)$/;
+                            // 支持本地上传格式: http://localhost:6688/static/filename.ext
+                            const localPattern = /^https?:\/\/.+\.(jpg|jpeg|png)$/;
+
+                            if (ossPattern.test(value) || localPattern.test(value)) {
+                                callback();
+                            } else {
+                                callback(new Error('请上传正确格式的头像图片'));
+                            }
+                        }
                     }
                 ],
                 phone: [

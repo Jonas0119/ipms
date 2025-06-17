@@ -2,18 +2,14 @@
     <div class="image-upload">
         <Progress :percent="uploadProgress" status="active" v-if="uploading" />
         <div class="image-upload-preview" v-if="!uploading && result">
-            <img v-lazy="ASSET_HOST + result" />
+            <img v-lazy="getImageUrl(result)" />
         </div>
         <Upload
             :disabled="uploading"
             accept="image/*"
             :show-upload-list="false"
-            :action="ASSET_HOST"
-            :data="uploadData"
-            :on-error="onUploadError"
+            action="data:,"
             :before-upload="onBeforeUpload"
-            :on-success="onUploadSuccess"
-            :on-progress="onUploadProgress"
             class="upload"
             ref="upload"
         >
@@ -65,66 +61,111 @@ export default {
     data() {
         return {
             ASSET_HOST,
-            uploadData: {},
             uploading: false,
             uploadProgress: 0,
-            result: this.value
+            result: this.value,
+            storageConfig: null
         };
     },
     mixins: [Emitter],
+    async created() {
+        // 页面加载时获取存储配置
+        try {
+            this.storageConfig = await utils.upload.getStorageConfig();
+        } catch (error) {
+            console.error('获取存储配置失败:', error);
+            // 在系统未初始化时，这是正常的，不需要显示错误
+        }
+    },
     methods: {
-        onBeforeUpload(file) {
+        async onBeforeUpload(file) {
             this.uploading = true;
             this.uploadProgress = 0;
             this.result = null;
 
-            return new Promise((resolve, reject) => {
+            try {
+                // 重新获取最新的存储配置
+                try {
+                    this.storageConfig = await utils.upload.getStorageConfig();
+                } catch (configError) {
+                    console.error('获取存储配置失败:', configError);
+                    throw new Error('无法获取存储配置，请确保后端存储服务已正确配置');
+                }
+
+                // 图片尺寸验证
+                if (this.width || this.height) {
+                    const isValid = await this.validateImageSize(file);
+                    if (!isValid) {
+                        this.uploading = false;
+                        return false;
+                    }
+                }
+
+                // 使用统一上传服务
+                const response = await utils.upload.upload(file, {
+                    dir: this.dir,
+                    onProgress: progress => {
+                        this.uploadProgress = progress;
+                    }
+                });
+
+                if (response.code === 200) {
+                    this.result = response.data.url;
+                    this.uploading = false;
+                    this.$emit('input', this.result);
+                    this.$emit('on-change', this.result);
+                    this.dispatch('FormItem', 'on-form-change', this.result);
+                    this.$refs.upload.clearFiles();
+                } else {
+                    throw new Error(response.message || '上传失败');
+                }
+            } catch (error) {
+                this.uploading = false;
+                this.result = null;
+                this.$emit('input', '');
+                this.$emit('on-change', '');
+                this.dispatch('FormItem', 'on-form-change', '');
+                this.$refs.upload.clearFiles();
+                Message.error(error.message || '上传失败');
+            }
+
+            // 阻止默认上传行为
+            return false;
+        },
+
+        async validateImageSize(file) {
+            return new Promise(resolve => {
                 utils.image.parse(file).then(
                     img => {
                         if (this.width && this.width !== img.width) {
-                            Message.error(`请上传${this.width}宽度图片`);
-                            this.uploading = false;
-                            return reject();
+                            Message.error(`请上传${this.width}宽度的图片`);
+                            resolve(false);
                         } else if (this.height && this.height !== img.height) {
-                            Message.error(`请上传${this.height}高度图片`);
-                            this.uploading = false;
-                            return reject();
+                            Message.error(`请上传${this.height}高度的图片`);
+                            resolve(false);
                         } else {
-                            const key = `${this.dir}/${img.hash}${img.ext}`;
-                            this.result = `/${key}`;
-
-                            utils.oss(key).then(res => {
-                                this.uploadData = res;
-                                resolve();
-                            });
+                            resolve(true);
                         }
                     },
                     () => {
-                        return reject();
+                        Message.error('图片解析失败');
+                        resolve(false);
                     }
                 );
             });
         },
-        onUploadProgress(e) {
-            this.uploadProgress = Math.floor((e.loaded / e.total) * 100);
-        },
-        onUploadSuccess() {
-            setTimeout(() => {
-                this.uploading = false;
-                this.$emit('input', this.result);
-                this.$emit('on-change', this.result);
-                this.dispatch('FormItem', 'on-form-change', this.result);
-                this.$refs.upload.clearFiles();
-            }, 1000);
-        },
-        onUploadError() {
-            Message.error('上传错误！');
-            this.uploading = false;
-            this.result = null;
-            this.$emit('input', '');
-            this.$emit('on-change', '');
-            this.dispatch('FormItem', 'on-form-change', '');
-            this.$refs.upload.clearFiles();
+
+        getImageUrl(url) {
+            if (!url) return '';
+
+            // 如果是完整URL，直接返回
+            if (url.startsWith('http')) {
+                return url;
+            }
+
+            // 否则拼接baseUrl
+            const baseUrl = this.storageConfig?.baseUrl || ASSET_HOST;
+            return url.startsWith('/') ? `${baseUrl}${url}` : `${baseUrl}/${url}`;
         }
     },
     watch: {

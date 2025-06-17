@@ -19,6 +19,10 @@ export { default as PcUserCaptchaAction } from './controller/user/captcha';
 export { default as PcUserResetAction } from './controller/user/reset';
 
 export { default as PcUploadSignAction } from './controller/upload/sign';
+export { default as PcUploadLocalAction } from './controller/upload/local';
+
+export { default as PcStorageConfigAction } from './controller/storage/config';
+export { default as PcStorageUploadAction } from './controller/storage/upload';
 
 export { default as PcDepartmentCreateAction } from './controller/department/create';
 export { default as PcDepartmentUpdateAction } from './controller/department/update';
@@ -133,6 +137,10 @@ export { default as PcBuildingRegisteredAction } from './controller/building/reg
 export { default as PcBuildingHistoryAction } from './controller/building/history';
 export { default as PcBuildingParseAction } from './controller/building/parse';
 export { default as PcBuildingImportAction } from './controller/building/import';
+export { default as PcBuildingTemplateAction } from './controller/building/template';
+
+export { default as PcTemplateConfigAction } from './controller/template/config';
+export { default as PcTemplateDownloadAction } from './controller/template/download';
 
 export { default as PcColleagueListAction } from './controller/colleague/list';
 export { default as PcColleagueDetailAction } from './controller/colleague/detail';

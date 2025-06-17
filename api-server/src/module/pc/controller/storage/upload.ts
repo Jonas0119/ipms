@@ -2,7 +2,7 @@
  * +----------------------------------------------------------------------
  * | 「e家宜业」
  * +----------------------------------------------------------------------
- * | Copyright (c) 2020~2022 https://www.chowa.cn All rights reserved.
+ * | Copyright (c) 2020-2024 https://www.chowa.cn All rights reserved.
  * +----------------------------------------------------------------------
  * | Licensed 未经授权禁止移除「e家宜业」和「卓佤科技」相关版权
  * +----------------------------------------------------------------------
@@ -11,50 +11,48 @@
  */
 
 import { Action } from '~/types/action';
-import { SUCCESS } from '~/constant/code';
-import { uploadService } from '~/service/upload';
+import { SUCCESS, DATA_MODEL_UPDATE_FAIL } from '~/constant/code';
 import { StorageServiceFactory } from '~/service/storage/storage-factory';
 import config from '~/config';
 
-const PcUploadSignAction = <Action>{
+const PcStorageUploadAction = <Action>{
     router: {
-        path: '/upload/sign',
-        method: 'get',
+        path: '/storage/upload',
+        method: 'post',
         authRequired: config.inited
     },
 
     response: async ctx => {
-        // 优先使用新的存储服务
         try {
             const storageService = StorageServiceFactory.getStorageService();
-            const uploadConfig = await storageService.getUploadConfig();
+
+            // 检查是否支持服务端上传
+            if (!storageService.handleFileUpload) {
+                ctx.body = {
+                    code: DATA_MODEL_UPDATE_FAIL,
+                    message: '当前存储模式不支持服务端上传'
+                };
+                return;
+            }
+
+            const result = await storageService.handleFileUpload(ctx);
 
             ctx.body = {
                 code: SUCCESS,
                 data: {
-                    ...uploadConfig
+                    success: true,
+                    url: result.url,
+                    key: result.key
                 }
             };
         } catch (error) {
-            // 如果新服务失败，回退到原有服务
-            console.warn('Storage service failed, fallback to upload service:', error);
-
-            const service = uploadService.getUploadService();
-            const signData = service.getUploadSign();
-
-            // 添加baseUrl信息
-            const baseUrl = StorageServiceFactory.getBaseUrl();
-
+            console.error('Storage upload error:', error);
             ctx.body = {
-                code: SUCCESS,
-                data: {
-                    ...signData,
-                    mode: config.storage.mode,
-                    baseUrl
-                }
+                code: DATA_MODEL_UPDATE_FAIL,
+                message: error.message || '文件上传失败'
             };
         }
     }
 };
 
-export default PcUploadSignAction;
+export default PcStorageUploadAction;

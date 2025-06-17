@@ -32,6 +32,7 @@ import IpMiddleware from '~/middleware/ip';
 import HeaderMiddleware from '~/middleware/header';
 import WatcherMiddleware from '~/middleware/watcher';
 import InitMiddleware from '~/middleware/init';
+import StaticMiddleware from '~/middleware/static';
 
 const app = new Koa();
 const router = new KoaRouter();
@@ -72,6 +73,7 @@ app.use(KoaBodyMiddleware({ multipart: true }))
             app
         )
     )
+    .use(StaticMiddleware())
     .use(ModelMiddleware())
     .use(IpMiddleware())
     .use(HeaderMiddleware())

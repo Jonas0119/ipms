@@ -30,6 +30,47 @@ interface Config {
         port: number;
         password: string;
     };
+    // 统一存储配置 (整合原upload和aliyun配置)
+    storage: {
+        mode: 'local' | 'oss' | 'minio'; // 存储模式
+        template?: {
+            path: string; // 模板文件存储路径
+            files: {
+                [key: string]: string; // 模板文件映射
+            };
+        };
+        local?: {
+            savePath: string; // 本地存储路径
+            urlPrefix: string; // URL前缀
+            baseUrl: string; // 访问基础URL
+        };
+        oss?: {
+            accessKeyId: string;
+            accessKeySecret: string;
+            bucket: string;
+            region: string;
+            baseUrl: string; // OSS访问基础URL
+            customDomain?: string; // 可选：自定义域名
+        };
+        minio?: {
+            endpoint: string; // MinIO服务地址
+            accessKey: string; // MinIO访问密钥
+            secretKey: string; // MinIO密钥
+            bucket: string; // 存储桶名称
+            region?: string; // 区域
+            useSSL: boolean; // 是否使用SSL
+            baseUrl: string; // 访问基础URL
+            customDomain?: string; // 可选：自定义域名
+        };
+    };
+    // 保留原upload配置以兼容现有代码
+    upload: {
+        mode: 'oss' | 'local' | 'minio';
+        local?: {
+            savePath: string;
+            urlPrefix: string;
+        };
+    };
     wechat: {
         ump: {
             appid: string;
@@ -98,7 +139,19 @@ function generateConfig(): Config {
     let customConfig = <CustomConfig>{};
 
     try {
-        customConfig = yaml.load(fs.readFileSync(path.join(process.cwd(), '.ejyyrc'), 'utf-8'));
+        // 先尝试当前目录
+        let configPath = path.join(process.cwd(), '.ejyyrc');
+
+        // 如果当前目录不存在,则尝试上级目录
+        if (!fs.existsSync(configPath)) {
+            configPath = path.join(process.cwd(), '..', '.ejyyrc');
+        }
+
+        if (!fs.existsSync(configPath)) {
+            throw new Error('未找到配置文件');
+        }
+
+        customConfig = yaml.load(fs.readFileSync(configPath, 'utf-8'));
     } catch (e) {
         cwlog.error('未检测到配置文件，程序退出');
         process.exit();
@@ -136,6 +189,68 @@ function generateConfig(): Config {
             port: 6379,
             password: '',
             ...customConfig.redis
+        },
+        // 处理存储配置的兼容性
+        storage: (() => {
+            const storageConfig = customConfig.storage || {};
+            const uploadConfig = customConfig.upload || {};
+            const aliyunConfig = customConfig.aliyun || {};
+
+            // 如果使用新的storage配置，优先使用storage配置
+            // 否则从原有的upload和aliyun配置中迁移
+            if (storageConfig.mode) {
+                return {
+                    mode: 'local',
+                    template: {
+                        path: 'template',
+                        files: {
+                            building_import: '固定资产导入模板.xlsx'
+                        }
+                    },
+                    local: {
+                        savePath: './uploads',
+                        urlPrefix: '/static',
+                        baseUrl: 'http://127.0.0.1:6688'
+                    },
+                    ...storageConfig
+                };
+            } else {
+                // 兼容旧配置，自动迁移
+                const finalStorageConfig = {
+                    mode: uploadConfig.mode || 'local',
+                    local: uploadConfig.local
+                        ? {
+                              ...uploadConfig.local,
+                              baseUrl: 'http://127.0.0.1:6688' // 默认值
+                          }
+                        : {
+                              savePath: './uploads',
+                              urlPrefix: '/static',
+                              baseUrl: 'http://127.0.0.1:6688'
+                          },
+                    oss: aliyunConfig.oss
+                        ? {
+                              accessKeyId: aliyunConfig.accessKeyId || '',
+                              accessKeySecret: aliyunConfig.accessKeySecret || '',
+                              bucket: aliyunConfig.oss.bucket || '',
+                              region: aliyunConfig.oss.region || '',
+                              baseUrl:
+                                  aliyunConfig.oss.host ||
+                                  `https://${aliyunConfig.oss.bucket}.${aliyunConfig.oss.region}.aliyuncs.com`
+                          }
+                        : undefined
+                };
+                return finalStorageConfig;
+            }
+        })(),
+        upload: {
+            mode: customConfig.storage?.mode || customConfig.upload?.mode || 'local',
+            local: customConfig.storage?.local ||
+                customConfig.upload?.local || {
+                    savePath: './uploads',
+                    urlPrefix: '/static'
+                },
+            ...customConfig.upload
         },
         wechat: {
             // 小程序

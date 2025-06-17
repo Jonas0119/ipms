@@ -19,7 +19,7 @@
             :show-upload-list="false"
             ref="upload"
             :before-upload="onBeforeUpload"
-            action="/"
+            action="data:,"
             multiple
         >
             <div class="upload-trigger">
@@ -55,7 +55,6 @@ import { Upload, Button, Icon, Progress, Message } from 'view-design';
 import Emitter from 'view-design/src/mixins/emitter';
 import { ASSET_HOST } from '@/config';
 import * as utils from '@/utils';
-import axios from 'axios';
 
 export default {
     name: 'MultipleImageUpload',
@@ -88,56 +87,54 @@ export default {
     },
     mixins: [Emitter],
     methods: {
-        onBeforeUpload(file) {
-            if (this.total === this.max) {
-                Message.error(`最多允许上传${this.max}张图片`);
+        async onBeforeUpload(file) {
+            if (this.total >= this.max) {
+                Message.error(`最多只能上传${this.max}张图片`);
                 return false;
             }
+
             this.total++;
 
-            utils.image.parse(file).then(
-                img => {
-                    const key = `${this.dir}/${img.hash}${img.ext}`;
+            try {
+                const img = await utils.image.parse(file);
+                const uuid = img.hash;
 
-                    this.result.unshift({
-                        name: `/${key}`,
-                        url: `${ASSET_HOST}/${key}`,
-                        progress: 0,
-                        uuid: img.hash
-                    });
+                this.result.unshift({
+                    name: '',
+                    url: '',
+                    progress: 0,
+                    uuid: uuid
+                });
 
-                    file.uuid = img.hash;
+                file.uuid = uuid;
 
-                    utils.oss(key).then(res => {
-                        const fd = new FormData();
-
-                        for (let key in res) {
-                            fd.append(key, res[key]);
+                // 使用统一上传服务
+                const response = await utils.upload.upload(file, {
+                    dir: this.dir,
+                    onProgress: progress => {
+                        const index = this.result.findIndex(item => item.uuid === file.uuid);
+                        if (index !== -1) {
+                            this.result[index].progress = progress;
                         }
+                    }
+                });
 
-                        fd.append('file', file);
-
-                        axios({
-                            url: ASSET_HOST,
-                            method: 'post',
-                            headers: {
-                                'Content-Type': 'multipart/form-data'
-                            },
-                            onUploadProgress: e => this.onUploadProgress(e, file),
-                            data: fd
-                        })
-                            .then(() => this.onUploadSuccess())
-                            .catch(() => this.onUploadError(file));
-                    });
-                },
-                () => this.onUploadError(file)
-            );
+                if (response.code === 200) {
+                    const index = this.result.findIndex(item => item.uuid === file.uuid);
+                    if (index !== -1) {
+                        this.result[index].name = response.data.url;
+                        this.result[index].url = response.data.url;
+                        this.result[index].progress = 100;
+                    }
+                    this.onUploadSuccess();
+                } else {
+                    throw new Error(response.message || '上传失败');
+                }
+            } catch (error) {
+                this.onUploadError(file);
+            }
 
             return false;
-        },
-        onUploadProgress(e, file) {
-            const index = this.result.findIndex(item => item.uuid === file.uuid);
-            this.result[index].progress = Math.floor((e.loaded / e.total) * 100);
         },
         onUploadSuccess() {
             setTimeout(() => {

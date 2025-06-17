@@ -25,7 +25,7 @@ module.exports = {
     component: () => import('./index'),
     children: [
         require('./dashboard/router'),
-        require('./epidemic/router'),
+        //require('./epidemic/router'),
         require('./notice/router'),
         require('./pet/router'),
         require('./fitment/router'),

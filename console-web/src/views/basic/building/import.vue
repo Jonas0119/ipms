@@ -11,7 +11,7 @@
 
             <div v-if="step === 0">
                 <Upload
-                    action="/"
+                    action="data:,"
                     type="drag"
                     accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
                     :before-upload="parseFile"
@@ -23,13 +23,7 @@
                     <p>点击或拖拽访固定资产导入文件到此处上传，导入住宅、商户总数量受许可限制</p>
                 </Upload>
 
-                <a
-                    :href="
-                        ASSET_HOST +
-                            '/template/%E5%9B%BA%E5%AE%9A%E8%B5%84%E4%BA%A7%E5%AF%BC%E5%85%A5%E6%A8%A1%E6%9D%BF.xlsx'
-                    "
-                    target="_blank"
-                >
+                <a href="#" @click="downloadTemplate">
                     <Icon type="ios-help-circle" />
                     模板文件下载
                 </a>
@@ -82,8 +76,9 @@
 import { mapGetters } from 'vuex';
 import { Header, Result, WaterMark } from '@/components';
 import { Card, Button, Steps, Step, Upload, Icon, Message, Table, Modal } from 'view-design';
-import * as utils from '@/utils';
 import { ASSET_HOST } from '@/config';
+import * as utils from '@/utils';
+import templateService from '@/utils/template';
 
 const columns = [
     {
@@ -201,6 +196,15 @@ export default {
         reImport() {
             this.step = 0;
             this.file = null;
+        },
+        async downloadTemplate() {
+            try {
+                await templateService.downloadTemplate('building_import');
+                Message.success('模板下载成功');
+            } catch (error) {
+                // 错误处理已在templateService中完成
+                console.error('模板下载失败:', error);
+            }
         }
     },
     computed: {

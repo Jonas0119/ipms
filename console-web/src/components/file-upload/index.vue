@@ -88,60 +88,63 @@ export default {
     },
     mixins: [Emitter],
     methods: {
-        onBeforeUpload(file) {
+        async onBeforeUpload(file) {
             this.uploading = true;
             this.uploadProgress = 0;
             this.result = null;
             this.fileName = file.name;
 
-            return new Promise((resolve, reject) => {
-                utils.file.parse(file).then(
-                    params => {
-                        const key = `${this.dir}/${params.hash}${params.ext}`;
-                        this.result = `/${key}`;
-
-                        utils.oss(key).then(res => {
-                            this.uploadData = res;
-                            resolve();
-                        });
-                    },
-                    () => {
-                        return reject();
+            try {
+                // 使用统一上传服务
+                const response = await utils.upload.upload(file, {
+                    dir: this.dir,
+                    onProgress: progress => {
+                        this.uploadProgress = progress;
                     }
-                );
-            });
-        },
-        onUploadProgress(e) {
-            this.uploadProgress = Math.floor((e.loaded / e.total) * 100);
-        },
-        onUploadSuccess() {
-            setTimeout(() => {
-                const result = {
-                    url: this.result,
-                    name: this.fileName
-                };
+                });
 
+                if (response.code === 200) {
+                    const result = {
+                        url: response.data.url,
+                        name: this.fileName
+                    };
+
+                    this.result = response.data.url;
+                    this.uploading = false;
+                    this.$emit('input', result);
+                    this.$emit('on-change', result);
+                    this.dispatch('FormItem', 'on-form-change', result);
+                    this.$refs.upload.clearFiles();
+                } else {
+                    throw new Error(response.message || '上传失败');
+                }
+            } catch (error) {
+                const result = {
+                    url: undefined,
+                    name: undefined
+                };
+                Message.error('上传失败：' + error.message);
                 this.uploading = false;
+                this.result = null;
+                this.fileName = null;
+
                 this.$emit('input', result);
                 this.$emit('on-change', result);
                 this.dispatch('FormItem', 'on-form-change', result);
                 this.$refs.upload.clearFiles();
-            }, 1000);
+            }
+
+            // 阻止默认上传行为
+            return false;
+        },
+        onUploadProgress() {
+            // 这个方法现在由统一上传服务的onProgress回调处理
+        },
+        onUploadSuccess() {
+            // 这个方法现在不需要了，因为上传成功在onBeforeUpload中处理
         },
         onUploadError() {
-            const result = {
-                url: undefined,
-                name: undefined
-            };
-            Message.error('上传错误！');
-            this.uploading = false;
-            this.result = null;
-            this.fileName = null;
-
-            this.$emit('input', result);
-            this.$emit('on-change', result);
-            this.dispatch('FormItem', 'on-form-change', result);
-            this.$refs.upload.clearFiles();
+            // 这个方法现在不需要了，因为错误处理在onBeforeUpload中处理
         }
     },
     watch: {

@@ -12,3 +12,7 @@ project.private.config.json
 *.zip
 *.pem
 *.env
+console-web/node_modules/
+api-server/node_modules/
+api-server/uploads/
+api-server/dist/

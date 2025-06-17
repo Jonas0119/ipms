@@ -9,13 +9,16 @@
             <UserInitCommunity ref="community" />
 
             <div class="cw-form-actions">
-                <Button type="primary" :loading="submiting" @click="submit">立即初始化</Button>
+                <Button type="primary" :loading="submiting" @click="submit">
+                    立即初始化
+                </Button>
             </div>
         </div>
         <div v-else class="container">
             <Result title="系统初始化成功">
                 <div slot="extra">
                     <p>感谢您的支持和信赖。</p>
+                    <p>系统已成功初始化，您可以开始使用了。</p>
                 </div>
 
                 <div slot="actions">
@@ -41,7 +44,7 @@
  */
 
 import { Copyright, Result, SimpleHeader } from '@/components';
-import { Button } from 'view-design';
+import { Button, Icon } from 'view-design';
 import * as utils from '@/utils';
 import UserInitProfile from './components/profile';
 import UserInitCommunity from './components/community';
@@ -56,8 +59,8 @@ export default {
     },
     methods: {
         submit() {
-            Promise.all([this.$refs.profile.validate(), this.$refs.community.validate()]).then(
-                ([profile, community]) => {
+            Promise.all([this.$refs.profile.validate(), this.$refs.community.validate()])
+                .then(([profile, community]) => {
                     const data = {
                         ...profile,
                         ...community,
@@ -77,15 +80,20 @@ export default {
                             this.success = true;
                         })
                         .catch(() => (this.submiting = false));
-                }
-            );
+                })
+                .catch(error => {
+                    console.error('Validation failed:', error);
+                    this.$Message.error('请检查配置信息是否完整');
+                });
         },
+
         goLogin() {
             this.$router.replace('/user/login');
         }
     },
     components: {
         Button,
+        Icon,
         Copyright,
         Result,
         SimpleHeader,

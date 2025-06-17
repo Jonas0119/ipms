@@ -12,26 +12,33 @@
 
 import { Action } from '~/types/action';
 import { SUCCESS } from '~/constant/code';
-import { uploadService } from '~/service/upload';
+import * as ROLE from '~/constant/role_access';
+import { TemplateService } from '~/service/template';
 
-const MpUploadSignAction = <Action>{
+const PcTemplateConfigAction = <Action>{
     router: {
-        path: '/upload/sign',
+        path: '/template/config',
         method: 'get',
-        authRequired: true
+        authRequired: true,
+        roles: [ROLE.ANYONE]
     },
-
     response: async ctx => {
-        const service = uploadService.getUploadService();
-        const signData = service.getUploadSign();
+        try {
+            const templateConfig = TemplateService.getTemplateConfig();
 
-        ctx.body = {
-            code: SUCCESS,
-            data: {
-                ...signData
-            }
-        };
+            ctx.body = {
+                code: SUCCESS,
+                data: templateConfig
+            };
+        } catch (error) {
+            console.error('Get template config error:', error);
+            ctx.body = {
+                code: SUCCESS,
+                data: { templates: {} },
+                message: '获取模板配置失败'
+            };
+        }
     }
 };
 
-export default MpUploadSignAction;
+export default PcTemplateConfigAction;

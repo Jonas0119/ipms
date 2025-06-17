@@ -544,45 +544,32 @@ export default {
             const imgUrl = canvas.toDataURL('image/jpeg');
             const file = this.dataToBlob(imgUrl);
 
-            utils.image.parse(file).then(img => {
-                const key = `${this.dir}/${img.hash}${img.ext}`;
-                const fd = new FormData();
-                this.result = `/${key}`;
-                this.uploading = true;
+            this.uploading = true;
 
-                utils.oss(key).then(res => {
-                    for (let prop in res) {
-                        fd.append(prop, res[prop]);
+            // 使用统一上传服务
+            utils.upload
+                .upload(file, {
+                    dir: this.dir,
+                    onProgress: progress => {
+                        this.progress = progress;
                     }
-
-                    fd.append('file', file);
-
-                    const xhr = new XMLHttpRequest();
-                    xhr.open('post', res.host, true);
-                    xhr.onreadystatechange = () => {
-                        if (xhr.readyState !== 4) {
-                            return;
-                        }
-                        if (xhr.status === 200 || xhr.status === 201 || xhr.staus === 202) {
-                            setTimeout(() => {
-                                this.visible = false;
-                                this.uploading = false;
-                                this.$emit('input', this.result);
-                                this.$emit('on-change', this.result);
-                                this.dispatch('FormItem', 'on-form-change', this.result);
-                            }, 1000);
-                        }
-                    };
-                    xhr.upload.addEventListener(
-                        'progress',
-                        e => {
-                            this.progress = (100 * Math.round(e.loaded)) / e.total;
-                        },
-                        false
-                    ); //监听进度
-                    xhr.send(fd);
+                })
+                .then(response => {
+                    if (response.code === 200) {
+                        this.result = response.data.url;
+                        this.visible = false;
+                        this.uploading = false;
+                        this.$emit('input', this.result);
+                        this.$emit('on-change', this.result);
+                        this.dispatch('FormItem', 'on-form-change', this.result);
+                    } else {
+                        throw new Error(response.message || '上传失败');
+                    }
+                })
+                .catch(error => {
+                    this.uploading = false;
+                    this.$Message.error(error.message || '上传失败');
                 });
-            });
         },
         cancel() {
             this.visible = false;

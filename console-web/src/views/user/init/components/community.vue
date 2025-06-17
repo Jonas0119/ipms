@@ -18,8 +18,8 @@
             <FormField title="客服电话：" prop="service_phone" width="200">
                 <Input v-model="form.service_phone" placeholder="请输入客服电话" />
             </FormField>
-            <FormField title="小区照片：" prop="banner" label="请上传900*506尺寸图片，用于业主端App展示">
-                <ImageUpload v-model="form.banner" dir="community_banner" :width="900" :height="506" />
+            <FormField title="小区照片：" prop="banner" label="请上传小区照片，用于业主端App展示">
+                <ImageUpload v-model="form.banner" dir="community_banner" />
             </FormField>
             <FormField prop="access_nfc" title="NFC门禁：">
                 <OSwitch v-model="form.access_nfc" :true-value="1" :false-value="0">

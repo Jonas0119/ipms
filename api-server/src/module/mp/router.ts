@@ -43,6 +43,7 @@ export { default as MpFeedbackProblemAction } from './controller/feedback/proble
 export { default as MpFeedbackFeatureAction } from './controller/feedback/feature';
 
 export { default as MpUploadSignAction } from './controller/upload/sign';
+export { default as MpUploadLocalAction } from './controller/upload/local';
 
 export { default as MpAccessListAction } from './controller/access/list';
 export { default as MpAccessDoorAction } from './controller/access/door';
