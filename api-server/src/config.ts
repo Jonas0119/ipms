@@ -200,7 +200,7 @@ function generateConfig(): Config {
             // 否则从原有的upload和aliyun配置中迁移
             if (storageConfig.mode) {
                 return {
-                    mode: 'local',
+                    mode: storageConfig.mode, // 使用配置文件中的实际模式
                     template: {
                         path: 'template',
                         files: {

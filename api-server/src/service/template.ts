@@ -100,9 +100,20 @@ export class TemplateService {
 
             case 'oss':
             case 'minio':
-                // 对于云存储，通过存储服务检查
-                const storageService = StorageServiceFactory.getStorageService();
-                return await storageService.fileExists(filePath);
+                try {
+                    // 对于云存储，通过存储服务检查
+                    const storageService = StorageServiceFactory.getStorageService();
+                    if (!storageService.fileExists) {
+                        // 如果存储服务不支持fileExists方法，假设文件存在
+                        console.warn(`Storage service does not support fileExists method for mode: ${currentMode}`);
+                        return true;
+                    }
+                    return await storageService.fileExists(filePath);
+                } catch (error) {
+                    console.error(`Error checking template file existence: ${error.message}`);
+                    // 出错时假设文件存在，避免阻塞下载功能
+                    return true;
+                }
 
             default:
                 return false;
@@ -132,11 +143,13 @@ export class TemplateService {
                 return `${baseUrl}/${template.path}/${filename}`;
 
             case 'minio':
-                const { customDomain: minioDomain } = config.storage.minio!;
+                const { customDomain: minioDomain, bucket } = config.storage.minio!;
                 if (minioDomain) {
                     return `${minioDomain}/${template.path}/${filename}`;
                 }
-                return undefined; // MinIO通常需要预签名URL
+                // 对于MinIO，即使没有自定义域名，也可以提供直链
+                // 但这需要存储桶是公开访问的
+                return `${baseUrl}/${bucket}/${template.path}/${filename}`;
 
             default:
                 return undefined;
@@ -164,8 +177,9 @@ export class TemplateService {
 
             case 'oss':
             case 'minio':
-                // 对于云存储，这里可以扩展为通过存储服务获取文件流
-                // 目前先返回null，让调用方使用直链下载
+                // 对于云存储，优先使用直链下载
+                // 如果没有直链，返回null让调用方使用API下载模式
+                console.log(`Template file for ${templateType} will be downloaded via direct URL or API fallback`);
                 return null;
 
             default:

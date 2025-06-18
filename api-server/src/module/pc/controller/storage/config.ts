@@ -23,9 +23,15 @@ const PcStorageConfigAction = <Action>{
     },
 
     response: async ctx => {
+        // 获取查询参数中的文件信息
+        const { filename, mimetype, dir } = ctx.query;
+        const filenameStr = Array.isArray(filename) ? filename[0] : filename;
+        const mimetypeStr = Array.isArray(mimetype) ? mimetype[0] : mimetype;
+        const dirStr = Array.isArray(dir) ? dir[0] : dir;
+        
         try {
             const storageService = StorageServiceFactory.getStorageService();
-            const uploadConfig = await storageService.getUploadConfig();
+            const uploadConfig = await storageService.getUploadConfig(filenameStr, mimetypeStr, dirStr);
             const currentMode = StorageServiceFactory.getCurrentMode();
 
             // 构建统一的配置响应
@@ -58,6 +64,8 @@ const PcStorageConfigAction = <Action>{
                 case 'minio':
                     if (uploadConfig.presignedUrl) {
                         response.presignedUrl = uploadConfig.presignedUrl;
+                        response.bucket = uploadConfig.bucket;
+                        response.key = uploadConfig.key;
                     } else {
                         // 如果没有预签名URL，使用服务端上传
                         response.uploadStrategy = 'server';

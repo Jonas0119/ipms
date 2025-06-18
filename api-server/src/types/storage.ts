@@ -32,6 +32,7 @@ export interface StorageConfig {
     secretKey?: string;
     bucket?: string;
     presignedUrl?: string;
+    key?: string;
 }
 
 // 文件上传结果接口
@@ -43,7 +44,7 @@ export interface UploadResult {
 // 统一存储服务接口
 export interface IStorageService {
     // 获取上传配置
-    getUploadConfig(): Promise<StorageConfig> | StorageConfig;
+    getUploadConfig(filename?: string, mimetype?: string, directory?: string): Promise<StorageConfig> | StorageConfig;
 
     // 处理文件上传
     handleFileUpload?(ctx: any): Promise<UploadResult>;

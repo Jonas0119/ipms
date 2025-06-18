@@ -15,7 +15,7 @@ import config from '~/config';
 import { IStorageService, StorageConfig, UploadResult } from '~/types/storage';
 
 export class OssStorageService implements IStorageService {
-    getUploadConfig(): StorageConfig {
+    getUploadConfig(filename?: string, mimetype?: string, directory?: string): StorageConfig {
         const { accessKeyId, accessKeySecret, bucket, region, customDomain } = config.storage.oss!;
         const expire = Date.now() + 60 * 30 * 1000; // 30分钟有效期
 

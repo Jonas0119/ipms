@@ -36,7 +36,10 @@ export default function StaticMiddleware(): Middleware {
             return await next();
         }
 
-        if (config.upload.mode !== 'local') {
+        // 使用新的storage配置，向后兼容upload配置
+        const isLocalMode = config.storage.mode === 'local' || config.upload.mode === 'local';
+        
+        if (!isLocalMode) {
             ctx.status = 404;
             ctx.body = 'Not Found';
             return;
@@ -44,10 +47,13 @@ export default function StaticMiddleware(): Middleware {
 
         try {
             const filePath = decodeURIComponent(ctx.path.replace('/static/', ''));
-            const fullPath = path.join(process.cwd(), config.upload.local!.savePath, filePath);
+            
+            // 优先使用新的storage配置，向后兼容upload配置
+            const savePath = config.storage.local?.savePath || config.upload.local?.savePath || './uploads';
+            const fullPath = path.join(process.cwd(), savePath, filePath);
 
             const resolvedPath = path.resolve(fullPath);
-            const allowedDir = path.resolve(process.cwd(), config.upload.local!.savePath);
+            const allowedDir = path.resolve(process.cwd(), savePath);
 
             if (!resolvedPath.startsWith(allowedDir)) {
                 ctx.status = 403;

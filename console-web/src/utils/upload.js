@@ -29,22 +29,43 @@ class UnifiedUploadService {
     /**
      * 获取存储配置（替代原 oss.js 功能）
      */
-    async getStorageConfig() {
+    async getStorageConfig(file, options = {}) {
         const now = Date.now();
 
-        // 配置缓存机制
-        if (!this.storageConfig || this.configExpire < now + 10000) {
-            try {
-                const response = await request.get('/storage/config');
-                this.storageConfig = response.data;
-                this.configExpire = this.storageConfig.expire || now + 30 * 60 * 1000;
-            } catch (error) {
-                console.error('获取存储配置失败:', error);
-                throw new Error('无法获取存储配置，请检查网络连接');
-            }
+        // 对于MinIO预签名上传，需要传递文件信息以生成正确的扩展名
+        let needFileInfo = false;
+        let params = {};
+        
+        if (file) {
+            params.filename = file.name;
+            params.mimetype = file.type;
+            needFileInfo = true;
+        }
+        
+        if (options.dir) {
+            params.dir = options.dir;
+            needFileInfo = true; // 有dir参数时也不使用缓存
         }
 
-        return this.storageConfig;
+        // 配置缓存机制 - 如果需要文件信息，则不使用缓存
+        if (!needFileInfo && this.storageConfig && this.configExpire >= now + 10000) {
+            return this.storageConfig;
+        }
+
+        try {
+            const response = await request.get('/storage/config', { params });
+            
+            // 只有在不需要文件信息时才缓存配置
+            if (!needFileInfo) {
+                this.storageConfig = response.data;
+                this.configExpire = this.storageConfig.expire || now + 30 * 60 * 1000;
+            }
+            
+            return response.data;
+        } catch (error) {
+            console.error('获取存储配置失败:', error);
+            throw new Error('无法获取存储配置，请检查网络连接');
+        }
     }
 
     /**
@@ -63,7 +84,14 @@ class UnifiedUploadService {
      * @param {String} options.dir - 上传目录
      */
     async upload(file, options = {}) {
-        const config = await this.getStorageConfig();
+        let config = await this.getStorageConfig(file, options);
+
+        // 对于MinIO预签名上传，每次都需要获取新的配置（因为每次key都不同）
+        if (config.uploadStrategy === 'presigned' && config.mode === 'minio') {
+            // 清除缓存并重新获取配置，确保每次上传都有唯一的key和presignedUrl
+            this.clearCache();
+            config = await this.getStorageConfig(file, options);
+        }
 
         switch (config.uploadStrategy) {
             case 'server':
@@ -134,10 +162,56 @@ class UnifiedUploadService {
         const formData = new FormData();
         formData.append('file', file);
 
-        return this.executeUpload({
+        // 使用PUT方法进行预签名上传
+        const response = await this.executeUploadToPutUrl({
             url: config.presignedUrl,
-            data: formData,
+            data: file,
             onProgress: options.onProgress
+        });
+
+        // MinIO预签名上传成功后返回标准格式
+        return {
+            code: 200,
+            data: {
+                url: `${config.baseUrl}/${config.bucket}/${config.key}`,
+                key: config.key
+            }
+        };
+    }
+
+    /**
+     * 执行PUT上传（用于MinIO预签名上传）
+     */
+    async executeUploadToPutUrl({ url, data, onProgress }) {
+        return new Promise((resolve, reject) => {
+            const xhr = new XMLHttpRequest();
+
+            xhr.open('PUT', url, true);
+
+            xhr.upload.addEventListener(
+                'progress',
+                e => {
+                    if (e.lengthComputable && typeof onProgress === 'function') {
+                        const progress = Math.floor((e.loaded / e.total) * 100);
+                        onProgress(progress);
+                    }
+                },
+                false
+            );
+
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200 || xhr.status === 201 || xhr.status === 204) {
+                        resolve({ code: 200 });
+                    } else {
+                        const errorMsg = '文件上传失败';
+                        Message.error(errorMsg);
+                        reject(new Error(errorMsg));
+                    }
+                }
+            };
+
+            xhr.send(data);
         });
     }
 

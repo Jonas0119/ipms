@@ -16,7 +16,7 @@
                 <Input v-model="form.idcard" placeholder="请输入您的身份证号码" />
             </FormField>
             <FormField prop="avatar_url" title="头像：" label="请上传您的头像图片">
-                <AvatarCrop dir="avatar" circle v-model="form.avatar_url" />
+                <ImageUpload dir="avatar" v-model="form.avatar_url" />
             </FormField>
             <FormField title="手机号码：" prop="phone" width="200">
                 <Input v-model="form.phone" placeholder="请输入您的手机号码" />
@@ -48,7 +48,7 @@
  */
 
 import { Card, Form, Input } from 'view-design';
-import { AvatarCrop, FormField } from '@/components';
+import { ImageUpload, FormField } from '@/components';
 import formMixin from '@/mixins/form';
 
 export default {
@@ -75,26 +75,7 @@ export default {
                     { pattern: /^\d{17}\d|x$/i, message: '请输入正确的身份证号码' }
                 ],
                 avatar_url: [
-                    {
-                        required: true,
-                        validator: (rule, value, callback) => {
-                            if (!value) {
-                                callback(new Error('请上传您的头像，建议使用实拍照片'));
-                                return;
-                            }
-
-                            // 支持OSS上传格式: /avatar/hash.ext
-                            const ossPattern = /^\/avatar\/[a-z0-9]{32}\.(jpg|jpeg|png)$/;
-                            // 支持本地上传格式: http://localhost:6688/static/filename.ext
-                            const localPattern = /^https?:\/\/.+\.(jpg|jpeg|png)$/;
-
-                            if (ossPattern.test(value) || localPattern.test(value)) {
-                                callback();
-                            } else {
-                                callback(new Error('请上传正确格式的头像图片'));
-                            }
-                        }
-                    }
+                    { required: true, message: '请上传您的头像图片' }
                 ],
                 phone: [
                     { required: true, message: '请输入您的手机号码' },
@@ -139,7 +120,7 @@ export default {
     },
     components: {
         Card,
-        AvatarCrop,
+        ImageUpload,
         Form,
         FormField,
         Input

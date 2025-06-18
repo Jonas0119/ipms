@@ -24,7 +24,27 @@ const PcBuildingTemplateAction = <Action>{
     },
     response: async ctx => {
         try {
-            // 使用新的模板服务，保持向后兼容
+            // 获取模板配置
+            const templateConfig = TemplateService.getTemplateConfig();
+            const template = templateConfig.templates['building_import'];
+
+            if (!template) {
+                ctx.status = 404;
+                ctx.body = {
+                    code: 404,
+                    message: '模板类型不存在'
+                };
+                return;
+            }
+
+            // 如果有直链，重定向到直链
+            if (template.directUrl) {
+                console.log(`Building template redirecting to direct URL: ${template.directUrl}`);
+                ctx.redirect(template.directUrl);
+                return;
+            }
+
+            // 检查模板是否存在
             const exists = await TemplateService.templateExists('building_import');
             if (!exists) {
                 ctx.status = 404;
@@ -35,35 +55,27 @@ const PcBuildingTemplateAction = <Action>{
                 return;
             }
 
-            // 获取模板配置
-            const templateConfig = TemplateService.getTemplateConfig();
-            const template = templateConfig.templates['building_import'];
-
-            // 如果有直链，重定向到直链
-            if (template && template.directUrl) {
-                ctx.redirect(template.directUrl);
-                return;
-            }
-
-            // 否则通过服务端下载
+            // 尝试通过服务端下载
             const fileStream = await TemplateService.getTemplateStream('building_import');
-            if (!fileStream) {
-                ctx.status = 404;
-                ctx.body = {
-                    code: 404,
-                    message: '模板文件读取失败'
-                };
+            if (fileStream) {
+                // 设置响应头
+                ctx.set({
+                    'Content-Type': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                    'Content-Disposition': 'attachment; filename="固定资产导入模板.xlsx"'
+                });
+
+                // 返回文件流
+                ctx.body = fileStream as any;
                 return;
             }
 
-            // 设置响应头
-            ctx.set({
-                'Content-Type': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-                'Content-Disposition': 'attachment; filename="固定资产导入模板.xlsx"'
-            });
+            // 对于云存储（如MinIO），如果无法获取文件流，返回详细的错误信息
+            ctx.status = 500;
+            ctx.body = {
+                code: 500,
+                message: 'MinIO模式下模板文件下载失败，请检查MinIO服务是否正常运行，或确保模板文件已正确上传到存储桶的template目录中'
+            };
 
-            // 返回文件流
-            ctx.body = fileStream as any;
         } catch (error) {
             console.error('Building template download error:', error);
             ctx.status = 500;

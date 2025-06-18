@@ -14,6 +14,8 @@ import { Middleware, DefaultState, DefaultContext } from 'koa';
 import utils from '~/utils';
 import cwlog from 'chowa-log';
 import config from '~/config';
+import fs from 'fs';
+import path from 'path';
 
 function WatcherMiddleware(): Middleware<DefaultState, DefaultContext> {
     return async (ctx, next) => {
@@ -43,7 +45,49 @@ function WatcherMiddleware(): Middleware<DefaultState, DefaultContext> {
         }
 
         if (ctx.status === 404) {
-            ctx.redirect('https://www.chowa.cn');
+            // 检查是否是本地开发环境
+            const isLocalDev = config.debug || 
+                              ctx.host.includes('localhost') || 
+                              ctx.host.includes('127.0.0.1') ||
+                              ctx.host.includes('172.17.0.5') ||
+                              /^\d+\.\d+\.\d+\.\d+/.test(ctx.host);
+
+            if (isLocalDev) {
+                // 本地环境：检查是否是API请求
+                const isApiRequest = ctx.path.startsWith('/pc/') || 
+                                   ctx.path.startsWith('/mp/') || 
+                                   ctx.path.startsWith('/oa/') || 
+                                   ctx.path.startsWith('/notify/') ||
+                                   ctx.path.startsWith('/static/') ||
+                                   ctx.path.startsWith('/cws/');
+
+                if (isApiRequest) {
+                    // API请求返回404 JSON响应
+                    ctx.status = 404;
+                    ctx.body = { code: 404, message: '页面不存在' };
+                } else {
+                    // 前端路由：尝试返回index.html (SPA回退)
+                    try {
+                        const indexPath = path.join(process.cwd(), 'console-web/dist/index.html');
+                        if (fs.existsSync(indexPath)) {
+                            const content = fs.readFileSync(indexPath, 'utf-8');
+                            ctx.status = 200;
+                            ctx.type = 'text/html';
+                            ctx.body = content;
+                        } else {
+                            ctx.status = 404;
+                            ctx.body = { code: 404, message: '前端文件未找到' };
+                        }
+                    } catch (err) {
+                        cwlog.error('读取index.html失败: ' + err.message);
+                        ctx.status = 404;
+                        ctx.body = { code: 404, message: '页面加载失败' };
+                    }
+                }
+            } else {
+                // 生产环境：重定向到官网
+                ctx.redirect('https://www.chowa.cn');
+            }
         }
     };
 }

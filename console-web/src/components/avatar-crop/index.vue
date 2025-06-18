@@ -236,8 +236,8 @@ export default {
                 return false;
             }
 
-            // 超出大小
-            if (file.size / 1024 > maxSize) {
+            // 超出大小 (maxSize为0时跳过大小检查)
+            if (maxSize > 0 && file.size / 1024 > maxSize) {
                 Message.error('图片大小超出限制');
                 return false;
             }

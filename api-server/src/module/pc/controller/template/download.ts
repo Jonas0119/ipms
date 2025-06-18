@@ -39,17 +39,6 @@ const PcTemplateDownloadAction = <Action>{
         const { templateType } = <RequestParams>ctx.params;
 
         try {
-            // 检查模板是否存在
-            const exists = await TemplateService.templateExists(templateType);
-            if (!exists) {
-                ctx.status = 404;
-                ctx.body = {
-                    code: 404,
-                    message: '模板文件不存在'
-                };
-                return;
-            }
-
             // 获取模板配置
             const templateConfig = TemplateService.getTemplateConfig();
             const template = templateConfig.templates[templateType];
@@ -65,29 +54,44 @@ const PcTemplateDownloadAction = <Action>{
 
             // 如果有直链，重定向到直链
             if (template.directUrl) {
+                console.log(`Redirecting to direct URL: ${template.directUrl}`);
                 ctx.redirect(template.directUrl);
                 return;
             }
 
-            // 否则通过服务端下载
-            const fileStream = await TemplateService.getTemplateStream(templateType);
-            if (!fileStream) {
+            // 检查模板是否存在（使用优化后的检查逻辑）
+            const exists = await TemplateService.templateExists(templateType);
+            if (!exists) {
                 ctx.status = 404;
                 ctx.body = {
                     code: 404,
-                    message: '模板文件读取失败'
+                    message: '模板文件不存在'
                 };
                 return;
             }
 
-            // 设置响应头
-            ctx.set({
-                'Content-Type': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-                'Content-Disposition': `attachment; filename="${encodeURIComponent(template.name)}"`
-            });
+            // 尝试通过服务端下载
+            const fileStream = await TemplateService.getTemplateStream(templateType);
+            if (fileStream) {
+                // 设置响应头
+                ctx.set({
+                    'Content-Type': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                    'Content-Disposition': `attachment; filename="${encodeURIComponent(template.name)}"`
+                });
 
-            // 返回文件流
-            ctx.body = fileStream as any;
+                // 返回文件流
+                ctx.body = fileStream as any;
+                return;
+            }
+
+            // 对于云存储（如MinIO），如果无法获取文件流，返回错误信息
+            // 建议前端使用直链下载或联系管理员
+            ctx.status = 500;
+            ctx.body = {
+                code: 500,
+                message: 'MinIO模式下模板文件下载失败，请检查MinIO服务是否正常运行，或确保模板文件已正确上传到存储桶的template目录中'
+            };
+
         } catch (error) {
             console.error('Template download error:', error);
             ctx.status = 500;

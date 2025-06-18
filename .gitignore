@@ -16,3 +16,13 @@ console-web/node_modules/
 api-server/node_modules/
 api-server/uploads/
 api-server/dist/
+MINIO_FILE_EXTENSION_FIX.md
+MINIO_FINAL_FIXES_REPORT.md
+MINIO_INTEGRATION_SUMMARY.md
+MINIO_MULTIPLE_UPLOAD_FIX.md
+MINIO_PUBLIC_ACCESS_IMPLEMENTATION.md
+MINIO_SETUP.md
+MINIO_UNDEFINED_URL_FIX.md
+MINIO_UPLOAD_FIX_REPORT.md
+AVATAR_VALIDATION_FIX.md
+console-web/nginx-conf/custom.conf

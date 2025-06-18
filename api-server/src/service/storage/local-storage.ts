@@ -21,7 +21,7 @@ export class LocalStorageService implements IStorageService {
         this.ensureUploadDirExists();
     }
 
-    getUploadConfig(): StorageConfig {
+    getUploadConfig(filename?: string, mimetype?: string, directory?: string): StorageConfig {
         const expire = Date.now() + 60 * 30 * 1000; // 30分钟有效期
 
         return {
