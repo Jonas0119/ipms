@@ -1,14 +1,10 @@
 /**
  * +----------------------------------------------------------------------
- * | 「e家宜业」
- * +----------------------------------------------------------------------
- * | Copyright (c) 2020-2024 https://www.chowa.cn All rights reserved.
- * +----------------------------------------------------------------------
- * | Licensed 未经授权禁止移除「e家宜业」和「卓佤科技」相关版权
- * +----------------------------------------------------------------------
- * | Author: contact@chowa.cn
+ * | 开源物业管理系统，敬请使用
  * +----------------------------------------------------------------------
  */
+
+import kjhlog from '~/utils/kjhlog';
 
 import schedule from 'node-schedule';
 import moment from 'moment';
@@ -17,7 +13,6 @@ import axios from 'axios';
 import config from '~/config';
 import { VIRUS_JOB } from '~/constant/schedule';
 import { TRUE, FALSE } from '~/constant/status';
-import cwlog from 'chowa-log';
 
 async function getVirusData() {
     const model = Knex({
@@ -25,7 +20,7 @@ async function getVirusData() {
         connection: config.mysqlConfig
     });
 
-    cwlog.info('开始更新新冠病毒数据');
+    kjhlog.info('开始更新新冠病毒数据');
 
     const created_at = moment()
         .startOf('hour')
@@ -37,7 +32,7 @@ async function getVirusData() {
         .first();
 
     if (jobDone) {
-        return cwlog.info('已有进程更新，任务忽略');
+        return kjhlog.info('已有进程更新，任务忽略');
     }
 
     await model.from('ejyy_schedule').insert({
@@ -51,14 +46,14 @@ async function getVirusData() {
     });
 
     if (netRes.status !== 200 || netRes.data.code !== 10000) {
-        cwlog.error('更新新冠病毒数据失败');
+        kjhlog.error('更新新冠病毒数据失败');
 
         await model.from('ejyy_virus').insert({
             success: FALSE,
             created_at
         });
     } else {
-        cwlog.success('更新新冠病毒数据成功');
+        kjhlog.success('更新新冠病毒数据成功');
 
         await model.from('ejyy_virus').insert({
             success: TRUE,

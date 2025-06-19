@@ -1,12 +1,6 @@
 /**
  * +----------------------------------------------------------------------
- * | 「e家宜业」
- * +----------------------------------------------------------------------
- * | Copyright (c) 2020-2024 https://www.chowa.cn All rights reserved.
- * +----------------------------------------------------------------------
- * | Licensed 未经授权禁止移除「e家宜业」和「卓佤科技」相关版权
- * +----------------------------------------------------------------------
- * | Author: contact@chowa.cn
+ * | 开源物业管理系统，敬请使用
  * +----------------------------------------------------------------------
  */
 
@@ -28,8 +22,7 @@ export interface TemplateConfig {
 }
 
 export class TemplateService {
-    /**
-     * 获取模板配置信息
+    /*     * 获取模板配置信息
      */
     static getTemplateConfig(): TemplateConfig {
         const { template } = config.storage;
@@ -54,8 +47,7 @@ export class TemplateService {
         return { templates };
     }
 
-    /**
-     * 获取模板文件的物理路径
+    /*     * 获取模板文件的物理路径
      */
     static getTemplateFilePath(templateType: string): string | null {
         const { template } = config.storage;
@@ -82,8 +74,7 @@ export class TemplateService {
         }
     }
 
-    /**
-     * 检查模板文件是否存在
+    /*     * 检查模板文件是否存在
      */
     static async templateExists(templateType: string): Promise<boolean> {
         const filePath = this.getTemplateFilePath(templateType);
@@ -120,8 +111,7 @@ export class TemplateService {
         }
     }
 
-    /**
-     * 获取模板文件的直链URL（如果支持）
+    /*     * 获取模板文件的直链URL（如果支持）
      */
     private static getDirectUrl(filename: string, baseUrl: string, mode: string): string | undefined {
         const { template } = config.storage;
@@ -156,8 +146,7 @@ export class TemplateService {
         }
     }
 
-    /**
-     * 获取模板文件流（用于下载）
+    /*     * 获取模板文件流（用于下载）
      */
     static async getTemplateStream(templateType: string): Promise<fs.ReadStream | null> {
         const filePath = this.getTemplateFilePath(templateType);

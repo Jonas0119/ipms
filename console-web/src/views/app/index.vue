@@ -1,3 +1,6 @@
+/** * +---------------------------------------------------------------------- * | 开源物业管理系统，敬请使用 *
++---------------------------------------------------------------------- */
+
 <template>
     <section id="app">
         <audio ref="audio" preload="auto" hidden>
@@ -65,18 +68,6 @@
 </template>
 
 <script>
-/**
- * +----------------------------------------------------------------------
- * | 「e家宜业」
- * +----------------------------------------------------------------------
- * | Copyright (c) 2020-2024 https://www.chowa.cn All rights reserved.
- * +----------------------------------------------------------------------
- * | Licensed 未经授权禁止移除「e家宜业」和「卓佤科技」相关版权
- * +----------------------------------------------------------------------
- * | Author: contact@chowa.cn
- * +----------------------------------------------------------------------
- */
-
 import { mapActions, mapGetters } from 'vuex';
 import { Layout, Sider, Header, Content, Drawer, Notice } from 'view-design';
 import Nav from './components/nav';
@@ -88,7 +79,7 @@ import * as utils from '@/utils';
 import ROLES from '@/constants/role';
 
 export default {
-    name: 'ChowaApp',
+    name: 'App',
     data() {
         return {
             settingVisible: false,

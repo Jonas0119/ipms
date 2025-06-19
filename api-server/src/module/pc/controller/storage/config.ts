@@ -1,12 +1,6 @@
 /**
  * +----------------------------------------------------------------------
- * | 「e家宜业」
- * +----------------------------------------------------------------------
- * | Copyright (c) 2020-2024 https://www.chowa.cn All rights reserved.
- * +----------------------------------------------------------------------
- * | Licensed 未经授权禁止移除「e家宜业」和「卓佤科技」相关版权
- * +----------------------------------------------------------------------
- * | Author: contact@chowa.cn
+ * | 开源物业管理系统，敬请使用
  * +----------------------------------------------------------------------
  */
 
@@ -23,6 +17,10 @@ const PcStorageConfigAction = <Action>{
     },
 
     response: async ctx => {
+        kjhlog.info('=== STORAGE CONFIG API CALLED ===');
+        kjhlog.info(`Request URL: ${ctx.request.url}`);
+        kjhlog.info(`Query string: ${JSON.stringify(ctx.query)}`);
+        
         // 获取查询参数中的文件信息
         let filenameStr: string | undefined;
         let mimetypeStr: string | undefined;
@@ -32,12 +30,20 @@ const PcStorageConfigAction = <Action>{
         if (ctx.query.params) {
             try {
                 const paramsStr = Array.isArray(ctx.query.params) ? ctx.query.params[0] : ctx.query.params;
-                const parsedParams = JSON.parse(decodeURIComponent(paramsStr));
+                kjhlog.info(`Raw params string: ${paramsStr}`);
+                
+                // 尝试解码URL编码的字符串
+                const decodedParams = decodeURIComponent(paramsStr);
+                kjhlog.info(`Decoded params: ${decodedParams}`);
+                
+                const parsedParams = JSON.parse(decodedParams);
+                kjhlog.info(`Parsed params object:`, parsedParams);
+                
                 filenameStr = parsedParams.filename;
                 mimetypeStr = parsedParams.mimetype;
                 dirStr = parsedParams.dir;
             } catch (error) {
-                console.warn('Failed to parse params:', error);
+                kjhlog.warn('Failed to parse params:', error);
                 // 如果解析失败，使用undefined值
             }
         } else {
@@ -48,22 +54,34 @@ const PcStorageConfigAction = <Action>{
             dirStr = Array.isArray(dir) ? dir[0] : dir;
         }
 
-        // 添加调试日志
-        console.log('Storage config request params:', {
-            filename: filenameStr,
-            mimetype: mimetypeStr,
-            dir: dirStr
+        // 获取当前存储配置信息
+        const currentMode = StorageServiceFactory.getCurrentMode();
+        const baseUrl = StorageServiceFactory.getBaseUrl();
+        
+        // 详细的调试日志 - 包含存储类型信息
+        kjhlog.info('=== Storage Config Request ===');
+        kjhlog.info(`Storage Mode: ${currentMode}`);
+        kjhlog.info(`Base URL: ${baseUrl}`);
+        kjhlog.info('Request params:', {
+            filename: filenameStr || 'undefined',
+            mimetype: mimetypeStr || 'undefined',
+            dir: dirStr || 'undefined'
+        });
+        kjhlog.info(`Storage detailed config:`, {
+            mode: currentMode,
+            localConfig: config.storage.local,
+            ossConfig: config.storage.oss ? { ...config.storage.oss, accessKeySecret: '[HIDDEN]' } : undefined,
+            minioConfig: config.storage.minio ? { ...config.storage.minio, secretKey: '[HIDDEN]' } : undefined
         });
 
         try {
             const storageService = StorageServiceFactory.getStorageService();
             const uploadConfig = await storageService.getUploadConfig(filenameStr, mimetypeStr, dirStr);
-            const currentMode = StorageServiceFactory.getCurrentMode();
 
             // 构建统一的配置响应
             const response: any = {
                 mode: currentMode,
-                baseUrl: StorageServiceFactory.getBaseUrl(),
+                baseUrl: baseUrl,
                 expire: uploadConfig.expire || Date.now() + 30 * 60 * 1000,
                 uploadStrategy: getUploadStrategy(currentMode)
             };
@@ -72,6 +90,7 @@ const PcStorageConfigAction = <Action>{
             switch (currentMode) {
                 case 'local':
                     response.uploadUrl = '/pc/storage/upload';
+                    kjhlog.info(`Local storage configured with upload URL: ${response.uploadUrl}`);
                     break;
 
                 case 'oss':
@@ -84,6 +103,7 @@ const PcStorageConfigAction = <Action>{
                             dir: uploadConfig.dir || '',
                             success_action_status: '200'
                         };
+                        kjhlog.info(`OSS storage configured with direct upload to: ${uploadConfig.host}`);
                     }
                     break;
 
@@ -92,20 +112,24 @@ const PcStorageConfigAction = <Action>{
                         response.presignedUrl = uploadConfig.presignedUrl;
                         response.bucket = uploadConfig.bucket;
                         response.key = uploadConfig.key;
+                        kjhlog.info(`MinIO storage configured with presigned URL for bucket: ${uploadConfig.bucket}`);
                     } else {
                         // 如果没有预签名URL，使用服务端上传
                         response.uploadStrategy = 'server';
                         response.uploadUrl = '/pc/storage/upload';
+                        kjhlog.info(`MinIO storage fallback to server upload`);
                     }
                     break;
             }
+
+            kjhlog.success(`Storage config response prepared for mode: ${currentMode}`);
 
             ctx.body = {
                 code: SUCCESS,
                 data: response
             };
         } catch (error) {
-            console.error('Get storage config error:', error);
+            kjhlog.error('Get storage config error:', error);
             ctx.body = {
                 code: DATA_MODEL_UPDATE_FAIL,
                 message: error.message || '获取存储配置失败'

@@ -1,21 +1,16 @@
 /**
  * +----------------------------------------------------------------------
- * | 「e家宜业」
- * +----------------------------------------------------------------------
- * | Copyright (c) 2020-2024 https://www.chowa.cn All rights reserved.
- * +----------------------------------------------------------------------
- * | Licensed 未经授权禁止移除「e家宜业」和「卓佤科技」相关版权
- * +----------------------------------------------------------------------
- * | Author: contact@chowa.cn
+ * | 开源物业管理系统，敬请使用
  * +----------------------------------------------------------------------
  */
+
+import kjhlog from '~/utils/kjhlog';
 
 import path from 'path';
 import { Context } from 'koa';
 import { NotifyAction } from '~/types/action';
 import KoaRouter from 'koa-router';
 import * as NotifyModuleRouter from './router';
-import cwlog from 'chowa-log';
 import config from '~/config';
 
 function MpModule(appRouter: KoaRouter) {
@@ -27,7 +22,7 @@ function MpModule(appRouter: KoaRouter) {
         });
 
         if (config.debug) {
-            cwlog.info(
+            kjhlog.info(
                 `${name} mounted and request from ${path.posix.join('/notify', router.path)} by ${router.method}`
             );
         }

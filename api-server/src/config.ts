@@ -1,12 +1,6 @@
 /**
  * +----------------------------------------------------------------------
- * | 「e家宜业」
- * +----------------------------------------------------------------------
- * | Copyright (c) 2020-2024 https://www.chowa.cn All rights reserved.
- * +----------------------------------------------------------------------
- * | Licensed 未经授权禁止移除「e家宜业」和「卓佤科技」相关版权
- * +----------------------------------------------------------------------
- * | Author: contact@chowa.cn
+ * | 开源物业管理系统，敬请使用
  * +----------------------------------------------------------------------
  */
 
@@ -15,7 +9,7 @@ import Knex from 'knex';
 import yaml from 'js-yaml';
 import fs from 'fs';
 import path from 'path';
-import cwlog from 'chowa-log';
+import kjhlog from './utils/kjhlog';
 
 interface Config {
     name: string;
@@ -136,7 +130,7 @@ function generateConfig(): Config {
 
         customConfig = yaml.load(fs.readFileSync(configPath, 'utf-8'));
     } catch (e) {
-        cwlog.error('未检测到配置文件，程序退出');
+        kjhlog.error('未检测到配置文件，程序退出');
         process.exit();
     }
 
@@ -163,7 +157,6 @@ function generateConfig(): Config {
         debug: process.env.NODE_ENV !== 'production',
         server: {
             port: 6688,
-            name: 'e家宜业',
             ...customConfig.server
         },
         mysqlConfig,

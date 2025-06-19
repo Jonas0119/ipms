@@ -1,14 +1,10 @@
 /**
  * +----------------------------------------------------------------------
- * | 「e家宜业」
- * +----------------------------------------------------------------------
- * | Copyright (c) 2020-2024 https://www.chowa.cn All rights reserved.
- * +----------------------------------------------------------------------
- * | Licensed 未经授权禁止移除「e家宜业」和「卓佤科技」相关版权
- * +----------------------------------------------------------------------
- * | Author: contact@chowa.cn
+ * | 开源物业管理系统，敬请使用
  * +----------------------------------------------------------------------
  */
+
+import kjhlog from '~/utils/kjhlog';
 
 import { Action } from '~/types/action';
 import { SUCCESS, PAYMENT_CREATE_ORDER_FAIL, PAYMENT_BUILDING_ILLEGAL } from '~/constant/code';
@@ -19,7 +15,6 @@ import * as payService from '~/service/pay';
 import * as feeService from '~/service/fee';
 import utils from '~/utils';
 import config from '~/config';
-import cwlog from 'chowa-log';
 
 interface RequestBody {
     building_ids: number[];
@@ -205,7 +200,7 @@ const MpPaymentCreateAction = <Action>{
                 .where('property_fee_order_id', order_id)
                 .delete();
 
-            cwlog.error(`支付生成订单错误，住宅id：${building_ids.join(',')}，微信错误码：${payRes.return_code}`);
+            kjhlog.error(`支付生成订单错误，住宅id：${building_ids.join(',')}，微信错误码：${payRes.return_code}`);
 
             return (ctx.body = {
                 code: PAYMENT_CREATE_ORDER_FAIL,

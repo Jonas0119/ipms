@@ -1,18 +1,13 @@
 /**
  * +----------------------------------------------------------------------
- * | 「e家宜业」
- * +----------------------------------------------------------------------
- * | Copyright (c) 2020-2024 https://www.chowa.cn All rights reserved.
- * +----------------------------------------------------------------------
- * | Licensed 未经授权禁止移除「e家宜业」和「卓佤科技」相关版权
- * +----------------------------------------------------------------------
- * | Author: contact@chowa.cn
+ * | 开源物业管理系统，敬请使用
  * +----------------------------------------------------------------------
  */
 
+import kjhlog from '~/utils/kjhlog';
+
 import { Middleware, DefaultState, DefaultContext } from 'koa';
 import utils from '~/utils';
-import cwlog from 'chowa-log';
 import config from '~/config';
 import fs from 'fs';
 import path from 'path';
@@ -25,9 +20,9 @@ function WatcherMiddleware(): Middleware<DefaultState, DefaultContext> {
             ctx.status = 500;
 
             if (config.debug) {
-                cwlog.error('===============错误捕捉开始=================');
+                kjhlog.error('===============错误捕捉开始=================');
                 console.log(error);
-                cwlog.error('===============错误捕捉结束=================');
+                kjhlog.error('===============错误捕捉结束=================');
             } else {
                 utils.mail.send({
                     to: config.smtp.to,
@@ -81,14 +76,13 @@ function WatcherMiddleware(): Middleware<DefaultState, DefaultContext> {
                             ctx.body = { code: 404, message: '前端文件未找到' };
                         }
                     } catch (err) {
-                        cwlog.error('读取index.html失败: ' + err.message);
+                        kjhlog.error('读取index.html失败: ' + err.message);
                         ctx.status = 404;
                         ctx.body = { code: 404, message: '页面加载失败' };
                     }
                 }
             } else {
                 // 生产环境：重定向到官网
-                ctx.redirect('https://www.chowa.cn');
             }
         }
     };

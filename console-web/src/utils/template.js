@@ -1,12 +1,6 @@
 /**
  * +----------------------------------------------------------------------
- * | 「e家宜业」
- * +----------------------------------------------------------------------
- * | Copyright (c) 2020-2024 https://www.chowa.cn All rights reserved.
- * +----------------------------------------------------------------------
- * | Licensed 未经授权禁止移除「e家宜业」和「卓佤科技」相关版权
- * +----------------------------------------------------------------------
- * | Author: contact@chowa.cn
+ * | 开源物业管理系统，敬请使用
  * +----------------------------------------------------------------------
  */
 
@@ -19,8 +13,7 @@ class TemplateService {
         this.configExpire = 0;
     }
 
-    /**
-     * 获取模板配置（带缓存）
+    /*     * 获取模板配置（带缓存）
      */
     async getTemplateConfig() {
         const now = Date.now();
@@ -40,8 +33,7 @@ class TemplateService {
         return this.templateConfig;
     }
 
-    /**
-     * 下载模板文件
+    /*     * 下载模板文件
      * @param {string} templateType 模板类型
      * @param {Object} options 下载选项
      */
@@ -69,8 +61,7 @@ class TemplateService {
         }
     }
 
-    /**
-     * 通过URL直接下载
+    /*     * 通过URL直接下载
      * @param {string} url 下载URL
      * @param {string} filename 文件名
      */
@@ -84,8 +75,7 @@ class TemplateService {
         document.body.removeChild(link);
     }
 
-    /**
-     * 通过API下载
+    /*     * 通过API下载
      * @param {string} apiUrl API地址
      * @param {string} filename 文件名
      */
@@ -115,8 +105,7 @@ class TemplateService {
         }
     }
 
-    /**
-     * 获取模板列表
+    /*     * 获取模板列表
      */
     async getTemplateList() {
         const config = await this.getTemplateConfig();
@@ -128,8 +117,7 @@ class TemplateService {
         }));
     }
 
-    /**
-     * 检查模板是否存在
+    /*     * 检查模板是否存在
      * @param {string} templateType 模板类型
      */
     async templateExists(templateType) {
@@ -141,8 +129,7 @@ class TemplateService {
         }
     }
 
-    /**
-     * 清除缓存
+    /*     * 清除缓存
      */
     clearCache() {
         this.templateConfig = null;

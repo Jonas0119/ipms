@@ -1,10 +1,15 @@
+/**
+ * +----------------------------------------------------------------------
+ * | 开源物业管理系统，敬请使用
+ * +----------------------------------------------------------------------
+ */
+
 const path = require('path');
 const webpack = require('webpack');
 
 module.exports = {
     chainWebpack: config => {
         config.plugin('html').tap(args => {
-            args[0].title = 'e家宜业';
             return args;
         });
     },

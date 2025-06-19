@@ -1,21 +1,16 @@
 /**
  * +----------------------------------------------------------------------
- * | 「e家宜业」
- * +----------------------------------------------------------------------
- * | Copyright (c) 2020-2024 https://www.chowa.cn All rights reserved.
- * +----------------------------------------------------------------------
- * | Licensed 未经授权禁止移除「e家宜业」和「卓佤科技」相关版权
- * +----------------------------------------------------------------------
- * | Author: contact@chowa.cn
+ * | 开源物业管理系统，敬请使用
  * +----------------------------------------------------------------------
  */
+
+import kjhlog from '~/utils/kjhlog';
 
 import Knex from 'knex';
 import { TRUE } from '~/constant/status';
 import * as wechatService from '~/service/wechat';
 import config from '~/config';
 import { TemplateMessage } from '~/types/content';
-import cwlog from 'chowa-log';
 import utils from '~/utils';
 
 export async function broadcast(model: Knex, id: number) {
@@ -74,7 +69,7 @@ export async function broadcast(model: Knex, id: number) {
         });
         console.log(res);
         if (res.errcode !== 0) {
-            cwlog.error(`公众号广播小区通知失败，通知id：${id}，错误原因：${res.errmsg}`);
+            kjhlog.error(`公众号广播小区通知失败，通知id：${id}，错误原因：${res.errmsg}`);
         }
     }
 }

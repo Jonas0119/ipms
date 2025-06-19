@@ -1,14 +1,10 @@
 /**
  * +----------------------------------------------------------------------
- * | 「e家宜业」
- * +----------------------------------------------------------------------
- * | Copyright (c) 2020-2024 https://www.chowa.cn All rights reserved.
- * +----------------------------------------------------------------------
- * | Licensed 未经授权禁止移除「e家宜业」和「卓佤科技」相关版权
- * +----------------------------------------------------------------------
- * | Author: contact@chowa.cn
+ * | 开源物业管理系统，敬请使用
  * +----------------------------------------------------------------------
  */
+
+import kjhlog from '~/utils/kjhlog';
 
 import { Action } from '~/types/action';
 import { SUCCESS, QUERY_ILLEFAL } from '~/constant/code';
@@ -18,7 +14,6 @@ import * as wechatService from '~/service/wechat';
 import { MP_REPAIR_ALLOT_TPL, OA_NOTICE_TO_PROPERTY_COMPANY_USER } from '~/constant/tpl';
 import utils from '~/utils';
 import moment from 'moment';
-import cwlog from 'chowa-log';
 import config from '~/config';
 
 interface RequestBody {
@@ -123,7 +118,7 @@ const PcRepairAllotAction = <Action>{
             });
 
             if (res.errcode !== 0) {
-                cwlog.error(`小程序模板${MP_REPAIR_ALLOT_TPL}推送失败，${res.errmsg}`);
+                kjhlog.error(`小程序模板${MP_REPAIR_ALLOT_TPL}推送失败，${res.errmsg}`);
             }
         }
 
@@ -169,7 +164,7 @@ const PcRepairAllotAction = <Action>{
             });
 
             if (res.errcode !== 0) {
-                cwlog.error(`公众号推送${OA_NOTICE_TO_PROPERTY_COMPANY_USER}推送失败，${res.errmsg}`);
+                kjhlog.error(`公众号推送${OA_NOTICE_TO_PROPERTY_COMPANY_USER}推送失败，${res.errmsg}`);
             }
         }
 

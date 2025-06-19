@@ -1,14 +1,10 @@
 /**
  * +----------------------------------------------------------------------
- * | 「e家宜业」
- * +----------------------------------------------------------------------
- * | Copyright (c) 2020-2024 https://www.chowa.cn All rights reserved.
- * +----------------------------------------------------------------------
- * | Licensed 未经授权禁止移除「e家宜业」和「卓佤科技」相关版权
- * +----------------------------------------------------------------------
- * | Author: contact@chowa.cn
+ * | 开源物业管理系统，敬请使用
  * +----------------------------------------------------------------------
  */
+
+import kjhlog from '~/utils/kjhlog';
 
 import { Action } from '~/types/action';
 import { SUCCESS, STATUS_ERROR, NOT_FOUND_BINDING_BUILDING, PARAMS_ERROR } from '~/constant/code';
@@ -18,7 +14,6 @@ import * as wechatService from '~/service/wechat';
 import { MP_OWNER_APPROVE } from '~/constant/tpl';
 import { AUTHENTICTED_BY_PROPERTY_COMPANY } from '~/constant/authenticated_type';
 import utils from '~/utils';
-import cwlog from 'chowa-log';
 import moment from 'moment';
 
 interface RequestBody {
@@ -180,7 +175,7 @@ const PcOwerApplyReplyAction = <Action>{
             });
 
             if (res.errcode !== 0) {
-                cwlog.error(`小程序模板${MP_OWNER_APPROVE}推送失败，${res.errmsg}`);
+                kjhlog.error(`小程序模板${MP_OWNER_APPROVE}推送失败，${res.errmsg}`);
             }
         }
 

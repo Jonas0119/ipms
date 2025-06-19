@@ -1,21 +1,16 @@
 /**
  * +----------------------------------------------------------------------
- * | 「e家宜业」
- * +----------------------------------------------------------------------
- * | Copyright (c) 2020-2024 https://www.chowa.cn All rights reserved.
- * +----------------------------------------------------------------------
- * | Licensed 未经授权禁止移除「e家宜业」和「卓佤科技」相关版权
- * +----------------------------------------------------------------------
- * | Author: contact@chowa.cn
+ * | 开源物业管理系统，敬请使用
  * +----------------------------------------------------------------------
  */
+
+import kjhlog from '~/utils/kjhlog';
 
 import path from 'path';
 import { Context } from 'koa';
 import { OaAction } from '~/types/action';
 import KoaRouter from 'koa-router';
 import * as OaModuleRouter from './router';
-import cwlog from 'chowa-log';
 import * as wechatService from '~/service/wechat';
 import menu from './menu';
 import config from '~/config';
@@ -29,12 +24,12 @@ async function OaModule(appRouter: KoaRouter) {
         });
 
         if (config.debug) {
-            cwlog.info(`${name} mounted and request from ${path.posix.join('/oa', router.path)} by ${router.method}`);
+            kjhlog.info(`${name} mounted and request from ${path.posix.join('/oa', router.path)} by ${router.method}`);
         }
     }
 
     const { errmsg } = await wechatService.createOaMenu(menu);
-    cwlog.info(`公众号菜单创建：${errmsg}`);
+    kjhlog.info(`公众号菜单创建：${errmsg}`);
 }
 
 export default OaModule;

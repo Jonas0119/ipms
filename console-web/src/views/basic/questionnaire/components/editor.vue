@@ -1,3 +1,6 @@
+/** * +---------------------------------------------------------------------- * | 开源物业管理系统，敬请使用 *
++---------------------------------------------------------------------- */
+
 <template>
     <WaterMark class="questionnaire-editor">
         <Card dis-hover :bordered="false" title="问卷信息">
@@ -114,18 +117,6 @@
 </template>
 
 <script>
-/**
- * +----------------------------------------------------------------------
- * | 「e家宜业」
- * +----------------------------------------------------------------------
- * | Copyright (c) 2020~2022 https://www.chowa.cn All rights reserved.
- * +----------------------------------------------------------------------
- * | Licensed 未经授权禁止移除「e家宜业」和「卓佤科技」相关版权
- * +----------------------------------------------------------------------
- * | Author: contact@chowa.cn
- * +----------------------------------------------------------------------
- */
-
 import { mapGetters } from 'vuex';
 import { FormField, WaterMark } from '@/components';
 import { Card, Button, Form, Input, DatePicker, Icon, Radio, Switch, Checkbox, Message, Modal } from 'view-design';

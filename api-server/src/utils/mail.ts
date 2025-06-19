@@ -1,19 +1,14 @@
 /**
  * +----------------------------------------------------------------------
- * | 「e家宜业」
- * +----------------------------------------------------------------------
- * | Copyright (c) 2020-2024 https://www.chowa.cn All rights reserved.
- * +----------------------------------------------------------------------
- * | Licensed 未经授权禁止移除「e家宜业」和「卓佤科技」相关版权
- * +----------------------------------------------------------------------
- * | Author: contact@chowa.cn
+ * | 开源物业管理系统，敬请使用
  * +----------------------------------------------------------------------
  */
+
+import kjhlog from '~/utils/kjhlog';
 
 import nodemailer from 'nodemailer';
 import moment from 'moment';
 import config from '~/config';
-import cwlog from 'chowa-log';
 
 export interface MailOptions extends nodemailer.SendMailOptions {
     content: string[];
@@ -124,7 +119,6 @@ export async function send({ subject, content, attachments = [] }: MailOptions) 
                     </div>
                 </div>
 
-                <div class="copy"><a href="https://www.chowa.cn">&copy;卓佤科技 2020-${moment().year()}</a></div>
             </div>
         </body>
 
@@ -142,15 +136,13 @@ export async function send({ subject, content, attachments = [] }: MailOptions) 
             })
             .sendMail(
                 {
-                    from: `e家宜业服务报警 <${user}>`,
                     to: to,
-                    subject: `e家宜业服务报警「${subject}」`,
                     html,
                     attachments
                 },
                 err => {
                     if (err) {
-                        cwlog.error('邮件发送失败！');
+                        kjhlog.error('邮件发送失败！');
                         console.log(err);
                         resolve(false);
                     }

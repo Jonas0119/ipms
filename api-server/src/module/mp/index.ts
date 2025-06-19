@@ -1,14 +1,10 @@
 /**
  * +----------------------------------------------------------------------
- * | 「e家宜业」
- * +----------------------------------------------------------------------
- * | Copyright (c) 2020-2024 https://www.chowa.cn All rights reserved.
- * +----------------------------------------------------------------------
- * | Licensed 未经授权禁止移除「e家宜业」和「卓佤科技」相关版权
- * +----------------------------------------------------------------------
- * | Author: contact@chowa.cn
+ * | 开源物业管理系统，敬请使用
  * +----------------------------------------------------------------------
  */
+
+import kjhlog from '~/utils/kjhlog';
 
 import path from 'path';
 import { Context } from 'koa';
@@ -18,7 +14,6 @@ import * as MpModuleRouter from './router';
 import config from '~/config';
 import validatorService from '~/service/validator';
 import { PARAMS_ERROR, USER_INFO_UNINTACT } from '~/constant/code';
-import cwlog from 'chowa-log';
 
 function MpModule(appRouter: KoaRouter) {
     for (const name in MpModuleRouter) {
@@ -81,7 +76,7 @@ function MpModule(appRouter: KoaRouter) {
         });
 
         if (config.debug) {
-            cwlog.info(`${name} mounted and request from ${path.posix.join('/mp', router.path)} by ${router.method}`);
+            kjhlog.info(`${name} mounted and request from ${path.posix.join('/mp', router.path)} by ${router.method}`);
         }
     }
 }

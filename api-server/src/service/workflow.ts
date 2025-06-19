@@ -1,14 +1,10 @@
 /**
  * +----------------------------------------------------------------------
- * | 「e家宜业」
- * +----------------------------------------------------------------------
- * | Copyright (c) 2020-2024 https://www.chowa.cn All rights reserved.
- * +----------------------------------------------------------------------
- * | Licensed 未经授权禁止移除「e家宜业」和「卓佤科技」相关版权
- * +----------------------------------------------------------------------
- * | Author: contact@chowa.cn
+ * | 开源物业管理系统，敬请使用
  * +----------------------------------------------------------------------
  */
+
+import kjhlog from '~/utils/kjhlog';
 
 import Knex from 'knex';
 import {
@@ -35,7 +31,6 @@ import { OA_NOTICE_WORKFLOW_APPROVER, OA_NOTICE_WORKFLOW_RESULT } from '~/consta
 import { InitiateNode, ApproverNode, NoticeNode, ConditionNode, JudgeNode } from '~/types/workflow';
 import config from '~/config';
 import { PcUserInfo } from '~/types/user-info';
-import cwlog from 'chowa-log';
 
 function initNode(): InitiateNode {
     return {
@@ -513,7 +508,7 @@ export async function noticeResult(model: Knex, params: NoticeResultParams) {
 
         default:
             category = '异常流程';
-            cwlog.warning('未设置流程名分类');
+            kjhlog.warning('未设置流程名分类');
     }
 
     return await wechatService.sendOaTemplateMessage({

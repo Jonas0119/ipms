@@ -26,3 +26,4 @@ MINIO_UNDEFINED_URL_FIX.md
 MINIO_UPLOAD_FIX_REPORT.md
 AVATAR_VALIDATION_FIX.md
 console-web/nginx-conf/custom.conf
+fix_copyright.py

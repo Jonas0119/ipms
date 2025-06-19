@@ -1,12 +1,6 @@
 /**
  * +----------------------------------------------------------------------
- * | 「e家宜业」
- * +----------------------------------------------------------------------
- * | Copyright (c) 2020-2024 https://www.chowa.cn All rights reserved.
- * +----------------------------------------------------------------------
- * | Licensed 未经授权禁止移除「e家宜业」和「卓佤科技」相关版权
- * +----------------------------------------------------------------------
- * | Author: contact@chowa.cn
+ * | 开源物业管理系统，敬请使用
  * +----------------------------------------------------------------------
  */
 
@@ -16,8 +10,7 @@ import * as config from '@/config';
 import auth from './auth';
 import request from './request';
 
-/**
- * 统一上传服务类 - 整合原 oss.js 和 upload.js 功能
+/* * 统一上传服务类 - 整合原 oss.js 和 upload.js 功能
  * 前端零配置，所有存储信息从后端获取
  */
 class UnifiedUploadService {
@@ -26,8 +19,7 @@ class UnifiedUploadService {
         this.configExpire = 0;
     }
 
-    /**
-     * 获取存储配置（替代原 oss.js 功能）
+    /*     * 获取存储配置（替代原 oss.js 功能）
      */
     async getStorageConfig(file, options = {}) {
         const now = Date.now();
@@ -69,16 +61,14 @@ class UnifiedUploadService {
         }
     }
 
-    /**
-     * 清除配置缓存（用于配置更新后强制重新获取）
+    /*     * 清除配置缓存（用于配置更新后强制重新获取）
      */
     clearCache() {
         this.storageConfig = null;
         this.configExpire = 0;
     }
 
-    /**
-     * 统一上传接口
+    /*     * 统一上传接口
      * @param {File} file - 要上传的文件
      * @param {Object} options - 上传选项
      * @param {Function} options.onProgress - 进度回调
@@ -106,8 +96,7 @@ class UnifiedUploadService {
         }
     }
 
-    /**
-     * 服务端上传（本地存储模式）
+    /*     * 服务端上传（本地存储模式）
      */
     async serverUpload(file, config, options) {
         const formData = new FormData();
@@ -124,8 +113,7 @@ class UnifiedUploadService {
         });
     }
 
-    /**
-     * 直传上传（OSS模式）
+    /*     * 直传上传（OSS模式）
      */
     async directUpload(file, config, options) {
         const formData = new FormData();
@@ -156,8 +144,7 @@ class UnifiedUploadService {
         };
     }
 
-    /**
-     * 预签名上传（MinIO模式）
+    /*     * 预签名上传（MinIO模式）
      */
     async presignedUpload(file, config, options) {
         // 使用PUT方法进行预签名上传
@@ -177,8 +164,7 @@ class UnifiedUploadService {
         };
     }
 
-    /**
-     * 执行PUT上传（用于MinIO预签名上传）
+    /*     * 执行PUT上传（用于MinIO预签名上传）
      */
     async executeUploadToPutUrl({ url, data, onProgress }) {
         return new Promise((resolve, reject) => {
@@ -213,8 +199,7 @@ class UnifiedUploadService {
         });
     }
 
-    /**
-     * 执行上传（保留原 upload.js 的核心逻辑）
+    /*     * 执行上传（保留原 upload.js 的核心逻辑）
      */
     async executeUpload({ url, data, onProgress }) {
         return new Promise((resolve, reject) => {
@@ -275,8 +260,7 @@ class UnifiedUploadService {
         });
     }
 
-    /**
-     * 生成文件key
+    /*     * 生成文件key
      */
     generateFileKey(file, dir = '') {
         const timestamp = Date.now();
@@ -289,8 +273,7 @@ class UnifiedUploadService {
         return dir ? `${dir}/${filename}` : filename;
     }
 
-    /**
-     * 获取文件扩展名
+    /*     * 获取文件扩展名
      */
     getFileExtension(file) {
         const name = file.name || '';

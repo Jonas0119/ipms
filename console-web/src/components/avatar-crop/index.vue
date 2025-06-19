@@ -1,3 +1,6 @@
+/** * +---------------------------------------------------------------------- * | 开源物业管理系统，敬请使用 *
++---------------------------------------------------------------------- */
+
 <template>
     <div class="avatar-crop">
         <img :src="ASSET_HOST + result" v-if="!uploading && result" class="preview" :style="previewStyle" />
@@ -94,18 +97,6 @@
 </template>
 
 <script>
-/**
- * +----------------------------------------------------------------------
- * | 「e家宜业」
- * +----------------------------------------------------------------------
- * | Copyright (c) 2020-2024 https://www.chowa.cn All rights reserved.
- * +----------------------------------------------------------------------
- * | Licensed 未经授权禁止移除「e家宜业」和「卓佤科技」相关版权
- * +----------------------------------------------------------------------
- * | Author: contact@chowa.cn
- * +----------------------------------------------------------------------
- */
-
 import { Modal, Button, Icon, Progress, Row, Col, Message } from 'view-design';
 import Emitter from 'view-design/src/mixins/emitter';
 import { ASSET_HOST } from '@/config';
