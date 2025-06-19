@@ -1,0 +1,122 @@
+# e家宜业智慧物业系统配置文件
+# 基于YAML格式，请根据实际环境修改相应配置项
+
+# 服务器配置
+server:
+  port: 6688
+  name: "e家宜业"
+
+# MySQL数据库配置
+mysql:
+  host: "localhost"
+  port: 3306
+  user: "root"
+  password: "Tjfae@123"
+  database: "ejyy"
+
+# Redis配置
+redis:
+  host: "localhost"
+  port: 6379
+  password: ""
+
+# 统一存储配置
+storage:
+  # 存储模式：local | oss | minio
+  mode: "minio"
+  #mode: "local"
+  
+  # 模板文件配置
+  template:
+    # 模板文件存储路径（相对于对应存储的根路径）
+    path: "template"
+    # 模板文件映射
+    files:
+      building_import: "固定资产导入模板.xlsx"
+      # 可以扩展其他模板文件
+      # user_import: "用户导入模板.xlsx"
+  
+  # 本地存储配置
+  local:
+    savePath: "./uploads"
+    urlPrefix: "/static"
+    baseUrl: "http://127.0.0.1:6688"
+  
+  # 阿里云OSS配置（同时用于SMS服务）
+  oss:
+    accessKeyId: "your_aliyun_access_key_id"
+    accessKeySecret: "your_aliyun_access_key_secret"
+    bucket: "your_oss_bucket_name"
+    region: "oss-cn-hangzhou"
+    baseUrl: "https://your_bucket.oss-cn-hangzhou.aliyuncs.com"
+    customDomain: ""  # 可选：自定义CDN域名
+  
+  # MinIO配置
+  minio:
+    endpoint: "http://localhost:9000"  # MinIO API端口
+    accessKey: "admin"
+    secretKey: "minioadmin"
+    bucket: "ejyy"
+    useSSL: false
+    baseUrl: "http://localhost:9000"  # MinIO API端口
+    customDomain: ""  # 可选：自定义域名
+
+# 微信相关配置
+wechat:
+  # 用户端小程序
+  ump:
+    appid: "your_user_miniprogram_appid"
+    secret: "your_user_miniprogram_secret"
+  
+  # 微信公众号
+  oa:
+    appid: "your_official_account_appid"
+    secret: "your_official_account_secret"
+    token: "your_official_account_token"
+    key: "your_official_account_encoding_key"
+  
+  # 微信支付
+  pay:
+    mch_id: "your_merchant_id"
+    prodHost: "https://api.mch.weixin.qq.com"
+    devHost: "https://api.mch.weixin.qq.com"
+    payExpire: 1800000  # 支付时效30分钟
+    refoundExpire: 1296000000  # 退款时效15天
+    key: "your_wechat_pay_key"
+    certPath: "/path/to/your/cert.p12"
+  
+  # 物业端小程序
+  pmp:
+    appid: "your_property_miniprogram_appid"
+    secret: "your_property_miniprogram_secret"
+
+# 地图服务配置（腾讯地图）
+map:
+  key: "your_tencent_map_key"
+
+# Session配置
+session:
+  key: "ejyy:session"
+  maxAge: 1800000  # 30分钟
+  signed: false
+
+# 二维码配置
+community:
+  expire: 300000  # 5分钟
+
+# 加密解密配置
+crypto:
+  key: "your_crypto_key_32_chars_long___"
+  iv: "your_crypto_iv16"
+
+# SMTP邮件服务配置
+smtp:
+  host: "smtp.163.com"
+  port: 465
+  secure: true
+  user: "your_email@163.com"
+  password: "your_email_password"
+  to: "admin@yourdomain.com"
+
+# 初始化标志
+inited: false 
