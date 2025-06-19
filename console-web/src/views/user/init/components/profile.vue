@@ -74,9 +74,7 @@ export default {
                     { required: true, message: '请输入您的身份证号码' },
                     { pattern: /^\d{17}\d|x$/i, message: '请输入正确的身份证号码' }
                 ],
-                avatar_url: [
-                    { required: true, message: '请上传您的头像图片' }
-                ],
+                avatar_url: [{ required: true, message: '请上传您的头像图片' }],
                 phone: [
                     { required: true, message: '请输入您的手机号码' },
                     { pattern: /^\d{11}$/, message: '请输入正确的手机号码' }

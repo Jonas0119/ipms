@@ -16,8 +16,8 @@ import config from '~/config';
 
 function createClient() {
     const apiConfig = new openApi.Config({
-        accessKeyId: config.aliyun.accessKeyId,
-        accessKeySecret: config.aliyun.accessKeySecret
+        accessKeyId: config.storage.oss?.accessKeyId || '',
+        accessKeySecret: config.storage.oss?.accessKeySecret || ''
     });
 
     apiConfig.endpoint = 'dysmsapi.aliyuncs.com';

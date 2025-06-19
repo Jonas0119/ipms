@@ -18,9 +18,6 @@ export { default as PcUserAccountLoginAction } from './controller/user/account_l
 export { default as PcUserCaptchaAction } from './controller/user/captcha';
 export { default as PcUserResetAction } from './controller/user/reset';
 
-export { default as PcUploadSignAction } from './controller/upload/sign';
-export { default as PcUploadLocalAction } from './controller/upload/local';
-
 export { default as PcStorageConfigAction } from './controller/storage/config';
 export { default as PcStorageUploadAction } from './controller/storage/upload';
 

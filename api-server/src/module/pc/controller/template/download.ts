@@ -89,9 +89,9 @@ const PcTemplateDownloadAction = <Action>{
             ctx.status = 500;
             ctx.body = {
                 code: 500,
-                message: 'MinIO模式下模板文件下载失败，请检查MinIO服务是否正常运行，或确保模板文件已正确上传到存储桶的template目录中'
+                message:
+                    'MinIO模式下模板文件下载失败，请检查MinIO服务是否正常运行，或确保模板文件已正确上传到存储桶的template目录中'
             };
-
         } catch (error) {
             console.error('Template download error:', error);
             ctx.status = 500;

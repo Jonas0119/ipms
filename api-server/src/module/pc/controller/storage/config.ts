@@ -24,11 +24,37 @@ const PcStorageConfigAction = <Action>{
 
     response: async ctx => {
         // 获取查询参数中的文件信息
-        const { filename, mimetype, dir } = ctx.query;
-        const filenameStr = Array.isArray(filename) ? filename[0] : filename;
-        const mimetypeStr = Array.isArray(mimetype) ? mimetype[0] : mimetype;
-        const dirStr = Array.isArray(dir) ? dir[0] : dir;
-        
+        let filenameStr: string | undefined;
+        let mimetypeStr: string | undefined;
+        let dirStr: string | undefined;
+
+        // 检查是否是新的params格式（前端发送的是一个params参数包含JSON）
+        if (ctx.query.params) {
+            try {
+                const paramsStr = Array.isArray(ctx.query.params) ? ctx.query.params[0] : ctx.query.params;
+                const parsedParams = JSON.parse(decodeURIComponent(paramsStr));
+                filenameStr = parsedParams.filename;
+                mimetypeStr = parsedParams.mimetype;
+                dirStr = parsedParams.dir;
+            } catch (error) {
+                console.warn('Failed to parse params:', error);
+                // 如果解析失败，使用undefined值
+            }
+        } else {
+            // 兼容直接传递的参数格式
+            const { filename, mimetype, dir } = ctx.query;
+            filenameStr = Array.isArray(filename) ? filename[0] : filename;
+            mimetypeStr = Array.isArray(mimetype) ? mimetype[0] : mimetype;
+            dirStr = Array.isArray(dir) ? dir[0] : dir;
+        }
+
+        // 添加调试日志
+        console.log('Storage config request params:', {
+            filename: filenameStr,
+            mimetype: mimetypeStr,
+            dir: dirStr
+        });
+
         try {
             const storageService = StorageServiceFactory.getStorageService();
             const uploadConfig = await storageService.getUploadConfig(filenameStr, mimetypeStr, dirStr);

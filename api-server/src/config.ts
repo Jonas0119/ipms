@@ -30,7 +30,7 @@ interface Config {
         port: number;
         password: string;
     };
-    // 统一存储配置 (整合原upload和aliyun配置)
+    // 统一存储配置
     storage: {
         mode: 'local' | 'oss' | 'minio'; // 存储模式
         template?: {
@@ -61,14 +61,6 @@ interface Config {
             useSSL: boolean; // 是否使用SSL
             baseUrl: string; // 访问基础URL
             customDomain?: string; // 可选：自定义域名
-        };
-    };
-    // 保留原upload配置以兼容现有代码
-    upload: {
-        mode: 'oss' | 'local' | 'minio';
-        local?: {
-            savePath: string;
-            urlPrefix: string;
         };
     };
     wechat: {
@@ -106,15 +98,6 @@ interface Config {
     };
     community: {
         expire: number;
-    };
-    aliyun: {
-        accessKeyId: string;
-        accessKeySecret: string;
-        oss: {
-            bucket: string;
-            region: string;
-            host?: string;
-        };
     };
     crypto: {
         key: string;
@@ -193,8 +176,6 @@ function generateConfig(): Config {
         // 处理存储配置的兼容性
         storage: (() => {
             const storageConfig = customConfig.storage || {};
-            const uploadConfig = customConfig.upload || {};
-            const aliyunConfig = customConfig.aliyun || {};
 
             // 如果使用新的storage配置，优先使用storage配置
             // 否则从原有的upload和aliyun配置中迁移
@@ -217,41 +198,23 @@ function generateConfig(): Config {
             } else {
                 // 兼容旧配置，自动迁移
                 const finalStorageConfig = {
-                    mode: uploadConfig.mode || 'local',
-                    local: uploadConfig.local
-                        ? {
-                              ...uploadConfig.local,
-                              baseUrl: 'http://127.0.0.1:6688' // 默认值
-                          }
-                        : {
-                              savePath: './uploads',
-                              urlPrefix: '/static',
-                              baseUrl: 'http://127.0.0.1:6688'
-                          },
-                    oss: aliyunConfig.oss
-                        ? {
-                              accessKeyId: aliyunConfig.accessKeyId || '',
-                              accessKeySecret: aliyunConfig.accessKeySecret || '',
-                              bucket: aliyunConfig.oss.bucket || '',
-                              region: aliyunConfig.oss.region || '',
-                              baseUrl:
-                                  aliyunConfig.oss.host ||
-                                  `https://${aliyunConfig.oss.bucket}.${aliyunConfig.oss.region}.aliyuncs.com`
-                          }
-                        : undefined
+                    mode: 'local',
+                    local: {
+                        savePath: './uploads',
+                        urlPrefix: '/static',
+                        baseUrl: 'http://127.0.0.1:6688'
+                    },
+                    oss: {
+                        accessKeyId: '',
+                        accessKeySecret: '',
+                        bucket: '',
+                        region: '',
+                        baseUrl: ''
+                    }
                 };
                 return finalStorageConfig;
             }
         })(),
-        upload: {
-            mode: customConfig.storage?.mode || customConfig.upload?.mode || 'local',
-            local: customConfig.storage?.local ||
-                customConfig.upload?.local || {
-                    savePath: './uploads',
-                    urlPrefix: '/static'
-                },
-            ...customConfig.upload
-        },
         wechat: {
             // 小程序
             ump: {
@@ -302,17 +265,6 @@ function generateConfig(): Config {
         community: {
             expire: 5 * 60 * 1000,
             ...customConfig.community
-        },
-        aliyun: {
-            accessKeyId: '',
-            accessKeySecret: '',
-            // 对象存储
-            oss: {
-                bucket: '',
-                region: '',
-                host: ''
-            },
-            ...customConfig.aliyun
         },
         // 各类可以解密加密
         crypto: {

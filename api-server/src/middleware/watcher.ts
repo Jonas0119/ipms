@@ -46,20 +46,22 @@ function WatcherMiddleware(): Middleware<DefaultState, DefaultContext> {
 
         if (ctx.status === 404) {
             // 检查是否是本地开发环境
-            const isLocalDev = config.debug || 
-                              ctx.host.includes('localhost') || 
-                              ctx.host.includes('127.0.0.1') ||
-                              ctx.host.includes('172.17.0.5') ||
-                              /^\d+\.\d+\.\d+\.\d+/.test(ctx.host);
+            const isLocalDev =
+                config.debug ||
+                ctx.host.includes('localhost') ||
+                ctx.host.includes('127.0.0.1') ||
+                ctx.host.includes('172.17.0.5') ||
+                /^\d+\.\d+\.\d+\.\d+/.test(ctx.host);
 
             if (isLocalDev) {
                 // 本地环境：检查是否是API请求
-                const isApiRequest = ctx.path.startsWith('/pc/') || 
-                                   ctx.path.startsWith('/mp/') || 
-                                   ctx.path.startsWith('/oa/') || 
-                                   ctx.path.startsWith('/notify/') ||
-                                   ctx.path.startsWith('/static/') ||
-                                   ctx.path.startsWith('/cws/');
+                const isApiRequest =
+                    ctx.path.startsWith('/pc/') ||
+                    ctx.path.startsWith('/mp/') ||
+                    ctx.path.startsWith('/oa/') ||
+                    ctx.path.startsWith('/notify/') ||
+                    ctx.path.startsWith('/static/') ||
+                    ctx.path.startsWith('/cws/');
 
                 if (isApiRequest) {
                     // API请求返回404 JSON响应

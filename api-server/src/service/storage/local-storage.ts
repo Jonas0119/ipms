@@ -42,6 +42,9 @@ export class LocalStorageService implements IStorageService {
         const file = Array.isArray(files.file) ? files.file[0] : files.file;
         const { savePath } = config.storage.local!;
 
+        // 获取目录参数
+        const directory = ctx.request.body?.dir || 'uploads';
+
         // 生成文件名和路径
         const timestamp = Date.now();
         const random = Math.random()
@@ -66,7 +69,9 @@ export class LocalStorageService implements IStorageService {
         }
 
         const filename = `${timestamp}_${random}${ext}`;
-        const fullPath = path.join(process.cwd(), savePath, filename);
+        // 使用目录参数构建完整路径
+        const relativePath = path.join(directory, filename);
+        const fullPath = path.join(process.cwd(), savePath, relativePath);
 
         // 确保目录存在
         const dir = path.dirname(fullPath);
@@ -89,8 +94,8 @@ export class LocalStorageService implements IStorageService {
         }
 
         return {
-            url: this.getFileUrl(filename),
-            key: filename
+            url: this.getFileUrl(relativePath),
+            key: relativePath
         };
     }
 
@@ -103,6 +108,7 @@ export class LocalStorageService implements IStorageService {
     async deleteFile(key: string): Promise<boolean> {
         try {
             const { savePath } = config.storage.local!;
+            // key现在可能包含目录路径，如 "avatar/filename.jpg"
             const fullPath = path.join(process.cwd(), savePath, key);
 
             if (fs.existsSync(fullPath)) {
@@ -119,6 +125,7 @@ export class LocalStorageService implements IStorageService {
     async fileExists(key: string): Promise<boolean> {
         try {
             const { savePath } = config.storage.local!;
+            // key现在可能包含目录路径，如 "avatar/filename.jpg"
             const fullPath = path.join(process.cwd(), savePath, key);
             return fs.existsSync(fullPath);
         } catch (error) {

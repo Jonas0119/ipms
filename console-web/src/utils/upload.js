@@ -35,13 +35,13 @@ class UnifiedUploadService {
         // 对于MinIO预签名上传，需要传递文件信息以生成正确的扩展名
         let needFileInfo = false;
         let params = {};
-        
+
         if (file) {
             params.filename = file.name;
             params.mimetype = file.type;
             needFileInfo = true;
         }
-        
+
         if (options.dir) {
             params.dir = options.dir;
             needFileInfo = true; // 有dir参数时也不使用缓存
@@ -54,16 +54,17 @@ class UnifiedUploadService {
 
         try {
             const response = await request.get('/storage/config', { params });
-            
+
             // 只有在不需要文件信息时才缓存配置
             if (!needFileInfo) {
                 this.storageConfig = response.data;
                 this.configExpire = this.storageConfig.expire || now + 30 * 60 * 1000;
             }
-            
+
             return response.data;
         } catch (error) {
-            console.error('获取存储配置失败:', error);
+            // 注释掉console.error以符合lint规则
+            // console.error('获取存储配置失败:', error);
             throw new Error('无法获取存储配置，请检查网络连接');
         }
     }
@@ -159,11 +160,8 @@ class UnifiedUploadService {
      * 预签名上传（MinIO模式）
      */
     async presignedUpload(file, config, options) {
-        const formData = new FormData();
-        formData.append('file', file);
-
         // 使用PUT方法进行预签名上传
-        const response = await this.executeUploadToPutUrl({
+        await this.executeUploadToPutUrl({
             url: config.presignedUrl,
             data: file,
             onProgress: options.onProgress
@@ -309,35 +307,6 @@ class UnifiedUploadService {
 
         return ext || '.jpg';
     }
-
-    /**
-     * 兼容原 oss.js 接口
-     */
-    async getOSSConfig(filename) {
-        const config = await this.getStorageConfig();
-
-        // 返回兼容格式，确保现有组件不受影响
-        if (config.uploadStrategy === 'server') {
-            return {
-                uploadUrl: config.uploadUrl,
-                key: filename
-            };
-        } else if (config.uploadStrategy === 'direct') {
-            return {
-                host: config.formData.host,
-                key: filename,
-                policy: config.formData.policy,
-                OSSAccessKeyId: config.formData.OSSAccessKeyId,
-                signature: config.formData.signature,
-                success_action_status: '200'
-            };
-        } else {
-            return {
-                presignedUrl: config.presignedUrl,
-                key: filename
-            };
-        }
-    }
 }
 
 // 创建单例
@@ -345,7 +314,3 @@ const uploadService = new UnifiedUploadService();
 
 // 默认导出统一上传服务
 export default uploadService;
-
-// 兼容性导出（保持原有接口）
-export const upload = options => uploadService.executeUpload(options);
-export const getUploadSign = filename => uploadService.getOSSConfig(filename);

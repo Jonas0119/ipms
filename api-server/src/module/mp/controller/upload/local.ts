@@ -12,8 +12,8 @@
 
 import { Action } from '~/types/action';
 import { SUCCESS, DATA_MODEL_UPDATE_FAIL } from '~/constant/code';
-import { uploadService } from '~/service/upload';
-import { LocalUploadService } from '~/service/upload/local-upload';
+import { StorageServiceFactory } from '~/service/storage/storage-factory';
+import { LocalStorageService } from '~/service/storage/local-storage';
 
 const MpUploadLocalAction = <Action>{
     router: {
@@ -25,7 +25,7 @@ const MpUploadLocalAction = <Action>{
     response: async ctx => {
         try {
             // 只有在本地模式下才允许使用此接口
-            if (!uploadService.isLocalMode()) {
+            if (!StorageServiceFactory.isLocalMode()) {
                 ctx.body = {
                     code: DATA_MODEL_UPDATE_FAIL,
                     message: '当前不支持本地上传模式'
@@ -33,7 +33,7 @@ const MpUploadLocalAction = <Action>{
                 return;
             }
 
-            const service = uploadService.getUploadService() as LocalUploadService;
+            const service = StorageServiceFactory.getStorageService() as LocalStorageService;
             const result = await service.handleFileUpload(ctx);
 
             ctx.body = {

@@ -12,7 +12,7 @@
 
 import { Action } from '~/types/action';
 import { SUCCESS } from '~/constant/code';
-import { uploadService } from '~/service/upload';
+import { StorageServiceFactory } from '~/service/storage/storage-factory';
 
 const MpUploadSignAction = <Action>{
     router: {
@@ -22,13 +22,13 @@ const MpUploadSignAction = <Action>{
     },
 
     response: async ctx => {
-        const service = uploadService.getUploadService();
-        const signData = service.getUploadSign();
+        const service = StorageServiceFactory.getStorageService();
+        const storageConfig = service.getUploadConfig();
 
         ctx.body = {
             code: SUCCESS,
             data: {
-                ...signData
+                ...storageConfig
             }
         };
     }

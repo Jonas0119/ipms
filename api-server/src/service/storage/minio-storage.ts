@@ -20,13 +20,13 @@ export class MinioStorageService implements IStorageService {
 
     constructor() {
         const { endpoint, accessKey, secretKey, useSSL } = config.storage.minio!;
-        
+
         // 解析endpoint，提取host和port
         const url = new URL(endpoint);
-        
+
         this.minioClient = new Minio.Client({
             endPoint: url.hostname,
-            port: url.port ? parseInt(url.port) : (useSSL ? 443 : 9000),
+            port: url.port ? parseInt(url.port) : useSSL ? 443 : 9000,
             useSSL: useSSL || false,
             accessKey,
             secretKey
@@ -37,13 +37,20 @@ export class MinioStorageService implements IStorageService {
         const { bucket } = config.storage.minio!;
         const expire = Date.now() + 60 * 30 * 1000; // 30分钟有效期
 
+        // 添加调试日志
+        console.log('MinIO getUploadConfig params:', {
+            filename,
+            mimetype,
+            directory
+        });
+
         try {
             // 先尝试检查bucket是否存在，如果不存在则创建
             const bucketExists = await this.minioClient.bucketExists(bucket);
             if (!bucketExists) {
                 console.log(`Creating MinIO bucket: ${bucket}`);
                 await this.minioClient.makeBucket(bucket, 'us-east-1');
-                
+
                 // 设置存储桶为公开访问
                 await this.setBucketPublicPolicy(bucket);
             } else {
@@ -56,7 +63,7 @@ export class MinioStorageService implements IStorageService {
             const random = Math.random()
                 .toString(36)
                 .substring(2, 15);
-            
+
             // 确定文件扩展名
             let ext = '';
             if (filename) {
@@ -66,20 +73,35 @@ export class MinioStorageService implements IStorageService {
                     ext = filename.substring(dotIndex);
                 }
             }
-            
-            // 如果没有扩展名，拒绝上传
-            if (!ext) {
-                throw new Error('文件必须包含有效的扩展名');
+
+            // 如果文件名没有扩展名，尝试根据MIME类型推断
+            if (!ext && mimetype) {
+                if (mimetype.includes('png')) {
+                    ext = '.png';
+                } else if (mimetype.includes('gif')) {
+                    ext = '.gif';
+                } else if (mimetype.includes('webp')) {
+                    ext = '.webp';
+                } else if (mimetype.includes('jpeg') || mimetype.includes('jpg')) {
+                    ext = '.jpg';
+                } else if (mimetype.includes('image')) {
+                    ext = '.jpg'; // 默认图片扩展名
+                }
             }
-            
+
+            // 如果仍然没有扩展名，使用默认的jpg扩展名（适用于图片上传）
+            if (!ext) {
+                ext = '.jpg';
+            }
+
             // 使用指定的目录或默认的uploads目录
             const dir = directory || 'uploads';
             const key = `${dir}/${timestamp}_${random}${ext}`;
 
             // 生成预签名上传URL
             const presignedUrl = await this.minioClient.presignedPutObject(
-                bucket, 
-                key, 
+                bucket,
+                key,
                 30 * 60 // 30分钟有效期
             );
 
@@ -109,7 +131,7 @@ export class MinioStorageService implements IStorageService {
 
     async handleFileUpload(ctx: any): Promise<UploadResult> {
         const files = ctx.request.files;
-        
+
         if (!files || !files.file) {
             throw new Error('No file uploaded');
         }
@@ -124,7 +146,7 @@ export class MinioStorageService implements IStorageService {
             .substring(2, 15);
         const originalName = file.originalFilename || file.name || '';
         let ext = originalName.substring(originalName.lastIndexOf('.'));
-        
+
         // 确保总是有扩展名
         if (!ext) {
             const mimeType = file.mimetype || file.type || '';

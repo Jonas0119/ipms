@@ -41,11 +41,12 @@ function InitMiddleware(): Middleware<DefaultState, DefaultContext> {
         } else {
             if (isInitAction) {
                 // 检查是否是本地开发环境
-                const isLocalDev = config.debug || 
-                                  ctx.host.includes('localhost') || 
-                                  ctx.host.includes('127.0.0.1') ||
-                                  ctx.host.includes('172.17.0.5') ||
-                                  /^\d+\.\d+\.\d+\.\d+/.test(ctx.host);
+                const isLocalDev =
+                    config.debug ||
+                    ctx.host.includes('localhost') ||
+                    ctx.host.includes('127.0.0.1') ||
+                    ctx.host.includes('172.17.0.5') ||
+                    /^\d+\.\d+\.\d+\.\d+/.test(ctx.host);
 
                 if (isLocalDev) {
                     // 本地环境：重定向到根路径

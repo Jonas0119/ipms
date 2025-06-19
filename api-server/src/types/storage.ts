@@ -58,24 +58,3 @@ export interface IStorageService {
     // 检查文件是否存在
     fileExists?(key: string): Promise<boolean>;
 }
-
-// 兼容原有接口
-export interface UploadSign {
-    policy: string;
-    signature: string;
-    accessid: string;
-    expire: number;
-    host: string;
-    dir: string;
-}
-
-export interface LocalUploadSign {
-    uploadUrl: string;
-    expire: number;
-    dir: string;
-}
-
-export interface IUploadService {
-    getUploadSign(): UploadSign | LocalUploadSign;
-    handleFileUpload?(file: any): Promise<UploadResult>;
-}
