@@ -250,3 +250,22 @@ storage:
 
 **升级效果：** 配置完整性提升、编译警告清零、品牌标识统一、用户体验改善
 
+
+#how to run
+#后台服务
+docker run -d --name api-server   -p 6688:6688   -v /Users/pzq/tech/projects/ejyy/api-server/dist:/www/apiserver   -w /www/apiserver   node:24.2.0   sh -c "npm install && node ejyy_server.js"
+
+#mysql
+docker run -d --name my-redis -p 6379:6379 redis:6.2.6
+docker exec -it mysql57 mysql -u root -p
+
+#redis
+
+#minio
+
+
+#前端服务
+
+
+#获取docker IP
+docker inspect my-redis | grep IPAddress
