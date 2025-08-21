@@ -148,6 +148,7 @@ class UnifiedUploadService {
      */
     async presignedUpload(file, config, options) {
         // 使用PUT方法进行预签名上传
+        console.log('presignedUrl', config.presignedUrl);
         await this.executeUploadToPutUrl({
             url: config.presignedUrl,
             data: file,

@@ -259,6 +259,109 @@ docker run -d --name api-server   -p 6688:6688   -v /Users/pzq/tech/projects/ejy
 docker run -d --name my-redis -p 6379:6379 redis:6.2.6
 docker exec -it mysql57 mysql -u root -p
 
+TRUNCATE TABLE `ejyy_ask_for_leave`;                           
+TRUNCATE TABLE `ejyy_ask_for_leave_flow`;                      
+TRUNCATE TABLE `ejyy_building_info`;                           
+TRUNCATE TABLE `ejyy_community_info`;                          
+TRUNCATE TABLE `ejyy_community_remote_open_door_log`;          
+TRUNCATE TABLE `ejyy_community_setting`;                       
+TRUNCATE TABLE `ejyy_complain`;                                
+TRUNCATE TABLE `ejyy_contract`;                                
+TRUNCATE TABLE `ejyy_contract_category`;                       
+TRUNCATE TABLE `ejyy_contract_item`;                           
+TRUNCATE TABLE `ejyy_convenient`;                              
+TRUNCATE TABLE `ejyy_employee_sign_record`;                    
+TRUNCATE TABLE `ejyy_employee_sign_setting`;                   
+TRUNCATE TABLE `ejyy_epidemic`;                                
+TRUNCATE TABLE `ejyy_feedback`;                                
+TRUNCATE TABLE `ejyy_fitment`;                                 
+TRUNCATE TABLE `ejyy_inform`;                                  
+TRUNCATE TABLE `ejyy_iot_elevator`;                            
+TRUNCATE TABLE `ejyy_iot_elevator_log`;                        
+TRUNCATE TABLE `ejyy_iot_entrance`;                            
+TRUNCATE TABLE `ejyy_iot_entrance_log`;                        
+TRUNCATE TABLE `ejyy_iot_lamp`;                                
+TRUNCATE TABLE `ejyy_iot_lamp_line`;                           
+TRUNCATE TABLE `ejyy_iot_lamp_log`;                            
+TRUNCATE TABLE `ejyy_iot_lamp_work_mode`;                      
+TRUNCATE TABLE `ejyy_iot_meter`;                               
+TRUNCATE TABLE `ejyy_iot_meter_read`;                          
+TRUNCATE TABLE `ejyy_iot_meter_repeater`;                      
+TRUNCATE TABLE `ejyy_iot_park`;                                
+TRUNCATE TABLE `ejyy_iot_park_blacklist`;                      
+TRUNCATE TABLE `ejyy_iot_park_log`;                            
+TRUNCATE TABLE `ejyy_iot_warning`;                             
+TRUNCATE TABLE `ejyy_iot_warning_log`;                         
+TRUNCATE TABLE `ejyy_material`;                                
+TRUNCATE TABLE `ejyy_material_category`;                       
+TRUNCATE TABLE `ejyy_material_purchase`;                       
+TRUNCATE TABLE `ejyy_material_purchase_flow`;                  
+TRUNCATE TABLE `ejyy_material_purchase_item`;                  
+TRUNCATE TABLE `ejyy_material_supplier`;                       
+TRUNCATE TABLE `ejyy_material_used`;                           
+TRUNCATE TABLE `ejyy_meeting`;                                 
+TRUNCATE TABLE `ejyy_meeting_participant`;                     
+TRUNCATE TABLE `ejyy_meeting_room`;                            
+TRUNCATE TABLE `ejyy_mission`;                                 
+TRUNCATE TABLE `ejyy_mission_category`;                        
+TRUNCATE TABLE `ejyy_mission_complete`;                        
+TRUNCATE TABLE `ejyy_mission_complete_node`;                   
+TRUNCATE TABLE `ejyy_mission_line`;                            
+TRUNCATE TABLE `ejyy_mission_line_node`;                       
+TRUNCATE TABLE `ejyy_mission_point`;                           
+TRUNCATE TABLE `ejyy_move_car`;                                
+TRUNCATE TABLE `ejyy_notice_to_user`;                          
+TRUNCATE TABLE `ejyy_notice_to_user_readed`;                   
+TRUNCATE TABLE `ejyy_notice_tpl`;                              
+TRUNCATE TABLE `ejyy_owner_apply`;                             
+TRUNCATE TABLE `ejyy_owner_detail_log`;                        
+TRUNCATE TABLE `ejyy_party`;                                   
+TRUNCATE TABLE `ejyy_pet`;                                     
+TRUNCATE TABLE `ejyy_pet_vaccinate`;                           
+TRUNCATE TABLE `ejyy_property_company_access`;                 
+TRUNCATE TABLE `ejyy_property_company_auth`;                   
+TRUNCATE TABLE `ejyy_property_company_building_registered`;    
+TRUNCATE TABLE `ejyy_property_company_department`;             
+TRUNCATE TABLE `ejyy_property_company_job`;                    
+TRUNCATE TABLE `ejyy_property_company_user`;                   
+TRUNCATE TABLE `ejyy_property_company_user_access_community`;  
+TRUNCATE TABLE `ejyy_property_company_user_default_community`; 
+TRUNCATE TABLE `ejyy_property_company_user_join_record`;       
+TRUNCATE TABLE `ejyy_property_company_user_login`;             
+TRUNCATE TABLE `ejyy_property_fee`;                            
+TRUNCATE TABLE `ejyy_property_fee_order`;                      
+TRUNCATE TABLE `ejyy_property_fee_order_item`;                 
+TRUNCATE TABLE `ejyy_question`;                                
+TRUNCATE TABLE `ejyy_question_option`;                         
+TRUNCATE TABLE `ejyy_questionnaire`;                           
+TRUNCATE TABLE `ejyy_questionnaire_answer`;                    
+TRUNCATE TABLE `ejyy_questionnaire_answer_result`;             
+TRUNCATE TABLE `ejyy_questionnaire_statistics`;                
+TRUNCATE TABLE `ejyy_refound`;                                 
+TRUNCATE TABLE `ejyy_refound_flow`;                            
+TRUNCATE TABLE `ejyy_refound_item`;                            
+TRUNCATE TABLE `ejyy_repair`;                                  
+TRUNCATE TABLE `ejyy_repair_urge`;                             
+TRUNCATE TABLE `ejyy_schedule`;                                
+TRUNCATE TABLE `ejyy_session_store`;                           
+TRUNCATE TABLE `ejyy_storehouse`;                              
+TRUNCATE TABLE `ejyy_topic`;                                   
+TRUNCATE TABLE `ejyy_user_building`;                           
+TRUNCATE TABLE `ejyy_user_building_operate_log`;               
+TRUNCATE TABLE `ejyy_user_car`;                                
+TRUNCATE TABLE `ejyy_user_car_operate_log`;                    
+TRUNCATE TABLE `ejyy_user_car_sync`;                           
+TRUNCATE TABLE `ejyy_user_default_community`;                  
+TRUNCATE TABLE `ejyy_virus`;                                   
+TRUNCATE TABLE `ejyy_vistor`;                                  
+TRUNCATE TABLE `ejyy_wechat_mp_auth`;                          
+TRUNCATE TABLE `ejyy_wechat_mp_user`;                          
+TRUNCATE TABLE `ejyy_wechat_mp_user_login`;                    
+TRUNCATE TABLE `ejyy_wechat_official_accounts_user`;           
+TRUNCATE TABLE `ejyy_workflow`;                                
+TRUNCATE TABLE `ejyy_workflow_node`;                           
+
+
 #redis
 
 #minio
@@ -269,3 +372,19 @@ docker exec -it mysql57 mysql -u root -p
 
 #获取docker IP
 docker inspect my-redis | grep IPAddress
+
+#获取所有容器的IP
+docker inspect -f '{{.Name}} - {{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $(docker ps -q)
+
+#配置
+1、api-server
+api-server/src/config.ts  IP需要修改api-server对应的IP
+
+2、console-web
+console-web/src/config.js  IP需要修改console-web对应的IP
+
+3、后台配饰api-server/dist/.ejyyrc
+1）minio的IP
+2）mysql的IP
+3）redis的IP
+4）

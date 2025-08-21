@@ -78,6 +78,7 @@ export default {
                 // 重新获取最新的存储配置
                 try {
                     this.storageConfig = await utils.upload.getStorageConfig();
+                    console.log('storageConfig', this.storageConfig);
                 } catch (configError) {
                     console.error('获取存储配置失败:', configError);
                     throw new Error('无法获取存储配置，请确保后端存储服务已正确配置');
@@ -93,6 +94,7 @@ export default {
                 }
 
                 // 使用统一上传服务
+                console.log('start to upload file');
                 const response = await utils.upload.upload(file, {
                     dir: this.dir,
                     onProgress: progress => {

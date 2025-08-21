@@ -184,7 +184,7 @@ function generateConfig(): Config {
                     local: {
                         savePath: './uploads',
                         urlPrefix: '/static',
-                        baseUrl: 'http://127.0.0.1:6688'
+                        baseUrl: 'http://172.17.0.4:6688'
                     },
                     ...storageConfig
                 };
@@ -195,7 +195,7 @@ function generateConfig(): Config {
                     local: {
                         savePath: './uploads',
                         urlPrefix: '/static',
-                        baseUrl: 'http://127.0.0.1:6688'
+                        baseUrl: 'http://172.17.0.4:6688'
                     },
                     oss: {
                         accessKeyId: '',

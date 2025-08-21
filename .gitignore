@@ -25,3 +25,5 @@ MINIO_UNDEFINED_URL_FIX.md
 MINIO_UPLOAD_FIX_REPORT.md
 AVATAR_VALIDATION_FIX.md
 fix_copyright.py
+console-web/dist.tar.gz
+api-server/README.md

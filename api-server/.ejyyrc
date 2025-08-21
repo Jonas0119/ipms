@@ -23,8 +23,8 @@ redis:
 # 统一存储配置
 storage:
   # 存储模式：local | oss | minio
-  mode: "minio"
-  #mode: "local"
+  #mode: "minio"
+  mode: "local"
   
   # 模板文件配置
   template:
@@ -53,13 +53,14 @@ storage:
   
   # MinIO配置
   minio:
-    endpoint: "http://localhost:9000"  # MinIO API端口
+    minio:
+    endpoint: "http://172.17.0.6:9000"  # MinIO API端口（内部访问）
     accessKey: "admin"
     secretKey: "minioadmin"
     bucket: "ejyy"
     useSSL: false
-    baseUrl: "http://localhost:9000"  # MinIO API端口
-    customDomain: ""  # 可选：自定义域名
+    baseUrl: "http://172.17.0.6:9000"  # MinIO API端口
+    customDomain: "http://127.0.0.1:9000"  # 前端访问地址
 
 # 微信相关配置
 wechat:
