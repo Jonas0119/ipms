@@ -55,7 +55,7 @@ const PcConvenientUpdateAction = <Action>{
         const { community_id, id, title, location, phone } = <RequestBody>ctx.request.body;
 
         const affect = await ctx.model
-            .from('ejyy_convenient')
+            .from('ipms_convenient')
             .update({
                 title,
                 location,

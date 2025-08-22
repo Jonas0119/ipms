@@ -72,7 +72,7 @@ const PcPartyCreateAction = <Action>{
 
         const created_at = Date.now();
 
-        const [id] = await ctx.model.from('ejyy_party').insert({
+        const [id] = await ctx.model.from('ipms_party').insert({
             title,
             carousel,
             cover_img: cover_img ? cover_img : null,

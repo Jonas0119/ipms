@@ -69,7 +69,7 @@ const PcWarningUpdateAction = <Action>{
         const { id, community_id, sign, secret, name, lng, lat } = <RequestBody>ctx.request.body;
 
         const record = await ctx.model
-            .from('ejyy_iot_warning')
+            .from('ipms_iot_warning')
             .where('id', id)
             .andWhere('community_id', community_id)
             .first();
@@ -82,7 +82,7 @@ const PcWarningUpdateAction = <Action>{
         }
 
         const exist = await ctx.model
-            .from('ejyy_iot_warning')
+            .from('ipms_iot_warning')
             .where('name', name)
             .andWhere('community_id', community_id)
             .andWhereNot('id', id)
@@ -96,7 +96,7 @@ const PcWarningUpdateAction = <Action>{
         }
 
         await ctx.model
-            .from('ejyy_iot_warning')
+            .from('ipms_iot_warning')
             .update({
                 sign,
                 secret,

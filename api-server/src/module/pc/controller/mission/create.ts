@@ -81,7 +81,7 @@ const PcMissionCreateAction = <Action>{
         >ctx.request.body;
 
         const category = await ctx.model
-            .from('ejyy_mission_category')
+            .from('ipms_mission_category')
             .andWhere('id', category_id)
             .first();
 
@@ -93,7 +93,7 @@ const PcMissionCreateAction = <Action>{
         }
 
         const line = await ctx.model
-            .from('ejyy_mission_line')
+            .from('ipms_mission_line')
             .where('community_id', community_id)
             .andWhere('id', line_id)
             .first();
@@ -122,7 +122,7 @@ const PcMissionCreateAction = <Action>{
 
         const created_at = Date.now();
 
-        const [id] = await ctx.model.from('ejyy_mission').insert({
+        const [id] = await ctx.model.from('ipms_mission').insert({
             category_id,
             community_id,
             start_date: moment(start_date)

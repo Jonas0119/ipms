@@ -75,31 +75,31 @@ const PcUserMpLoginAction = <Action>{
         }
 
         let pcUserInfo = await ctx.model
-            .table('ejyy_property_company_user')
+            .table('ipms_property_company_user')
             .leftJoin(
-                'ejyy_wechat_official_accounts_user',
-                'ejyy_wechat_official_accounts_user.union_id',
-                'ejyy_property_company_user.union_id'
+                'ipms_wechat_official_accounts_user',
+                'ipms_wechat_official_accounts_user.union_id',
+                'ipms_property_company_user.union_id'
             )
             .leftJoin(
-                'ejyy_property_company_access',
-                'ejyy_property_company_access.id',
-                'ejyy_property_company_user.access_id'
+                'ipms_property_company_access',
+                'ipms_property_company_access.id',
+                'ipms_property_company_user.access_id'
             )
-            .where('ejyy_property_company_user.leave_office', FALSE)
-            .where('ejyy_property_company_user.phone', phoneInfo.data.purePhoneNumber)
+            .where('ipms_property_company_user.leave_office', FALSE)
+            .where('ipms_property_company_user.phone', phoneInfo.data.purePhoneNumber)
             .select(
-                'ejyy_property_company_user.id',
-                'ejyy_property_company_user.account',
-                'ejyy_property_company_user.real_name',
-                'ejyy_property_company_user.gender',
-                'ejyy_property_company_user.avatar_url',
-                'ejyy_property_company_user.phone',
-                'ejyy_property_company_user.admin',
-                'ejyy_property_company_user.join_company_at',
-                'ejyy_property_company_user.created_at',
-                'ejyy_wechat_official_accounts_user.subscribed',
-                'ejyy_property_company_access.content'
+                'ipms_property_company_user.id',
+                'ipms_property_company_user.account',
+                'ipms_property_company_user.real_name',
+                'ipms_property_company_user.gender',
+                'ipms_property_company_user.avatar_url',
+                'ipms_property_company_user.phone',
+                'ipms_property_company_user.admin',
+                'ipms_property_company_user.join_company_at',
+                'ipms_property_company_user.created_at',
+                'ipms_wechat_official_accounts_user.subscribed',
+                'ipms_property_company_access.content'
             )
             .first();
 
@@ -111,7 +111,7 @@ const PcUserMpLoginAction = <Action>{
         }
 
         await ctx.model
-            .from('ejyy_property_company_user')
+            .from('ipms_property_company_user')
             .update({
                 open_id: phoneInfo.data.openid,
                 union_id: phoneInfo.data.unionid
@@ -124,13 +124,13 @@ const PcUserMpLoginAction = <Action>{
 
         const token = utils.crypto.md5(`${phoneInfo.data.openid}${Date.now()}`);
         await ctx.model
-            .from('ejyy_property_company_auth')
+            .from('ipms_property_company_auth')
             .where({ property_company_user_id: pcUserInfo.id })
             .update({
                 token
             });
 
-        await ctx.model.from('ejyy_property_company_user_login').insert({
+        await ctx.model.from('ipms_property_company_user_login').insert({
             property_company_user_id: pcUserInfo.id,
             ip: ctx.request.ip,
             user_agent: `brand/${brand},model/${model},system/${system},platform/$${platform}`,

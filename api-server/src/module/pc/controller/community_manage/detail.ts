@@ -31,8 +31,8 @@ const PcCommunityManageDetailAction = <Action>{
         const { id } = <RequestParams>ctx.params;
 
         const communityInfo = await ctx.model
-            .from('ejyy_community_info')
-            .where('ejyy_community_info.id', id)
+            .from('ipms_community_info')
+            .where('ipms_community_info.id', id)
             .select('id', 'name', 'banner', 'phone', 'province', 'city', 'district', 'created_by', 'created_at')
             .first();
 
@@ -44,31 +44,31 @@ const PcCommunityManageDetailAction = <Action>{
         }
 
         const creatorInfo = await ctx.model
-            .from('ejyy_property_company_user')
+            .from('ipms_property_company_user')
             .leftJoin(
-                'ejyy_property_company_department',
-                'ejyy_property_company_department.id',
-                'ejyy_property_company_user.department_id'
+                'ipms_property_company_department',
+                'ipms_property_company_department.id',
+                'ipms_property_company_user.department_id'
             )
-            .leftJoin('ejyy_property_company_job', 'ejyy_property_company_job.id', 'ejyy_property_company_user.job_id')
-            .where('ejyy_property_company_user.id', communityInfo.created_by)
+            .leftJoin('ipms_property_company_job', 'ipms_property_company_job.id', 'ipms_property_company_user.job_id')
+            .where('ipms_property_company_user.id', communityInfo.created_by)
             .select(
-                'ejyy_property_company_user.avatar_url',
-                'ejyy_property_company_user.phone',
-                'ejyy_property_company_department.name as department',
-                'ejyy_property_company_job.name as job',
-                'ejyy_property_company_user.real_name',
-                'ejyy_property_company_user.created_at'
+                'ipms_property_company_user.avatar_url',
+                'ipms_property_company_user.phone',
+                'ipms_property_company_department.name as department',
+                'ipms_property_company_job.name as job',
+                'ipms_property_company_user.real_name',
+                'ipms_property_company_user.created_at'
             )
             .first();
 
         const setting = await ctx.model
-            .from('ejyy_community_setting')
+            .from('ipms_community_setting')
             .where('community_id', id)
             .first();
 
         const convenientList = await ctx.model
-            .from('ejyy_convenient')
+            .from('ipms_convenient')
             .where('community_id', id)
             .select('id', 'title', 'location', 'phone')
             .orderBy('id', 'desc');

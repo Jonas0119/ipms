@@ -70,7 +70,7 @@ const PcInformUpdateAction = <Action>{
         const { id, title, carousel, cover_img, content, community_id, published } = <RequestBody>ctx.request.body;
 
         const exist = await ctx.model
-            .from('ejyy_inform')
+            .from('ipms_inform')
             .where('id', id)
             .andWhere('community_id', community_id)
             .first();
@@ -97,7 +97,7 @@ const PcInformUpdateAction = <Action>{
         }
 
         await ctx.model
-            .from('ejyy_inform')
+            .from('ipms_inform')
             .update({
                 title,
                 carousel,

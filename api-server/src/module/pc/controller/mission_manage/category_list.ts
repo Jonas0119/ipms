@@ -38,20 +38,20 @@ const PcMissionManageCategoryListAction = <Action>{
         const { page_num, page_size } = <RequestBody>ctx.request.body;
 
         const list = await ctx.model
-            .from('ejyy_mission_category')
-            .leftJoin('ejyy_property_company_user', 'ejyy_property_company_user.id', 'ejyy_mission_category.created_by')
-            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ejyy_mission_category.id'))
+            .from('ipms_mission_category')
+            .leftJoin('ipms_property_company_user', 'ipms_property_company_user.id', 'ipms_mission_category.created_by')
+            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ipms_mission_category.id'))
             .select(
-                'ejyy_mission_category.id',
-                'ejyy_mission_category.name',
-                'ejyy_mission_category.description',
-                'ejyy_mission_category.created_at',
-                'ejyy_mission_category.created_by',
-                'ejyy_property_company_user.real_name'
+                'ipms_mission_category.id',
+                'ipms_mission_category.name',
+                'ipms_mission_category.description',
+                'ipms_mission_category.created_at',
+                'ipms_mission_category.created_by',
+                'ipms_property_company_user.real_name'
             )
             .limit(page_size)
             .offset((page_num - 1) * page_size)
-            .orderBy('ejyy_mission_category.id', 'desc');
+            .orderBy('ipms_mission_category.id', 'desc');
 
         const [res] = await ctx.model.select(ctx.model.raw('found_rows() AS total'));
 

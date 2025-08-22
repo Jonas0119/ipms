@@ -44,7 +44,7 @@ const PcMissionManageCategoryUpdateAction = <Action>{
         const { id, name, description } = <RequestBody>ctx.request.body;
 
         const exist = await ctx.model
-            .from('ejyy_mission_category')
+            .from('ipms_mission_category')
             .andWhere('id', id)
             .first();
 
@@ -56,7 +56,7 @@ const PcMissionManageCategoryUpdateAction = <Action>{
         }
 
         const repeat = await ctx.model
-            .from('ejyy_mission_category')
+            .from('ipms_mission_category')
             .andWhere('name', name)
             .andWhereNot('id', id)
             .first();
@@ -69,7 +69,7 @@ const PcMissionManageCategoryUpdateAction = <Action>{
         }
 
         await ctx.model
-            .from('ejyy_mission_category')
+            .from('ipms_mission_category')
             .update({
                 name,
                 description

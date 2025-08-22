@@ -163,7 +163,7 @@ export default {
                 this.detail = res.data;
 
                 const graph = new dagre.graphlib.Graph();
-                const ejyy = 'ejyy';
+                const ejyy = 'ipms';
                 const nodeOption = {
                     width: 30,
                     height: 50

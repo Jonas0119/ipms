@@ -38,7 +38,7 @@ export const FCDA = 15;
 export const YZDA = 16;
 // 物料仓储
 export const WLCC = 17;
-// 疫情防控
+// 预留占位
 export const YQFK = 18;
 // 巡检任务
 export const XJRW = 19;
@@ -80,7 +80,7 @@ export enum Role {
     FCDA,
     YZDA,
     WLCC,
-    YQFK,
+    // (removed)
     XJRW,
     XZTZ,
     ZNMJ,

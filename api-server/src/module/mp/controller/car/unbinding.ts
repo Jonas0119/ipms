@@ -33,7 +33,7 @@ const MpCarUnbindingAction = <Action>{
         const { id } = <RequestParams>ctx.params;
 
         const affect = await ctx.model
-            .table('ejyy_user_car')
+            .table('ipms_user_car')
             .update('status', UNBINDING_CAR)
             .where('id', id);
 
@@ -44,12 +44,12 @@ const MpCarUnbindingAction = <Action>{
             });
         }
 
-        await ctx.model.from('ejyy_user_car_sync').insert({
+        await ctx.model.from('ipms_user_car_sync').insert({
             user_car_id: id,
             is_remove: TRUE
         });
 
-        await ctx.model.from('ejyy_user_car_operate_log').insert({
+        await ctx.model.from('ipms_user_car_operate_log').insert({
             user_car_id: id,
             wechat_mp_user_id: ctx.mpUserInfo.id,
             status: UNBINDING_CAR,

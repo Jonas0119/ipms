@@ -62,22 +62,22 @@ if [ "$CREATE_NEW" = true ]; then
       --memory-swap=2g \
       -p 6688:6688 \
       -p 9229:9229 \
-      -v /Users/pzq/tech/projects/ejyy/api-server/dist:/www/apiserver \
-      -v /Users/pzq/tech/projects/ejyy/api-server/memory-monitor.js:/www/apiserver/memory-monitor.js \
+      -v /Users/pzq/tech/projects/ipms/api-server/dist:/www/apiserver \
+      -v /Users/pzq/tech/projects/ipms/api-server/memory-monitor.js:/www/apiserver/memory-monitor.js \
       -w /www/apiserver \
       node:24.2.0 \
       sh -c "
         npm install && 
         sleep 20 &&
-        if [ -f ejyy_server.js ] && [ -s ejyy_server.js ]; then
-          cp ejyy_server.js ejyy_server.js.backup &&
-          echo 'require(\"./memory-monitor.js\");' >> ejyy_server.js &&
+        if [ -f ipms_server.js ] && [ -s ipms_server.js ]; then
+          cp ipms_server.js ipms_server.js.backup &&
+          echo 'require(\"./memory-monitor.js\");' >> ipms_server.js &&
           echo 'Memory monitor added successfully'
         else
-          echo 'Error: ejyy_server.js not found or empty' &&
+          echo 'Error: ipms_server.js not found or empty' &&
           exit 1
         fi &&
-        node --inspect=0.0.0.0:9229 --expose-gc --max-old-space-size=768 ejyy_server.js
+        node --inspect=0.0.0.0:9229 --expose-gc --max-old-space-size=768 ipms_server.js
       "
     
     if [ $? -eq 0 ]; then

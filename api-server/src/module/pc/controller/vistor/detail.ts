@@ -42,35 +42,35 @@ const PcVistorDetailAction = <Action>{
         let registrant = null;
 
         const info = await ctx.model
-            .from('ejyy_vistor')
-            .leftJoin('ejyy_building_info', 'ejyy_building_info.id', 'ejyy_vistor.building_id')
-            .leftJoin('ejyy_property_company_user', 'ejyy_property_company_user.id', 'ejyy_vistor.scan_by')
-            .leftJoin('ejyy_wechat_mp_user', 'ejyy_wechat_mp_user.id', 'ejyy_vistor.wechat_mp_user_id')
+            .from('ipms_vistor')
+            .leftJoin('ipms_building_info', 'ipms_building_info.id', 'ipms_vistor.building_id')
+            .leftJoin('ipms_property_company_user', 'ipms_property_company_user.id', 'ipms_vistor.scan_by')
+            .leftJoin('ipms_wechat_mp_user', 'ipms_wechat_mp_user.id', 'ipms_vistor.wechat_mp_user_id')
             .select(
-                'ejyy_vistor.id',
-                'ejyy_vistor.vistor_name',
-                'ejyy_vistor.vistor_phone',
-                'ejyy_vistor.car_number',
-                'ejyy_vistor.have_vistor_info',
-                'ejyy_vistor.scan_by',
-                'ejyy_vistor.building_id',
-                'ejyy_vistor.property_company_user_id',
-                'ejyy_vistor.wechat_mp_user_id as owner_id',
-                'ejyy_wechat_mp_user.real_name as owner_name',
-                'ejyy_vistor.uid',
-                'ejyy_vistor.expire',
-                'ejyy_vistor.used_at',
-                'ejyy_vistor.created_at',
-                'ejyy_building_info.type',
-                'ejyy_building_info.area',
-                'ejyy_building_info.building',
-                'ejyy_building_info.unit',
-                'ejyy_building_info.number',
-                'ejyy_property_company_user.id as scan_user_id',
-                'ejyy_property_company_user.real_name as scan_real_name'
+                'ipms_vistor.id',
+                'ipms_vistor.vistor_name',
+                'ipms_vistor.vistor_phone',
+                'ipms_vistor.car_number',
+                'ipms_vistor.have_vistor_info',
+                'ipms_vistor.scan_by',
+                'ipms_vistor.building_id',
+                'ipms_vistor.property_company_user_id',
+                'ipms_vistor.wechat_mp_user_id as owner_id',
+                'ipms_wechat_mp_user.real_name as owner_name',
+                'ipms_vistor.uid',
+                'ipms_vistor.expire',
+                'ipms_vistor.used_at',
+                'ipms_vistor.created_at',
+                'ipms_building_info.type',
+                'ipms_building_info.area',
+                'ipms_building_info.building',
+                'ipms_building_info.unit',
+                'ipms_building_info.number',
+                'ipms_property_company_user.id as scan_user_id',
+                'ipms_property_company_user.real_name as scan_real_name'
             )
-            .where('ejyy_vistor.id', id)
-            .andWhere('ejyy_vistor.community_id', community_id)
+            .where('ipms_vistor.id', id)
+            .andWhere('ipms_vistor.community_id', community_id)
             .first();
 
         if (!info) {
@@ -82,7 +82,7 @@ const PcVistorDetailAction = <Action>{
 
         if (info.property_company_user_id) {
             registrant = await ctx.model
-                .from('ejyy_property_company_user')
+                .from('ipms_property_company_user')
                 .where('id', info.property_company_user_id)
                 .select('id', 'real_name')
                 .first();

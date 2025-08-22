@@ -66,33 +66,33 @@ const PcFitmentListAction = <Action>{
         const where = {};
 
         if (step) {
-            where['ejyy_fitment.step'] = step;
+            where['ipms_fitment.step'] = step;
         }
 
         if (is_return_cash_deposit !== undefined) {
-            where['ejyy_fitment.is_return_cash_deposit'] = is_return_cash_deposit;
+            where['ipms_fitment.is_return_cash_deposit'] = is_return_cash_deposit;
         }
 
         const list = await ctx.model
-            .from('ejyy_fitment')
-            .leftJoin('ejyy_building_info', 'ejyy_building_info.id', 'ejyy_fitment.building_id')
-            .where('ejyy_fitment.community_id', community_id)
+            .from('ipms_fitment')
+            .leftJoin('ipms_building_info', 'ipms_building_info.id', 'ipms_fitment.building_id')
+            .where('ipms_fitment.community_id', community_id)
             .andWhere(where)
-            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ejyy_fitment.id'))
+            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ipms_fitment.id'))
             .select(
-                'ejyy_fitment.id',
-                'ejyy_fitment.step',
-                'ejyy_fitment.is_return_cash_deposit',
-                'ejyy_fitment.created_at',
-                'ejyy_building_info.type',
-                'ejyy_building_info.area',
-                'ejyy_building_info.building',
-                'ejyy_building_info.unit',
-                'ejyy_building_info.number'
+                'ipms_fitment.id',
+                'ipms_fitment.step',
+                'ipms_fitment.is_return_cash_deposit',
+                'ipms_fitment.created_at',
+                'ipms_building_info.type',
+                'ipms_building_info.area',
+                'ipms_building_info.building',
+                'ipms_building_info.unit',
+                'ipms_building_info.number'
             )
             .limit(page_size)
             .offset((page_num - 1) * page_size)
-            .orderBy('ejyy_fitment.id', 'desc');
+            .orderBy('ipms_fitment.id', 'desc');
 
         const [res] = await ctx.model.select(ctx.model.raw('found_rows() AS total'));
 

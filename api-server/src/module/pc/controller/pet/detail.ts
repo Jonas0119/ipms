@@ -39,27 +39,27 @@ const MpPcDetailAction = <Action>{
         const { id, community_id } = <RequestBody>ctx.request.body;
 
         const info = await ctx.model
-            .from('ejyy_pet')
-            .leftJoin('ejyy_community_info', 'ejyy_community_info.id', 'ejyy_pet.community_id')
-            .leftJoin('ejyy_wechat_mp_user', 'ejyy_wechat_mp_user.id', 'ejyy_pet.wechat_mp_user_id')
+            .from('ipms_pet')
+            .leftJoin('ipms_community_info', 'ipms_community_info.id', 'ipms_pet.community_id')
+            .leftJoin('ipms_wechat_mp_user', 'ipms_wechat_mp_user.id', 'ipms_pet.wechat_mp_user_id')
             .select(
-                'ejyy_pet.id',
-                'ejyy_pet.wechat_mp_user_id',
-                'ejyy_pet.name',
-                'ejyy_pet.sex',
-                'ejyy_pet.pet_type',
-                'ejyy_pet.coat_color',
-                'ejyy_pet.breed',
-                'ejyy_pet.photo',
-                'ejyy_pet.pet_license',
-                'ejyy_pet.pet_license_award_at',
-                'ejyy_community_info.name as community_name',
-                'ejyy_pet.remove',
-                'ejyy_pet.remove_reason',
-                'ejyy_pet.removed_at',
-                'ejyy_wechat_mp_user.real_name'
+                'ipms_pet.id',
+                'ipms_pet.wechat_mp_user_id',
+                'ipms_pet.name',
+                'ipms_pet.sex',
+                'ipms_pet.pet_type',
+                'ipms_pet.coat_color',
+                'ipms_pet.breed',
+                'ipms_pet.photo',
+                'ipms_pet.pet_license',
+                'ipms_pet.pet_license_award_at',
+                'ipms_community_info.name as community_name',
+                'ipms_pet.remove',
+                'ipms_pet.remove_reason',
+                'ipms_pet.removed_at',
+                'ipms_wechat_mp_user.real_name'
             )
-            .where('ejyy_pet.id', id)
+            .where('ipms_pet.id', id)
             .where('community_id', community_id)
             .first();
 
@@ -71,7 +71,7 @@ const MpPcDetailAction = <Action>{
         }
 
         const vaccinates = await ctx.model
-            .from('ejyy_pet_vaccinate')
+            .from('ipms_pet_vaccinate')
             .select('vaccinated_at', 'vaccine_type')
             .where('pet_id', id)
             .orderBy('id', 'desc');

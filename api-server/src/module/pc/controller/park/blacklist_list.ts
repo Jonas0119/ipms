@@ -45,27 +45,27 @@ const PcParkBlacklistListAction = <Action>{
         const { page_num, page_size, community_id } = <RequestBody>ctx.request.body;
 
         const list = await ctx.model
-            .from('ejyy_iot_park_blacklist')
+            .from('ipms_iot_park_blacklist')
             .leftJoin(
-                'ejyy_property_company_user',
-                'ejyy_property_company_user.id',
-                'ejyy_iot_park_blacklist.created_by'
+                'ipms_property_company_user',
+                'ipms_property_company_user.id',
+                'ipms_iot_park_blacklist.created_by'
             )
-            .leftJoin('ejyy_iot_park', 'ejyy_iot_park.id', 'ejyy_iot_park_blacklist.park_id')
-            .where('ejyy_iot_park.community_id', community_id)
-            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ejyy_iot_park_blacklist.id'))
+            .leftJoin('ipms_iot_park', 'ipms_iot_park.id', 'ipms_iot_park_blacklist.park_id')
+            .where('ipms_iot_park.community_id', community_id)
+            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ipms_iot_park_blacklist.id'))
             .select(
-                'ejyy_iot_park_blacklist.id',
-                'ejyy_iot_park_blacklist.park_id',
-                'ejyy_iot_park_blacklist.car_number',
-                'ejyy_iot_park_blacklist.created_by',
-                'ejyy_iot_park_blacklist.created_at',
-                'ejyy_property_company_user.real_name',
-                'ejyy_iot_park.name as park'
+                'ipms_iot_park_blacklist.id',
+                'ipms_iot_park_blacklist.park_id',
+                'ipms_iot_park_blacklist.car_number',
+                'ipms_iot_park_blacklist.created_by',
+                'ipms_iot_park_blacklist.created_at',
+                'ipms_property_company_user.real_name',
+                'ipms_iot_park.name as park'
             )
             .limit(page_size)
             .offset((page_num - 1) * page_size)
-            .orderBy('ejyy_iot_park_blacklist.id', 'desc');
+            .orderBy('ipms_iot_park_blacklist.id', 'desc');
 
         const [res] = await ctx.model.select(ctx.model.raw('found_rows() AS total'));
 

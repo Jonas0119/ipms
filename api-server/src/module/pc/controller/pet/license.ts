@@ -56,7 +56,7 @@ const PcPetLicenseAction = <Action>{
         const { pet_license, pet_license_award_at, community_id } = <RequestBody>ctx.request.body;
 
         const affect = await ctx.model
-            .from('ejyy_pet')
+            .from('ipms_pet')
             .update({ pet_license, pet_license_award_at })
             .where('id', id)
             .where('community_id', community_id);

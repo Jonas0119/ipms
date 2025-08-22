@@ -51,7 +51,7 @@ const PcOptionOwerAction = <Action>{
         const { phone, community_id } = <RequestBody>ctx.request.body;
 
         const ownerInfo = await ctx.model
-            .from('ejyy_wechat_mp_user')
+            .from('ipms_wechat_mp_user')
             .where('phone', phone)
             .andWhere('intact', TRUE)
             .select('id', 'real_name', 'phone', 'avatar_url')
@@ -65,23 +65,23 @@ const PcOptionOwerAction = <Action>{
         }
 
         const result = <Building[]>await ctx.model
-            .table('ejyy_user_building')
-            .leftJoin('ejyy_building_info', 'ejyy_building_info.id', 'ejyy_user_building.building_id')
-            .where('ejyy_user_building.wechat_mp_user_id', ownerInfo.id)
-            .andWhere('ejyy_user_building.status', BINDING_BUILDING)
-            .andWhere('ejyy_building_info.community_id', community_id)
+            .table('ipms_user_building')
+            .leftJoin('ipms_building_info', 'ipms_building_info.id', 'ipms_user_building.building_id')
+            .where('ipms_user_building.wechat_mp_user_id', ownerInfo.id)
+            .andWhere('ipms_user_building.status', BINDING_BUILDING)
+            .andWhere('ipms_building_info.community_id', community_id)
             .select(
-                'ejyy_user_building.id as user_building_id',
-                'ejyy_user_building.authenticated',
-                'ejyy_user_building.authenticated_type',
-                'ejyy_building_info.type',
-                'ejyy_building_info.area',
-                'ejyy_building_info.building',
-                'ejyy_building_info.unit',
-                'ejyy_building_info.number',
-                'ejyy_building_info.id as building_id'
+                'ipms_user_building.id as user_building_id',
+                'ipms_user_building.authenticated',
+                'ipms_user_building.authenticated_type',
+                'ipms_building_info.type',
+                'ipms_building_info.area',
+                'ipms_building_info.building',
+                'ipms_building_info.unit',
+                'ipms_building_info.number',
+                'ipms_building_info.id as building_id'
             )
-            .orderBy('ejyy_user_building.id', 'desc');
+            .orderBy('ipms_user_building.id', 'desc');
 
         if (result.length === 0) {
             return (ctx.body = {

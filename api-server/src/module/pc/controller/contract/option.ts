@@ -17,7 +17,7 @@ const PcContractOptionAction = <Action>{
     },
     response: async ctx => {
         const list = await ctx.model
-            .from('ejyy_contract_category')
+            .from('ipms_contract_category')
             .select('id', 'name', 'description')
             .orderBy('id');
 

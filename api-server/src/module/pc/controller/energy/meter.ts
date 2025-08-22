@@ -45,39 +45,39 @@ const PcEnergyMeterAction = <Action>{
         const { page_num, page_size, community_id } = <RequestBody>ctx.request.body;
 
         const list = await ctx.model
-            .from('ejyy_iot_meter')
-            .leftJoin('ejyy_property_company_user', 'ejyy_property_company_user.id', 'ejyy_iot_meter.created_by')
-            .leftJoin('ejyy_iot_meter_repeater', 'ejyy_iot_meter_repeater.id', 'ejyy_iot_meter.repeater_id')
-            .leftJoin('ejyy_building_info', 'ejyy_building_info.id', 'ejyy_iot_meter.building_id')
-            .where('ejyy_iot_meter.community_id', community_id)
-            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ejyy_iot_meter.id'))
+            .from('ipms_iot_meter')
+            .leftJoin('ipms_property_company_user', 'ipms_property_company_user.id', 'ipms_iot_meter.created_by')
+            .leftJoin('ipms_iot_meter_repeater', 'ipms_iot_meter_repeater.id', 'ipms_iot_meter.repeater_id')
+            .leftJoin('ipms_building_info', 'ipms_building_info.id', 'ipms_iot_meter.building_id')
+            .where('ipms_iot_meter.community_id', community_id)
+            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ipms_iot_meter.id'))
             .select(
-                'ejyy_iot_meter.id',
-                'ejyy_iot_meter.community_id',
-                'ejyy_iot_meter.category',
-                'ejyy_iot_meter.model',
-                'ejyy_iot_meter.building_id',
-                'ejyy_iot_meter.name',
-                'ejyy_iot_meter.password',
-                'ejyy_iot_meter.no',
-                'ejyy_iot_meter.imei',
-                'ejyy_iot_meter.repeater_id',
-                'ejyy_iot_meter.init_value',
-                'ejyy_iot_meter.current_value',
-                'ejyy_iot_meter.max_value',
-                'ejyy_iot_meter.online',
-                'ejyy_iot_meter.created_by',
-                'ejyy_iot_meter.created_at',
-                'ejyy_property_company_user.real_name',
-                'ejyy_building_info.type',
-                'ejyy_building_info.area',
-                'ejyy_building_info.building',
-                'ejyy_building_info.unit',
-                'ejyy_building_info.number'
+                'ipms_iot_meter.id',
+                'ipms_iot_meter.community_id',
+                'ipms_iot_meter.category',
+                'ipms_iot_meter.model',
+                'ipms_iot_meter.building_id',
+                'ipms_iot_meter.name',
+                'ipms_iot_meter.password',
+                'ipms_iot_meter.no',
+                'ipms_iot_meter.imei',
+                'ipms_iot_meter.repeater_id',
+                'ipms_iot_meter.init_value',
+                'ipms_iot_meter.current_value',
+                'ipms_iot_meter.max_value',
+                'ipms_iot_meter.online',
+                'ipms_iot_meter.created_by',
+                'ipms_iot_meter.created_at',
+                'ipms_property_company_user.real_name',
+                'ipms_building_info.type',
+                'ipms_building_info.area',
+                'ipms_building_info.building',
+                'ipms_building_info.unit',
+                'ipms_building_info.number'
             )
             .limit(page_size)
             .offset((page_num - 1) * page_size)
-            .orderBy('ejyy_iot_meter.id', 'desc');
+            .orderBy('ipms_iot_meter.id', 'desc');
 
         const [res] = await ctx.model.select(ctx.model.raw('found_rows() AS total'));
 

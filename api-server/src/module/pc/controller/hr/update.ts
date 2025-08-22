@@ -85,7 +85,7 @@ const PcHrUpdateAction = <Action>{
         >ctx.request.body;
 
         const info = await ctx.model
-            .from('ejyy_property_company_user')
+            .from('ipms_property_company_user')
             .where('id', id)
             .first();
 
@@ -111,7 +111,7 @@ const PcHrUpdateAction = <Action>{
         }
 
         const isExistJob = await ctx.model
-            .from('ejyy_property_company_job')
+            .from('ipms_property_company_job')
             .andWhere('id', job_id)
             .first();
 
@@ -123,7 +123,7 @@ const PcHrUpdateAction = <Action>{
         }
 
         const isExistDepartment = await ctx.model
-            .from('ejyy_property_company_department')
+            .from('ipms_property_company_department')
             .andWhere('id', department_id)
             .first();
 
@@ -135,7 +135,7 @@ const PcHrUpdateAction = <Action>{
         }
 
         const isExistAccess = await ctx.model
-            .from('ejyy_property_company_access')
+            .from('ipms_property_company_access')
             .andWhere('id', access_id)
             .first();
 
@@ -149,7 +149,7 @@ const PcHrUpdateAction = <Action>{
         // 更新可访问小区，只判断当前人事的可操控小区是否与数据一致
         if (community_access.length > 0) {
             const selfAccessCommunity = await ctx.model
-                .from('ejyy_property_company_user_access_community')
+                .from('ipms_property_company_user_access_community')
                 .whereIn('community_id', community_access)
                 .andWhere('property_company_user_id', ctx.pcUserInfo.id)
                 .select('community_id');
@@ -165,7 +165,7 @@ const PcHrUpdateAction = <Action>{
         const gender = utils.idcard.gender(idcard);
 
         const affect = await ctx.model
-            .from('ejyy_property_company_user')
+            .from('ipms_property_company_user')
             .update({
                 real_name,
                 idcard,
@@ -186,7 +186,7 @@ const PcHrUpdateAction = <Action>{
         }
 
         await ctx.model
-            .from('ejyy_property_company_user_access_community')
+            .from('ipms_property_company_user_access_community')
             .where('property_company_user_id', id)
             .delete();
 
@@ -198,7 +198,7 @@ const PcHrUpdateAction = <Action>{
                 };
             });
 
-            await ctx.model.from('ejyy_property_company_user_access_community').insert(data);
+            await ctx.model.from('ipms_property_company_user_access_community').insert(data);
         }
 
         ctx.body = {

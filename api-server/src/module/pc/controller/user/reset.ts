@@ -33,7 +33,7 @@ const PcUserResetAction = <Action>{
         const { password } = <RequestBody>ctx.request.body;
 
         await ctx.model
-            .from('ejyy_property_company_user')
+            .from('ipms_property_company_user')
             .where('id', ctx.pcUserInfo.id)
             .update('password', utils.crypto.md5(password));
 

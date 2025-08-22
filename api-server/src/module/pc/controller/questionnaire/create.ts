@@ -74,7 +74,7 @@ const PcQuestionnaireCreateAction = <Action>{
         const { community_id, title, published, expire, questions } = <RequestBody>ctx.request.body;
 
         const created_at = Date.now();
-        const [id] = await ctx.model.from('ejyy_questionnaire').insert({
+        const [id] = await ctx.model.from('ipms_questionnaire').insert({
             community_id,
             title,
             expire,
@@ -87,7 +87,7 @@ const PcQuestionnaireCreateAction = <Action>{
         // mysql 低版本不支持批量返回ids
         for (let quesiton of questions) {
             const optionsData = [];
-            const [question_id] = await ctx.model.from('ejyy_question').insert({
+            const [question_id] = await ctx.model.from('ipms_question').insert({
                 title: quesiton.title,
                 type: quesiton.type,
                 questionnaire_id: id
@@ -99,10 +99,10 @@ const PcQuestionnaireCreateAction = <Action>{
                     question_id
                 });
             });
-            await ctx.model.from('ejyy_question_option').insert(optionsData);
+            await ctx.model.from('ipms_question_option').insert(optionsData);
         }
 
-        await ctx.model.from('ejyy_questionnaire_statistics').insert({
+        await ctx.model.from('ipms_questionnaire_statistics').insert({
             questionnaire_id: id,
             content: JSON.stringify({
                 total: 0,

@@ -45,29 +45,29 @@ const PcElevatorListAction = <Action>{
         const { page_num, page_size, community_id } = <RequestBody>ctx.request.body;
 
         const list = await ctx.model
-            .from('ejyy_iot_elevator')
-            .leftJoin('ejyy_property_company_user', 'ejyy_property_company_user.id', 'ejyy_iot_elevator.created_by')
-            .where('ejyy_iot_elevator.community_id', community_id)
-            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ejyy_iot_elevator.id'))
+            .from('ipms_iot_elevator')
+            .leftJoin('ipms_property_company_user', 'ipms_property_company_user.id', 'ipms_iot_elevator.created_by')
+            .where('ipms_iot_elevator.community_id', community_id)
+            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ipms_iot_elevator.id'))
             .select(
-                'ejyy_iot_elevator.id',
-                'ejyy_iot_elevator.community_id',
-                'ejyy_iot_elevator.sign',
-                'ejyy_iot_elevator.secret',
-                'ejyy_iot_elevator.name',
-                'ejyy_iot_elevator.building',
-                'ejyy_iot_elevator.category',
-                'ejyy_iot_elevator.online',
-                'ejyy_iot_elevator.verify_property_fee',
-                'ejyy_iot_elevator.lng',
-                'ejyy_iot_elevator.lat',
-                'ejyy_iot_elevator.created_by',
-                'ejyy_iot_elevator.created_at',
-                'ejyy_property_company_user.real_name'
+                'ipms_iot_elevator.id',
+                'ipms_iot_elevator.community_id',
+                'ipms_iot_elevator.sign',
+                'ipms_iot_elevator.secret',
+                'ipms_iot_elevator.name',
+                'ipms_iot_elevator.building',
+                'ipms_iot_elevator.category',
+                'ipms_iot_elevator.online',
+                'ipms_iot_elevator.verify_property_fee',
+                'ipms_iot_elevator.lng',
+                'ipms_iot_elevator.lat',
+                'ipms_iot_elevator.created_by',
+                'ipms_iot_elevator.created_at',
+                'ipms_property_company_user.real_name'
             )
             .limit(page_size)
             .offset((page_num - 1) * page_size)
-            .orderBy('ejyy_iot_elevator.id', 'desc');
+            .orderBy('ipms_iot_elevator.id', 'desc');
 
         const [res] = await ctx.model.select(ctx.model.raw('found_rows() AS total'));
 

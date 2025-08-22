@@ -34,26 +34,26 @@ const PcOptionColleagueAction = <Action>{
         const { community_id } = <RequestBody>ctx.request.body;
 
         const list = await ctx.model
-            .from('ejyy_property_company_user')
+            .from('ipms_property_company_user')
             .leftJoin(
-                'ejyy_property_company_department',
-                'ejyy_property_company_department.id',
-                'ejyy_property_company_user.department_id'
+                'ipms_property_company_department',
+                'ipms_property_company_department.id',
+                'ipms_property_company_user.department_id'
             )
-            .leftJoin('ejyy_property_company_job', 'ejyy_property_company_job.id', 'ejyy_property_company_user.job_id')
-            .whereIn('ejyy_property_company_user.id', function() {
-                this.from('ejyy_property_company_user_access_community')
+            .leftJoin('ipms_property_company_job', 'ipms_property_company_job.id', 'ipms_property_company_user.job_id')
+            .whereIn('ipms_property_company_user.id', function() {
+                this.from('ipms_property_company_user_access_community')
                     .where('community_id', community_id)
                     .select('property_company_user_id');
             })
-            .andWhere('ejyy_property_company_user.leave_office', FALSE)
+            .andWhere('ipms_property_company_user.leave_office', FALSE)
             .select(
-                'ejyy_property_company_department.name as department',
-                'ejyy_property_company_user.department_id',
-                'ejyy_property_company_job.name as job',
-                'ejyy_property_company_user.job_id',
-                'ejyy_property_company_user.real_name',
-                'ejyy_property_company_user.id'
+                'ipms_property_company_department.name as department',
+                'ipms_property_company_user.department_id',
+                'ipms_property_company_job.name as job',
+                'ipms_property_company_user.job_id',
+                'ipms_property_company_user.real_name',
+                'ipms_property_company_user.id'
             );
 
         ctx.body = {

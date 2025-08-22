@@ -40,7 +40,7 @@ const PcRefoundCancelAction = <Action>{
         const { id, community_id } = <RequestBody>ctx.request.body;
 
         const info = await ctx.model
-            .from('ejyy_refound')
+            .from('ipms_refound')
             .where('id', id)
             .andWhere('community_id', community_id)
             .andWhere('created_by', ctx.pcUserInfo.id)
@@ -63,7 +63,7 @@ const PcRefoundCancelAction = <Action>{
         const canceled_at = Date.now();
 
         await ctx.model
-            .from('ejyy_refound')
+            .from('ipms_refound')
             .where('id', id)
             .andWhere('community_id', community_id)
             .update({

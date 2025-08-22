@@ -51,7 +51,7 @@ const PcMissionManagePointUpdateAction = <Action>{
         const { id, local, category_id, community_id } = <RequestBody>ctx.request.body;
 
         const exist = await ctx.model
-            .from('ejyy_mission_point')
+            .from('ipms_mission_point')
             .where('community_id', community_id)
             .andWhere('id', id)
             .first();
@@ -64,7 +64,7 @@ const PcMissionManagePointUpdateAction = <Action>{
         }
 
         const repeat = await ctx.model
-            .from('ejyy_mission_point')
+            .from('ipms_mission_point')
             .where('community_id', community_id)
             .andWhere('local', local)
             .andWhereNot('id', id)
@@ -78,7 +78,7 @@ const PcMissionManagePointUpdateAction = <Action>{
         }
 
         const category = await ctx.model
-            .from('ejyy_mission_category')
+            .from('ipms_mission_category')
             .where('id', category_id)
             .first();
 
@@ -90,7 +90,7 @@ const PcMissionManagePointUpdateAction = <Action>{
         }
 
         await ctx.model
-            .from('ejyy_mission_point')
+            .from('ipms_mission_point')
             .update({
                 local,
                 category_id

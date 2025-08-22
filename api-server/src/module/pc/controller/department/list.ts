@@ -37,7 +37,7 @@ const PcDepartmentListAction = <Action>{
         const { page_num, page_size } = <RequestBody>ctx.request.body;
 
         const list = await ctx.model
-            .from('ejyy_property_company_department')
+            .from('ipms_property_company_department')
             .select(ctx.model.raw('SQL_CALC_FOUND_ROWS id'))
             .select('id', 'name')
             .limit(page_size)

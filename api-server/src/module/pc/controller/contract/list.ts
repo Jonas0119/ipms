@@ -45,23 +45,23 @@ const PcContractListAction = <Action>{
         const { page_num, page_size, community_id } = <RequestBody>ctx.request.body;
 
         const list = await ctx.model
-            .from('ejyy_contract')
-            .leftJoin('ejyy_contract_category', 'ejyy_contract_category.id', 'ejyy_contract.category_id')
-            .where('ejyy_contract.community_id', community_id)
-            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ejyy_contract.id'))
+            .from('ipms_contract')
+            .leftJoin('ipms_contract_category', 'ipms_contract_category.id', 'ipms_contract.category_id')
+            .where('ipms_contract.community_id', community_id)
+            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ipms_contract.id'))
             .select(
-                'ejyy_contract.id',
-                'ejyy_contract.title',
-                'ejyy_contract.contract_fee',
-                'ejyy_contract.begin_time',
-                'ejyy_contract.finish_time',
-                'ejyy_contract.created_at',
-                'ejyy_contract.created_by',
-                'ejyy_contract_category.name as category'
+                'ipms_contract.id',
+                'ipms_contract.title',
+                'ipms_contract.contract_fee',
+                'ipms_contract.begin_time',
+                'ipms_contract.finish_time',
+                'ipms_contract.created_at',
+                'ipms_contract.created_by',
+                'ipms_contract_category.name as category'
             )
             .limit(page_size)
             .offset((page_num - 1) * page_size)
-            .orderBy('ejyy_contract.id', 'desc');
+            .orderBy('ipms_contract.id', 'desc');
 
         const [res] = await ctx.model.select(ctx.model.raw('found_rows() AS total'));
 

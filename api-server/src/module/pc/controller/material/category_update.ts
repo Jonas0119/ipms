@@ -43,7 +43,7 @@ const PcMaterialCategoryUpdateAction = <Action>{
         const { id, name, description } = <RequestBody>ctx.request.body;
 
         const exist = await ctx.model
-            .from('ejyy_material_category')
+            .from('ipms_material_category')
             .where('name', name)
             .first();
 
@@ -55,7 +55,7 @@ const PcMaterialCategoryUpdateAction = <Action>{
         }
 
         const repeat = await ctx.model
-            .from('ejyy_material_category')
+            .from('ipms_material_category')
             .where('name', name)
             .andWhereNot('id', id)
             .first();
@@ -68,7 +68,7 @@ const PcMaterialCategoryUpdateAction = <Action>{
         }
 
         await ctx.model
-            .from('ejyy_material_category')
+            .from('ipms_material_category')
             .update({
                 name,
                 description: description ? description : null

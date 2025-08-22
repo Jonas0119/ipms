@@ -40,29 +40,29 @@ const PcPaymentDetailAction = <Action>{
         const { id, community_id } = <RequestBody>ctx.request.body;
 
         const info = await ctx.model
-            .from('ejyy_property_fee')
-            .leftJoin('ejyy_property_company_user', 'ejyy_property_company_user.id', 'ejyy_property_fee.created_by')
-            .where('ejyy_property_fee.community_id', community_id)
-            .where('ejyy_property_fee.id', id)
+            .from('ipms_property_fee')
+            .leftJoin('ipms_property_company_user', 'ipms_property_company_user.id', 'ipms_property_fee.created_by')
+            .where('ipms_property_fee.community_id', community_id)
+            .where('ipms_property_fee.id', id)
             .select(
-                'ejyy_property_fee.id',
-                'ejyy_property_fee.start_year',
-                'ejyy_property_fee.end_year',
-                'ejyy_property_fee.house_fee',
-                'ejyy_property_fee.computed_house_fee_by_area',
-                'ejyy_property_fee.carport_fee',
-                'ejyy_property_fee.computed_carport_fee_by_area',
-                'ejyy_property_fee.warehoure_fee',
-                'ejyy_property_fee.computed_warehouse_fee_by_area',
-                'ejyy_property_fee.merchant_fee',
-                'ejyy_property_fee.computed_merchant_fee_by_area',
-                'ejyy_property_fee.garage_fee',
-                'ejyy_property_fee.computed_garage_fee_by_area',
-                'ejyy_property_fee.wechat_push',
-                'ejyy_property_fee.sms_push',
-                'ejyy_property_fee.created_at',
-                'ejyy_property_fee.created_by',
-                'ejyy_property_company_user.real_name'
+                'ipms_property_fee.id',
+                'ipms_property_fee.start_year',
+                'ipms_property_fee.end_year',
+                'ipms_property_fee.house_fee',
+                'ipms_property_fee.computed_house_fee_by_area',
+                'ipms_property_fee.carport_fee',
+                'ipms_property_fee.computed_carport_fee_by_area',
+                'ipms_property_fee.warehoure_fee',
+                'ipms_property_fee.computed_warehouse_fee_by_area',
+                'ipms_property_fee.merchant_fee',
+                'ipms_property_fee.computed_merchant_fee_by_area',
+                'ipms_property_fee.garage_fee',
+                'ipms_property_fee.computed_garage_fee_by_area',
+                'ipms_property_fee.wechat_push',
+                'ipms_property_fee.sms_push',
+                'ipms_property_fee.created_at',
+                'ipms_property_fee.created_by',
+                'ipms_property_company_user.real_name'
             )
             .first();
 

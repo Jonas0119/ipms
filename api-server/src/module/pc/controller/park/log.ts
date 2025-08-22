@@ -45,21 +45,21 @@ const PcParkLogAction = <Action>{
         const { page_num, page_size, community_id } = <RequestBody>ctx.request.body;
 
         const list = await ctx.model
-            .from('ejyy_iot_park_log')
-            .leftJoin('ejyy_iot_park', 'ejyy_iot_park.id', 'ejyy_iot_park_log.park_id')
-            .where('ejyy_iot_park.community_id', community_id)
-            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ejyy_iot_park_log.id'))
+            .from('ipms_iot_park_log')
+            .leftJoin('ipms_iot_park', 'ipms_iot_park.id', 'ipms_iot_park_log.park_id')
+            .where('ipms_iot_park.community_id', community_id)
+            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ipms_iot_park_log.id'))
             .select(
-                'ejyy_iot_park_log.id',
-                'ejyy_iot_park_log.car_number',
-                'ejyy_iot_park_log.gate',
-                'ejyy_iot_park_log.is_leave',
-                'ejyy_iot_park_log.created_at',
-                'ejyy_iot_park.name as park'
+                'ipms_iot_park_log.id',
+                'ipms_iot_park_log.car_number',
+                'ipms_iot_park_log.gate',
+                'ipms_iot_park_log.is_leave',
+                'ipms_iot_park_log.created_at',
+                'ipms_iot_park.name as park'
             )
             .limit(page_size)
             .offset((page_num - 1) * page_size)
-            .orderBy('ejyy_iot_park_log.id', 'desc');
+            .orderBy('ipms_iot_park_log.id', 'desc');
 
         const [res] = await ctx.model.select(ctx.model.raw('found_rows() AS total'));
 

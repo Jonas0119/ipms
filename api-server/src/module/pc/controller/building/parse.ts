@@ -1,12 +1,12 @@
 /**
  * +----------------------------------------------------------------------
- * | 「e家宜业」
+ * | IPMS
  * +----------------------------------------------------------------------
- * | Copyright (c) 2020-2024 https://www.chowa.cn All rights reserved.
+ * | Copyright (c) 2020-2025 IPMS
  * +----------------------------------------------------------------------
- * | Licensed 未经授权禁止移除「e家宜业」和「卓佤科技」相关版权
+ * | IPMS
  * +----------------------------------------------------------------------
- * | Author: contact@chowa.cn
+ * | Author: support@ipms.local
  * +----------------------------------------------------------------------
  */
 
@@ -155,7 +155,7 @@ const PcBuildingParseAction = <Action>{
                 data.error.push('业主手机号码错误');
             } else if (
                 await ctx.model
-                    .from('ejyy_building_info')
+                    .from('ipms_building_info')
                     .where(where)
                     .first()
             ) {

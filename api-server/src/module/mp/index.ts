@@ -21,33 +21,33 @@ function MpModule(appRouter: KoaRouter) {
 
         appRouter[router.method](path.posix.join('/mp', router.path), async (ctx: Context, next) => {
             if (router.authRequired) {
-                const token = ctx.request.header['ejyy-mp-token'];
+                const token = ctx.request.header['ipms-mp-token'];
 
                 if (!token) {
                     return (ctx.status = 401);
                 }
 
                 ctx.mpUserInfo = await ctx.model
-                    .table('ejyy_wechat_mp_auth')
-                    .leftJoin('ejyy_wechat_mp_user', 'ejyy_wechat_mp_user.id', 'ejyy_wechat_mp_auth.wechat_mp_user_id')
+                    .table('ipms_wechat_mp_auth')
+                    .leftJoin('ipms_wechat_mp_user', 'ipms_wechat_mp_user.id', 'ipms_wechat_mp_auth.wechat_mp_user_id')
                     .leftJoin(
-                        'ejyy_wechat_official_accounts_user',
-                        'ejyy_wechat_official_accounts_user.union_id',
-                        'ejyy_wechat_mp_user.union_id'
+                        'ipms_wechat_official_accounts_user',
+                        'ipms_wechat_official_accounts_user.union_id',
+                        'ipms_wechat_mp_user.union_id'
                     )
-                    .where('ejyy_wechat_mp_auth.token', token)
+                    .where('ipms_wechat_mp_auth.token', token)
                     .select(
-                        'ejyy_wechat_mp_user.id',
-                        'ejyy_wechat_mp_user.nick_name',
-                        'ejyy_wechat_mp_user.phone',
-                        'ejyy_wechat_mp_user.real_name',
-                        'ejyy_wechat_mp_user.idcard',
-                        'ejyy_wechat_mp_user.gender',
-                        'ejyy_wechat_mp_user.avatar_url',
-                        'ejyy_wechat_mp_user.signature',
-                        'ejyy_wechat_mp_user.intact',
-                        'ejyy_wechat_mp_user.created_at',
-                        'ejyy_wechat_official_accounts_user.subscribed'
+                        'ipms_wechat_mp_user.id',
+                        'ipms_wechat_mp_user.nick_name',
+                        'ipms_wechat_mp_user.phone',
+                        'ipms_wechat_mp_user.real_name',
+                        'ipms_wechat_mp_user.idcard',
+                        'ipms_wechat_mp_user.gender',
+                        'ipms_wechat_mp_user.avatar_url',
+                        'ipms_wechat_mp_user.signature',
+                        'ipms_wechat_mp_user.intact',
+                        'ipms_wechat_mp_user.created_at',
+                        'ipms_wechat_official_accounts_user.subscribed'
                     )
                     .first();
 

@@ -17,7 +17,7 @@ function InitMiddleware(): Middleware<DefaultState, DefaultContext> {
         if (!config.inited && !/^\/pc\/(upload\/(sign|local)|storage\/(config|upload))$/.test(ctx.request.path)) {
             const total = utils.sql.countReader(
                 await ctx.model
-                    .from('ejyy_property_company_user')
+                    .from('ipms_property_company_user')
                     .where('admin', TRUE)
                     .count()
             );

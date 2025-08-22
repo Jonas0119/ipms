@@ -42,14 +42,14 @@ const MpFamilyUnbindingAction = <Action>{
         const { user_id, user_building_ids } = <RequestBody>ctx.request.body;
 
         const selfRegisterBuilding = await ctx.model
-            .from('ejyy_user_building')
+            .from('ipms_user_building')
             .where('authenticated_user_id', ctx.mpUserInfo.id)
             .where('authenticated_type', AUTHENTICTED_BY_FAMILY)
             .select('building_id');
         const allowBuildingIds = selfRegisterBuilding.map(item => item.building_id);
 
         const userBuilding = await ctx.model
-            .from('ejyy_user_building')
+            .from('ipms_user_building')
             .whereIn('id', user_building_ids)
             .select('building_id');
         const buildingIds = userBuilding.map(item => item.building_id);
@@ -66,7 +66,7 @@ const MpFamilyUnbindingAction = <Action>{
         }
 
         const affect = await ctx.model
-            .from('ejyy_user_building')
+            .from('ipms_user_building')
             .update({ status: UNBINDING_BUILDING })
             .where({ wechat_mp_user_id: user_id })
             .whereIn('building_id', buildingIds);
@@ -84,7 +84,7 @@ const MpFamilyUnbindingAction = <Action>{
                 created_at
             });
         });
-        await ctx.model.from('ejyy_user_building_operate_log').insert(history);
+        await ctx.model.from('ipms_user_building_operate_log').insert(history);
 
         ctx.body = {
             code: SUCCESS,

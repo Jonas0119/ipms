@@ -64,7 +64,7 @@ const PcMissionManageLineUpdateAction = <Action>{
         const { id, name, description, category_id, community_id, points } = <RequestBody>ctx.request.body;
 
         const exist = await ctx.model
-            .from('ejyy_mission_line')
+            .from('ipms_mission_line')
             .where('community_id', community_id)
             .andWhere('id', id)
             .first();
@@ -77,7 +77,7 @@ const PcMissionManageLineUpdateAction = <Action>{
         }
 
         const repeat = await ctx.model
-            .from('ejyy_mission_line')
+            .from('ipms_mission_line')
             .where('community_id', community_id)
             .andWhere('name', name)
             .andWhereNot('id', id)
@@ -91,7 +91,7 @@ const PcMissionManageLineUpdateAction = <Action>{
         }
 
         const category = await ctx.model
-            .from('ejyy_mission_category')
+            .from('ipms_mission_category')
             .where('id', category_id)
             .first();
 
@@ -103,7 +103,7 @@ const PcMissionManageLineUpdateAction = <Action>{
         }
 
         await ctx.model
-            .from('ejyy_mission_line')
+            .from('ipms_mission_line')
             .update({
                 name,
                 description,
@@ -112,11 +112,11 @@ const PcMissionManageLineUpdateAction = <Action>{
             .where('id', id);
 
         await ctx.model
-            .from('ejyy_mission_line_node')
+            .from('ipms_mission_line_node')
             .where('line_id', id)
             .delete();
 
-        await ctx.model.from('ejyy_mission_line_node').insert(
+        await ctx.model.from('ipms_mission_line_node').insert(
             points.map(point_id => {
                 return {
                     point_id,

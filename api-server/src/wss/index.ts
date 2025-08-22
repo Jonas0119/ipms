@@ -38,19 +38,19 @@ class ws {
             }
 
             const userInfo = await model
-                .table('ejyy_property_company_auth')
+                .table('ipms_property_company_auth')
                 .leftJoin(
-                    'ejyy_property_company_user',
-                    'ejyy_property_company_user.id',
-                    'ejyy_property_company_auth.property_company_user_id'
+                    'ipms_property_company_user',
+                    'ipms_property_company_user.id',
+                    'ipms_property_company_auth.property_company_user_id'
                 )
                 .leftJoin(
-                    'ejyy_property_company_access',
-                    'ejyy_property_company_access.id',
-                    'ejyy_property_company_user.access_id'
+                    'ipms_property_company_access',
+                    'ipms_property_company_access.id',
+                    'ipms_property_company_user.access_id'
                 )
-                .where('ejyy_property_company_auth.token', token)
-                .select('ejyy_property_company_user.id', 'ejyy_property_company_access.content')
+                .where('ipms_property_company_auth.token', token)
+                .select('ipms_property_company_user.id', 'ipms_property_company_access.content')
                 .first();
 
             if (!userInfo) {

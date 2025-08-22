@@ -32,7 +32,7 @@ const PcMaterialDetailAction = <Action>{
     response: async ctx => {
         const { id, community_id } = <RequestBody>ctx.request.body;
         const info = await ctx.model
-            .from('ejyy_material')
+            .from('ipms_material')
             .where('id', id)
             .andWhere('community_id', community_id)
             .select('id', 'name', 'total')

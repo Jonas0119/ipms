@@ -58,7 +58,7 @@ const PcComplainFinishAction = <Action>{
         const { id, community_id, dispose_imgs, dispose_content } = <RequestBody>ctx.request.body;
 
         const detail = await ctx.model
-            .from('ejyy_complain')
+            .from('ipms_complain')
             .where('id', id)
             .andWhere('community_id', community_id)
             .andWhere('step', CONFIRM_COMPLAIN_STEP)
@@ -75,7 +75,7 @@ const PcComplainFinishAction = <Action>{
 
         if (detail.dispose_subscribed) {
             const { open_id } = await ctx.model
-                .from('ejyy_wechat_mp_user')
+                .from('ipms_wechat_mp_user')
                 .where('id', detail.wechat_mp_user_id)
                 .first();
 
@@ -102,7 +102,7 @@ const PcComplainFinishAction = <Action>{
         }
 
         await ctx.model
-            .from('ejyy_complain')
+            .from('ipms_complain')
             .update({
                 step: FINISH_COMPLAIN_STEP,
                 finished_at,

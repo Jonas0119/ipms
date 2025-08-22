@@ -103,7 +103,7 @@ const CwCommunityManageCreateAction = <Action>{
             fitment_pledge
         } = <RequestBody>ctx.request.body;
 
-        const [id] = await ctx.model.from('ejyy_community_info').insert({
+        const [id] = await ctx.model.from('ipms_community_info').insert({
             name,
             banner,
             province,
@@ -114,7 +114,7 @@ const CwCommunityManageCreateAction = <Action>{
             created_by: ctx.pcUserInfo.id
         });
 
-        await ctx.model.from('ejyy_community_setting').insert({
+        await ctx.model.from('ipms_community_setting').insert({
             access_nfc,
             access_remote,
             access_qrcode,
@@ -123,7 +123,7 @@ const CwCommunityManageCreateAction = <Action>{
             community_id: id
         });
 
-        await ctx.model.from('ejyy_property_company_user_access_community').insert({
+        await ctx.model.from('ipms_property_company_user_access_community').insert({
             community_id: id,
             property_company_user_id: ctx.pcUserInfo.id
         });

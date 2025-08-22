@@ -111,7 +111,7 @@ const PcEnergyMeterCreateAction = <Action>{
 
         if (building_id) {
             buildingInfo = await ctx.model
-                .from('ejyy_building_info')
+                .from('ipms_building_info')
                 .where('community_id', community_id)
                 .andWhere('id', building_id)
                 .select('type', 'area', 'building', 'unit', 'number')
@@ -127,7 +127,7 @@ const PcEnergyMeterCreateAction = <Action>{
 
         if (repeater_id) {
             const verifyRepeater = await ctx.model
-                .from('ejyy_iot_meter_repeater')
+                .from('ipms_iot_meter_repeater')
                 .where('community_id', community_id)
                 .andWhere('id', repeater_id)
                 .first();
@@ -141,7 +141,7 @@ const PcEnergyMeterCreateAction = <Action>{
         }
 
         const exist = await ctx.model
-            .from('ejyy_iot_meter')
+            .from('ipms_iot_meter')
             .where('name', name)
             .andWhere('community_id', community_id)
             .first();
@@ -154,7 +154,7 @@ const PcEnergyMeterCreateAction = <Action>{
         }
 
         const created_at = Date.now();
-        const [id] = await ctx.model.from('ejyy_iot_meter').insert({
+        const [id] = await ctx.model.from('ipms_iot_meter').insert({
             community_id,
             building_id: building_id ? building_id : null,
             name,

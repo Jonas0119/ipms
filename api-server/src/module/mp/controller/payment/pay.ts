@@ -33,9 +33,9 @@ const MpPaymentPayAction = <Action>{
         const { id } = <RequestParams>ctx.params;
 
         const detail = await ctx.model
-            .from('ejyy_property_fee_order')
+            .from('ipms_property_fee_order')
             .where('id', id)
-            .where('ejyy_property_fee_order.wechat_mp_user_id', ctx.mpUserInfo.id)
+            .where('ipms_property_fee_order.wechat_mp_user_id', ctx.mpUserInfo.id)
             .first();
 
         if (!detail) {

@@ -79,7 +79,7 @@ const PcQuestionnaireUpdateAction = <Action>{
         const { id, community_id, title, published, expire, questions } = <RequestBody>ctx.request.body;
 
         const detail = await ctx.model
-            .from('ejyy_questionnaire')
+            .from('ipms_questionnaire')
             .where('id', id)
             .andWhere('community_id', community_id)
             .first();
@@ -106,23 +106,23 @@ const PcQuestionnaireUpdateAction = <Action>{
         }
 
         await ctx.model
-            .from('ejyy_question_option')
+            .from('ipms_question_option')
             .whereIn('question_id', function() {
-                this.from('ejyy_question')
+                this.from('ipms_question')
                     .where('questionnaire_id', id)
                     .select('id');
             })
             .delete();
 
         await ctx.model
-            .from('ejyy_question')
+            .from('ipms_question')
             .where('questionnaire_id', id)
             .delete();
 
         // mysql 低版本不支持批量返回ids
         for (let quesiton of questions) {
             const optionsData = [];
-            const [question_id] = await ctx.model.from('ejyy_question').insert({
+            const [question_id] = await ctx.model.from('ipms_question').insert({
                 title: quesiton.title,
                 type: quesiton.type,
                 questionnaire_id: id
@@ -134,11 +134,11 @@ const PcQuestionnaireUpdateAction = <Action>{
                     question_id
                 });
             });
-            await ctx.model.from('ejyy_question_option').insert(optionsData);
+            await ctx.model.from('ipms_question_option').insert(optionsData);
         }
 
         await ctx.model
-            .from('ejyy_questionnaire')
+            .from('ipms_questionnaire')
             .where('id', id)
             .andWhere('community_id', community_id)
             .update({

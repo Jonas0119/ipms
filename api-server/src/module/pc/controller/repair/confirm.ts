@@ -51,7 +51,7 @@ const PcRepairConfirmAction = <Action>{
         const { id, community_id, dispose_reply } = <RequestBody>ctx.request.body;
 
         const detail = await ctx.model
-            .from('ejyy_repair')
+            .from('ipms_repair')
             .where('id', id)
             .andWhere('community_id', community_id)
             .andWhere('step', ALLOT_REPAIR_STEP)
@@ -68,7 +68,7 @@ const PcRepairConfirmAction = <Action>{
 
         if (detail.dispose_subscribed) {
             const { open_id } = await ctx.model
-                .from('ejyy_wechat_mp_user')
+                .from('ipms_wechat_mp_user')
                 .where('id', detail.wechat_mp_user_id)
                 .first();
 
@@ -89,7 +89,7 @@ const PcRepairConfirmAction = <Action>{
                                 ? '公共设施/区域'
                                 : utils.building.name(
                                       await ctx.model
-                                          .from('ejyy_building_info')
+                                          .from('ipms_building_info')
                                           .where('id', detail.building_id)
                                           .first()
                                   )
@@ -106,7 +106,7 @@ const PcRepairConfirmAction = <Action>{
         }
 
         await ctx.model
-            .from('ejyy_repair')
+            .from('ipms_repair')
             .update({
                 step: CONFIRM_REPAIR_STEP,
                 disposed_at,

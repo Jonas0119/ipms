@@ -32,7 +32,7 @@ const PcSupplierDeleteAction = <Action>{
         const { id } = <RequestParams>ctx.params;
 
         const exist = await ctx.model
-            .from('ejyy_material_supplier')
+            .from('ipms_material_supplier')
             .where('id', id)
             .first();
 
@@ -44,7 +44,7 @@ const PcSupplierDeleteAction = <Action>{
         }
 
         await ctx.model
-            .from('ejyy_material_supplier')
+            .from('ipms_material_supplier')
             .where('id', id)
             .delete();
 

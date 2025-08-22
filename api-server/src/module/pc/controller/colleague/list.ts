@@ -50,36 +50,36 @@ const PcColleagueListAction = <Action>{
         const where = {};
 
         if (name) {
-            where['ejyy_property_company_user.real_name'] = name;
+            where['ipms_property_company_user.real_name'] = name;
         }
 
         if (phone) {
-            where['ejyy_property_company_user.phone'] = phone;
+            where['ipms_property_company_user.phone'] = phone;
         }
 
         const list = await ctx.model
-            .from('ejyy_property_company_user')
+            .from('ipms_property_company_user')
             .leftJoin(
-                'ejyy_property_company_department',
-                'ejyy_property_company_department.id',
-                'ejyy_property_company_user.department_id'
+                'ipms_property_company_department',
+                'ipms_property_company_department.id',
+                'ipms_property_company_user.department_id'
             )
-            .leftJoin('ejyy_property_company_job', 'ejyy_property_company_job.id', 'ejyy_property_company_user.job_id')
+            .leftJoin('ipms_property_company_job', 'ipms_property_company_job.id', 'ipms_property_company_user.job_id')
             .leftJoin(
-                'ejyy_wechat_official_accounts_user',
-                'ejyy_wechat_official_accounts_user.union_id',
-                'ejyy_property_company_user.union_id'
+                'ipms_wechat_official_accounts_user',
+                'ipms_wechat_official_accounts_user.union_id',
+                'ipms_property_company_user.union_id'
             )
-            .andWhere('ejyy_property_company_user.leave_office', FALSE)
+            .andWhere('ipms_property_company_user.leave_office', FALSE)
             .andWhere(where)
-            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ejyy_property_company_user.id'))
+            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ipms_property_company_user.id'))
             .select(
-                'ejyy_property_company_user.id',
-                'ejyy_property_company_user.real_name',
-                'ejyy_property_company_user.phone',
-                'ejyy_property_company_department.name as department',
-                'ejyy_property_company_job.name as job',
-                'ejyy_wechat_official_accounts_user.subscribed'
+                'ipms_property_company_user.id',
+                'ipms_property_company_user.real_name',
+                'ipms_property_company_user.phone',
+                'ipms_property_company_department.name as department',
+                'ipms_property_company_job.name as job',
+                'ipms_wechat_official_accounts_user.subscribed'
             )
             .limit(page_size)
             .offset((page_num - 1) * page_size)

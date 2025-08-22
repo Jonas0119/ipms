@@ -39,7 +39,7 @@ const PcMissionManageLineDeleteAction = <Action>{
         const { id, community_id } = <RequestBody>ctx.request.body;
 
         const info = await ctx.model
-            .from('ejyy_mission_line')
+            .from('ipms_mission_line')
             .where('community_id', community_id)
             .andWhere('id', id)
             .first();
@@ -52,7 +52,7 @@ const PcMissionManageLineDeleteAction = <Action>{
         }
 
         const using = await ctx.model
-            .from('ejyy_mission')
+            .from('ipms_mission')
             .where('line_id', id)
             .first();
 
@@ -64,7 +64,7 @@ const PcMissionManageLineDeleteAction = <Action>{
         }
 
         await ctx.model
-            .from('ejyy_mission_line')
+            .from('ipms_mission_line')
             .where('id', id)
             .delete();
 

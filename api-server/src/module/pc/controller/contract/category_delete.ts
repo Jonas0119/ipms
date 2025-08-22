@@ -32,7 +32,7 @@ const PcContractCategoryDeleteAction = <Action>{
         const { id } = <RequestParams>ctx.params;
 
         const used = await ctx.model
-            .from('ejyy_contract')
+            .from('ipms_contract')
             .where('category_id', id)
             .first();
 
@@ -44,7 +44,7 @@ const PcContractCategoryDeleteAction = <Action>{
         }
 
         await ctx.model
-            .from('ejyy_contract_category')
+            .from('ipms_contract_category')
             .where('id', id)
             .delete();
 

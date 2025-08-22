@@ -78,48 +78,48 @@ const PcCarListAction = <Action>{
         const where = {};
 
         if (is_new_energy !== undefined) {
-            where['ejyy_user_car.is_new_energy'] = is_new_energy;
+            where['ipms_user_car.is_new_energy'] = is_new_energy;
         }
 
         if (car_number !== undefined) {
-            where['ejyy_user_car.car_number'] = car_number;
+            where['ipms_user_car.car_number'] = car_number;
         }
 
         if (car_type !== undefined) {
-            where['ejyy_user_car.car_type'] = car_type;
+            where['ipms_user_car.car_type'] = car_type;
         }
 
         if (status !== undefined) {
-            where['ejyy_user_car.status'] = status;
+            where['ipms_user_car.status'] = status;
         }
 
         if (sync !== undefined) {
-            where['ejyy_user_car.sync'] = sync;
+            where['ipms_user_car.sync'] = sync;
         }
 
         const list = await ctx.model
-            .from('ejyy_user_car')
-            .leftJoin('ejyy_building_info', 'ejyy_building_info.id', 'ejyy_user_car.building_id')
-            .where('ejyy_building_info.community_id', community_id)
+            .from('ipms_user_car')
+            .leftJoin('ipms_building_info', 'ipms_building_info.id', 'ipms_user_car.building_id')
+            .where('ipms_building_info.community_id', community_id)
             .andWhere(where)
-            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ejyy_user_car.id'))
+            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ipms_user_car.id'))
             .select(
-                'ejyy_user_car.id',
-                'ejyy_user_car.car_number',
-                'ejyy_user_car.car_type',
-                'ejyy_user_car.is_new_energy',
-                'ejyy_user_car.status',
-                'ejyy_user_car.sync',
-                'ejyy_user_car.created_at',
-                'ejyy_building_info.type',
-                'ejyy_building_info.area',
-                'ejyy_building_info.building',
-                'ejyy_building_info.unit',
-                'ejyy_building_info.number'
+                'ipms_user_car.id',
+                'ipms_user_car.car_number',
+                'ipms_user_car.car_type',
+                'ipms_user_car.is_new_energy',
+                'ipms_user_car.status',
+                'ipms_user_car.sync',
+                'ipms_user_car.created_at',
+                'ipms_building_info.type',
+                'ipms_building_info.area',
+                'ipms_building_info.building',
+                'ipms_building_info.unit',
+                'ipms_building_info.number'
             )
             .limit(page_size)
             .offset((page_num - 1) * page_size)
-            .orderBy('ejyy_user_car.id', 'desc');
+            .orderBy('ipms_user_car.id', 'desc');
 
         const [res] = await ctx.model.select(ctx.model.raw('found_rows() AS total'));
 

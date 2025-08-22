@@ -55,27 +55,27 @@ const PcPaymentRefundAction = <Action>{
         const { order_id, community_id, order_item_id, refund_recv_accout } = <RequestBody>ctx.request.body;
 
         const detail = await ctx.model
-            .from('ejyy_property_fee_order_item')
+            .from('ipms_property_fee_order_item')
             .leftJoin(
-                'ejyy_property_fee_order',
-                'ejyy_property_fee_order.id',
-                'ejyy_property_fee_order_item.property_fee_order_id'
+                'ipms_property_fee_order',
+                'ipms_property_fee_order.id',
+                'ipms_property_fee_order_item.property_fee_order_id'
             )
-            .leftJoin('ejyy_property_fee', 'ejyy_property_fee.id', 'ejyy_property_fee_order.property_fee_id')
-            .where('ejyy_property_fee_order.id', order_id)
-            .where('ejyy_property_fee_order_item.id', order_item_id)
-            .andWhere('ejyy_property_fee.community_id', community_id)
+            .leftJoin('ipms_property_fee', 'ipms_property_fee.id', 'ipms_property_fee_order.property_fee_id')
+            .where('ipms_property_fee_order.id', order_id)
+            .where('ipms_property_fee_order_item.id', order_item_id)
+            .andWhere('ipms_property_fee.community_id', community_id)
             .select(
-                'ejyy_property_fee_order_item.id',
-                'ejyy_property_fee_order_item.fee',
-                'ejyy_property_fee_order_item.refund_apply_at',
-                'ejyy_property_fee_order_item.refund_by',
-                'ejyy_property_fee_order_item.refund',
-                'ejyy_property_fee_order.created_at',
-                'ejyy_property_fee_order.paid',
-                'ejyy_property_fee_order.paid_fee',
-                'ejyy_property_fee_order.is_cash',
-                'ejyy_property_fee_order.fee as total_fee'
+                'ipms_property_fee_order_item.id',
+                'ipms_property_fee_order_item.fee',
+                'ipms_property_fee_order_item.refund_apply_at',
+                'ipms_property_fee_order_item.refund_by',
+                'ipms_property_fee_order_item.refund',
+                'ipms_property_fee_order.created_at',
+                'ipms_property_fee_order.paid',
+                'ipms_property_fee_order.paid_fee',
+                'ipms_property_fee_order.is_cash',
+                'ipms_property_fee_order.fee as total_fee'
             )
             .first();
 
@@ -116,7 +116,7 @@ const PcPaymentRefundAction = <Action>{
         if (detail.is_cash) {
             refund_id = utils.crypto.md5(`${Date.now()}${detail.fee}${order_item_id}`);
             await ctx.model
-                .from('ejyy_property_fee_order_item')
+                .from('ipms_property_fee_order_item')
                 .update({
                     refund_by: ctx.pcUserInfo.id,
                     refund_at: refund_apply_at,
@@ -132,14 +132,14 @@ const PcPaymentRefundAction = <Action>{
                 .where('id', order_item_id);
 
             const haveRefundingItem = await ctx.model
-                .from('ejyy_property_fee_order_item')
+                .from('ipms_property_fee_order_item')
                 .where('property_fee_order_id', order_id)
                 .whereNotNull('refund_apply_at')
                 .andWhere('refund', FALSE)
                 .first();
 
             await ctx.model
-                .from('ejyy_property_fee_order')
+                .from('ipms_property_fee_order')
                 .update({
                     refunding: TRUE,
                     refunded: !haveRefundingItem ? TRUE : FALSE,
@@ -163,7 +163,7 @@ const PcPaymentRefundAction = <Action>{
             }
 
             await ctx.model
-                .from('ejyy_property_fee_order')
+                .from('ipms_property_fee_order')
                 .update({
                     refunding: TRUE,
                     refunded: FALSE
@@ -171,7 +171,7 @@ const PcPaymentRefundAction = <Action>{
                 .where('id', order_id);
 
             await ctx.model
-                .from('ejyy_property_fee_order_item')
+                .from('ipms_property_fee_order_item')
                 .update({
                     refund_by: ctx.pcUserInfo.id,
                     refund_apply_at

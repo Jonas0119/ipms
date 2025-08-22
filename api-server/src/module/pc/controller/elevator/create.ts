@@ -84,7 +84,7 @@ const PcElevatorCreateAction = <Action>{
         );
 
         const exist = await ctx.model
-            .from('ejyy_iot_elevator')
+            .from('ipms_iot_elevator')
             .where('community_id', community_id)
             .andWhere('name', name)
             .first();
@@ -97,7 +97,7 @@ const PcElevatorCreateAction = <Action>{
         }
 
         const created_at = Date.now();
-        const [id] = await ctx.model.from('ejyy_iot_elevator').insert({
+        const [id] = await ctx.model.from('ipms_iot_elevator').insert({
             community_id,
             sign,
             secret,

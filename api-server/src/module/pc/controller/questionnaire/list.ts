@@ -61,7 +61,7 @@ const PcQuestionnaireListAction = <Action>{
         }
 
         const list = await ctx.model
-            .from('ejyy_questionnaire')
+            .from('ipms_questionnaire')
             .where('community_id', community_id)
             .andWhere(where)
             .andWhere(function() {

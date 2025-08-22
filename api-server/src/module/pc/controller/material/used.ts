@@ -44,21 +44,21 @@ const PcMaterialUsedction = <Action>{
         const { page_num, page_size, material_id } = <RequestBody>ctx.request.body;
 
         const list = await ctx.model
-            .from('ejyy_material_used')
-            .leftJoin('ejyy_property_company_user', 'ejyy_property_company_user.id', 'ejyy_material_used.used_by')
-            .where('ejyy_material_used.material_id', material_id)
-            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ejyy_material_used.id'))
+            .from('ipms_material_used')
+            .leftJoin('ipms_property_company_user', 'ipms_property_company_user.id', 'ipms_material_used.used_by')
+            .where('ipms_material_used.material_id', material_id)
+            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ipms_material_used.id'))
             .select(
-                'ejyy_material_used.id',
-                'ejyy_material_used.total',
-                'ejyy_material_used.reason',
-                'ejyy_material_used.created_at',
-                'ejyy_material_used.used_by',
-                'ejyy_property_company_user.real_name'
+                'ipms_material_used.id',
+                'ipms_material_used.total',
+                'ipms_material_used.reason',
+                'ipms_material_used.created_at',
+                'ipms_material_used.used_by',
+                'ipms_property_company_user.real_name'
             )
             .limit(page_size)
             .offset((page_num - 1) * page_size)
-            .orderBy('ejyy_material_used.id', 'desc');
+            .orderBy('ipms_material_used.id', 'desc');
 
         const [res] = await ctx.model.select(ctx.model.raw('found_rows() AS total'));
 

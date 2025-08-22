@@ -40,7 +40,7 @@ const PcRoleAccessUpdateAction = <Action>{
         const { content, name, id } = <RequestBody>ctx.request.body;
 
         const exist = await ctx.model
-            .from('ejyy_property_company_access')
+            .from('ipms_property_company_access')
             .where('name', name)
             .andWhere('id', '<>', id)
             .first();
@@ -53,7 +53,7 @@ const PcRoleAccessUpdateAction = <Action>{
         }
 
         const affect = await ctx.model
-            .from('ejyy_property_company_access')
+            .from('ipms_property_company_access')
             .update({
                 name,
                 content: JSON.stringify(content)

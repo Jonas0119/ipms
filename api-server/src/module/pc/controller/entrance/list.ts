@@ -45,28 +45,28 @@ const PcEntranceListAction = <Action>{
         const { page_num, page_size, community_id } = <RequestBody>ctx.request.body;
 
         const list = await ctx.model
-            .from('ejyy_iot_entrance')
-            .leftJoin('ejyy_property_company_user', 'ejyy_property_company_user.id', 'ejyy_iot_entrance.created_by')
-            .where('ejyy_iot_entrance.community_id', community_id)
-            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ejyy_iot_entrance.id'))
+            .from('ipms_iot_entrance')
+            .leftJoin('ipms_property_company_user', 'ipms_property_company_user.id', 'ipms_iot_entrance.created_by')
+            .where('ipms_iot_entrance.community_id', community_id)
+            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ipms_iot_entrance.id'))
             .select(
-                'ejyy_iot_entrance.id',
-                'ejyy_iot_entrance.community_id',
-                'ejyy_iot_entrance.sign',
-                'ejyy_iot_entrance.secret',
-                'ejyy_iot_entrance.name',
-                'ejyy_iot_entrance.building',
-                'ejyy_iot_entrance.category',
-                'ejyy_iot_entrance.lng',
-                'ejyy_iot_entrance.lat',
-                'ejyy_iot_entrance.online',
-                'ejyy_iot_entrance.created_by',
-                'ejyy_iot_entrance.created_at',
-                'ejyy_property_company_user.real_name'
+                'ipms_iot_entrance.id',
+                'ipms_iot_entrance.community_id',
+                'ipms_iot_entrance.sign',
+                'ipms_iot_entrance.secret',
+                'ipms_iot_entrance.name',
+                'ipms_iot_entrance.building',
+                'ipms_iot_entrance.category',
+                'ipms_iot_entrance.lng',
+                'ipms_iot_entrance.lat',
+                'ipms_iot_entrance.online',
+                'ipms_iot_entrance.created_by',
+                'ipms_iot_entrance.created_at',
+                'ipms_property_company_user.real_name'
             )
             .limit(page_size)
             .offset((page_num - 1) * page_size)
-            .orderBy('ejyy_iot_entrance.id', 'desc');
+            .orderBy('ipms_iot_entrance.id', 'desc');
 
         const [res] = await ctx.model.select(ctx.model.raw('found_rows() AS total'));
 

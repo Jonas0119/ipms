@@ -78,7 +78,7 @@ const PcLampLineUpdateAction = <Action>{
     response: async ctx => {
         const { id, community_id, name, port, lamp_id, work_mode } = <RequestBody>ctx.request.body;
         const record = await ctx.model
-            .from('ejyy_iot_lamp_line')
+            .from('ipms_iot_lamp_line')
             .where('id', id)
             .first();
 
@@ -90,7 +90,7 @@ const PcLampLineUpdateAction = <Action>{
         }
 
         const lampInfo = await ctx.model
-            .from('ejyy_iot_lamp')
+            .from('ipms_iot_lamp')
             .where('community_id', community_id)
             .andWhere('id', lamp_id)
             .first();
@@ -110,7 +110,7 @@ const PcLampLineUpdateAction = <Action>{
         }
 
         const portUsed = await ctx.model
-            .from('ejyy_iot_lamp_line')
+            .from('ipms_iot_lamp_line')
             .where('lamp_id', lamp_id)
             .andWhere('port', port)
             .andWhereNot('id', id)
@@ -124,7 +124,7 @@ const PcLampLineUpdateAction = <Action>{
         }
 
         const exist = await ctx.model
-            .from('ejyy_iot_lamp_line')
+            .from('ipms_iot_lamp_line')
             .where('lamp_id', lamp_id)
             .andWhere('name', name)
             .andWhereNot('id', id)
@@ -138,7 +138,7 @@ const PcLampLineUpdateAction = <Action>{
         }
 
         await ctx.model
-            .from('ejyy_iot_lamp_line')
+            .from('ipms_iot_lamp_line')
             .update({
                 name,
                 port,
@@ -147,12 +147,12 @@ const PcLampLineUpdateAction = <Action>{
             .where('id', id);
 
         await ctx.model
-            .from('ejyy_iot_lamp_work_mode')
+            .from('ipms_iot_lamp_work_mode')
             .where('lamp_line_id', id)
             .delete();
 
         const created_at = Date.now();
-        await ctx.model.from('ejyy_iot_lamp_work_mode').insert(
+        await ctx.model.from('ipms_iot_lamp_work_mode').insert(
             work_mode.map(mode => {
                 return {
                     ...mode,

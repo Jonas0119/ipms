@@ -59,7 +59,7 @@ const MpPetRemoveAction = <Action>{
         const { reason } = <RequestBody>ctx.request.body;
 
         const affect = await ctx.model
-            .from('ejyy_pet')
+            .from('ipms_pet')
             .update({
                 remove_reason: reason,
                 remove: TRUE,

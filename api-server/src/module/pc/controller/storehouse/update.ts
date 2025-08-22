@@ -51,7 +51,7 @@ const PcStorehouseUpdateAction = <Action>{
         const { id, name, local, community_id } = <RequestBody>ctx.request.body;
 
         const exist = await ctx.model
-            .from('ejyy_storehouse')
+            .from('ipms_storehouse')
             .where('community_id', community_id)
             .andWhere('id', id)
             .first();
@@ -64,7 +64,7 @@ const PcStorehouseUpdateAction = <Action>{
         }
 
         const repeat = await ctx.model
-            .from('ejyy_storehouse')
+            .from('ipms_storehouse')
             .where('name', name)
             .andWhere('community_id', community_id)
             .andWhereNot('id', id)
@@ -78,7 +78,7 @@ const PcStorehouseUpdateAction = <Action>{
         }
 
         await ctx.model
-            .from('ejyy_storehouse')
+            .from('ipms_storehouse')
             .update({ name, local })
             .where('id', id)
             .andWhere('community_id', community_id);

@@ -83,13 +83,13 @@ const PcNoticeCreateAction = <Action>{
         let notice_tpl_id = null;
 
         if (oa_tpl_msg) {
-            [notice_tpl_id] = await ctx.model.from('ejyy_notice_tpl').insert({
+            [notice_tpl_id] = await ctx.model.from('ipms_notice_tpl').insert({
                 tpl,
                 content: JSON.stringify(tpl_content)
             });
         }
 
-        const [id] = await ctx.model.from('ejyy_notice_to_user').insert({
+        const [id] = await ctx.model.from('ipms_notice_to_user').insert({
             title,
             overview,
             community_id,

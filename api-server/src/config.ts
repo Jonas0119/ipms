@@ -116,12 +116,12 @@ function generateConfig(): Config {
     let customConfig = <CustomConfig>{};
 
     try {
-        // 先尝试当前目录
-        let configPath = path.join(process.cwd(), '.ejyyrc');
+        // 只加载 .ipmsrc
+        let configPath = path.join(process.cwd(), '.ipmsrc');
 
         // 如果当前目录不存在,则尝试上级目录
         if (!fs.existsSync(configPath)) {
-            configPath = path.join(process.cwd(), '..', '.ejyyrc');
+            configPath = path.join(process.cwd(), '..', '.ipmsrc');
         }
 
         if (!fs.existsSync(configPath)) {
@@ -153,7 +153,7 @@ function generateConfig(): Config {
     };
 
     return {
-        name: 'ejyy',
+        name: 'ipms',
         debug: process.env.NODE_ENV !== 'production',
         server: {
             port: 6688,
@@ -249,7 +249,7 @@ function generateConfig(): Config {
             ...customConfig.map
         },
         session: {
-            key: 'ejyy:session',
+            key: 'ipms:session',
             maxAge: 1000 * 60 * 30,
             signed: false,
             ...customConfig.session

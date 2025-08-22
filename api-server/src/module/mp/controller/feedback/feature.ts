@@ -46,7 +46,7 @@ const MpFeedbackFeatureAction = <Action>{
             .valueOf();
 
         const exist = await ctx.model
-            .from('ejyy_feedback')
+            .from('ipms_feedback')
             .where('wechat_mp_user_id', ctx.mpUserInfo.id)
             .andWhere('type', FEEDBACK_OF_FEATURE)
             .andWhere('created_at', '>=', beginStamp)
@@ -60,7 +60,7 @@ const MpFeedbackFeatureAction = <Action>{
             });
         }
 
-        const [id] = await ctx.model.from('ejyy_feedback').insert({
+        const [id] = await ctx.model.from('ipms_feedback').insert({
             subject,
             content,
             type: FEEDBACK_OF_FEATURE,

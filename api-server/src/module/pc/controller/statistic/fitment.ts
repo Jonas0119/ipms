@@ -33,10 +33,10 @@ const StatisticFitmentAction = <Action>{
         const { community_id } = <RequestBody>ctx.request.body;
 
         const list = await ctx.model
-            .from('ejyy_fitment')
-            .leftJoin('ejyy_building_info', 'ejyy_building_info.id', 'ejyy_fitment.building_id')
-            .where('ejyy_fitment.community_id', community_id)
-            .select('ejyy_fitment.cash_deposit', 'ejyy_fitment.is_return_cash_deposit', 'ejyy_fitment.created_at');
+            .from('ipms_fitment')
+            .leftJoin('ipms_building_info', 'ipms_building_info.id', 'ipms_fitment.building_id')
+            .where('ipms_fitment.community_id', community_id)
+            .select('ipms_fitment.cash_deposit', 'ipms_fitment.is_return_cash_deposit', 'ipms_fitment.created_at');
 
         ctx.body = {
             code: SUCCESS,

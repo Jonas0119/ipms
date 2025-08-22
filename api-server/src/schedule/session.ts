@@ -25,7 +25,7 @@ export default () => {
             .startOf('hour')
             .valueOf();
         const jobDone = await model
-            .from('ejyy_schedule')
+            .from('ipms_schedule')
             .where('created_at', created_at)
             .where('job', SESSION_JOB)
             .first();
@@ -34,13 +34,13 @@ export default () => {
             return kjhlog.info('已有进程清理，任务忽略');
         }
 
-        await model.from('ejyy_schedule').insert({
+        await model.from('ipms_schedule').insert({
             job: SESSION_JOB,
             created_at
         });
 
         await model
-            .from('ejyy_session_store')
+            .from('ipms_session_store')
             .where('expire', '<', Date.now())
             .delete();
 

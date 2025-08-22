@@ -40,25 +40,25 @@ const PcNoticeDetailAction = <Action>{
         const { id, community_id } = <RequestBody>ctx.request.body;
 
         const detail = await ctx.model
-            .from('ejyy_notice_to_user')
-            .leftJoin('ejyy_notice_tpl', 'ejyy_notice_tpl.id', 'ejyy_notice_to_user.notice_tpl_id')
-            .leftJoin('ejyy_property_company_user', 'ejyy_property_company_user.id', 'ejyy_notice_to_user.created_by')
-            .where('ejyy_notice_to_user.id', id)
-            .andWhere('ejyy_notice_to_user.community_id', community_id)
+            .from('ipms_notice_to_user')
+            .leftJoin('ipms_notice_tpl', 'ipms_notice_tpl.id', 'ipms_notice_to_user.notice_tpl_id')
+            .leftJoin('ipms_property_company_user', 'ipms_property_company_user.id', 'ipms_notice_to_user.created_by')
+            .where('ipms_notice_to_user.id', id)
+            .andWhere('ipms_notice_to_user.community_id', community_id)
             .select(
-                'ejyy_notice_to_user.id',
-                'ejyy_notice_to_user.title',
-                'ejyy_notice_to_user.overview',
-                'ejyy_notice_to_user.content',
-                'ejyy_notice_to_user.created_at',
-                'ejyy_notice_to_user.notice_tpl_id',
-                'ejyy_notice_to_user.published',
-                'ejyy_notice_to_user.published_at',
-                'ejyy_notice_to_user.created_by',
-                'ejyy_notice_to_user.published_by',
-                'ejyy_notice_tpl.tpl',
-                'ejyy_notice_tpl.content as tpl_content',
-                'ejyy_property_company_user.real_name'
+                'ipms_notice_to_user.id',
+                'ipms_notice_to_user.title',
+                'ipms_notice_to_user.overview',
+                'ipms_notice_to_user.content',
+                'ipms_notice_to_user.created_at',
+                'ipms_notice_to_user.notice_tpl_id',
+                'ipms_notice_to_user.published',
+                'ipms_notice_to_user.published_at',
+                'ipms_notice_to_user.created_by',
+                'ipms_notice_to_user.published_by',
+                'ipms_notice_tpl.tpl',
+                'ipms_notice_tpl.content as tpl_content',
+                'ipms_property_company_user.real_name'
             )
             .first();
 
@@ -87,7 +87,7 @@ const PcNoticeDetailAction = <Action>{
 
         if (detail.published_by) {
             const pInfo = await ctx.model
-                .from('ejyy_property_company_user')
+                .from('ipms_property_company_user')
                 .where('id', detail.published_by)
                 .first();
 

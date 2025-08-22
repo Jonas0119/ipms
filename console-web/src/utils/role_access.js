@@ -62,8 +62,7 @@ export function text(role) {
         case ROLES.WLCC:
             return '物料仓储';
 
-        case ROLES.YQFK:
-            return '疫情防控';
+        
 
         case ROLES.XJRW:
             return '巡检任务';

@@ -39,7 +39,7 @@ const PcHrResetAction = <Action>{
         const { user_id, password } = <RequestBody>ctx.request.body;
 
         const affect = await ctx.model
-            .from('ejyy_property_company_user')
+            .from('ipms_property_company_user')
             .where('id', user_id)
             .update('password', utils.crypto.md5(password));
 

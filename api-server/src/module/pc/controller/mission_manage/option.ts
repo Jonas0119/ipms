@@ -32,15 +32,15 @@ const PcMissionManageOptionAction = <Action>{
     response: async ctx => {
         const { community_id } = <RequestBody>ctx.request.body;
 
-        const category = await ctx.model.from('ejyy_mission_category').select('id', 'name', 'description');
+        const category = await ctx.model.from('ipms_mission_category').select('id', 'name', 'description');
 
         const point = await ctx.model
-            .from('ejyy_mission_point')
+            .from('ipms_mission_point')
             .where('community_id', community_id)
             .select('id', 'local', 'category_id');
 
         const line = await ctx.model
-            .from('ejyy_mission_line')
+            .from('ipms_mission_line')
             .where('community_id', community_id)
             .select('id', 'category_id', 'name', 'description');
 

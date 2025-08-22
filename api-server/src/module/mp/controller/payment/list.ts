@@ -38,29 +38,29 @@ const MpPaymentListAction = <Action>{
         const { page_num, page_size } = <RequestBody>ctx.request.body;
 
         const list = await ctx.model
-            .from('ejyy_property_fee_order')
-            .leftJoin('ejyy_property_fee', 'ejyy_property_fee.id', 'ejyy_property_fee_order.property_fee_id')
-            .leftJoin('ejyy_community_info', 'ejyy_community_info.id', 'ejyy_property_fee.community_id')
-            .where('ejyy_property_fee_order.wechat_mp_user_id', ctx.mpUserInfo.id)
-            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ejyy_property_fee_order.id'))
+            .from('ipms_property_fee_order')
+            .leftJoin('ipms_property_fee', 'ipms_property_fee.id', 'ipms_property_fee_order.property_fee_id')
+            .leftJoin('ipms_community_info', 'ipms_community_info.id', 'ipms_property_fee.community_id')
+            .where('ipms_property_fee_order.wechat_mp_user_id', ctx.mpUserInfo.id)
+            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ipms_property_fee_order.id'))
             .select(
-                'ejyy_community_info.name as community_name',
-                'ejyy_property_fee.start_year',
-                'ejyy_property_fee.end_year',
-                'ejyy_property_fee.house_fee',
-                'ejyy_property_fee_order.id as order_id',
-                'ejyy_property_fee_order.transaction_id',
-                'ejyy_property_fee_order.paid',
-                'ejyy_property_fee_order.refunding',
-                'ejyy_property_fee_order.refunded',
-                'ejyy_property_fee_order.cancel',
-                'ejyy_property_fee_order.fee',
-                'ejyy_property_fee_order.paid_fee',
-                'ejyy_property_fee_order.created_at'
+                'ipms_community_info.name as community_name',
+                'ipms_property_fee.start_year',
+                'ipms_property_fee.end_year',
+                'ipms_property_fee.house_fee',
+                'ipms_property_fee_order.id as order_id',
+                'ipms_property_fee_order.transaction_id',
+                'ipms_property_fee_order.paid',
+                'ipms_property_fee_order.refunding',
+                'ipms_property_fee_order.refunded',
+                'ipms_property_fee_order.cancel',
+                'ipms_property_fee_order.fee',
+                'ipms_property_fee_order.paid_fee',
+                'ipms_property_fee_order.created_at'
             )
             .limit(page_size)
             .offset((page_num - 1) * page_size)
-            .orderBy('ejyy_property_fee_order.id', 'desc');
+            .orderBy('ipms_property_fee_order.id', 'desc');
 
         const [res] = await ctx.model.select(ctx.model.raw('found_rows() AS total'));
 

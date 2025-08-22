@@ -45,32 +45,32 @@ const PcEnergyRepeaterAction = <Action>{
         const { page_num, page_size, community_id } = <RequestBody>ctx.request.body;
 
         const list = await ctx.model
-            .from('ejyy_iot_meter_repeater')
+            .from('ipms_iot_meter_repeater')
             .leftJoin(
-                'ejyy_property_company_user',
-                'ejyy_property_company_user.id',
-                'ejyy_iot_meter_repeater.created_by'
+                'ipms_property_company_user',
+                'ipms_property_company_user.id',
+                'ipms_iot_meter_repeater.created_by'
             )
-            .where('ejyy_iot_meter_repeater.community_id', community_id)
-            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ejyy_iot_meter_repeater.id'))
+            .where('ipms_iot_meter_repeater.community_id', community_id)
+            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ipms_iot_meter_repeater.id'))
             .select(
-                'ejyy_iot_meter_repeater.id',
-                'ejyy_iot_meter_repeater.community_id',
-                'ejyy_iot_meter_repeater.sign',
-                'ejyy_iot_meter_repeater.name',
-                'ejyy_iot_meter_repeater.category',
-                'ejyy_iot_meter_repeater.username',
-                'ejyy_iot_meter_repeater.password',
-                'ejyy_iot_meter_repeater.lng',
-                'ejyy_iot_meter_repeater.lat',
-                'ejyy_iot_meter_repeater.online',
-                'ejyy_iot_meter_repeater.created_by',
-                'ejyy_iot_meter_repeater.created_at',
-                'ejyy_property_company_user.real_name'
+                'ipms_iot_meter_repeater.id',
+                'ipms_iot_meter_repeater.community_id',
+                'ipms_iot_meter_repeater.sign',
+                'ipms_iot_meter_repeater.name',
+                'ipms_iot_meter_repeater.category',
+                'ipms_iot_meter_repeater.username',
+                'ipms_iot_meter_repeater.password',
+                'ipms_iot_meter_repeater.lng',
+                'ipms_iot_meter_repeater.lat',
+                'ipms_iot_meter_repeater.online',
+                'ipms_iot_meter_repeater.created_by',
+                'ipms_iot_meter_repeater.created_at',
+                'ipms_property_company_user.real_name'
             )
             .limit(page_size)
             .offset((page_num - 1) * page_size)
-            .orderBy('ejyy_iot_meter_repeater.id', 'desc');
+            .orderBy('ipms_iot_meter_repeater.id', 'desc');
 
         const [res] = await ctx.model.select(ctx.model.raw('found_rows() AS total'));
 

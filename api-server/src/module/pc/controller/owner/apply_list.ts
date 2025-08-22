@@ -62,37 +62,37 @@ const PcOwerApplyListAction = <Action>{
         const where = {};
 
         if (replied !== undefined) {
-            where['ejyy_owner_apply.replied'] = replied;
+            where['ipms_owner_apply.replied'] = replied;
         }
 
         if (subscribed !== undefined) {
-            where['ejyy_owner_apply.subscribed'] = subscribed;
+            where['ipms_owner_apply.subscribed'] = subscribed;
         }
 
         if (success !== undefined) {
-            where['ejyy_owner_apply.success'] = success;
+            where['ipms_owner_apply.success'] = success;
         }
 
         const list = await ctx.model
-            .from('ejyy_owner_apply')
-            .leftJoin('ejyy_wechat_mp_user', 'ejyy_wechat_mp_user.id', 'ejyy_owner_apply.wechat_mp_user_id')
+            .from('ipms_owner_apply')
+            .leftJoin('ipms_wechat_mp_user', 'ipms_wechat_mp_user.id', 'ipms_owner_apply.wechat_mp_user_id')
             .where(where)
-            .andWhere('ejyy_owner_apply.community_id', community_id)
-            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ejyy_owner_apply.id'))
+            .andWhere('ipms_owner_apply.community_id', community_id)
+            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ipms_owner_apply.id'))
             .select(
-                'ejyy_owner_apply.id',
-                'ejyy_owner_apply.house',
-                'ejyy_owner_apply.carport',
-                'ejyy_owner_apply.warehouse',
-                'ejyy_owner_apply.subscribed',
-                'ejyy_owner_apply.replied',
-                'ejyy_owner_apply.success',
-                'ejyy_owner_apply.created_at',
-                'ejyy_wechat_mp_user.real_name'
+                'ipms_owner_apply.id',
+                'ipms_owner_apply.house',
+                'ipms_owner_apply.carport',
+                'ipms_owner_apply.warehouse',
+                'ipms_owner_apply.subscribed',
+                'ipms_owner_apply.replied',
+                'ipms_owner_apply.success',
+                'ipms_owner_apply.created_at',
+                'ipms_wechat_mp_user.real_name'
             )
             .limit(page_size)
             .offset((page_num - 1) * page_size)
-            .orderBy('ejyy_owner_apply.id', 'desc');
+            .orderBy('ipms_owner_apply.id', 'desc');
 
         const [res] = await ctx.model.select(ctx.model.raw('found_rows() AS total'));
 

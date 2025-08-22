@@ -47,7 +47,7 @@ const MpQuestionnaireSubmitAction = <Action>{
         const { questionnaire_id, answers } = <RequestBody>ctx.request.body;
 
         const answered = await ctx.model
-            .from('ejyy_questionnaire_answer')
+            .from('ipms_questionnaire_answer')
             .where('questionnaire_id', questionnaire_id)
             .where('wechat_mp_user_id', ctx.mpUserInfo.id)
             .first();
@@ -60,14 +60,14 @@ const MpQuestionnaireSubmitAction = <Action>{
         }
 
         const { content } = await ctx.model
-            .from('ejyy_questionnaire_statistics')
+            .from('ipms_questionnaire_statistics')
             .where('questionnaire_id', questionnaire_id)
             .first();
 
         const statistics = content as QuestionnaireStatistics;
         statistics.total++;
 
-        const [answer_id] = await ctx.model.from('ejyy_questionnaire_answer').insert({
+        const [answer_id] = await ctx.model.from('ipms_questionnaire_answer').insert({
             questionnaire_id,
             wechat_mp_user_id: ctx.mpUserInfo.id,
             created_at: Date.now()
@@ -91,10 +91,10 @@ const MpQuestionnaireSubmitAction = <Action>{
             });
         });
 
-        await ctx.model.from('ejyy_questionnaire_answer_result').insert(result);
+        await ctx.model.from('ipms_questionnaire_answer_result').insert(result);
 
         await ctx.model
-            .from('ejyy_questionnaire_statistics')
+            .from('ipms_questionnaire_statistics')
             .update('content', JSON.stringify(statistics))
             .where('questionnaire_id', questionnaire_id);
 

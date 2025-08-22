@@ -45,35 +45,35 @@ interface CommunitiesInfo {
 // 涉及两个问题，关联的家庭用户操作
 async function communityService(model: Knex, wehcatMpUserId: number): Promise<CommunitiesInfo> {
     const result: Record[] = await model
-        .table('ejyy_user_building')
-        .leftJoin('ejyy_building_info', 'ejyy_building_info.id', 'ejyy_user_building.building_id')
-        .leftJoin('ejyy_community_info', 'ejyy_community_info.id', 'ejyy_building_info.community_id')
-        .leftJoin('ejyy_community_setting', 'ejyy_community_setting.community_id', 'ejyy_building_info.community_id')
-        .where('ejyy_user_building.wechat_mp_user_id', wehcatMpUserId)
-        .andWhere('ejyy_user_building.status', BINDING_BUILDING)
+        .table('ipms_user_building')
+        .leftJoin('ipms_building_info', 'ipms_building_info.id', 'ipms_user_building.building_id')
+        .leftJoin('ipms_community_info', 'ipms_community_info.id', 'ipms_building_info.community_id')
+        .leftJoin('ipms_community_setting', 'ipms_community_setting.community_id', 'ipms_building_info.community_id')
+        .where('ipms_user_building.wechat_mp_user_id', wehcatMpUserId)
+        .andWhere('ipms_user_building.status', BINDING_BUILDING)
         .select(
-            'ejyy_user_building.id as user_building_id',
-            'ejyy_user_building.authenticated',
-            'ejyy_user_building.authenticated_type',
-            'ejyy_building_info.id as building_id',
-            'ejyy_building_info.community_id',
-            'ejyy_building_info.type',
-            'ejyy_building_info.area',
-            'ejyy_building_info.building',
-            'ejyy_building_info.unit',
-            'ejyy_building_info.number',
-            'ejyy_community_info.name',
-            'ejyy_community_info.banner',
-            'ejyy_community_info.phone',
-            'ejyy_community_info.province',
-            'ejyy_community_info.city',
-            'ejyy_community_info.district',
-            'ejyy_community_setting.access_nfc',
-            'ejyy_community_setting.access_qrcode',
-            'ejyy_community_setting.access_remote',
-            'ejyy_community_setting.fitment_pledge'
+            'ipms_user_building.id as user_building_id',
+            'ipms_user_building.authenticated',
+            'ipms_user_building.authenticated_type',
+            'ipms_building_info.id as building_id',
+            'ipms_building_info.community_id',
+            'ipms_building_info.type',
+            'ipms_building_info.area',
+            'ipms_building_info.building',
+            'ipms_building_info.unit',
+            'ipms_building_info.number',
+            'ipms_community_info.name',
+            'ipms_community_info.banner',
+            'ipms_community_info.phone',
+            'ipms_community_info.province',
+            'ipms_community_info.city',
+            'ipms_community_info.district',
+            'ipms_community_setting.access_nfc',
+            'ipms_community_setting.access_qrcode',
+            'ipms_community_setting.access_remote',
+            'ipms_community_setting.fitment_pledge'
         )
-        .orderBy('ejyy_community_info.id', 'desc');
+        .orderBy('ipms_community_info.id', 'desc');
 
     const map: ComunityMap = {};
 
@@ -143,7 +143,7 @@ async function communityService(model: Knex, wehcatMpUserId: number): Promise<Co
     list.reverse();
 
     const mainCommunityInfo = await model
-        .table('ejyy_user_default_community')
+        .table('ipms_user_default_community')
         .where({ wechat_mp_user_id: wehcatMpUserId })
         .select('community_id')
         .first();
@@ -162,13 +162,13 @@ async function communityService(model: Knex, wehcatMpUserId: number): Promise<Co
             default_community_id = list[0].community_id;
 
             if (!mainCommunityInfo) {
-                await model.table('ejyy_user_default_community').insert({
+                await model.table('ipms_user_default_community').insert({
                     wechat_mp_user_id: wehcatMpUserId,
                     community_id: default_community_id
                 });
             } else {
                 await model
-                    .table('ejyy_user_default_community')
+                    .table('ipms_user_default_community')
                     .update({ community_id: default_community_id })
                     .where({ wechat_mp_user_id: wehcatMpUserId });
             }

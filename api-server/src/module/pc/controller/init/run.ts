@@ -164,7 +164,7 @@ const PcInitRunAction = <Action>{
 
         const total = utils.sql.countReader(
             await ctx.model
-                .from('ejyy_property_company_user')
+                .from('ipms_property_company_user')
                 .where('admin', TRUE)
                 .count()
         );
@@ -178,7 +178,7 @@ const PcInitRunAction = <Action>{
 
         const created_at = Date.now();
 
-        const [user_id] = await ctx.model.from('ejyy_property_company_user').insert({
+        const [user_id] = await ctx.model.from('ipms_property_company_user').insert({
             account,
             password: utils.crypto.md5(password),
             real_name,
@@ -192,7 +192,7 @@ const PcInitRunAction = <Action>{
             leave_office: FALSE
         });
 
-        const [community_id] = await ctx.model.from('ejyy_community_info').insert({
+        const [community_id] = await ctx.model.from('ipms_community_info').insert({
             name,
             banner,
             province,
@@ -203,7 +203,7 @@ const PcInitRunAction = <Action>{
             created_by: user_id
         });
 
-        await ctx.model.from('ejyy_community_setting').insert({
+        await ctx.model.from('ipms_community_setting').insert({
             access_nfc,
             access_remote,
             access_qrcode,
@@ -212,12 +212,12 @@ const PcInitRunAction = <Action>{
             community_id
         });
 
-        await ctx.model.from('ejyy_property_company_user_access_community').insert({
+        await ctx.model.from('ipms_property_company_user_access_community').insert({
             community_id,
             property_company_user_id: user_id
         });
 
-        await ctx.model.from('ejyy_property_company_auth').insert({
+        await ctx.model.from('ipms_property_company_auth').insert({
             property_company_user_id: user_id,
             token: null
         });

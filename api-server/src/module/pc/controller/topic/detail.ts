@@ -39,19 +39,19 @@ const PcTopicDetailAction = <Action>{
         const { id, community_id } = <RequestBody>ctx.request.body;
 
         const detail = await ctx.model
-            .from('ejyy_topic')
-            .leftJoin('ejyy_property_company_user', 'ejyy_property_company_user.id', 'ejyy_topic.created_by')
-            .where('ejyy_topic.id', id)
-            .andWhere('ejyy_topic.community_id', community_id)
+            .from('ipms_topic')
+            .leftJoin('ipms_property_company_user', 'ipms_property_company_user.id', 'ipms_topic.created_by')
+            .where('ipms_topic.id', id)
+            .andWhere('ipms_topic.community_id', community_id)
             .select(
-                'ejyy_topic.id',
-                'ejyy_topic.banner_img',
-                'ejyy_topic.title',
-                'ejyy_topic.content',
-                'ejyy_topic.published',
-                'ejyy_topic.created_at',
-                'ejyy_topic.created_by',
-                'ejyy_property_company_user.real_name'
+                'ipms_topic.id',
+                'ipms_topic.banner_img',
+                'ipms_topic.title',
+                'ipms_topic.content',
+                'ipms_topic.published',
+                'ipms_topic.created_at',
+                'ipms_topic.created_by',
+                'ipms_property_company_user.real_name'
             )
             .first();
 

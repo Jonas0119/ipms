@@ -56,7 +56,7 @@ const MpFitmentReturnInfoAction = <Action>{
         const { return_name, return_bank, return_bank_id } = <RequestBody>ctx.request.body;
 
         const exist = await ctx.model
-            .from('ejyy_fitment')
+            .from('ipms_fitment')
             .where('id', id)
             .first();
 
@@ -68,7 +68,7 @@ const MpFitmentReturnInfoAction = <Action>{
         }
 
         const affect = await ctx.model
-            .from('ejyy_fitment')
+            .from('ipms_fitment')
             .update({
                 return_name,
                 return_bank,

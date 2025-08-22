@@ -80,13 +80,13 @@ const MpVistorCreateAction = <Action>{
         }
 
         const vistorInfo = await ctx.model
-            .from('ejyy_wechat_mp_user')
+            .from('ipms_wechat_mp_user')
             .where('phone', vistor_phone)
             .first();
 
         if (vistorInfo) {
             const vistorBuildingInfo = await ctx.model
-                .from('ejyy_user_building')
+                .from('ipms_user_building')
                 .where('building_id', building_id)
                 .where('wechat_mp_user_id', vistorInfo.id)
                 .where('status', BINDING_BUILDING)
@@ -100,7 +100,7 @@ const MpVistorCreateAction = <Action>{
             }
         }
 
-        const [id] = await ctx.model.from('ejyy_vistor').insert({
+        const [id] = await ctx.model.from('ipms_vistor').insert({
             community_id,
             building_id,
             wechat_mp_user_id: ctx.mpUserInfo.id,

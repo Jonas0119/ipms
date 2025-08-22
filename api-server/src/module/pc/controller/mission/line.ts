@@ -33,18 +33,18 @@ const PcMissionLineAction = <Action>{
         const { complete_id } = <RequestParams>ctx.params;
 
         const records = await ctx.model
-            .from('ejyy_mission_complete_node')
-            .leftJoin('ejyy_mission_point', 'ejyy_mission_point.id', 'ejyy_mission_complete_node.point_id')
-            .where('ejyy_mission_complete_node.complete_id', complete_id)
+            .from('ipms_mission_complete_node')
+            .leftJoin('ipms_mission_point', 'ipms_mission_point.id', 'ipms_mission_complete_node.point_id')
+            .where('ipms_mission_complete_node.complete_id', complete_id)
             .select(
-                'ejyy_mission_complete_node.id',
-                'ejyy_mission_complete_node.normal',
-                'ejyy_mission_complete_node.remark',
-                'ejyy_mission_complete_node.img1',
-                'ejyy_mission_complete_node.img2',
-                'ejyy_mission_complete_node.img3',
-                'ejyy_mission_complete_node.created_at',
-                'ejyy_mission_point.local'
+                'ipms_mission_complete_node.id',
+                'ipms_mission_complete_node.normal',
+                'ipms_mission_complete_node.remark',
+                'ipms_mission_complete_node.img1',
+                'ipms_mission_complete_node.img2',
+                'ipms_mission_complete_node.img3',
+                'ipms_mission_complete_node.created_at',
+                'ipms_mission_point.local'
             );
 
         const list = [];
@@ -62,7 +62,7 @@ const PcMissionLineAction = <Action>{
 
             const like = utils.sql.countReader(
                 await ctx.model
-                    .from('ejyy_mission_complete_node')
+                    .from('ipms_mission_complete_node')
                     .whereNot('id', record.id)
                     .whereIn('img1', imgs)
                     .orWhereIn('img2', imgs)

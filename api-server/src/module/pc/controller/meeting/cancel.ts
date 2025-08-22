@@ -40,7 +40,7 @@ const PcMeetingCancelAction = <Action>{
         const { id, community_id } = <RequestBody>ctx.request.body;
 
         const info = await ctx.model
-            .from('ejyy_meeting')
+            .from('ipms_meeting')
             .where('id', id)
             .andWhere('community_id', community_id)
             .andWhere('created_by', ctx.pcUserInfo.id)
@@ -61,7 +61,7 @@ const PcMeetingCancelAction = <Action>{
         }
 
         await ctx.model
-            .from('ejyy_meeting')
+            .from('ipms_meeting')
             .update('cancel', TRUE)
             .where('id', id);
 

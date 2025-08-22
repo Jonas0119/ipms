@@ -39,43 +39,43 @@ const MpMoveCarDetailAction = <Action>{
         let resInfo = <EjyyPropertyCompanyUser & EjyyPropertyCompanyDepartment & EjyyPropertyCompanyJob>null;
 
         const info = <EjyyMoveCar & EjyyCommunityInfo>await ctx.model
-            .from('ejyy_move_car')
-            .leftJoin('ejyy_community_info', 'ejyy_community_info.id', 'ejyy_move_car.community_id')
+            .from('ipms_move_car')
+            .leftJoin('ipms_community_info', 'ipms_community_info.id', 'ipms_move_car.community_id')
             .select(
-                'ejyy_move_car.id',
-                'ejyy_move_car.car_number',
-                'ejyy_move_car.move_reason',
-                'ejyy_move_car.live_img',
-                'ejyy_move_car.have_concat_info',
-                'ejyy_move_car.response_user_id',
-                'ejyy_move_car.response_content',
-                'ejyy_move_car.responsed_at',
-                'ejyy_move_car.created_at',
-                'ejyy_community_info.name as community_name'
+                'ipms_move_car.id',
+                'ipms_move_car.car_number',
+                'ipms_move_car.move_reason',
+                'ipms_move_car.live_img',
+                'ipms_move_car.have_concat_info',
+                'ipms_move_car.response_user_id',
+                'ipms_move_car.response_content',
+                'ipms_move_car.responsed_at',
+                'ipms_move_car.created_at',
+                'ipms_community_info.name as community_name'
             )
-            .where('ejyy_move_car.id', id)
-            .where('ejyy_move_car.wechat_mp_user_id', ctx.mpUserInfo.id)
+            .where('ipms_move_car.id', id)
+            .where('ipms_move_car.wechat_mp_user_id', ctx.mpUserInfo.id)
             .first();
 
         if (info.response_user_id) {
             resInfo = await ctx.model
-                .from('ejyy_property_company_user')
+                .from('ipms_property_company_user')
                 .leftJoin(
-                    'ejyy_property_company_department',
-                    'ejyy_property_company_department.id',
-                    'ejyy_property_company_user.department_id'
+                    'ipms_property_company_department',
+                    'ipms_property_company_department.id',
+                    'ipms_property_company_user.department_id'
                 )
                 .leftJoin(
-                    'ejyy_property_company_job',
-                    'ejyy_property_company_job.id',
-                    'ejyy_property_company_user.job_id'
+                    'ipms_property_company_job',
+                    'ipms_property_company_job.id',
+                    'ipms_property_company_user.job_id'
                 )
-                .where('ejyy_property_company_user.id', info.response_user_id)
+                .where('ipms_property_company_user.id', info.response_user_id)
                 .select(
-                    'ejyy_property_company_user.avatar_url',
-                    'ejyy_property_company_department.name as department',
-                    'ejyy_property_company_job.name as job',
-                    'ejyy_property_company_user.real_name'
+                    'ipms_property_company_user.avatar_url',
+                    'ipms_property_company_department.name as department',
+                    'ipms_property_company_job.name as job',
+                    'ipms_property_company_user.real_name'
                 )
                 .first();
         }

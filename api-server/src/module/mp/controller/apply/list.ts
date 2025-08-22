@@ -37,7 +37,7 @@ const MpApplyListAction = <Action>{
         const { page_num, page_size } = <RequestBody>ctx.request.body;
 
         const list = await ctx.model
-            .from('ejyy_owner_apply')
+            .from('ipms_owner_apply')
             .where('wechat_mp_user_id', ctx.mpUserInfo.id)
             .select(ctx.model.raw('SQL_CALC_FOUND_ROWS id'))
             .select(

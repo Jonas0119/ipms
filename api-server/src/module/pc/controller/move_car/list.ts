@@ -61,7 +61,7 @@ const PcMoveCarListAction = <Action>{
         }
 
         const list = await ctx.model
-            .from('ejyy_move_car')
+            .from('ipms_move_car')
             .where('community_id', community_id)
             .andWhere(where)
             .andWhere(function() {

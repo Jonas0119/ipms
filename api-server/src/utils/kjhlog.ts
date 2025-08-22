@@ -60,7 +60,7 @@ class KjhLog {
         this.logDir = options.logDir || path.join(process.cwd(), 'logs');
         this.enableConsole = options.enableConsole !== false;
         this.enableFile = options.enableFile !== false;
-        this.serviceName = options.serviceName || 'ejyy-api';
+        this.serviceName = options.serviceName || 'ipms-api';
 
         // 确保日志目录存在
         if (this.enableFile && !fs.existsSync(this.logDir)) {
@@ -226,7 +226,7 @@ const kjhlog = new KjhLog({
     level: process.env.NODE_ENV === 'development' ? LogLevel.DEBUG : LogLevel.INFO,
     enableConsole: true,
     enableFile: process.env.NODE_ENV === 'production',
-    serviceName: 'ejyy-api'
+    serviceName: 'ipms-api'
 });
 
 // 导出实例和类

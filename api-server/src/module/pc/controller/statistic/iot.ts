@@ -33,24 +33,24 @@ const StatisticIotAction = <Action>{
         const { community_id } = <RequestBody>ctx.request.body;
 
         const entrance = await ctx.model
-            .from('ejyy_iot_entrance')
+            .from('ipms_iot_entrance')
             .where('community_id', community_id)
             .select('name', 'online');
 
         const elevator = await ctx.model
-            .from('ejyy_iot_elevator')
+            .from('ipms_iot_elevator')
             .where('community_id', community_id)
             .select('name', 'online');
 
         const lamp = await ctx.model
-            .from('ejyy_iot_lamp')
-            .leftJoin('ejyy_iot_lamp_line', 'ejyy_iot_lamp_line.lamp_id', 'ejyy_iot_lamp.id')
-            .where('ejyy_iot_lamp.community_id', community_id)
+            .from('ipms_iot_lamp')
+            .leftJoin('ipms_iot_lamp_line', 'ipms_iot_lamp_line.lamp_id', 'ipms_iot_lamp.id')
+            .where('ipms_iot_lamp.community_id', community_id)
             .select(
-                'ejyy_iot_lamp.id',
-                'ejyy_iot_lamp.name',
-                'ejyy_iot_lamp.online',
-                'ejyy_iot_lamp_line.name as line'
+                'ipms_iot_lamp.id',
+                'ipms_iot_lamp.name',
+                'ipms_iot_lamp.online',
+                'ipms_iot_lamp_line.name as line'
             );
 
         const lmap = {};
@@ -70,17 +70,17 @@ const StatisticIotAction = <Action>{
         });
 
         const repeater = await ctx.model
-            .from('ejyy_iot_meter_repeater')
+            .from('ipms_iot_meter_repeater')
             .where('community_id', community_id)
             .select('name', 'online');
 
         const park = await ctx.model
-            .from('ejyy_iot_park')
+            .from('ipms_iot_park')
             .where('community_id', community_id)
             .select('name', 'online');
 
         const warning = await ctx.model
-            .from('ejyy_iot_warning')
+            .from('ipms_iot_warning')
             .where('community_id', community_id)
             .select('name', 'online');
 

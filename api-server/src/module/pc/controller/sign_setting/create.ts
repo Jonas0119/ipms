@@ -51,12 +51,12 @@ const PcSignSettingCreateAction = <Action>{
         const { community_id, distance, lng, lat } = <RequestBody>ctx.request.body;
 
         await ctx.model
-            .from('ejyy_employee_sign_setting')
+            .from('ipms_employee_sign_setting')
             .where('community_id', community_id)
             .andWhere('latest', TRUE)
             .update('latest', FALSE);
 
-        await ctx.model.from('ejyy_employee_sign_setting').insert({
+        await ctx.model.from('ipms_employee_sign_setting').insert({
             community_id,
             lng,
             lat,

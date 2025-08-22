@@ -37,7 +37,7 @@ const PcCommunityManageListAction = <Action>{
         const { page_num, page_size } = <RequestBody>ctx.request.body;
 
         const list = await ctx.model
-            .from('ejyy_community_info')
+            .from('ipms_community_info')
             .select(ctx.model.raw('SQL_CALC_FOUND_ROWS id'))
             .select('id', 'name', 'province', 'city', 'district', 'created_at')
             .limit(page_size)

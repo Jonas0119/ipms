@@ -43,7 +43,7 @@ const MpUserProfileAction = <Action>{
         const { nick_name, signature, avatar_url } = <RequestBody>ctx.request.body;
 
         await ctx.model
-            .from('ejyy_wechat_mp_user')
+            .from('ipms_wechat_mp_user')
             .where('id', ctx.mpUserInfo.id)
             .update({ nick_name, signature, avatar_url });
 

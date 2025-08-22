@@ -87,7 +87,7 @@ const PcPetListAction = <Action>{
         }
 
         const list = await ctx.model
-            .from('ejyy_pet')
+            .from('ipms_pet')
             .where('community_id', community_id)
             .andWhere(where)
             .andWhere(function() {

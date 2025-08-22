@@ -43,7 +43,7 @@ const PcContractCategoryUpdateAction = <Action>{
         const { id, name, description } = <RequestBody>ctx.request.body;
 
         const exist = await ctx.model
-            .from('ejyy_contract_category')
+            .from('ipms_contract_category')
             .where('name', name)
             .andWhere('id', '<>', id)
             .first();
@@ -56,7 +56,7 @@ const PcContractCategoryUpdateAction = <Action>{
         }
 
         const affect = await ctx.model
-            .from('ejyy_contract_category')
+            .from('ipms_contract_category')
             .update({ name, description: description ? description : null })
             .where('id', id);
 

@@ -56,37 +56,37 @@ const PcMaterialListAction = <Action>{
         const where = {};
 
         if (storehouse_id) {
-            where['ejyy_material.storehouse_id'] = storehouse_id;
+            where['ipms_material.storehouse_id'] = storehouse_id;
         }
 
         if (category_id) {
-            where['ejyy_material.category_id'] = category_id;
+            where['ipms_material.category_id'] = category_id;
         }
 
         const list = await ctx.model
-            .from('ejyy_material')
-            .leftJoin('ejyy_property_company_user', 'ejyy_property_company_user.id', 'ejyy_material.created_by')
-            .leftJoin('ejyy_material_category', 'ejyy_material_category.id', 'ejyy_material.category_id')
-            .leftJoin('ejyy_storehouse', 'ejyy_storehouse.id', 'ejyy_material.storehouse_id')
-            .where('ejyy_material.community_id', community_id)
+            .from('ipms_material')
+            .leftJoin('ipms_property_company_user', 'ipms_property_company_user.id', 'ipms_material.created_by')
+            .leftJoin('ipms_material_category', 'ipms_material_category.id', 'ipms_material.category_id')
+            .leftJoin('ipms_storehouse', 'ipms_storehouse.id', 'ipms_material.storehouse_id')
+            .where('ipms_material.community_id', community_id)
             .andWhere(where)
-            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ejyy_material.id'))
+            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ipms_material.id'))
             .select(
-                'ejyy_material.id',
-                'ejyy_material.name',
-                'ejyy_material.total',
-                'ejyy_material.category_id',
-                'ejyy_material.storehouse_id',
-                'ejyy_material.created_at',
-                'ejyy_material.created_by',
-                'ejyy_property_company_user.real_name',
-                'ejyy_material_category.name as category',
-                'ejyy_storehouse.name as storehouse',
-                'ejyy_storehouse.local'
+                'ipms_material.id',
+                'ipms_material.name',
+                'ipms_material.total',
+                'ipms_material.category_id',
+                'ipms_material.storehouse_id',
+                'ipms_material.created_at',
+                'ipms_material.created_by',
+                'ipms_property_company_user.real_name',
+                'ipms_material_category.name as category',
+                'ipms_storehouse.name as storehouse',
+                'ipms_storehouse.local'
             )
             .limit(page_size)
             .offset((page_num - 1) * page_size)
-            .orderBy('ejyy_material.id', 'desc');
+            .orderBy('ipms_material.id', 'desc');
 
         const [res] = await ctx.model.select(ctx.model.raw('found_rows() AS total'));
 

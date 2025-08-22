@@ -37,7 +37,7 @@ const PcMissionManageCategoryCreateAction = <Action>{
         const { name, description } = <RequestBody>ctx.request.body;
 
         const exist = await ctx.model
-            .from('ejyy_mission_category')
+            .from('ipms_mission_category')
             .andWhere('name', name)
             .first();
 
@@ -50,7 +50,7 @@ const PcMissionManageCategoryCreateAction = <Action>{
 
         const created_at = Date.now();
 
-        const [id] = await ctx.model.from('ejyy_mission_category').insert({
+        const [id] = await ctx.model.from('ipms_mission_category').insert({
             name,
             description: description ? description : null,
             created_by: ctx.pcUserInfo.id,

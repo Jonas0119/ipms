@@ -43,7 +43,7 @@ const PcComplainMyDetailAction = <Action>{
         let referInfo = null;
 
         const info = await ctx.model
-            .from('ejyy_complain')
+            .from('ipms_complain')
             .where('id', id)
             .andWhere('community_id', community_id)
             .andWhere('dispose_user_id', ctx.pcUserInfo.id)
@@ -81,7 +81,7 @@ const PcComplainMyDetailAction = <Action>{
 
         if (info.step >= ALLOT_COMPLAIN_STEP) {
             allotInfo = await ctx.model
-                .from('ejyy_property_company_user')
+                .from('ipms_property_company_user')
                 .where('id', info.allot_user_id)
                 .select('id', 'real_name')
                 .first();
@@ -94,13 +94,13 @@ const PcComplainMyDetailAction = <Action>{
 
         if (info.property_company_user_id) {
             referInfo = await ctx.model
-                .from('ejyy_property_company_user')
+                .from('ipms_property_company_user')
                 .where('id', info.property_company_user_id)
                 .select('id', 'real_name')
                 .first();
         } else {
             referInfo = await ctx.model
-                .from('ejyy_wechat_mp_user')
+                .from('ipms_wechat_mp_user')
                 .where('id', info.wechat_mp_user_id)
                 .select('id', 'real_name')
                 .first();

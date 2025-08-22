@@ -57,7 +57,7 @@ const PcMaterialUpdateAction = <Action>{
         const { name, category_id, storehouse_id, id, community_id } = <RequestBody>ctx.request.body;
 
         const categoryExist = await ctx.model
-            .from('ejyy_material_category')
+            .from('ipms_material_category')
             .where('id', category_id)
             .first();
 
@@ -69,7 +69,7 @@ const PcMaterialUpdateAction = <Action>{
         }
 
         const storehouseExist = await ctx.model
-            .from('ejyy_storehouse')
+            .from('ipms_storehouse')
             .where('id', storehouse_id)
             .andWhere('community_id', community_id)
             .first();
@@ -82,7 +82,7 @@ const PcMaterialUpdateAction = <Action>{
         }
 
         const repeat = await ctx.model
-            .from('ejyy_material')
+            .from('ipms_material')
             .where('name', name)
             .andWhere('community_id', community_id)
             .andWhereNot('id', id)
@@ -96,7 +96,7 @@ const PcMaterialUpdateAction = <Action>{
         }
 
         await ctx.model
-            .from('ejyy_material')
+            .from('ipms_material')
             .update({
                 name,
                 category_id,

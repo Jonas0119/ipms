@@ -87,7 +87,7 @@ const PcNoticeUpdateAction = <Action>{
         );
 
         const detail = await ctx.model
-            .from('ejyy_notice_to_user')
+            .from('ipms_notice_to_user')
             .where('id', id)
             .andWhere('community_id', community_id)
             .first();
@@ -111,14 +111,14 @@ const PcNoticeUpdateAction = <Action>{
         if (oa_tpl_msg) {
             if (notice_tpl_id) {
                 await ctx.model
-                    .from('ejyy_notice_tpl')
+                    .from('ipms_notice_tpl')
                     .where('id', notice_tpl_id)
                     .update({
                         tpl,
                         content: JSON.stringify(tpl_content)
                     });
             } else {
-                [notice_tpl_id] = await ctx.model.from('ejyy_notice_tpl').insert({
+                [notice_tpl_id] = await ctx.model.from('ipms_notice_tpl').insert({
                     tpl,
                     content: JSON.stringify(tpl_content)
                 });
@@ -126,7 +126,7 @@ const PcNoticeUpdateAction = <Action>{
         } else {
             if (notice_tpl_id) {
                 await ctx.model
-                    .from('ejyy_notice_tpl')
+                    .from('ipms_notice_tpl')
                     .where('id', notice_tpl_id)
                     .delete();
 
@@ -135,7 +135,7 @@ const PcNoticeUpdateAction = <Action>{
         }
 
         const affect = await ctx.model
-            .from('ejyy_notice_to_user')
+            .from('ipms_notice_to_user')
             .update({
                 title,
                 overview,

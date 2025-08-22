@@ -32,10 +32,10 @@ const PcPurchaseOptionAction = <Action>{
     response: async ctx => {
         const { community_id } = <RequestBody>ctx.request.body;
 
-        const supplier = await ctx.model.from('ejyy_material_supplier').select('id', 'title');
+        const supplier = await ctx.model.from('ipms_material_supplier').select('id', 'title');
 
         const material = await ctx.model
-            .from('ejyy_material')
+            .from('ipms_material')
             .where('community_id', community_id)
             .select('id', 'name')
             .orderBy('id', 'desc');

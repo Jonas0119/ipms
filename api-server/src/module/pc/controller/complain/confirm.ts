@@ -50,7 +50,7 @@ const PcComplainConfirmAction = <Action>{
         const { id, community_id, dispose_reply } = <RequestBody>ctx.request.body;
 
         const detail = await ctx.model
-            .from('ejyy_complain')
+            .from('ipms_complain')
             .where('id', id)
             .andWhere('community_id', community_id)
             .andWhere('step', ALLOT_COMPLAIN_STEP)
@@ -65,13 +65,13 @@ const PcComplainConfirmAction = <Action>{
 
         const disposed_at = Date.now();
         const { name: community_name } = await ctx.model
-            .from('ejyy_community_info')
+            .from('ipms_community_info')
             .where('id', community_id)
             .first();
 
         if (detail.dispose_subscribed) {
             const { open_id } = await ctx.model
-                .from('ejyy_wechat_mp_user')
+                .from('ipms_wechat_mp_user')
                 .where('id', detail.wechat_mp_user_id)
                 .first();
 
@@ -98,7 +98,7 @@ const PcComplainConfirmAction = <Action>{
         }
 
         await ctx.model
-            .from('ejyy_complain')
+            .from('ipms_complain')
             .update({
                 step: CONFIRM_COMPLAIN_STEP,
                 disposed_at,

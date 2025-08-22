@@ -38,32 +38,32 @@ const MpQuestionnaireUnansweredAction = <Action>{
         const { page_num, page_size } = <RequestBody>ctx.request.body;
 
         const list = await ctx.model
-            .from('ejyy_questionnaire')
+            .from('ipms_questionnaire')
             .leftJoin(
-                'ejyy_user_default_community',
-                'ejyy_user_default_community.community_id',
-                'ejyy_questionnaire.community_id'
+                'ipms_user_default_community',
+                'ipms_user_default_community.community_id',
+                'ipms_questionnaire.community_id'
             )
-            .where('ejyy_user_default_community.wechat_mp_user_id', ctx.mpUserInfo.id)
-            .whereNotIn('ejyy_questionnaire.id', function() {
-                this.from('ejyy_questionnaire_answer')
+            .where('ipms_user_default_community.wechat_mp_user_id', ctx.mpUserInfo.id)
+            .whereNotIn('ipms_questionnaire.id', function() {
+                this.from('ipms_questionnaire_answer')
                     .where('wechat_mp_user_id', ctx.mpUserInfo.id)
                     .select('questionnaire_id');
             })
-            .andWhere('ejyy_questionnaire.created_at', '>=', ctx.mpUserInfo.created_at)
-            .andWhere('ejyy_questionnaire.expire', '>', Date.now())
-            .andWhere('ejyy_questionnaire.published', TRUE)
-            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ejyy_questionnaire.id'))
+            .andWhere('ipms_questionnaire.created_at', '>=', ctx.mpUserInfo.created_at)
+            .andWhere('ipms_questionnaire.expire', '>', Date.now())
+            .andWhere('ipms_questionnaire.published', TRUE)
+            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ipms_questionnaire.id'))
             .select(
-                'ejyy_questionnaire.id',
-                'ejyy_questionnaire.title',
-                'ejyy_questionnaire.expire',
-                'ejyy_questionnaire.published_at',
-                'ejyy_questionnaire.created_at'
+                'ipms_questionnaire.id',
+                'ipms_questionnaire.title',
+                'ipms_questionnaire.expire',
+                'ipms_questionnaire.published_at',
+                'ipms_questionnaire.created_at'
             )
             .limit(page_size)
             .offset((page_num - 1) * page_size)
-            .orderBy('ejyy_questionnaire.id', 'desc');
+            .orderBy('ipms_questionnaire.id', 'desc');
 
         const [res] = await ctx.model.select(ctx.model.raw('found_rows() AS total'));
 

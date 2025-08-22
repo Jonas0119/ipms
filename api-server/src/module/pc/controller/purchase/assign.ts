@@ -52,7 +52,7 @@ const PcPurchaseAssignction = <Action>{
         const { id, node_id, relation_user_id, community_id } = <RequestBody>ctx.request.body;
 
         const flowInfo = await ctx.model
-            .from('ejyy_material_purchase')
+            .from('ipms_material_purchase')
             .where('id', id)
             .andWhere('community_id', community_id)
             .first();
@@ -65,7 +65,7 @@ const PcPurchaseAssignction = <Action>{
         }
 
         const flowNode = await ctx.model
-            .from('ejyy_material_purchase_flow')
+            .from('ipms_material_purchase_flow')
             .where('parent_id', id)
             .andWhere('id', node_id)
             .first();
@@ -83,7 +83,7 @@ const PcPurchaseAssignction = <Action>{
         }
 
         await ctx.model
-            .from('ejyy_material_purchase_flow')
+            .from('ipms_material_purchase_flow')
             .update({ relation_user_id })
             .where('id', node_id);
 

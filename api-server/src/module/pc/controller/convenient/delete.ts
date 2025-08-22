@@ -37,7 +37,7 @@ const PcConvenientDeleteAction = <Action>{
         const { community_id, id } = <RequestBody>ctx.request.body;
 
         await ctx.model
-            .from('ejyy_convenient')
+            .from('ipms_convenient')
             .where({
                 community_id,
                 id

@@ -32,7 +32,7 @@ const PcMissionManageCategoryDeleteAction = <Action>{
         const { id } = <RequestParmas>ctx.params;
 
         const exist = await ctx.model
-            .from('ejyy_mission_category')
+            .from('ipms_mission_category')
             .andWhere('id', id)
             .first();
 
@@ -44,7 +44,7 @@ const PcMissionManageCategoryDeleteAction = <Action>{
         }
 
         const pointUsed = await ctx.model
-            .from('ejyy_mission_point')
+            .from('ipms_mission_point')
             .where('category_id', id)
             .first();
 
@@ -56,7 +56,7 @@ const PcMissionManageCategoryDeleteAction = <Action>{
         }
 
         const lineUsed = await ctx.model
-            .from('ejyy_mission_line')
+            .from('ipms_mission_line')
             .where('category_id', id)
             .first();
 
@@ -68,7 +68,7 @@ const PcMissionManageCategoryDeleteAction = <Action>{
         }
 
         const missionUsed = await ctx.model
-            .from('ejyy_mission')
+            .from('ipms_mission')
             .where('category_id', id)
             .first();
 
@@ -80,7 +80,7 @@ const PcMissionManageCategoryDeleteAction = <Action>{
         }
 
         await ctx.model
-            .from('ejyy_mission_category')
+            .from('ipms_mission_category')
             .where('id', id)
             .delete();
 

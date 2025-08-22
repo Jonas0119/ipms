@@ -1,12 +1,12 @@
 /**
  * +----------------------------------------------------------------------
- * | 「e家宜业」
+ * | IPMS
  * +----------------------------------------------------------------------
- * | Copyright (c) 2020-2024 https://www.chowa.cn All rights reserved.
+ * | Copyright (c) 2020-2025 IPMS
  * +----------------------------------------------------------------------
- * | Licensed 未经授权禁止移除「e家宜业」和「卓佤科技」相关版权
+ * | IPMS
  * +----------------------------------------------------------------------
- * | Author: contact@chowa.cn
+ * | Author: support@ipms.local
  * +----------------------------------------------------------------------
  */
 
@@ -53,12 +53,12 @@ const PcBuildingBindingAction = <Action>{
         const { building_id, id, community_id } = <RequestBody>ctx.request.body;
 
         const detail = await ctx.model
-            .from('ejyy_user_building')
-            .leftJoin('ejyy_building_info', 'ejyy_building_info.id', 'ejyy_user_building.building_id')
-            .where('ejyy_user_building.id', id)
-            .andWhere('ejyy_user_building.building_id', building_id)
-            .andWhere('ejyy_building_info.community_id', community_id)
-            .select('ejyy_user_building.status')
+            .from('ipms_user_building')
+            .leftJoin('ipms_building_info', 'ipms_building_info.id', 'ipms_user_building.building_id')
+            .where('ipms_user_building.id', id)
+            .andWhere('ipms_user_building.building_id', building_id)
+            .andWhere('ipms_building_info.community_id', community_id)
+            .select('ipms_user_building.status')
             .first();
 
         if (!detail) {
@@ -76,7 +76,7 @@ const PcBuildingBindingAction = <Action>{
         }
 
         const affect = await ctx.model
-            .from('ejyy_user_building')
+            .from('ipms_user_building')
             .update({
                 status: BINDING_BUILDING
             })
@@ -91,7 +91,7 @@ const PcBuildingBindingAction = <Action>{
 
         const created_at = Date.now();
 
-        await ctx.model.from('ejyy_user_building_operate_log').insert({
+        await ctx.model.from('ipms_user_building_operate_log').insert({
             user_building_id: id,
             property_company_user_id: ctx.pcUserInfo.id,
             status: BINDING_BUILDING,

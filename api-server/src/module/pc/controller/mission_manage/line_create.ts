@@ -58,7 +58,7 @@ const PcMissionManageLineCreateAction = <Action>{
         const { name, description, category_id, community_id, points } = <RequestBody>ctx.request.body;
 
         const exist = await ctx.model
-            .from('ejyy_mission_line')
+            .from('ipms_mission_line')
             .where('community_id', community_id)
             .andWhere('name', name)
             .first();
@@ -71,7 +71,7 @@ const PcMissionManageLineCreateAction = <Action>{
         }
 
         const category = await ctx.model
-            .from('ejyy_mission_category')
+            .from('ipms_mission_category')
             .where('id', category_id)
             .first();
 
@@ -84,7 +84,7 @@ const PcMissionManageLineCreateAction = <Action>{
 
         const created_at = Date.now();
 
-        const [id] = await ctx.model.from('ejyy_mission_line').insert({
+        const [id] = await ctx.model.from('ipms_mission_line').insert({
             name,
             description,
             category_id,
@@ -93,7 +93,7 @@ const PcMissionManageLineCreateAction = <Action>{
             created_at
         });
 
-        await ctx.model.from('ejyy_mission_line_node').insert(
+        await ctx.model.from('ipms_mission_line_node').insert(
             points.map(point_id => {
                 return {
                     point_id,

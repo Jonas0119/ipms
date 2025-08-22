@@ -56,14 +56,14 @@ const MpCommunityBindingByFamliyAction = <Action>{
         }
 
         const familyList = await ctx.model
-            .from('ejyy_user_building')
+            .from('ipms_user_building')
             .whereIn('building_id', qrInfo.building_ids)
             .where({ wechat_mp_user_id: qrInfo.user_id })
             .andWhere('status', NORMAL_STATUS)
             .select('building_id');
 
         const selfList = await ctx.model
-            .from('ejyy_user_building')
+            .from('ipms_user_building')
             .whereIn('building_id', qrInfo.building_ids)
             .where({ wechat_mp_user_id: ctx.mpUserInfo.id })
             .andWhere('status', NORMAL_STATUS)
@@ -105,7 +105,7 @@ const MpCommunityBindingByFamliyAction = <Action>{
             });
         }
 
-        await ctx.model.from('ejyy_user_building').insert(bindingData);
+        await ctx.model.from('ipms_user_building').insert(bindingData);
 
         const communityInfo = await communityService(ctx.model, ctx.mpUserInfo.id);
 

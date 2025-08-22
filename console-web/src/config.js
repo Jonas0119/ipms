@@ -6,11 +6,11 @@
 
 import assetManager from '@/utils/asset-manager';
 
-export const TOKEN_ID = 'EJYY_PC_TOKEN';
+export const TOKEN_ID = 'IPMS_PC_TOKEN';
 
-export const USER_ID = 'EJYY_PC_USER_ID';
+export const USER_ID = 'IPMS_PC_USER_ID';
 
-export const AUTH_HEADER_NAME = 'ejyy-pc-token';
+export const AUTH_HEADER_NAME = 'ipms-pc-token';
 
 export const SITE_TITLE = '智慧物业管理平台';
 

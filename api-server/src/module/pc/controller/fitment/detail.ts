@@ -43,36 +43,36 @@ const PcFitmentDetailAction = <Action>{
         let reutrnUserInfo = null;
 
         const info = await ctx.model
-            .from('ejyy_fitment')
-            .leftJoin('ejyy_building_info', 'ejyy_building_info.id', 'ejyy_fitment.building_id')
-            .leftJoin('ejyy_community_setting', 'ejyy_community_setting.community_id', 'ejyy_fitment.community_id')
-            .leftJoin('ejyy_wechat_mp_user', 'ejyy_wechat_mp_user.id', 'ejyy_fitment.wechat_mp_user_id')
-            .where('ejyy_fitment.community_id', community_id)
-            .where('ejyy_fitment.id', id)
+            .from('ipms_fitment')
+            .leftJoin('ipms_building_info', 'ipms_building_info.id', 'ipms_fitment.building_id')
+            .leftJoin('ipms_community_setting', 'ipms_community_setting.community_id', 'ipms_fitment.community_id')
+            .leftJoin('ipms_wechat_mp_user', 'ipms_wechat_mp_user.id', 'ipms_fitment.wechat_mp_user_id')
+            .where('ipms_fitment.community_id', community_id)
+            .where('ipms_fitment.id', id)
             .select(
-                'ejyy_fitment.id',
-                'ejyy_fitment.wechat_mp_user_id',
-                'ejyy_fitment.step',
-                'ejyy_fitment.agree_user_id',
-                'ejyy_fitment.agreed_at',
-                'ejyy_fitment.cash_deposit',
-                'ejyy_fitment.finished_at',
-                'ejyy_fitment.confirm_user_id',
-                'ejyy_fitment.confirmed_at',
-                'ejyy_fitment.return_name',
-                'ejyy_fitment.return_bank',
-                'ejyy_fitment.return_bank_id',
-                'ejyy_fitment.return_operate_user_id',
-                'ejyy_fitment.is_return_cash_deposit',
-                'ejyy_fitment.returned_at',
-                'ejyy_fitment.created_at',
-                'ejyy_building_info.type',
-                'ejyy_building_info.area',
-                'ejyy_building_info.building',
-                'ejyy_building_info.unit',
-                'ejyy_building_info.number',
-                'ejyy_community_setting.fitment_pledge',
-                'ejyy_wechat_mp_user.real_name'
+                'ipms_fitment.id',
+                'ipms_fitment.wechat_mp_user_id',
+                'ipms_fitment.step',
+                'ipms_fitment.agree_user_id',
+                'ipms_fitment.agreed_at',
+                'ipms_fitment.cash_deposit',
+                'ipms_fitment.finished_at',
+                'ipms_fitment.confirm_user_id',
+                'ipms_fitment.confirmed_at',
+                'ipms_fitment.return_name',
+                'ipms_fitment.return_bank',
+                'ipms_fitment.return_bank_id',
+                'ipms_fitment.return_operate_user_id',
+                'ipms_fitment.is_return_cash_deposit',
+                'ipms_fitment.returned_at',
+                'ipms_fitment.created_at',
+                'ipms_building_info.type',
+                'ipms_building_info.area',
+                'ipms_building_info.building',
+                'ipms_building_info.unit',
+                'ipms_building_info.number',
+                'ipms_community_setting.fitment_pledge',
+                'ipms_wechat_mp_user.real_name'
             )
             .first();
 
@@ -85,7 +85,7 @@ const PcFitmentDetailAction = <Action>{
 
         if (info.step >= PROPERTY_COMPANY_ALLOW_STEP) {
             agreeUserInfo = await ctx.model
-                .from('ejyy_property_company_user')
+                .from('ipms_property_company_user')
                 .where('id', info.agree_user_id)
                 .select('id', 'real_name')
                 .first();
@@ -93,14 +93,14 @@ const PcFitmentDetailAction = <Action>{
 
         if (info.step === PROPERTY_COMPANY_CONFIRM_STEP) {
             confirmUserInfo = await ctx.model
-                .from('ejyy_property_company_user')
+                .from('ipms_property_company_user')
                 .where('id', info.confirm_user_id)
                 .select('id', 'real_name')
                 .first();
 
             if (info.return_operate_user_id) {
                 reutrnUserInfo = await ctx.model
-                    .from('ejyy_property_company_user')
+                    .from('ipms_property_company_user')
                     .where('id', info.return_operate_user_id)
                     .select('id', 'real_name')
                     .first();

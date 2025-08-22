@@ -31,7 +31,7 @@ const PcJobDeleteAction = <Action>{
         const { id } = <RequestParams>ctx.params;
 
         const used = await ctx.model
-            .from('ejyy_property_company_user')
+            .from('ipms_property_company_user')
             .where('job_id', id)
             .first();
 
@@ -43,7 +43,7 @@ const PcJobDeleteAction = <Action>{
         }
 
         await ctx.model
-            .from('ejyy_property_company_job')
+            .from('ipms_property_company_job')
             .where('id', id)
             .delete();
 

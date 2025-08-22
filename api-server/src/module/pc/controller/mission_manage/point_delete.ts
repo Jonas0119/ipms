@@ -39,7 +39,7 @@ const PcMissionManagePointDeleteAction = <Action>{
         const { id, community_id } = <RequestBody>ctx.request.body;
 
         const exist = await ctx.model
-            .from('ejyy_mission_point')
+            .from('ipms_mission_point')
             .where('community_id', community_id)
             .andWhere('id', id)
             .first();
@@ -52,7 +52,7 @@ const PcMissionManagePointDeleteAction = <Action>{
         }
 
         const lineUsed = await ctx.model
-            .from('ejyy_mission_line_node')
+            .from('ipms_mission_line_node')
             .where('point_id', id)
             .first();
 
@@ -64,7 +64,7 @@ const PcMissionManagePointDeleteAction = <Action>{
         }
 
         const completeUsed = await ctx.model
-            .from('ejyy_mission_complete_node')
+            .from('ipms_mission_complete_node')
             .where('point_id', id)
             .first();
 
@@ -76,7 +76,7 @@ const PcMissionManagePointDeleteAction = <Action>{
         }
 
         await ctx.model
-            .from('ejyy_mission_point')
+            .from('ipms_mission_point')
             .where('id', id)
             .delete();
 

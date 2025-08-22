@@ -71,7 +71,7 @@ const PcSupplierUpdateAction = <Action>{
         const { id, title, linkman, phone, business, bank_name, bank_id, bank_address } = <RequestBody>ctx.request.body;
 
         const exist = await ctx.model
-            .from('ejyy_material_supplier')
+            .from('ipms_material_supplier')
             .where('id', id)
             .first();
 
@@ -83,7 +83,7 @@ const PcSupplierUpdateAction = <Action>{
         }
 
         const repeat = await ctx.model
-            .from('ejyy_material_supplier')
+            .from('ipms_material_supplier')
             .where('title', title)
             .andWhereNot('id', id)
             .first();
@@ -96,7 +96,7 @@ const PcSupplierUpdateAction = <Action>{
         }
 
         await ctx.model
-            .from('ejyy_material_supplier')
+            .from('ipms_material_supplier')
             .update({
                 title,
                 linkman,

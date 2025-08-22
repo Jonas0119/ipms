@@ -62,7 +62,7 @@ const PcLampUpdateAction = <Action>{
     response: async ctx => {
         const { id, community_id, secret, name, sn, port_total } = <RequestBody>ctx.request.body;
         const record = await ctx.model
-            .from('ejyy_iot_lamp')
+            .from('ipms_iot_lamp')
             .where('id', id)
             .andWhere('community_id', community_id)
             .first();
@@ -75,7 +75,7 @@ const PcLampUpdateAction = <Action>{
         }
 
         const exist = await ctx.model
-            .from('ejyy_iot_lamp')
+            .from('ipms_iot_lamp')
             .where('community_id', community_id)
             .andWhere('name', name)
             .andWhereNot('id', id)
@@ -89,7 +89,7 @@ const PcLampUpdateAction = <Action>{
         }
 
         await ctx.model
-            .from('ejyy_iot_lamp')
+            .from('ipms_iot_lamp')
             .update({
                 secret,
                 name,

@@ -50,35 +50,35 @@ const PcVistorListAction = <Action>{
         const { page_num, page_size, community_id, used } = <RequestBody>ctx.request.body;
 
         const list = await ctx.model
-            .from('ejyy_vistor')
-            .leftJoin('ejyy_building_info', 'ejyy_building_info.id', 'ejyy_vistor.building_id')
-            .where('ejyy_vistor.community_id', community_id)
+            .from('ipms_vistor')
+            .leftJoin('ipms_building_info', 'ipms_building_info.id', 'ipms_vistor.building_id')
+            .where('ipms_vistor.community_id', community_id)
             .andWhere(function() {
                 if (typeof used === 'boolean') {
                     if (used) {
-                        this.whereNotNull('ejyy_vistor.used_at');
+                        this.whereNotNull('ipms_vistor.used_at');
                     } else {
-                        this.whereNull('ejyy_vistor.used_at');
+                        this.whereNull('ipms_vistor.used_at');
                     }
                 }
             })
-            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ejyy_vistor.id'))
+            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ipms_vistor.id'))
             .select(
-                'ejyy_vistor.id',
-                'ejyy_vistor.vistor_name',
-                'ejyy_vistor.have_vistor_info',
-                'ejyy_vistor.used_at',
-                'ejyy_vistor.created_at',
-                'ejyy_building_info.type',
-                'ejyy_building_info.area',
-                'ejyy_building_info.building',
-                'ejyy_building_info.unit',
-                'ejyy_building_info.number'
+                'ipms_vistor.id',
+                'ipms_vistor.vistor_name',
+                'ipms_vistor.have_vistor_info',
+                'ipms_vistor.used_at',
+                'ipms_vistor.created_at',
+                'ipms_building_info.type',
+                'ipms_building_info.area',
+                'ipms_building_info.building',
+                'ipms_building_info.unit',
+                'ipms_building_info.number'
             )
-            .select(ctx.model.raw('IF(ejyy_vistor.property_company_user_id, 1, 0) as check_in'))
+            .select(ctx.model.raw('IF(ipms_vistor.property_company_user_id, 1, 0) as check_in'))
             .limit(page_size)
             .offset((page_num - 1) * page_size)
-            .orderBy('ejyy_vistor.id', 'desc');
+            .orderBy('ipms_vistor.id', 'desc');
 
         const [res] = await ctx.model.select(ctx.model.raw('found_rows() AS total'));
 

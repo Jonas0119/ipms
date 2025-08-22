@@ -35,7 +35,7 @@ const PcMeetingOptionAction = <Action>{
         const { community_id } = <RequestBody>ctx.request.body;
 
         const list = await ctx.model
-            .from('ejyy_meeting_room')
+            .from('ipms_meeting_room')
             .where('community_id', community_id)
             .select('id', 'name', 'local', 'have_tv', 'have_board', 'have_projector');
 
@@ -48,7 +48,7 @@ const PcMeetingOptionAction = <Action>{
             .valueOf();
 
         const using = await ctx.model
-            .from('ejyy_meeting')
+            .from('ipms_meeting')
             .where('community_id', community_id)
             .andWhere('start_time', '>=', start)
             .andWhere('end_time', '<=', end)

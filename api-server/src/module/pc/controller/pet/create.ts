@@ -115,7 +115,7 @@ const PcPetCreateAction = <Action>{
             user_id
         } = <RequestBody>ctx.request.body;
 
-        const [id] = await ctx.model.from('ejyy_pet').insert({
+        const [id] = await ctx.model.from('ipms_pet').insert({
             wechat_mp_user_id: user_id,
             community_id,
             pet_type,
@@ -129,14 +129,14 @@ const PcPetCreateAction = <Action>{
 
         if (haveLicense) {
             await ctx.model
-                .from('ejyy_pet')
+                .from('ipms_pet')
                 .update({
                     pet_license,
                     pet_license_award_at
                 })
                 .where({ id });
 
-            await ctx.model.from('ejyy_pet_vaccinate').insert({
+            await ctx.model.from('ipms_pet_vaccinate').insert({
                 pet_id: id,
                 vaccinated_at,
                 vaccine_type,

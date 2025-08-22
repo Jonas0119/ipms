@@ -1,14 +1,13 @@
 {
-  "name": "ejyy_server",
+  "name": "ipms_server",
   "version": "1.0.0",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/chowa/ejyy.git"
+    "url": "git+https://github.com/Jonas0119/ipms.git"
   },
   "keywords": [
     "typescript",
-    "chowa",
-    "ejyy",
+    "ipms",
     "nodejs"
   ],
   "engines": {
@@ -21,14 +20,13 @@
     "lint": "prettier --write src/*.ts src/**/*.ts src/**/**/*.ts src/**/**/**/*.ts",
     "dist": "webpack --config webpack.config.js"
   },
-  "author": "contact@chowa.cn",
+  "author": "Jonas0119",
   "dependencies": {
     "@alicloud/dysmsapi20170525": "^2.0.2",
     "@alicloud/openapi-client": "^0.3.5",
     "@elastic/elasticsearch": "^7.11.0",
     "axios": "^0.21.1",
     "check-disk-space": "^3.0.1",
-    "chowa-log": "^1.0.8",
     "js-yaml": "^4.1.0",
     "knex": "^0.21.12",
     "koa": "^2.11.0",
@@ -83,7 +81,7 @@
     "~": "src/"
   },
   "bugs": {
-    "url": "https://github.com/chowa/ejyy/issues"
+    "url": "https://github.com/Jonas0119/ipms/issues"
   },
-  "homepage": "https://github.com/chowa/ejyy"
+  "homepage": "https://github.com/Jonas0119/ipms"
 }

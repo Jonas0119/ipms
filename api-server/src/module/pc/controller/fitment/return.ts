@@ -42,7 +42,7 @@ const PcFitmentReturnAction = <Action>{
         const returned_at = Date.now();
 
         const affect = await ctx.model
-            .from('ejyy_fitment')
+            .from('ipms_fitment')
             .update({
                 is_return_cash_deposit: TRUE,
                 return_operate_user_id: ctx.pcUserInfo.id,

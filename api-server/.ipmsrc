@@ -1,0 +1,84 @@
+# IPMS 配置文件（原 .ejyyrc 升级版）
+
+server:
+  port: 6688
+  name: "IPMS"
+
+mysql:
+  host: "localhost"
+  port: 3306
+  user: "root"
+  password: "Tjfae@123"
+  database: "ipms"
+
+redis:
+  host: "localhost"
+  port: 6379
+  password: ""
+
+storage:
+  mode: "local"
+  template:
+    path: "template"
+    files:
+      building_import: "固定资产导入模板.xlsx"
+  local:
+    savePath: "./uploads"
+    urlPrefix: "/static"
+    baseUrl: "http://127.0.0.1:6688"
+  minio:
+    endpoint: "http://172.17.0.6:9000"
+    accessKey: "admin"
+    secretKey: "minioadmin"
+    bucket: "ipms"
+    useSSL: false
+    baseUrl: "http://172.17.0.6:9000"
+    customDomain: "http://127.0.0.1:9000"
+
+wechat:
+  ump:
+    appid: "your_user_miniprogram_appid"
+    secret: "your_user_miniprogram_secret"
+  oa:
+    appid: "your_official_account_appid"
+    secret: "your_official_account_secret"
+    token: "your_official_account_token"
+    key: "your_official_account_encoding_key"
+  pay:
+    mch_id: "your_merchant_id"
+    prodHost: "https://api.mch.weixin.qq.com"
+    devHost: "https://api.mch.weixin.qq.com"
+    payExpire: 1800000
+    refoundExpire: 1296000000
+    key: "your_wechat_pay_key"
+    certPath: "/path/to/your/cert.p12"
+  pmp:
+    appid: "your_property_miniprogram_appid"
+    secret: "your_property_miniprogram_secret"
+
+map:
+  key: "your_tencent_map_key"
+
+session:
+  key: "ipms:session"
+  maxAge: 1800000
+  signed: false
+
+community:
+  expire: 300000
+
+crypto:
+  key: "your_crypto_key_32_chars_long___"
+  iv: "your_crypto_iv16"
+
+smtp:
+  host: "smtp.163.com"
+  port: 465
+  secure: true
+  user: "your_email@163.com"
+  password: "your_email_password"
+  to: "admin@yourdomain.com"
+
+inited: false
+
+

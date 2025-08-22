@@ -55,7 +55,7 @@ const PcPetVaccinateAction = <Action>{
         const { id } = <RequestParams>ctx.params;
         const { vaccinated_at, vaccine_type } = <RequestBody>ctx.request.body;
 
-        const [aid] = await ctx.model.from('ejyy_pet_vaccinate').insert({
+        const [aid] = await ctx.model.from('ipms_pet_vaccinate').insert({
             vaccinated_at,
             vaccine_type,
             pet_id: id,

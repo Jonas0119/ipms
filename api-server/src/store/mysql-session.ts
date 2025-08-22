@@ -30,7 +30,7 @@ function getExpiresOn(session: Session, ttl: number): number {
 class MysqlSessionStore {
     async get(sid: string): Promise<Session> {
         const row = await model
-            .from('ejyy_session_store')
+            .from('ipms_session_store')
             .where('id', sid)
             .where('expire', '>', Date.now())
             .first();
@@ -49,14 +49,14 @@ class MysqlSessionStore {
         let data = JSON.stringify(session);
 
         await model.raw(
-            'INSERT INTO ejyy_session_store (id, expire, data) VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE expire=?, data =?',
+            'INSERT INTO ipms_session_store (id, expire, data) VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE expire=?, data =?',
             [sid, expire, data, expire, data]
         );
     }
 
     async destroy(sid: string) {
         await model
-            .from('ejyy_session_store')
+            .from('ipms_session_store')
             .where('id', sid)
             .delete();
     }

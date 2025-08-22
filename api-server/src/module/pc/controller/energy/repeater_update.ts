@@ -82,7 +82,7 @@ const PcEnergyRepeaterUpdateAction = <Action>{
         const { id, community_id, sign, name, category, username, password, lng, lat } = <RequestBody>ctx.request.body;
 
         const record = await ctx.model
-            .from('ejyy_iot_meter_repeater')
+            .from('ipms_iot_meter_repeater')
             .where('id', id)
             .andWhere('community_id', community_id)
             .first();
@@ -95,7 +95,7 @@ const PcEnergyRepeaterUpdateAction = <Action>{
         }
 
         const exist = await ctx.model
-            .from('ejyy_iot_meter_repeater')
+            .from('ipms_iot_meter_repeater')
             .where('name', name)
             .andWhere('community_id', community_id)
             .andWhereNot('id', id)
@@ -109,7 +109,7 @@ const PcEnergyRepeaterUpdateAction = <Action>{
         }
 
         await ctx.model
-            .from('ejyy_iot_meter_repeater')
+            .from('ipms_iot_meter_repeater')
             .update({
                 sign,
                 name,

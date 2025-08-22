@@ -99,7 +99,7 @@ const PcComplainListAction = <Action>{
         }
 
         const list = await ctx.model
-            .from('ejyy_complain')
+            .from('ipms_complain')
             .where('community_id', community_id)
             .andWhere(where)
             .andWhere(function() {

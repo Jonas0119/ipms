@@ -4,11 +4,9 @@
  * +----------------------------------------------------------------------
  */
 
-import VirusScheduleJob from './virus';
 import SessionScheduleJob from './session';
 
 // 定时任务最小粒度是小时
 export function run() {
-    VirusScheduleJob();
     SessionScheduleJob();
 }

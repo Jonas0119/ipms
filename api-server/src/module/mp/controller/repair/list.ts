@@ -37,29 +37,29 @@ const MpRepairListAction = <Action>{
         const { page_num, page_size } = <RequestBody>ctx.request.body;
 
         const list = await ctx.model
-            .from('ejyy_repair')
-            .leftJoin('ejyy_community_info', 'ejyy_community_info.id', 'ejyy_repair.community_id')
-            .leftJoin('ejyy_building_info', 'ejyy_building_info.id', 'ejyy_repair.building_id')
-            .where('ejyy_repair.wechat_mp_user_id', ctx.mpUserInfo.id)
-            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ejyy_repair.id'))
+            .from('ipms_repair')
+            .leftJoin('ipms_community_info', 'ipms_community_info.id', 'ipms_repair.community_id')
+            .leftJoin('ipms_building_info', 'ipms_building_info.id', 'ipms_repair.building_id')
+            .where('ipms_repair.wechat_mp_user_id', ctx.mpUserInfo.id)
+            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ipms_repair.id'))
             .select(
-                'ejyy_repair.id',
-                'ejyy_repair.description',
-                'ejyy_repair.step',
-                'ejyy_repair.repair_type',
-                'ejyy_repair.merge_id',
-                'ejyy_repair.building_id',
-                'ejyy_repair.created_at',
-                'ejyy_building_info.type',
-                'ejyy_building_info.area',
-                'ejyy_building_info.building',
-                'ejyy_building_info.unit',
-                'ejyy_building_info.number',
-                'ejyy_community_info.name as community_name'
+                'ipms_repair.id',
+                'ipms_repair.description',
+                'ipms_repair.step',
+                'ipms_repair.repair_type',
+                'ipms_repair.merge_id',
+                'ipms_repair.building_id',
+                'ipms_repair.created_at',
+                'ipms_building_info.type',
+                'ipms_building_info.area',
+                'ipms_building_info.building',
+                'ipms_building_info.unit',
+                'ipms_building_info.number',
+                'ipms_community_info.name as community_name'
             )
             .limit(page_size)
             .offset((page_num - 1) * page_size)
-            .orderBy('ejyy_repair.id', 'desc');
+            .orderBy('ipms_repair.id', 'desc');
 
         const [res] = await ctx.model.select(ctx.model.raw('found_rows() AS total'));
 

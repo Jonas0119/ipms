@@ -45,7 +45,7 @@ const PcStorehouseCreateAction = <Action>{
         const { name, community_id, local } = <RequestBody>ctx.request.body;
 
         const exist = await ctx.model
-            .from('ejyy_storehouse')
+            .from('ipms_storehouse')
             .where('name', name)
             .andWhere('community_id', community_id)
             .first();
@@ -58,7 +58,7 @@ const PcStorehouseCreateAction = <Action>{
         }
 
         const created_at = Date.now();
-        const [id] = await ctx.model.from('ejyy_storehouse').insert({
+        const [id] = await ctx.model.from('ipms_storehouse').insert({
             name,
             local,
             community_id,

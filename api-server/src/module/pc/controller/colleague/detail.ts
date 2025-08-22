@@ -33,30 +33,30 @@ const PcColleagueDetailAction = <Action>{
         const { id } = <RequestParams>ctx.params;
 
         const info = await ctx.model
-            .from('ejyy_property_company_user')
+            .from('ipms_property_company_user')
             .leftJoin(
-                'ejyy_property_company_department',
-                'ejyy_property_company_department.id',
-                'ejyy_property_company_user.department_id'
+                'ipms_property_company_department',
+                'ipms_property_company_department.id',
+                'ipms_property_company_user.department_id'
             )
-            .leftJoin('ejyy_property_company_job', 'ejyy_property_company_job.id', 'ejyy_property_company_user.job_id')
+            .leftJoin('ipms_property_company_job', 'ipms_property_company_job.id', 'ipms_property_company_user.job_id')
             .leftJoin(
-                'ejyy_wechat_official_accounts_user',
-                'ejyy_wechat_official_accounts_user.union_id',
-                'ejyy_property_company_user.union_id'
+                'ipms_wechat_official_accounts_user',
+                'ipms_wechat_official_accounts_user.union_id',
+                'ipms_property_company_user.union_id'
             )
-            .where('ejyy_property_company_user.id', id)
-            .andWhere('ejyy_property_company_user.leave_office', FALSE)
+            .where('ipms_property_company_user.id', id)
+            .andWhere('ipms_property_company_user.leave_office', FALSE)
             .select(
-                'ejyy_property_company_user.id',
-                'ejyy_property_company_user.real_name',
-                'ejyy_property_company_user.phone',
-                'ejyy_property_company_user.gender',
-                'ejyy_property_company_user.avatar_url',
-                'ejyy_property_company_user.join_company_at',
-                'ejyy_property_company_department.name as department',
-                'ejyy_property_company_job.name as job',
-                'ejyy_wechat_official_accounts_user.subscribed'
+                'ipms_property_company_user.id',
+                'ipms_property_company_user.real_name',
+                'ipms_property_company_user.phone',
+                'ipms_property_company_user.gender',
+                'ipms_property_company_user.avatar_url',
+                'ipms_property_company_user.join_company_at',
+                'ipms_property_company_department.name as department',
+                'ipms_property_company_job.name as job',
+                'ipms_wechat_official_accounts_user.subscribed'
             )
             .first();
 

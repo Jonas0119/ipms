@@ -66,7 +66,7 @@ const PcMeetingCreateAction = <Action>{
         );
 
         const existRoom = await ctx.model
-            .from('ejyy_meeting_room')
+            .from('ipms_meeting_room')
             .where('community_id', community_id)
             .andWhere('id', meeting_room_id);
 
@@ -78,7 +78,7 @@ const PcMeetingCreateAction = <Action>{
         }
 
         const using = await ctx.model
-            .from('ejyy_meeting')
+            .from('ipms_meeting')
             .where('meeting_room_id', meeting_room_id)
             .andWhere('community_id', community_id)
             .andWhere(function() {
@@ -98,7 +98,7 @@ const PcMeetingCreateAction = <Action>{
             });
         }
 
-        const [id] = await ctx.model.from('ejyy_meeting').insert({
+        const [id] = await ctx.model.from('ipms_meeting').insert({
             start_time,
             end_time,
             theme,
@@ -108,7 +108,7 @@ const PcMeetingCreateAction = <Action>{
             created_at: Date.now()
         });
 
-        await ctx.model.from('ejyy_meeting_participant').insert(
+        await ctx.model.from('ipms_meeting_participant').insert(
             participants.map(user_id => {
                 return {
                     user_id,

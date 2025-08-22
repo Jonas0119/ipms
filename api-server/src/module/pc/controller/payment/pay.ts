@@ -55,25 +55,25 @@ const PcPaymentPayAction = <Action>{
         const { user_id, community_id, property_fee_id, building_ids } = <RequestBody>ctx.request.body;
 
         const feeDetail = await ctx.model
-            .from('ejyy_property_fee')
-            .leftJoin('ejyy_community_info', 'ejyy_community_info.id', 'ejyy_property_fee.community_id')
-            .where('ejyy_property_fee.id', property_fee_id)
-            .andWhere('ejyy_property_fee.community_id', community_id)
+            .from('ipms_property_fee')
+            .leftJoin('ipms_community_info', 'ipms_community_info.id', 'ipms_property_fee.community_id')
+            .where('ipms_property_fee.id', property_fee_id)
+            .andWhere('ipms_property_fee.community_id', community_id)
             .select(
-                'ejyy_property_fee.id',
-                'ejyy_community_info.name',
-                'ejyy_property_fee.start_year',
-                'ejyy_property_fee.end_year',
-                'ejyy_property_fee.house_fee',
-                'ejyy_property_fee.computed_house_fee_by_area',
-                'ejyy_property_fee.carport_fee',
-                'ejyy_property_fee.computed_carport_fee_by_area',
-                'ejyy_property_fee.warehoure_fee',
-                'ejyy_property_fee.computed_warehouse_fee_by_area',
-                'ejyy_property_fee.merchant_fee',
-                'ejyy_property_fee.computed_merchant_fee_by_area',
-                'ejyy_property_fee.garage_fee',
-                'ejyy_property_fee.computed_garage_fee_by_area'
+                'ipms_property_fee.id',
+                'ipms_community_info.name',
+                'ipms_property_fee.start_year',
+                'ipms_property_fee.end_year',
+                'ipms_property_fee.house_fee',
+                'ipms_property_fee.computed_house_fee_by_area',
+                'ipms_property_fee.carport_fee',
+                'ipms_property_fee.computed_carport_fee_by_area',
+                'ipms_property_fee.warehoure_fee',
+                'ipms_property_fee.computed_warehouse_fee_by_area',
+                'ipms_property_fee.merchant_fee',
+                'ipms_property_fee.computed_merchant_fee_by_area',
+                'ipms_property_fee.garage_fee',
+                'ipms_property_fee.computed_garage_fee_by_area'
             )
             .first();
 
@@ -85,20 +85,20 @@ const PcPaymentPayAction = <Action>{
         }
 
         const selfBuilding = await ctx.model
-            .from('ejyy_user_building')
-            .leftJoin('ejyy_building_info', 'ejyy_building_info.id', 'ejyy_user_building.building_id')
-            .where('ejyy_user_building.wechat_mp_user_id', user_id)
-            .andWhere('ejyy_user_building.status', BINDING_BUILDING)
-            .andWhere('ejyy_building_info.community_id', community_id)
-            .whereIn('ejyy_user_building.building_id', building_ids)
+            .from('ipms_user_building')
+            .leftJoin('ipms_building_info', 'ipms_building_info.id', 'ipms_user_building.building_id')
+            .where('ipms_user_building.wechat_mp_user_id', user_id)
+            .andWhere('ipms_user_building.status', BINDING_BUILDING)
+            .andWhere('ipms_building_info.community_id', community_id)
+            .whereIn('ipms_user_building.building_id', building_ids)
             .select(
-                'ejyy_building_info.id',
-                'ejyy_building_info.type',
-                'ejyy_building_info.area',
-                'ejyy_building_info.building',
-                'ejyy_building_info.unit',
-                'ejyy_building_info.number',
-                'ejyy_building_info.construction_area'
+                'ipms_building_info.id',
+                'ipms_building_info.type',
+                'ipms_building_info.area',
+                'ipms_building_info.building',
+                'ipms_building_info.unit',
+                'ipms_building_info.number',
+                'ipms_building_info.construction_area'
             );
 
         if (selfBuilding.length !== building_ids.length) {
@@ -110,30 +110,30 @@ const PcPaymentPayAction = <Action>{
 
         // 查询是否存在下单或支付的
         const paiedItems = await ctx.model
-            .from('ejyy_property_fee_order')
+            .from('ipms_property_fee_order')
             .leftJoin(
-                'ejyy_property_fee_order_item',
-                'ejyy_property_fee_order_item.property_fee_order_id',
-                'ejyy_property_fee_order.id'
+                'ipms_property_fee_order_item',
+                'ipms_property_fee_order_item.property_fee_order_id',
+                'ipms_property_fee_order.id'
             )
-            .where('ejyy_property_fee_order.property_fee_id', property_fee_id)
-            .andWhere('ejyy_property_fee_order.cancel', FALSE)
-            .whereIn('ejyy_property_fee_order_item.building_id', building_ids)
+            .where('ipms_property_fee_order.property_fee_id', property_fee_id)
+            .andWhere('ipms_property_fee_order.cancel', FALSE)
+            .whereIn('ipms_property_fee_order_item.building_id', building_ids)
             .where(function() {
                 this.where(function() {
                     // 支付了 没有退款 并且没有申请退款；
-                    this.where('ejyy_property_fee_order.paid', TRUE)
-                        .andWhere('ejyy_property_fee_order_item.refund', FALSE)
-                        .whereNull('ejyy_property_fee_order_item.refund_apply_at');
+                    this.where('ipms_property_fee_order.paid', TRUE)
+                        .andWhere('ipms_property_fee_order_item.refund', FALSE)
+                        .whereNull('ipms_property_fee_order_item.refund_apply_at');
                 }).orWhere(function() {
-                    this.where('ejyy_property_fee_order.paid', FALSE).andWhere(
-                        'ejyy_property_fee_order.created_at',
+                    this.where('ipms_property_fee_order.paid', FALSE).andWhere(
+                        'ipms_property_fee_order.created_at',
                         '>=',
                         Date.now() - config.wechat.pay.payExpire
                     );
                 });
             })
-            .select('ejyy_property_fee_order_item.building_id');
+            .select('ipms_property_fee_order_item.building_id');
 
         if (paiedItems.length > 0) {
             return (ctx.body = {
@@ -157,7 +157,7 @@ const PcPaymentPayAction = <Action>{
             });
         });
 
-        const [order_id] = await ctx.model.from('ejyy_property_fee_order').insert({
+        const [order_id] = await ctx.model.from('ipms_property_fee_order').insert({
             property_fee_id: property_fee_id,
             wechat_mp_user_id: user_id,
             fee: total_fee,
@@ -169,7 +169,7 @@ const PcPaymentPayAction = <Action>{
             created_at
         });
 
-        await ctx.model.from('ejyy_property_fee_order_item').insert(
+        await ctx.model.from('ipms_property_fee_order_item').insert(
             items.map(item => {
                 return {
                     ...item,

@@ -47,12 +47,12 @@ const PcCarUnbindingAction = <Action>{
         const { building_id, id, community_id } = <RequestBody>ctx.request.body;
 
         const detail = await ctx.model
-            .from('ejyy_user_car')
-            .leftJoin('ejyy_building_info', 'ejyy_building_info.id', 'ejyy_user_car.building_id')
-            .where('ejyy_user_car.id', id)
-            .andWhere('ejyy_user_car.building_id', building_id)
-            .andWhere('ejyy_building_info.community_id', community_id)
-            .select('ejyy_user_car.status')
+            .from('ipms_user_car')
+            .leftJoin('ipms_building_info', 'ipms_building_info.id', 'ipms_user_car.building_id')
+            .where('ipms_user_car.id', id)
+            .andWhere('ipms_user_car.building_id', building_id)
+            .andWhere('ipms_building_info.community_id', community_id)
+            .select('ipms_user_car.status')
             .first();
 
         if (!detail) {
@@ -70,7 +70,7 @@ const PcCarUnbindingAction = <Action>{
         }
 
         const affect = await ctx.model
-            .from('ejyy_user_car')
+            .from('ipms_user_car')
             .update({
                 status: UNBINDING_CAR
             })
@@ -85,12 +85,12 @@ const PcCarUnbindingAction = <Action>{
 
         const created_at = Date.now();
 
-        await ctx.model.from('ejyy_user_car_sync').insert({
+        await ctx.model.from('ipms_user_car_sync').insert({
             user_car_id: id,
             is_remove: TRUE
         });
 
-        await ctx.model.from('ejyy_user_car_operate_log').insert({
+        await ctx.model.from('ipms_user_car_operate_log').insert({
             user_car_id: id,
             property_company_user_id: ctx.pcUserInfo.id,
             status: UNBINDING_CAR,

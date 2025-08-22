@@ -49,30 +49,30 @@ const MpCarListAction = <Action>{
         const { community_id } = <RequestBody>ctx.request.body;
 
         const carsInfo: CarsInfo[] = await ctx.model
-            .from('ejyy_user_building')
-            .leftJoin('ejyy_building_info', 'ejyy_building_info.id', 'ejyy_user_building.building_id')
-            .leftJoin('ejyy_user_car', 'ejyy_user_car.building_id', 'ejyy_user_building.building_id')
-            .where('ejyy_user_building.wechat_mp_user_id', ctx.mpUserInfo.id)
-            .andWhere('ejyy_user_building.status', BINDING_BUILDING)
-            .andWhere('ejyy_building_info.community_id', community_id)
+            .from('ipms_user_building')
+            .leftJoin('ipms_building_info', 'ipms_building_info.id', 'ipms_user_building.building_id')
+            .leftJoin('ipms_user_car', 'ipms_user_car.building_id', 'ipms_user_building.building_id')
+            .where('ipms_user_building.wechat_mp_user_id', ctx.mpUserInfo.id)
+            .andWhere('ipms_user_building.status', BINDING_BUILDING)
+            .andWhere('ipms_building_info.community_id', community_id)
             .andWhere(function() {
-                this.where('ejyy_building_info.type', CARPORT).orWhere('ejyy_building_info.type', GARAGE);
+                this.where('ipms_building_info.type', CARPORT).orWhere('ipms_building_info.type', GARAGE);
             })
             .select(
-                'ejyy_user_building.building_id',
-                'ejyy_building_info.type',
-                'ejyy_building_info.building',
-                'ejyy_building_info.area',
-                'ejyy_building_info.unit',
-                'ejyy_building_info.number',
-                'ejyy_user_car.car_number',
-                'ejyy_user_car.car_type',
-                'ejyy_user_car.is_new_energy',
-                'ejyy_user_car.id as car_id',
-                'ejyy_user_car.status',
-                'ejyy_user_car.sync'
+                'ipms_user_building.building_id',
+                'ipms_building_info.type',
+                'ipms_building_info.building',
+                'ipms_building_info.area',
+                'ipms_building_info.unit',
+                'ipms_building_info.number',
+                'ipms_user_car.car_number',
+                'ipms_user_car.car_type',
+                'ipms_user_car.is_new_energy',
+                'ipms_user_car.id as car_id',
+                'ipms_user_car.status',
+                'ipms_user_car.sync'
             )
-            .orderBy('ejyy_user_car.id', 'desc');
+            .orderBy('ipms_user_car.id', 'desc');
 
         const map: BuildingMap = {};
 

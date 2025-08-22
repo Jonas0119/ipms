@@ -13,7 +13,7 @@ import config from '~/config';
 
 export async function pushAccessToVistor(model: Knex, vistorInfo: EjyyWechatMpUser, id: number, expire: number) {
     const record = await model
-        .from('ejyy_wechat_official_accounts_user')
+        .from('ipms_wechat_official_accounts_user')
         .where('union_id', vistorInfo.union_id)
         .first();
 

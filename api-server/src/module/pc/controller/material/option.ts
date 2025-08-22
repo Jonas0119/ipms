@@ -32,10 +32,10 @@ const PcMaterialOptionAction = <Action>{
     response: async ctx => {
         const { community_id } = <RequestBody>ctx.request.body;
 
-        const category = await ctx.model.from('ejyy_material_category').select('id', 'name', 'description');
+        const category = await ctx.model.from('ipms_material_category').select('id', 'name', 'description');
 
         const storehouse = await ctx.model
-            .from('ejyy_storehouse')
+            .from('ipms_storehouse')
             .where('community_id', community_id)
             .select('id', 'name', 'local');
 

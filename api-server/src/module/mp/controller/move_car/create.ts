@@ -80,7 +80,7 @@ const MpMoveCarCreateAction = <Action>{
         const { community_id, car_number, move_reason, live_img, subscribed } = <RequestBody>ctx.request.body;
 
         const inDb = await ctx.model
-            .from('ejyy_user_car')
+            .from('ipms_user_car')
             .where('car_number', car_number)
             .where('status', BINDING_CAR)
             .select('wechat_mp_user_id');
@@ -94,7 +94,7 @@ const MpMoveCarCreateAction = <Action>{
 
         const have_concat_info = inDb.length > 0 ? TRUE : FALSE;
 
-        const [id] = await ctx.model.from('ejyy_move_car').insert({
+        const [id] = await ctx.model.from('ipms_move_car').insert({
             community_id,
             car_number,
             wechat_mp_user_id: ctx.mpUserInfo.id,

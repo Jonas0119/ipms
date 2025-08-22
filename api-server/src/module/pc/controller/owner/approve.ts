@@ -43,7 +43,7 @@ const PcOwerApproveAction = <Action>{
         const { community_id, building_ids } = <RequestBody>ctx.request.body;
 
         const list = await ctx.model
-            .from('ejyy_building_info')
+            .from('ipms_building_info')
             .where('community_id', community_id)
             .whereIn('id', building_ids)
             .select('id');

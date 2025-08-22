@@ -72,7 +72,7 @@ const PcInformCreateAction = <Action>{
 
         const created_at = Date.now();
 
-        const [id] = await ctx.model.from('ejyy_inform').insert({
+        const [id] = await ctx.model.from('ipms_inform').insert({
             title,
             carousel,
             cover_img: cover_img ? cover_img : null,

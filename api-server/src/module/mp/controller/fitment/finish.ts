@@ -32,7 +32,7 @@ const MpFitmentFinishAction = <Action>{
         const { id } = <RequestParams>ctx.params;
 
         const detail = await ctx.model
-            .from('ejyy_fitment')
+            .from('ipms_fitment')
             .where('id', id)
             .where('wechat_mp_user_id', ctx.mpUserInfo.id)
             .select('step')
@@ -48,7 +48,7 @@ const MpFitmentFinishAction = <Action>{
         const stamp = Date.now();
 
         const affect = await ctx.model
-            .from('ejyy_fitment')
+            .from('ipms_fitment')
             .update({
                 finished_at: stamp,
                 step: USER_FINISH_FITMENT_STEP

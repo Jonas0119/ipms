@@ -65,7 +65,7 @@ const PcTopicUpdateAction = <Action>{
         const { community_id, id, title, banner_img, published, content } = <RequestBody>ctx.request.body;
 
         const affect = await ctx.model
-            .from('ejyy_topic')
+            .from('ipms_topic')
             .update({
                 title,
                 banner_img,

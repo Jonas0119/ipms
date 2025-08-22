@@ -39,25 +39,25 @@ const PcMeetingDetailAction = <Action>{
         const { id, community_id } = <RequestBody>ctx.request.body;
 
         const info = await ctx.model
-            .from('ejyy_meeting')
-            .leftJoin('ejyy_property_company_user', 'ejyy_property_company_user.id', 'ejyy_meeting.created_by')
-            .leftJoin('ejyy_meeting_room', 'ejyy_meeting_room.id', 'ejyy_meeting.meeting_room_id')
-            .where('ejyy_meeting.id', id)
-            .andWhere('ejyy_meeting.community_id', community_id)
+            .from('ipms_meeting')
+            .leftJoin('ipms_property_company_user', 'ipms_property_company_user.id', 'ipms_meeting.created_by')
+            .leftJoin('ipms_meeting_room', 'ipms_meeting_room.id', 'ipms_meeting.meeting_room_id')
+            .where('ipms_meeting.id', id)
+            .andWhere('ipms_meeting.community_id', community_id)
             .select(
-                'ejyy_meeting.id',
-                'ejyy_meeting.start_time',
-                'ejyy_meeting.end_time',
-                'ejyy_meeting.theme',
-                'ejyy_meeting.cancel',
-                'ejyy_meeting.created_by',
-                'ejyy_meeting.created_at',
-                'ejyy_property_company_user.real_name',
-                'ejyy_meeting_room.name',
-                'ejyy_meeting_room.local',
-                'ejyy_meeting_room.have_tv',
-                'ejyy_meeting_room.have_board',
-                'ejyy_meeting_room.have_projector'
+                'ipms_meeting.id',
+                'ipms_meeting.start_time',
+                'ipms_meeting.end_time',
+                'ipms_meeting.theme',
+                'ipms_meeting.cancel',
+                'ipms_meeting.created_by',
+                'ipms_meeting.created_at',
+                'ipms_property_company_user.real_name',
+                'ipms_meeting_room.name',
+                'ipms_meeting_room.local',
+                'ipms_meeting_room.have_tv',
+                'ipms_meeting_room.have_board',
+                'ipms_meeting_room.have_projector'
             )
             .first();
 
@@ -69,10 +69,10 @@ const PcMeetingDetailAction = <Action>{
         }
 
         const participant = await ctx.model
-            .from('ejyy_meeting_participant')
-            .leftJoin('ejyy_property_company_user', 'ejyy_property_company_user.id', 'ejyy_meeting_participant.user_id')
-            .where('ejyy_meeting_participant.meeting_id', id)
-            .select('ejyy_meeting_participant.user_id', 'ejyy_property_company_user.real_name');
+            .from('ipms_meeting_participant')
+            .leftJoin('ipms_property_company_user', 'ipms_property_company_user.id', 'ipms_meeting_participant.user_id')
+            .where('ipms_meeting_participant.meeting_id', id)
+            .select('ipms_meeting_participant.user_id', 'ipms_property_company_user.real_name');
 
         ctx.body = {
             code: SUCCESS,

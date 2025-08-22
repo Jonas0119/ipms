@@ -44,31 +44,31 @@ const MpComplainDetailAction = <Action>{
 
         const findDetail = async (compain_id: number): Promise<EjyyComplain & EjyyCommunityInfo> => {
             return await ctx.model
-                .from('ejyy_complain')
-                .leftJoin('ejyy_community_info', 'ejyy_community_info.id', 'ejyy_complain.community_id')
-                .where('ejyy_complain.id', compain_id)
-                .andWhere('ejyy_complain.wechat_mp_user_id', ctx.mpUserInfo.id)
+                .from('ipms_complain')
+                .leftJoin('ipms_community_info', 'ipms_community_info.id', 'ipms_complain.community_id')
+                .where('ipms_complain.id', compain_id)
+                .andWhere('ipms_complain.wechat_mp_user_id', ctx.mpUserInfo.id)
                 .select(
-                    'ejyy_complain.id',
-                    'ejyy_complain.type',
-                    'ejyy_complain.category',
-                    'ejyy_complain.description',
-                    'ejyy_complain.complain_imgs',
-                    'ejyy_complain.allot_user_id',
-                    'ejyy_complain.alloted_at',
-                    'ejyy_complain.dispose_user_id',
-                    'ejyy_complain.dispose_reply',
-                    'ejyy_complain.dispose_content',
-                    'ejyy_complain.dispose_imgs',
-                    'ejyy_complain.disposed_at',
-                    'ejyy_complain.finished_at',
-                    'ejyy_complain.merge_id',
-                    'ejyy_complain.step',
-                    'ejyy_complain.rate',
-                    'ejyy_complain.rate_content',
-                    'ejyy_complain.rated_at',
-                    'ejyy_complain.created_at',
-                    'ejyy_community_info.name as community_name'
+                    'ipms_complain.id',
+                    'ipms_complain.type',
+                    'ipms_complain.category',
+                    'ipms_complain.description',
+                    'ipms_complain.complain_imgs',
+                    'ipms_complain.allot_user_id',
+                    'ipms_complain.alloted_at',
+                    'ipms_complain.dispose_user_id',
+                    'ipms_complain.dispose_reply',
+                    'ipms_complain.dispose_content',
+                    'ipms_complain.dispose_imgs',
+                    'ipms_complain.disposed_at',
+                    'ipms_complain.finished_at',
+                    'ipms_complain.merge_id',
+                    'ipms_complain.step',
+                    'ipms_complain.rate',
+                    'ipms_complain.rate_content',
+                    'ipms_complain.rated_at',
+                    'ipms_complain.created_at',
+                    'ipms_community_info.name as community_name'
                 )
                 .first();
         };
@@ -92,46 +92,46 @@ const MpComplainDetailAction = <Action>{
 
         if (realDetail.step >= ALLOT_COMPLAIN_STEP) {
             allotInfo = await ctx.model
-                .from('ejyy_property_company_user')
+                .from('ipms_property_company_user')
                 .leftJoin(
-                    'ejyy_property_company_department',
-                    'ejyy_property_company_department.id',
-                    'ejyy_property_company_user.department_id'
+                    'ipms_property_company_department',
+                    'ipms_property_company_department.id',
+                    'ipms_property_company_user.department_id'
                 )
                 .leftJoin(
-                    'ejyy_property_company_job',
-                    'ejyy_property_company_job.id',
-                    'ejyy_property_company_user.job_id'
+                    'ipms_property_company_job',
+                    'ipms_property_company_job.id',
+                    'ipms_property_company_user.job_id'
                 )
-                .where('ejyy_property_company_user.id', realDetail.allot_user_id)
+                .where('ipms_property_company_user.id', realDetail.allot_user_id)
                 .select(
-                    'ejyy_property_company_user.avatar_url',
-                    'ejyy_property_company_user.phone',
-                    'ejyy_property_company_department.name as department',
-                    'ejyy_property_company_job.name as job',
-                    'ejyy_property_company_user.real_name'
+                    'ipms_property_company_user.avatar_url',
+                    'ipms_property_company_user.phone',
+                    'ipms_property_company_department.name as department',
+                    'ipms_property_company_job.name as job',
+                    'ipms_property_company_user.real_name'
                 )
                 .first();
 
             disposedInfo = await ctx.model
-                .from('ejyy_property_company_user')
+                .from('ipms_property_company_user')
                 .leftJoin(
-                    'ejyy_property_company_department',
-                    'ejyy_property_company_department.id',
-                    'ejyy_property_company_user.department_id'
+                    'ipms_property_company_department',
+                    'ipms_property_company_department.id',
+                    'ipms_property_company_user.department_id'
                 )
                 .leftJoin(
-                    'ejyy_property_company_job',
-                    'ejyy_property_company_job.id',
-                    'ejyy_property_company_user.job_id'
+                    'ipms_property_company_job',
+                    'ipms_property_company_job.id',
+                    'ipms_property_company_user.job_id'
                 )
-                .where('ejyy_property_company_user.id', realDetail.dispose_user_id)
+                .where('ipms_property_company_user.id', realDetail.dispose_user_id)
                 .select(
-                    'ejyy_property_company_user.avatar_url',
-                    'ejyy_property_company_user.phone',
-                    'ejyy_property_company_department.name as department',
-                    'ejyy_property_company_job.name as job',
-                    'ejyy_property_company_user.real_name'
+                    'ipms_property_company_user.avatar_url',
+                    'ipms_property_company_user.phone',
+                    'ipms_property_company_department.name as department',
+                    'ipms_property_company_job.name as job',
+                    'ipms_property_company_user.real_name'
                 )
                 .first();
         }

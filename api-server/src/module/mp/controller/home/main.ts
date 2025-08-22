@@ -25,32 +25,28 @@ const MpHomeMainAction = <Action>{
         const { community_id } = <RequestParams>ctx.params;
 
         const topic = await ctx.model
-            .from('ejyy_topic')
+            .from('ipms_topic')
             .where('published', TRUE)
             .andWhere('community_id', community_id)
             .select('id', 'banner_img', 'title')
             .orderBy('id', 'desc');
 
-        const virus = await ctx.model
-            .from('ejyy_virus')
-            .where('success', TRUE)
-            .orderBy('id', 'desc')
-            .first();
+        // removed obsolete field
 
         const unread_amount = utils.sql.countReader(
             await ctx.model
-                .from('ejyy_notice_to_user')
+                .from('ipms_notice_to_user')
                 .where(function() {
                     this.whereIn('community_id', function() {
-                        this.from('ejyy_user_building')
-                            .leftJoin('ejyy_building_info', 'ejyy_building_info.id', 'ejyy_user_building.building_id')
+                        this.from('ipms_user_building')
+                            .leftJoin('ipms_building_info', 'ipms_building_info.id', 'ipms_user_building.building_id')
                             .where('status', BINDING_BUILDING)
                             .andWhere('wechat_mp_user_id', ctx.mpUserInfo.id)
-                            .select('ejyy_building_info.community_id');
+                            .select('ipms_building_info.community_id');
                     }).orWhere('refer', SYSTEM_NOTICE);
                 })
                 .whereNotIn('id', function() {
-                    this.from('ejyy_notice_to_user_readed')
+                    this.from('ipms_notice_to_user_readed')
                         .where('wechat_mp_user_id', ctx.mpUserInfo.id)
                         .select('notice_id');
                 })
@@ -60,7 +56,7 @@ const MpHomeMainAction = <Action>{
         );
 
         const notice = await ctx.model
-            .from('ejyy_notice_to_user')
+            .from('ipms_notice_to_user')
             .where('community_id', community_id)
             .andWhere('published', TRUE)
             .limit(3)
@@ -72,7 +68,6 @@ const MpHomeMainAction = <Action>{
             code: SUCCESS,
             data: {
                 topic,
-                virus: virus.content,
                 unread_amount,
                 notice
             }

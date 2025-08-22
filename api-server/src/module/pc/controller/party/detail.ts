@@ -32,23 +32,23 @@ const PcPartyDetailAction = <Action>{
         const { id } = <RequestParams>ctx.params;
 
         const detail = await ctx.model
-            .from('ejyy_party')
-            .leftJoin('ejyy_property_company_user', 'ejyy_property_company_user.id', 'ejyy_party.created_by')
-            .leftJoin('ejyy_community_info', 'ejyy_community_info.id', 'ejyy_party.community_id')
-            .where('ejyy_party.id', id)
+            .from('ipms_party')
+            .leftJoin('ipms_property_company_user', 'ipms_property_company_user.id', 'ipms_party.created_by')
+            .leftJoin('ipms_community_info', 'ipms_community_info.id', 'ipms_party.community_id')
+            .where('ipms_party.id', id)
             .select(
-                'ejyy_party.id',
-                'ejyy_party.title',
-                'ejyy_party.cover_img',
-                'ejyy_party.carousel',
-                'ejyy_party.content',
-                'ejyy_party.created_at',
-                'ejyy_party.published',
-                'ejyy_party.published_at',
-                'ejyy_party.created_by',
-                'ejyy_party.published_by',
-                'ejyy_property_company_user.real_name',
-                'ejyy_community_info.name as community_name'
+                'ipms_party.id',
+                'ipms_party.title',
+                'ipms_party.cover_img',
+                'ipms_party.carousel',
+                'ipms_party.content',
+                'ipms_party.created_at',
+                'ipms_party.published',
+                'ipms_party.published_at',
+                'ipms_party.created_by',
+                'ipms_party.published_by',
+                'ipms_property_company_user.real_name',
+                'ipms_community_info.name as community_name'
             )
             .first();
 
@@ -63,7 +63,7 @@ const PcPartyDetailAction = <Action>{
 
         if (detail.published_by) {
             const pInfo = await ctx.model
-                .from('ejyy_property_company_user')
+                .from('ipms_property_company_user')
                 .where('id', detail.published_by)
                 .first();
 

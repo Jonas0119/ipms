@@ -45,26 +45,26 @@ const PcWarningListAction = <Action>{
         const { page_num, page_size, community_id } = <RequestBody>ctx.request.body;
 
         const list = await ctx.model
-            .from('ejyy_iot_warning')
-            .leftJoin('ejyy_property_company_user', 'ejyy_property_company_user.id', 'ejyy_iot_warning.created_by')
-            .where('ejyy_iot_warning.community_id', community_id)
-            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ejyy_iot_warning.id'))
+            .from('ipms_iot_warning')
+            .leftJoin('ipms_property_company_user', 'ipms_property_company_user.id', 'ipms_iot_warning.created_by')
+            .where('ipms_iot_warning.community_id', community_id)
+            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ipms_iot_warning.id'))
             .select(
-                'ejyy_iot_warning.id',
-                'ejyy_iot_warning.community_id',
-                'ejyy_iot_warning.sign',
-                'ejyy_iot_warning.name',
-                'ejyy_iot_warning.secret',
-                'ejyy_iot_warning.lng',
-                'ejyy_iot_warning.lat',
-                'ejyy_iot_warning.online',
-                'ejyy_iot_warning.created_by',
-                'ejyy_iot_warning.created_at',
-                'ejyy_property_company_user.real_name'
+                'ipms_iot_warning.id',
+                'ipms_iot_warning.community_id',
+                'ipms_iot_warning.sign',
+                'ipms_iot_warning.name',
+                'ipms_iot_warning.secret',
+                'ipms_iot_warning.lng',
+                'ipms_iot_warning.lat',
+                'ipms_iot_warning.online',
+                'ipms_iot_warning.created_by',
+                'ipms_iot_warning.created_at',
+                'ipms_property_company_user.real_name'
             )
             .limit(page_size)
             .offset((page_num - 1) * page_size)
-            .orderBy('ejyy_iot_warning.id', 'desc');
+            .orderBy('ipms_iot_warning.id', 'desc');
 
         const [res] = await ctx.model.select(ctx.model.raw('found_rows() AS total'));
 

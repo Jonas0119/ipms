@@ -40,7 +40,7 @@ service.interceptors.request.use(
         const token = utils.auth.getToken();
 
         if (token) {
-            options.headers['ejyy-pc-token'] = token;
+            options.headers['ipms-pc-token'] = token;
         }
 
         options.url = `/pc${options.url}`;

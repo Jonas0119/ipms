@@ -59,7 +59,7 @@ const PcMaterialCreateAction = <Action>{
         const { name, category_id, storehouse_id, total, community_id } = <RequestBody>ctx.request.body;
 
         const categoryExist = await ctx.model
-            .from('ejyy_material_category')
+            .from('ipms_material_category')
             .where('id', category_id)
             .first();
 
@@ -71,7 +71,7 @@ const PcMaterialCreateAction = <Action>{
         }
 
         const storehouseExist = await ctx.model
-            .from('ejyy_storehouse')
+            .from('ipms_storehouse')
             .where('id', storehouse_id)
             .andWhere('community_id', community_id)
             .first();
@@ -84,7 +84,7 @@ const PcMaterialCreateAction = <Action>{
         }
 
         const repeat = await ctx.model
-            .from('ejyy_material')
+            .from('ipms_material')
             .where('name', name)
             .andWhere('community_id', community_id)
             .first();
@@ -97,7 +97,7 @@ const PcMaterialCreateAction = <Action>{
         }
 
         const created_at = Date.now();
-        const [id] = await ctx.model.from('ejyy_material').insert({
+        const [id] = await ctx.model.from('ipms_material').insert({
             name,
             category_id,
             storehouse_id,
@@ -107,7 +107,7 @@ const PcMaterialCreateAction = <Action>{
             created_at
         });
 
-        await ctx.model.from('ejyy_material_purchase_item').insert({
+        await ctx.model.from('ipms_material_purchase_item').insert({
             material_id: id,
             total,
             origin: MATERIAL_ORIGIN_INIT,

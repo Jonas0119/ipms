@@ -56,31 +56,31 @@ const PcLeaveNoticeAction = <Action>{
         }
 
         const list = await ctx.model
-            .from('ejyy_ask_for_leave')
-            .leftJoin('ejyy_property_company_user', 'ejyy_property_company_user.id', 'ejyy_ask_for_leave.created_by')
-            .andWhere('ejyy_ask_for_leave.community_id', community_id)
+            .from('ipms_ask_for_leave')
+            .leftJoin('ipms_property_company_user', 'ipms_property_company_user.id', 'ipms_ask_for_leave.created_by')
+            .andWhere('ipms_ask_for_leave.community_id', community_id)
             .andWhere(where)
-            .whereIn('ejyy_ask_for_leave.id', function() {
-                this.from('ejyy_ask_for_leave_flow')
+            .whereIn('ipms_ask_for_leave.id', function() {
+                this.from('ipms_ask_for_leave_flow')
                     .where('node_type', WORKFLOW_NODE_NOTICE)
                     .andWhere('relation_user_id', ctx.pcUserInfo.id)
                     .select('parent_id');
             })
-            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ejyy_ask_for_leave.id'))
+            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ipms_ask_for_leave.id'))
             .select(
-                'ejyy_ask_for_leave.id',
-                'ejyy_ask_for_leave.created_by',
-                'ejyy_property_company_user.real_name',
-                'ejyy_ask_for_leave.begin_date',
-                'ejyy_ask_for_leave.reason',
-                'ejyy_ask_for_leave.total',
-                'ejyy_ask_for_leave.success',
-                'ejyy_ask_for_leave.cancel',
-                'ejyy_ask_for_leave.created_at'
+                'ipms_ask_for_leave.id',
+                'ipms_ask_for_leave.created_by',
+                'ipms_property_company_user.real_name',
+                'ipms_ask_for_leave.begin_date',
+                'ipms_ask_for_leave.reason',
+                'ipms_ask_for_leave.total',
+                'ipms_ask_for_leave.success',
+                'ipms_ask_for_leave.cancel',
+                'ipms_ask_for_leave.created_at'
             )
             .limit(page_size)
             .offset((page_num - 1) * page_size)
-            .orderBy('ejyy_ask_for_leave.id', 'desc');
+            .orderBy('ipms_ask_for_leave.id', 'desc');
 
         const [res] = await ctx.model.select(ctx.model.raw('found_rows() AS total'));
 

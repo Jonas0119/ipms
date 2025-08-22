@@ -23,7 +23,7 @@ module.exports = {
     },
     output: {
         path: path.posix.join(__dirname, 'dist'),
-        filename: `ejyy_server.js`
+        filename: `ipms_server.js`
     },
     stats: 'errors-only',
     externals: [nodeExternals()],

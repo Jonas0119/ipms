@@ -85,11 +85,11 @@ const PcVistorCreateAction = <Action>{
         }
 
         const vistorInfo = await ctx.model
-            .from('ejyy_wechat_mp_user')
+            .from('ipms_wechat_mp_user')
             .where('phone', vistor_phone)
             .first();
 
-        const [id] = await ctx.model.from('ejyy_vistor').insert({
+        const [id] = await ctx.model.from('ipms_vistor').insert({
             community_id,
             building_id,
             wechat_mp_user_id: user_id,

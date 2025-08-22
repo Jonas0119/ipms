@@ -1,12 +1,12 @@
 /**
  * +----------------------------------------------------------------------
- * | 「e家宜业」
+ * | IPMS
  * +----------------------------------------------------------------------
- * | Copyright (c) 2020-2024 https://www.chowa.cn All rights reserved.
+ * | Copyright (c) 2020-2025 IPMS
  * +----------------------------------------------------------------------
- * | Licensed 未经授权禁止移除「e家宜业」和「卓佤科技」相关版权
+ * | IPMS
  * +----------------------------------------------------------------------
- * | Author: contact@chowa.cn
+ * | Author: support@ipms.local
  * +----------------------------------------------------------------------
  */
 
@@ -46,7 +46,7 @@ const PcBuildingDetailAction = <Action>{
         const { community_id, id } = <RequestBody>ctx.request.body;
 
         const info = await ctx.model
-            .from('ejyy_building_info')
+            .from('ipms_building_info')
             .where('community_id', community_id)
             .andWhere('id', id)
             .select('id', 'type', 'area', 'building', 'unit', 'number', 'construction_area', 'created_at')
@@ -60,7 +60,7 @@ const PcBuildingDetailAction = <Action>{
         }
 
         const registered = await ctx.model
-            .from('ejyy_property_company_building_registered')
+            .from('ipms_property_company_building_registered')
             .where('building_id', id)
             .select('name', 'idcard', 'phone')
             .first();
@@ -69,14 +69,14 @@ const PcBuildingDetailAction = <Action>{
 
         if (ctx.pcUserInfo.access.includes(ROLE.YZDA)) {
             owners = await ctx.model
-                .from('ejyy_user_building')
-                .leftJoin('ejyy_wechat_mp_user', 'ejyy_wechat_mp_user.id', 'ejyy_user_building.wechat_mp_user_id')
-                .where('ejyy_user_building.building_id', id)
+                .from('ipms_user_building')
+                .leftJoin('ipms_wechat_mp_user', 'ipms_wechat_mp_user.id', 'ipms_user_building.wechat_mp_user_id')
+                .where('ipms_user_building.building_id', id)
                 .select(
-                    'ejyy_user_building.id',
-                    'ejyy_wechat_mp_user.id as user_id',
-                    'ejyy_wechat_mp_user.real_name',
-                    'ejyy_user_building.status'
+                    'ipms_user_building.id',
+                    'ipms_wechat_mp_user.id as user_id',
+                    'ipms_wechat_mp_user.real_name',
+                    'ipms_user_building.status'
                 );
         }
 
@@ -84,7 +84,7 @@ const PcBuildingDetailAction = <Action>{
 
         if (ctx.pcUserInfo.access.includes(ROLE.CLGL) && (info.type === CARPORT || info.type === GARAGE)) {
             cars = await ctx.model
-                .from('ejyy_user_car')
+                .from('ipms_user_car')
                 .where('building_id', id)
                 .select('id', 'car_number', 'car_type', 'status', 'created_at');
         }

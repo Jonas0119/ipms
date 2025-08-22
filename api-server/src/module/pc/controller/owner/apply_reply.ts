@@ -70,7 +70,7 @@ const PcOwerApplyReplyAction = <Action>{
         const { community_id, id, success, reply_content, building_ids } = <RequestBody>ctx.request.body;
 
         const detail = await ctx.model
-            .from('ejyy_owner_apply')
+            .from('ipms_owner_apply')
             .where('id', id)
             .andWhere('community_id', community_id)
             .first();
@@ -94,11 +94,11 @@ const PcOwerApplyReplyAction = <Action>{
 
         if (success) {
             const buildingsInfo = await ctx.model
-                .from('ejyy_building_info')
-                .leftJoin('ejyy_user_building', 'ejyy_user_building.building_id', 'ejyy_building_info.id')
-                .whereIn('ejyy_building_info.id', building_ids)
-                .whereNull('ejyy_user_building.building_id')
-                .select('ejyy_building_info.id');
+                .from('ipms_building_info')
+                .leftJoin('ipms_user_building', 'ipms_user_building.building_id', 'ipms_building_info.id')
+                .whereIn('ipms_building_info.id', building_ids)
+                .whereNull('ipms_user_building.building_id')
+                .select('ipms_building_info.id');
 
             if (buildingsInfo.length === 0) {
                 return (ctx.body = {
@@ -122,11 +122,11 @@ const PcOwerApplyReplyAction = <Action>{
                 bids.push(buildindInfo.id);
             }
 
-            await ctx.model.from('ejyy_user_building').insert(bindingData);
+            await ctx.model.from('ipms_user_building').insert(bindingData);
         }
 
         await ctx.model
-            .from('ejyy_owner_apply')
+            .from('ipms_owner_apply')
             .where('id', id)
             .andWhere('community_id', community_id)
             .update({
@@ -140,7 +140,7 @@ const PcOwerApplyReplyAction = <Action>{
 
         if (success && detail.subscribed) {
             const { open_id, real_name } = await ctx.model
-                .from('ejyy_wechat_mp_user')
+                .from('ipms_wechat_mp_user')
                 .where('id', detail.wechat_mp_user_id)
                 .first();
             const ret = [];
@@ -182,24 +182,24 @@ const PcOwerApplyReplyAction = <Action>{
         let buildings = [];
         if (bids.length > 0) {
             buildings = await ctx.model
-                .from('ejyy_building_info')
-                .leftJoin('ejyy_user_building', 'ejyy_user_building.building_id', 'ejyy_building_info.id')
-                .where('ejyy_building_info.community_id', community_id)
-                .andWhere('ejyy_user_building.wechat_mp_user_id', detail.wechat_mp_user_id)
-                .whereIn('ejyy_building_info.id', bids)
+                .from('ipms_building_info')
+                .leftJoin('ipms_user_building', 'ipms_user_building.building_id', 'ipms_building_info.id')
+                .where('ipms_building_info.community_id', community_id)
+                .andWhere('ipms_user_building.wechat_mp_user_id', detail.wechat_mp_user_id)
+                .whereIn('ipms_building_info.id', bids)
                 .select(
-                    'ejyy_user_building.id',
-                    'ejyy_user_building.building_id',
-                    'ejyy_building_info.type',
-                    'ejyy_building_info.area',
-                    'ejyy_building_info.building',
-                    'ejyy_building_info.unit',
-                    'ejyy_building_info.number',
-                    'ejyy_building_info.construction_area',
-                    'ejyy_building_info.created_at',
-                    'ejyy_user_building.authenticated',
-                    'ejyy_user_building.authenticated_type',
-                    'ejyy_user_building.status'
+                    'ipms_user_building.id',
+                    'ipms_user_building.building_id',
+                    'ipms_building_info.type',
+                    'ipms_building_info.area',
+                    'ipms_building_info.building',
+                    'ipms_building_info.unit',
+                    'ipms_building_info.number',
+                    'ipms_building_info.construction_area',
+                    'ipms_building_info.created_at',
+                    'ipms_user_building.authenticated',
+                    'ipms_user_building.authenticated_type',
+                    'ipms_user_building.status'
                 );
         }
 

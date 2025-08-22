@@ -76,7 +76,7 @@ const PcEnergyRepeaterCreateAction = <Action>{
         const { community_id, sign, name, category, username, password, lng, lat } = <RequestBody>ctx.request.body;
 
         const exist = await ctx.model
-            .from('ejyy_iot_meter_repeater')
+            .from('ipms_iot_meter_repeater')
             .where('name', name)
             .andWhere('community_id', community_id)
             .first();
@@ -89,7 +89,7 @@ const PcEnergyRepeaterCreateAction = <Action>{
         }
 
         const created_at = Date.now();
-        const [id] = await ctx.model.from('ejyy_iot_meter_repeater').insert({
+        const [id] = await ctx.model.from('ipms_iot_meter_repeater').insert({
             community_id,
             sign,
             name,

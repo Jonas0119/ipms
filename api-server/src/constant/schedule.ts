@@ -4,6 +4,6 @@
  * +----------------------------------------------------------------------
  */
 
-export const VIRUS_JOB = 'VIRUS_JOB';
+// removed VIRUS_JOB
 export const SESSION_JOB = 'SESSION_JOB';
 export const MOCK_JOB = 'MOCK_JOB';

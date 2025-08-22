@@ -32,7 +32,7 @@ const MpRepairUrgeAction = <Action>{
         const { id } = <RequestParams>ctx.params;
 
         const record = await ctx.model
-            .from('ejyy_repair')
+            .from('ipms_repair')
             .where('id', id)
             .andWhere('wechat_mp_user_id', ctx.mpUserInfo.id)
             .first();
@@ -54,7 +54,7 @@ const MpRepairUrgeAction = <Action>{
 
         if (record.step !== SUBMIT_REPAIR_STEP) {
             const urgeRow = await ctx.model
-                .from('ejyy_repair_urge')
+                .from('ipms_repair_urge')
                 .where('repair_id', id)
                 .orderBy('id', 'desc')
                 .first();
@@ -69,7 +69,7 @@ const MpRepairUrgeAction = <Action>{
             });
         }
 
-        await ctx.model.from('ejyy_repair_urge').insert({
+        await ctx.model.from('ipms_repair_urge').insert({
             repair_id: id,
             step: record.step,
             created_at: Date.now()

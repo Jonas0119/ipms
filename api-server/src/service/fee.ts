@@ -96,56 +96,56 @@ async function usersComputed(
     building_id: number = null
 ): Promise<FeeComputed> {
     const feeDetail = await model
-        .from('ejyy_property_fee')
-        .leftJoin('ejyy_community_info', 'ejyy_community_info.id', 'ejyy_property_fee.community_id')
-        .where('ejyy_property_fee.id', property_fee_id)
-        .andWhere('ejyy_property_fee.community_id', community_id)
+        .from('ipms_property_fee')
+        .leftJoin('ipms_community_info', 'ipms_community_info.id', 'ipms_property_fee.community_id')
+        .where('ipms_property_fee.id', property_fee_id)
+        .andWhere('ipms_property_fee.community_id', community_id)
         .select(
-            'ejyy_community_info.name as community_name',
-            'ejyy_property_fee.start_year',
-            'ejyy_property_fee.end_year',
-            'ejyy_property_fee.community_id',
-            'ejyy_property_fee.house_fee',
-            'ejyy_property_fee.computed_house_fee_by_area',
-            'ejyy_property_fee.carport_fee',
-            'ejyy_property_fee.computed_carport_fee_by_area',
-            'ejyy_property_fee.warehoure_fee',
-            'ejyy_property_fee.computed_warehouse_fee_by_area',
-            'ejyy_property_fee.merchant_fee',
-            'ejyy_property_fee.computed_merchant_fee_by_area',
-            'ejyy_property_fee.garage_fee',
-            'ejyy_property_fee.computed_garage_fee_by_area'
+            'ipms_community_info.name as community_name',
+            'ipms_property_fee.start_year',
+            'ipms_property_fee.end_year',
+            'ipms_property_fee.community_id',
+            'ipms_property_fee.house_fee',
+            'ipms_property_fee.computed_house_fee_by_area',
+            'ipms_property_fee.carport_fee',
+            'ipms_property_fee.computed_carport_fee_by_area',
+            'ipms_property_fee.warehoure_fee',
+            'ipms_property_fee.computed_warehouse_fee_by_area',
+            'ipms_property_fee.merchant_fee',
+            'ipms_property_fee.computed_merchant_fee_by_area',
+            'ipms_property_fee.garage_fee',
+            'ipms_property_fee.computed_garage_fee_by_area'
         )
         .first();
 
     const records = <Record[]>await model
-        .from('ejyy_wechat_mp_user')
+        .from('ipms_wechat_mp_user')
         .leftJoin(
-            'ejyy_wechat_official_accounts_user',
-            'ejyy_wechat_official_accounts_user.union_id',
-            'ejyy_wechat_mp_user.union_id'
+            'ipms_wechat_official_accounts_user',
+            'ipms_wechat_official_accounts_user.union_id',
+            'ipms_wechat_mp_user.union_id'
         )
-        .leftJoin('ejyy_user_building', 'ejyy_user_building.wechat_mp_user_id', 'ejyy_wechat_mp_user.id')
-        .leftJoin('ejyy_building_info', 'ejyy_building_info.id', 'ejyy_user_building.building_id')
-        .where('ejyy_building_info.community_id', feeDetail.community_id)
-        .andWhere('ejyy_user_building.status', BINDING_BUILDING)
+        .leftJoin('ipms_user_building', 'ipms_user_building.wechat_mp_user_id', 'ipms_wechat_mp_user.id')
+        .leftJoin('ipms_building_info', 'ipms_building_info.id', 'ipms_user_building.building_id')
+        .where('ipms_building_info.community_id', feeDetail.community_id)
+        .andWhere('ipms_user_building.status', BINDING_BUILDING)
         .andWhere(function() {
             if (building_id) {
-                this.where('ejyy_user_building.building_id', building_id);
+                this.where('ipms_user_building.building_id', building_id);
             }
         })
         .select(
-            'ejyy_wechat_mp_user.id',
-            'ejyy_wechat_mp_user.phone',
-            'ejyy_wechat_mp_user.real_name',
-            'ejyy_wechat_official_accounts_user.open_id',
-            'ejyy_wechat_official_accounts_user.subscribed',
-            'ejyy_building_info.type',
-            'ejyy_building_info.area',
-            'ejyy_building_info.building',
-            'ejyy_building_info.unit',
-            'ejyy_building_info.number',
-            'ejyy_building_info.construction_area'
+            'ipms_wechat_mp_user.id',
+            'ipms_wechat_mp_user.phone',
+            'ipms_wechat_mp_user.real_name',
+            'ipms_wechat_official_accounts_user.open_id',
+            'ipms_wechat_official_accounts_user.subscribed',
+            'ipms_building_info.type',
+            'ipms_building_info.area',
+            'ipms_building_info.building',
+            'ipms_building_info.unit',
+            'ipms_building_info.number',
+            'ipms_building_info.construction_area'
         );
 
     const map = <UserMap>{};

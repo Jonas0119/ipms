@@ -43,7 +43,7 @@ const PcJobListAction = <Action>{
         const { page_num, page_size, parent_id } = <RequestBody>ctx.request.body;
 
         const list = await ctx.model
-            .from('ejyy_property_company_job')
+            .from('ipms_property_company_job')
             .andWhere('parent_id', parent_id)
             .select(ctx.model.raw('SQL_CALC_FOUND_ROWS id'))
             .select('id', 'name')

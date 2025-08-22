@@ -42,7 +42,7 @@ const MpCommunityRemoveAction = <Action>{
         const { user_building_ids, community_id } = <RequestBody>ctx.request.body;
 
         await ctx.model
-            .from('ejyy_user_building')
+            .from('ipms_user_building')
             .update({ status: UNBINDING_BUILDING })
             .where({ wechat_mp_user_id: ctx.mpUserInfo.id })
             .whereIn('id', user_building_ids);
@@ -60,17 +60,17 @@ const MpCommunityRemoveAction = <Action>{
                 created_at
             });
         });
-        await ctx.model.from('ejyy_user_building_operate_log').insert(history);
+        await ctx.model.from('ipms_user_building_operate_log').insert(history);
 
         // 默认社区
-        const defaultInfo = await ctx.model.from('ejyy_user_default_community').where({
+        const defaultInfo = await ctx.model.from('ipms_user_default_community').where({
             wechat_mp_user_id: ctx.mpUserInfo.id,
             community_id
         });
 
         if (defaultInfo) {
             await ctx.model
-                .from('ejyy_user_default_community')
+                .from('ipms_user_default_community')
                 .update({ community_id: null })
                 .where({ wechat_mp_user_id: ctx.mpUserInfo.id });
         }

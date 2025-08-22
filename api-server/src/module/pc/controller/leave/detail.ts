@@ -39,28 +39,28 @@ const PcLeaveDetailAction = <Action>{
         const { id, community_id } = <RequestBody>ctx.request.body;
 
         const info = await ctx.model
-            .from('ejyy_ask_for_leave')
-            .leftJoin('ejyy_property_company_user', 'ejyy_property_company_user.id', 'ejyy_ask_for_leave.created_by')
+            .from('ipms_ask_for_leave')
+            .leftJoin('ipms_property_company_user', 'ipms_property_company_user.id', 'ipms_ask_for_leave.created_by')
             .leftJoin(
-                'ejyy_property_company_department',
-                'ejyy_property_company_department.id',
-                'ejyy_property_company_user.department_id'
+                'ipms_property_company_department',
+                'ipms_property_company_department.id',
+                'ipms_property_company_user.department_id'
             )
-            .where('ejyy_ask_for_leave.id', id)
-            .andWhere('ejyy_ask_for_leave.community_id', community_id)
+            .where('ipms_ask_for_leave.id', id)
+            .andWhere('ipms_ask_for_leave.community_id', community_id)
             .select(
-                'ejyy_ask_for_leave.id',
-                'ejyy_ask_for_leave.created_by',
-                'ejyy_ask_for_leave.begin_date',
-                'ejyy_ask_for_leave.reason',
-                'ejyy_ask_for_leave.total',
-                'ejyy_ask_for_leave.step',
-                'ejyy_ask_for_leave.success',
-                'ejyy_ask_for_leave.cancel',
-                'ejyy_ask_for_leave.canceled_at',
-                'ejyy_ask_for_leave.created_at',
-                'ejyy_property_company_user.real_name',
-                'ejyy_property_company_department.name as department_name'
+                'ipms_ask_for_leave.id',
+                'ipms_ask_for_leave.created_by',
+                'ipms_ask_for_leave.begin_date',
+                'ipms_ask_for_leave.reason',
+                'ipms_ask_for_leave.total',
+                'ipms_ask_for_leave.step',
+                'ipms_ask_for_leave.success',
+                'ipms_ask_for_leave.cancel',
+                'ipms_ask_for_leave.canceled_at',
+                'ipms_ask_for_leave.created_at',
+                'ipms_property_company_user.real_name',
+                'ipms_property_company_department.name as department_name'
             )
             .first();
 
@@ -72,29 +72,29 @@ const PcLeaveDetailAction = <Action>{
         }
 
         const steps = await ctx.model
-            .from('ejyy_ask_for_leave_flow')
-            .leftJoin('ejyy_workflow_node', 'ejyy_workflow_node.id', 'ejyy_ask_for_leave_flow.workflow_node_id')
+            .from('ipms_ask_for_leave_flow')
+            .leftJoin('ipms_workflow_node', 'ipms_workflow_node.id', 'ipms_ask_for_leave_flow.workflow_node_id')
             .leftJoin(
-                'ejyy_property_company_user',
-                'ejyy_property_company_user.id',
-                'ejyy_ask_for_leave_flow.relation_user_id'
+                'ipms_property_company_user',
+                'ipms_property_company_user.id',
+                'ipms_ask_for_leave_flow.relation_user_id'
             )
-            .where('ejyy_ask_for_leave_flow.parent_id', id)
+            .where('ipms_ask_for_leave_flow.parent_id', id)
             .select(
-                'ejyy_ask_for_leave_flow.id',
-                'ejyy_ask_for_leave_flow.step',
-                'ejyy_ask_for_leave_flow.finish',
-                'ejyy_ask_for_leave_flow.applicant_assign',
-                'ejyy_ask_for_leave_flow.relation_user_id',
-                'ejyy_ask_for_leave_flow.refuse_reason',
-                'ejyy_ask_for_leave_flow.finished_at',
-                'ejyy_workflow_node.type',
-                'ejyy_workflow_node.category',
-                'ejyy_workflow_node.value',
-                'ejyy_workflow_node.opt',
-                'ejyy_workflow_node.opt_first_equal',
-                'ejyy_workflow_node.opt_second_equal',
-                'ejyy_property_company_user.real_name as relation_user_name'
+                'ipms_ask_for_leave_flow.id',
+                'ipms_ask_for_leave_flow.step',
+                'ipms_ask_for_leave_flow.finish',
+                'ipms_ask_for_leave_flow.applicant_assign',
+                'ipms_ask_for_leave_flow.relation_user_id',
+                'ipms_ask_for_leave_flow.refuse_reason',
+                'ipms_ask_for_leave_flow.finished_at',
+                'ipms_workflow_node.type',
+                'ipms_workflow_node.category',
+                'ipms_workflow_node.value',
+                'ipms_workflow_node.opt',
+                'ipms_workflow_node.opt_first_equal',
+                'ipms_workflow_node.opt_second_equal',
+                'ipms_property_company_user.real_name as relation_user_name'
             );
 
         ctx.body = {

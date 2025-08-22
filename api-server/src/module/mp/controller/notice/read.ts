@@ -40,17 +40,17 @@ const MpNoticeReadAction = <Action>{
         const { id } = <RequestParams>ctx.params;
 
         const data = await ctx.model
-            .table('ejyy_notice_to_user')
-            .leftJoin('ejyy_community_info', 'ejyy_community_info.id', 'ejyy_notice_to_user.community_id')
-            .andWhere('ejyy_notice_to_user.id', id)
-            .andWhere('ejyy_notice_to_user.published', TRUE)
+            .table('ipms_notice_to_user')
+            .leftJoin('ipms_community_info', 'ipms_community_info.id', 'ipms_notice_to_user.community_id')
+            .andWhere('ipms_notice_to_user.id', id)
+            .andWhere('ipms_notice_to_user.published', TRUE)
             .select(
-                'ejyy_notice_to_user.id',
-                'ejyy_notice_to_user.title',
-                'ejyy_notice_to_user.content',
-                'ejyy_notice_to_user.refer',
-                'ejyy_community_info.name as scope',
-                'ejyy_notice_to_user.created_at'
+                'ipms_notice_to_user.id',
+                'ipms_notice_to_user.title',
+                'ipms_notice_to_user.content',
+                'ipms_notice_to_user.refer',
+                'ipms_community_info.name as scope',
+                'ipms_notice_to_user.created_at'
             )
             .first();
 
@@ -62,13 +62,13 @@ const MpNoticeReadAction = <Action>{
 
         if (parseInt(unread as string, 10) === 1) {
             const exit = await ctx.model
-                .from('ejyy_notice_to_user_readed')
+                .from('ipms_notice_to_user_readed')
                 .where('wechat_mp_user_id', ctx.mpUserInfo.id)
                 .andWhere('notice_id', id)
                 .first();
 
             if (!exit) {
-                await ctx.model.from('ejyy_notice_to_user_readed').insert({
+                await ctx.model.from('ipms_notice_to_user_readed').insert({
                     notice_id: data.id,
                     wechat_mp_user_id: ctx.mpUserInfo.id,
                     created_at: Date.now()

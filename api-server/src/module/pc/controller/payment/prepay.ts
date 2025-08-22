@@ -47,50 +47,50 @@ const PcPaymentPrepayAction = <Action>{
         const { user_id, community_id, property_fee_id } = <RequestBody>ctx.request.body;
 
         const list = await ctx.model
-            .from('ejyy_user_building')
-            .leftJoin('ejyy_building_info', 'ejyy_building_info.id', 'ejyy_user_building.building_id')
-            .where('ejyy_building_info.community_id', community_id)
-            .andWhere('ejyy_user_building.status', BINDING_BUILDING)
-            .andWhere('ejyy_user_building.wechat_mp_user_id', user_id)
-            .whereNotIn('ejyy_user_building.building_id', function() {
-                this.from('ejyy_property_fee')
+            .from('ipms_user_building')
+            .leftJoin('ipms_building_info', 'ipms_building_info.id', 'ipms_user_building.building_id')
+            .where('ipms_building_info.community_id', community_id)
+            .andWhere('ipms_user_building.status', BINDING_BUILDING)
+            .andWhere('ipms_user_building.wechat_mp_user_id', user_id)
+            .whereNotIn('ipms_user_building.building_id', function() {
+                this.from('ipms_property_fee')
                     .leftJoin(
-                        'ejyy_property_fee_order',
-                        'ejyy_property_fee_order.property_fee_id',
-                        'ejyy_property_fee.id'
+                        'ipms_property_fee_order',
+                        'ipms_property_fee_order.property_fee_id',
+                        'ipms_property_fee.id'
                     )
                     .leftJoin(
-                        'ejyy_property_fee_order_item',
-                        'ejyy_property_fee_order_item.property_fee_order_id',
-                        'ejyy_property_fee_order.id'
+                        'ipms_property_fee_order_item',
+                        'ipms_property_fee_order_item.property_fee_order_id',
+                        'ipms_property_fee_order.id'
                     )
-                    .where('ejyy_property_fee.id', property_fee_id)
-                    .andWhere('ejyy_property_fee.community_id', community_id)
-                    .andWhere('ejyy_property_fee_order.cancel', FALSE)
+                    .where('ipms_property_fee.id', property_fee_id)
+                    .andWhere('ipms_property_fee.community_id', community_id)
+                    .andWhere('ipms_property_fee_order.cancel', FALSE)
                     .andWhere(function() {
                         this.where(function() {
-                            this.where('ejyy_property_fee_order.paid', TRUE)
-                                .andWhere('ejyy_property_fee_order_item.refund', FALSE)
-                                .whereNull('ejyy_property_fee_order_item.refund_apply_at');
+                            this.where('ipms_property_fee_order.paid', TRUE)
+                                .andWhere('ipms_property_fee_order_item.refund', FALSE)
+                                .whereNull('ipms_property_fee_order_item.refund_apply_at');
                         }).orWhere(function() {
-                            this.where('ejyy_property_fee_order.paid', FALSE).andWhere(
-                                'ejyy_property_fee_order.created_at',
+                            this.where('ipms_property_fee_order.paid', FALSE).andWhere(
+                                'ipms_property_fee_order.created_at',
                                 '>=',
                                 Date.now() - config.wechat.pay.payExpire
                             );
                         });
                     })
-                    .select('ejyy_property_fee_order_item.building_id');
+                    .select('ipms_property_fee_order_item.building_id');
             })
             .select(
-                'ejyy_building_info.community_id',
-                'ejyy_building_info.id as building_id',
-                'ejyy_building_info.type',
-                'ejyy_building_info.area',
-                'ejyy_building_info.building',
-                'ejyy_building_info.unit',
-                'ejyy_building_info.number',
-                'ejyy_building_info.construction_area'
+                'ipms_building_info.community_id',
+                'ipms_building_info.id as building_id',
+                'ipms_building_info.type',
+                'ipms_building_info.area',
+                'ipms_building_info.building',
+                'ipms_building_info.unit',
+                'ipms_building_info.number',
+                'ipms_building_info.construction_area'
             );
 
         ctx.body = {

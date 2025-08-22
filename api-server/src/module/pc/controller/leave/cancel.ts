@@ -40,7 +40,7 @@ const PcLeaveCancelAction = <Action>{
         const { id, community_id } = <RequestBody>ctx.request.body;
 
         const info = await ctx.model
-            .from('ejyy_ask_for_leave')
+            .from('ipms_ask_for_leave')
             .where('id', id)
             .andWhere('community_id', community_id)
             .andWhere('created_by', ctx.pcUserInfo.id)
@@ -63,7 +63,7 @@ const PcLeaveCancelAction = <Action>{
         const canceled_at = Date.now();
 
         await ctx.model
-            .from('ejyy_ask_for_leave')
+            .from('ipms_ask_for_leave')
             .where('id', id)
             .andWhere('community_id', community_id)
             .update({

@@ -31,7 +31,7 @@ const PcDepartmentCreateAction = <Action>{
         const { name } = <RequestBody>ctx.request.body;
 
         const exist = await ctx.model
-            .from('ejyy_property_company_department')
+            .from('ipms_property_company_department')
             .where('name', name)
             .first();
 
@@ -42,7 +42,7 @@ const PcDepartmentCreateAction = <Action>{
             });
         }
 
-        const [id] = await ctx.model.from('ejyy_property_company_department').insert({
+        const [id] = await ctx.model.from('ipms_property_company_department').insert({
             name
         });
 

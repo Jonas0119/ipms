@@ -157,7 +157,7 @@ const PcContractCreateAction = <Action>{
         }
         const created_at = Date.now();
 
-        const [id] = await ctx.model.from('ejyy_contract').insert({
+        const [id] = await ctx.model.from('ipms_contract').insert({
             community_id,
             title,
             category_id,
@@ -189,7 +189,7 @@ const PcContractCreateAction = <Action>{
             });
         });
 
-        await ctx.model.from('ejyy_contract_item').insert(insertData);
+        await ctx.model.from('ipms_contract_item').insert(insertData);
 
         ctx.body = {
             code: SUCCESS,

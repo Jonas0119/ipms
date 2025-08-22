@@ -33,27 +33,27 @@ const MpVistorUseAction = <Action>{
         const { id } = <RequestParams>ctx.params;
 
         const detail = await ctx.model
-            .from('ejyy_vistor')
-            .leftJoin('ejyy_community_info', 'ejyy_community_info.id', 'ejyy_vistor.community_id')
-            .leftJoin('ejyy_building_info', 'ejyy_building_info.id', 'ejyy_vistor.building_id')
-            .leftJoin('ejyy_wechat_mp_user', 'ejyy_wechat_mp_user.id', 'ejyy_vistor.wechat_mp_user_id')
+            .from('ipms_vistor')
+            .leftJoin('ipms_community_info', 'ipms_community_info.id', 'ipms_vistor.community_id')
+            .leftJoin('ipms_building_info', 'ipms_building_info.id', 'ipms_vistor.building_id')
+            .leftJoin('ipms_wechat_mp_user', 'ipms_wechat_mp_user.id', 'ipms_vistor.wechat_mp_user_id')
             .select(
-                'ejyy_vistor.id',
-                'ejyy_vistor.uid',
-                'ejyy_vistor.expire',
-                'ejyy_vistor.used_at',
-                'ejyy_vistor.created_at',
-                'ejyy_vistor.building_id',
-                'ejyy_building_info.type',
-                'ejyy_building_info.area',
-                'ejyy_building_info.building',
-                'ejyy_building_info.unit',
-                'ejyy_building_info.number',
-                'ejyy_community_info.name as community_name',
-                'ejyy_wechat_mp_user.avatar_url',
-                'ejyy_wechat_mp_user.nick_name'
+                'ipms_vistor.id',
+                'ipms_vistor.uid',
+                'ipms_vistor.expire',
+                'ipms_vistor.used_at',
+                'ipms_vistor.created_at',
+                'ipms_vistor.building_id',
+                'ipms_building_info.type',
+                'ipms_building_info.area',
+                'ipms_building_info.building',
+                'ipms_building_info.unit',
+                'ipms_building_info.number',
+                'ipms_community_info.name as community_name',
+                'ipms_wechat_mp_user.avatar_url',
+                'ipms_wechat_mp_user.nick_name'
             )
-            .where('ejyy_vistor.id', id)
+            .where('ipms_vistor.id', id)
             .first();
 
         const uid = utils.access.encrypt(detail.id, detail.building_id, VISTOR_ACCESS_CODE);

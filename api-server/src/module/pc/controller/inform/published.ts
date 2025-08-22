@@ -40,7 +40,7 @@ const PcInformPublishedAction = <Action>{
         const { id, community_id } = <RequestBody>ctx.request.body;
 
         const exist = await ctx.model
-            .from('ejyy_inform')
+            .from('ipms_inform')
             .where('id', id)
             .andWhere('community_id', community_id)
             .first();
@@ -62,7 +62,7 @@ const PcInformPublishedAction = <Action>{
         const published_at = Date.now();
 
         await ctx.model
-            .from('ejyy_inform')
+            .from('ipms_inform')
             .update({
                 published: TRUE,
                 published_at,

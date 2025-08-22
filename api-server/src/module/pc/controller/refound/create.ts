@@ -118,7 +118,7 @@ const PcRefoundCreateAction = <Action>{
         }
 
         const created_at = Date.now();
-        const [id] = await ctx.model.from('ejyy_refound').insert({
+        const [id] = await ctx.model.from('ipms_refound').insert({
             community_id,
             created_by: ctx.pcUserInfo.id,
             workflow_id: generater.workflow_id,
@@ -159,8 +159,8 @@ const PcRefoundCreateAction = <Action>{
             };
         });
 
-        await ctx.model.from('ejyy_refound_flow').insert(insertDta);
-        await ctx.model.from('ejyy_refound_item').insert(
+        await ctx.model.from('ipms_refound_flow').insert(insertDta);
+        await ctx.model.from('ipms_refound_item').insert(
             items.map(item => {
                 return {
                     refound_id: id,

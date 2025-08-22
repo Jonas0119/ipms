@@ -39,32 +39,32 @@ const PcContractDetailAction = <Action>{
         const { id, community_id } = <RequestBody>ctx.request.body;
 
         const info = await ctx.model
-            .from('ejyy_contract')
-            .leftJoin('ejyy_contract_category', 'ejyy_contract_category.id', 'ejyy_contract.category_id')
-            .leftJoin('ejyy_property_company_user', 'ejyy_property_company_user.id', 'ejyy_contract.created_by')
-            .leftJoin('ejyy_wechat_mp_user', 'ejyy_wechat_mp_user.id', 'ejyy_contract.second_party_wechat_mp_user_id')
-            .where('ejyy_contract.id', id)
-            .andWhere('ejyy_contract.community_id', community_id)
+            .from('ipms_contract')
+            .leftJoin('ipms_contract_category', 'ipms_contract_category.id', 'ipms_contract.category_id')
+            .leftJoin('ipms_property_company_user', 'ipms_property_company_user.id', 'ipms_contract.created_by')
+            .leftJoin('ipms_wechat_mp_user', 'ipms_wechat_mp_user.id', 'ipms_contract.second_party_wechat_mp_user_id')
+            .where('ipms_contract.id', id)
+            .andWhere('ipms_contract.community_id', community_id)
             .select(
-                'ejyy_contract.id',
-                'ejyy_contract.title',
-                'ejyy_contract.category_id',
-                'ejyy_contract.first_party',
-                'ejyy_contract.first_party_linkman',
-                'ejyy_contract.first_party_phone',
-                'ejyy_contract.second_party',
-                'ejyy_contract.second_party_linkman',
-                'ejyy_contract.second_party_phone',
-                'ejyy_contract.begin_time',
-                'ejyy_contract.finish_time',
-                'ejyy_contract.contract_fee',
-                'ejyy_contract.created_at',
-                'ejyy_contract_category.name as category',
-                'ejyy_property_company_user.id as created_user_id',
-                'ejyy_property_company_user.real_name as created_user_real_name',
-                'ejyy_wechat_mp_user.id as second_party_user_id',
-                'ejyy_wechat_mp_user.real_name as second_party_user_real_name',
-                'ejyy_wechat_mp_user.phone as owner_phone'
+                'ipms_contract.id',
+                'ipms_contract.title',
+                'ipms_contract.category_id',
+                'ipms_contract.first_party',
+                'ipms_contract.first_party_linkman',
+                'ipms_contract.first_party_phone',
+                'ipms_contract.second_party',
+                'ipms_contract.second_party_linkman',
+                'ipms_contract.second_party_phone',
+                'ipms_contract.begin_time',
+                'ipms_contract.finish_time',
+                'ipms_contract.contract_fee',
+                'ipms_contract.created_at',
+                'ipms_contract_category.name as category',
+                'ipms_property_company_user.id as created_user_id',
+                'ipms_property_company_user.real_name as created_user_real_name',
+                'ipms_wechat_mp_user.id as second_party_user_id',
+                'ipms_wechat_mp_user.real_name as second_party_user_real_name',
+                'ipms_wechat_mp_user.phone as owner_phone'
             )
             .first();
 
@@ -76,23 +76,23 @@ const PcContractDetailAction = <Action>{
         }
 
         const items = await ctx.model
-            .from('ejyy_contract_item')
-            .leftJoin('ejyy_building_info', 'ejyy_building_info.id', 'ejyy_contract_item.building_id')
+            .from('ipms_contract_item')
+            .leftJoin('ipms_building_info', 'ipms_building_info.id', 'ipms_contract_item.building_id')
             .where('contract_id', id)
             .select(
-                'ejyy_contract_item.id',
-                'ejyy_contract_item.title',
-                'ejyy_contract_item.descritpion',
-                'ejyy_contract_item.building_id',
-                'ejyy_contract_item.attachment_url',
-                'ejyy_contract_item.attachment_name',
-                'ejyy_contract_item.fee',
-                'ejyy_contract_item.created_at',
-                'ejyy_building_info.type',
-                'ejyy_building_info.area',
-                'ejyy_building_info.building',
-                'ejyy_building_info.unit',
-                'ejyy_building_info.number'
+                'ipms_contract_item.id',
+                'ipms_contract_item.title',
+                'ipms_contract_item.descritpion',
+                'ipms_contract_item.building_id',
+                'ipms_contract_item.attachment_url',
+                'ipms_contract_item.attachment_name',
+                'ipms_contract_item.fee',
+                'ipms_contract_item.created_at',
+                'ipms_building_info.type',
+                'ipms_building_info.area',
+                'ipms_building_info.building',
+                'ipms_building_info.unit',
+                'ipms_building_info.number'
             );
 
         ctx.body = {

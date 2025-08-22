@@ -1,12 +1,12 @@
 /**
  * +----------------------------------------------------------------------
- * | 「e家宜业」
+ * | IPMS
  * +----------------------------------------------------------------------
- * | Copyright (c) 2020-2024 https://www.chowa.cn All rights reserved.
+ * | Copyright (c) 2020-2025 IPMS
  * +----------------------------------------------------------------------
- * | Licensed 未经授权禁止移除「e家宜业」和「卓佤科技」相关版权
+ * | IPMS
  * +----------------------------------------------------------------------
- * | Author: contact@chowa.cn
+ * | Author: support@ipms.local
  * +----------------------------------------------------------------------
  */
 
@@ -102,7 +102,7 @@ const PcBuildingImportAction = <Action>{
 
         for (let record of buildings) {
             const { type, area, building, unit, number, construction_area, name, idcard, phone } = record;
-            const [insertId] = await ctx.model.from('ejyy_building_info').insert({
+            const [insertId] = await ctx.model.from('ipms_building_info').insert({
                 community_id,
                 type,
                 area,
@@ -115,7 +115,7 @@ const PcBuildingImportAction = <Action>{
             });
 
             if (name && idcard && phone) {
-                await ctx.model.from('ejyy_property_company_building_registered').insert({
+                await ctx.model.from('ipms_property_company_building_registered').insert({
                     building_id: insertId,
                     name,
                     gender: utils.idcard.gender(idcard),

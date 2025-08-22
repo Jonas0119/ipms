@@ -168,7 +168,7 @@ const PcContractUpdateAction = <Action>{
             });
         }
         const detail = await ctx.model
-            .from('ejyy_contract')
+            .from('ipms_contract')
             .where('id', id)
             .andWhere('community_id', community_id)
             .first();
@@ -195,7 +195,7 @@ const PcContractUpdateAction = <Action>{
         }
 
         const affect = await ctx.model
-            .from('ejyy_contract')
+            .from('ipms_contract')
             .update({
                 title,
                 category_id,
@@ -221,7 +221,7 @@ const PcContractUpdateAction = <Action>{
         }
 
         const dbItems = await ctx.model
-            .from('ejyy_contract_item')
+            .from('ipms_contract_item')
             .where('contract_id', id)
             .select();
         const hasChange = (saved: ContractItem, changed: ContractItem) => {
@@ -262,7 +262,7 @@ const PcContractUpdateAction = <Action>{
             if (index > -1) {
                 if (hasChange(record, item)) {
                     await ctx.model
-                        .from('ejyy_contract_item')
+                        .from('ipms_contract_item')
                         .update({
                             title: item.title,
                             descritpion: item.descritpion ? item.descritpion : null,
@@ -275,7 +275,7 @@ const PcContractUpdateAction = <Action>{
                 }
             } else {
                 await ctx.model
-                    .from('ejyy_contract_item')
+                    .from('ipms_contract_item')
                     .where('id', id)
                     .delete();
             }
@@ -297,7 +297,7 @@ const PcContractUpdateAction = <Action>{
         });
 
         if (insertData.length > 0) {
-            await ctx.model.from('ejyy_contract_item').insert(insertData);
+            await ctx.model.from('ipms_contract_item').insert(insertData);
         }
 
         ctx.body = {

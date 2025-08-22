@@ -71,7 +71,7 @@ const PcCarCreateAction = <Action>{
         );
 
         const exist = await ctx.model
-            .from('ejyy_user_car')
+            .from('ipms_user_car')
             .where('car_number', car_number)
             .andWhere('wechat_mp_user_id', wechat_mp_user_id)
             .andWhere('building_id', building_id)
@@ -89,18 +89,18 @@ const PcCarCreateAction = <Action>{
         }
 
         const detail = await ctx.model
-            .from('ejyy_building_info')
+            .from('ipms_building_info')
             .leftJoin(
-                'ejyy_community_setting',
-                'ejyy_community_setting.community_id',
-                'ejyy_building_info.community_id'
+                'ipms_community_setting',
+                'ipms_community_setting.community_id',
+                'ipms_building_info.community_id'
             )
-            .where('ejyy_building_info.id', building_id)
-            .andWhere('ejyy_building_info.community_id', community_id)
+            .where('ipms_building_info.id', building_id)
+            .andWhere('ipms_building_info.community_id', community_id)
             .select(
-                'ejyy_community_setting.carport_max_car',
-                'ejyy_community_setting.garage_max_car',
-                'ejyy_building_info.type'
+                'ipms_community_setting.carport_max_car',
+                'ipms_community_setting.garage_max_car',
+                'ipms_building_info.type'
             )
             .first();
 
@@ -112,7 +112,7 @@ const PcCarCreateAction = <Action>{
         }
 
         const [{ count }] = await ctx.model
-            .from('ejyy_user_car')
+            .from('ipms_user_car')
             .where('building_id', building_id)
             .andWhere('status', BINDING_CAR)
             .count({ count: 'id' });
@@ -131,7 +131,7 @@ const PcCarCreateAction = <Action>{
             });
         }
 
-        const [id] = await ctx.model.from('ejyy_user_car').insert({
+        const [id] = await ctx.model.from('ipms_user_car').insert({
             wechat_mp_user_id,
             building_id,
             car_number,
@@ -140,7 +140,7 @@ const PcCarCreateAction = <Action>{
             created_at: Date.now()
         });
 
-        await ctx.model.from('ejyy_user_car_operate_log').insert({
+        await ctx.model.from('ipms_user_car_operate_log').insert({
             user_car_id: id,
             property_company_user_id: ctx.pcUserInfo.id,
             status: BINDING_CAR,

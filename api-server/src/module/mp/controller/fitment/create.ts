@@ -40,7 +40,7 @@ const MpFitmentCreateAction = <Action>{
         const { community_id, building_id } = <RequestBody>ctx.request.body;
 
         const exist = await ctx.model
-            .from('ejyy_fitment')
+            .from('ipms_fitment')
             .where('community_id', community_id)
             .where('building_id', building_id)
             .whereNull('finished_at')
@@ -54,12 +54,12 @@ const MpFitmentCreateAction = <Action>{
         }
 
         const buildingInfo = await ctx.model
-            .from('ejyy_building_info')
-            .leftJoin('ejyy_user_building', 'ejyy_user_building.building_id', 'ejyy_building_info.id')
-            .where('ejyy_building_info.community_id', community_id)
-            .andWhere('ejyy_building_info.id', building_id)
-            .andWhere('ejyy_user_building.wechat_mp_user_id', ctx.mpUserInfo.id)
-            .andWhere('ejyy_user_building.status', BINDING_BUILDING)
+            .from('ipms_building_info')
+            .leftJoin('ipms_user_building', 'ipms_user_building.building_id', 'ipms_building_info.id')
+            .where('ipms_building_info.community_id', community_id)
+            .andWhere('ipms_building_info.id', building_id)
+            .andWhere('ipms_user_building.wechat_mp_user_id', ctx.mpUserInfo.id)
+            .andWhere('ipms_user_building.status', BINDING_BUILDING)
             .first();
 
         if (!buildingInfo) {
@@ -69,7 +69,7 @@ const MpFitmentCreateAction = <Action>{
             });
         }
 
-        const [id] = await ctx.model.from('ejyy_fitment').insert({
+        const [id] = await ctx.model.from('ipms_fitment').insert({
             community_id,
             building_id,
             step: USER_SUBMIT_APPLY_STEP,

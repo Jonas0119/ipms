@@ -90,41 +90,41 @@ const MpFamilyDetailAction = <Action>{
         const { id } = <RequestParams>ctx.params;
 
         const userInfo = await ctx.model
-            .from('ejyy_wechat_mp_user')
+            .from('ipms_wechat_mp_user')
             .where('id', id)
             .select('id', 'nick_name', 'avatar_url', 'signature')
             .first();
 
         const records = <Record[]>await ctx.model
-            .from('ejyy_user_building')
-            .leftJoin('ejyy_building_info', 'ejyy_building_info.id', 'ejyy_user_building.building_id')
-            .leftJoin('ejyy_community_info', 'ejyy_community_info.id', 'ejyy_building_info.community_id')
-            .whereIn('ejyy_user_building.building_id', function() {
-                this.from('ejyy_user_building')
+            .from('ipms_user_building')
+            .leftJoin('ipms_building_info', 'ipms_building_info.id', 'ipms_user_building.building_id')
+            .leftJoin('ipms_community_info', 'ipms_community_info.id', 'ipms_building_info.community_id')
+            .whereIn('ipms_user_building.building_id', function() {
+                this.from('ipms_user_building')
                     .where('wechat_mp_user_id', ctx.mpUserInfo.id)
                     .where('status', BINDING_BUILDING)
                     .select('building_id');
             })
-            .where('ejyy_user_building.wechat_mp_user_id', id)
+            .where('ipms_user_building.wechat_mp_user_id', id)
             .andWhere('status', BINDING_BUILDING)
             .select(
-                'ejyy_user_building.id',
-                'ejyy_user_building.authenticated',
-                'ejyy_user_building.authenticated_type',
-                'ejyy_user_building.authenticated_user_id',
-                'ejyy_user_building.building_id',
-                'ejyy_building_info.type',
-                'ejyy_building_info.area',
-                'ejyy_building_info.building',
-                'ejyy_building_info.unit',
-                'ejyy_building_info.number',
-                'ejyy_building_info.community_id',
-                'ejyy_community_info.name',
-                'ejyy_community_info.province',
-                'ejyy_community_info.city',
-                'ejyy_community_info.district'
+                'ipms_user_building.id',
+                'ipms_user_building.authenticated',
+                'ipms_user_building.authenticated_type',
+                'ipms_user_building.authenticated_user_id',
+                'ipms_user_building.building_id',
+                'ipms_building_info.type',
+                'ipms_building_info.area',
+                'ipms_building_info.building',
+                'ipms_building_info.unit',
+                'ipms_building_info.number',
+                'ipms_building_info.community_id',
+                'ipms_community_info.name',
+                'ipms_community_info.province',
+                'ipms_community_info.city',
+                'ipms_community_info.district'
             )
-            .orderBy('ejyy_user_building.id', 'desc');
+            .orderBy('ipms_user_building.id', 'desc');
 
         if (records.length === 0) {
             return (ctx.body = {

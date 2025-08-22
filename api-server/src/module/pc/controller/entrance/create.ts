@@ -75,7 +75,7 @@ const PcEntranceCreateAction = <Action>{
         const { community_id, sign, secret, name, building, category, lng, lat } = <RequestBody>ctx.request.body;
 
         const exist = await ctx.model
-            .from('ejyy_iot_entrance')
+            .from('ipms_iot_entrance')
             .where('name', name)
             .andWhere('community_id', community_id)
             .first();
@@ -88,7 +88,7 @@ const PcEntranceCreateAction = <Action>{
         }
 
         const created_at = Date.now();
-        const [id] = await ctx.model.from('ejyy_iot_entrance').insert({
+        const [id] = await ctx.model.from('ipms_iot_entrance').insert({
             community_id,
             sign,
             secret,

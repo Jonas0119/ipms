@@ -1,6 +1,6 @@
 ## 项目介绍
 
-「e家宜业」是一套基于AGPL v3开源协议开源的智慧物业解决方案。实现了微信公众号、小程序、PC、H5、智能硬件多端打通。 后端采用Koa + Typescript轻量级构建，支持分布式部署；前端使用vue + view-design开发。
+IPMS 是一套基于 AGPL v3 开源协议的智慧物业管理解决方案，涵盖微信公众号/小程序/PC/H5/智能硬件多端。后端采用 Koa + TypeScript 构建，支持分布式部署；前端使用 Vue + View Design 开发。
 
 > 禁止将本项目的代码和资源进行任何形式的出售和盈利，产生的一切后果由侵权者自负！！
 
@@ -38,7 +38,53 @@
 
 ## 如何部署
 
-[查看文档](https://gj4h0z80f2.feishu.cn/docx/H62ndDuUhodT7dx0QIJc1sMFnfc)
+### Docker 部署（Redis → MySQL → MinIO → 后端 → 前端）
+
+0) 网络与目录
+```bash
+docker network create ipms-net || true
+mkdir -p ~/ipms/{mysql-data,redis-data,minio-data,minio-config,frontend-dist}
+```
+
+1) MySQL
+```bash
+docker run -d --name ipms-mysql --network ipms-net \
+  -e MYSQL_ROOT_PASSWORD='rootpass' -e MYSQL_DATABASE=ipms \
+  -v ~/ipms/mysql-data:/var/lib/mysql -p 3306:3306 mysql:5.7
+
+# 初始化新库（本机执行）
+mysql -h127.0.0.1 -uroot -p'rootpass' < resources/db_ipms.sql
+```
+
+2) Redis
+```bash
+docker run -d --name ipms-redis --network ipms-net \
+  -v ~/ipms/redis-data:/data -p 6379:6379 redis:6.2.6
+```
+
+3) MinIO
+```bash
+docker run -d --name ipms-minio --network ipms-net \
+  -e MINIO_ROOT_USER=admin -e MINIO_ROOT_PASSWORD=minioadmin \
+  -v ~/ipms/minio-data:/data -v ~/ipms/minio-config:/root/.minio \
+  -p 9000:9000 -p 9001:9001 minio/minio server /data --console-address :9001
+```
+
+4) 后端（API Server）
+```bash
+cd api-server && npm ci && npm run dist
+docker run -d --name api-server --network ipms-net \
+  -p 6688:6688 -v $(pwd)/dist:/www/apiserver -w /www/apiserver \
+  node:24.2.0 sh -c "npm install && node ipms_server.js"
+```
+
+5) 前端（控制台）
+```bash
+cd console-web && npm ci && npm run build
+cp -r dist/* ~/ipms/frontend-dist/
+docker run -d --name ipms-web -p 8080:80 \
+  -v ~/ipms/frontend-dist:/usr/share/nginx/html:ro nginx:1.25
+```
 
 ## SASS版及定制
 
@@ -144,7 +190,7 @@ await templateService.downloadTemplate('building_import');
 
 #### 📋 配置示例
 ```yaml
-# .ejyyrc 配置文件
+# .ipmsrc 配置文件（原 .ejyyrc 升级）
 storage:
   mode: "local"  # local/oss/minio
   template:
@@ -253,119 +299,192 @@ storage:
 
 #how to run
 #后台服务
-docker run -d --name api-server   -p 6688:6688   -v /Users/pzq/tech/projects/ejyy/api-server/dist:/www/apiserver   -w /www/apiserver   node:24.2.0   sh -c "npm install && node ejyy_server.js"
+docker run -d --name api-server   -p 6688:6688   -v /Users/pzq/tech/projects/ipms/api-server/dist:/www/apiserver   -w /www/apiserver   node:24.2.0   sh -c "npm install && node ipms_server.js"
 
 #mysql
 docker run -d --name my-redis -p 6379:6379 redis:6.2.6
 docker exec -it mysql57 mysql -u root -p
 
-TRUNCATE TABLE `ejyy_ask_for_leave`;                           
-TRUNCATE TABLE `ejyy_ask_for_leave_flow`;                      
-TRUNCATE TABLE `ejyy_building_info`;                           
-TRUNCATE TABLE `ejyy_community_info`;                          
-TRUNCATE TABLE `ejyy_community_remote_open_door_log`;          
-TRUNCATE TABLE `ejyy_community_setting`;                       
-TRUNCATE TABLE `ejyy_complain`;                                
-TRUNCATE TABLE `ejyy_contract`;                                
-TRUNCATE TABLE `ejyy_contract_category`;                       
-TRUNCATE TABLE `ejyy_contract_item`;                           
-TRUNCATE TABLE `ejyy_convenient`;                              
-TRUNCATE TABLE `ejyy_employee_sign_record`;                    
-TRUNCATE TABLE `ejyy_employee_sign_setting`;                   
-TRUNCATE TABLE `ejyy_epidemic`;                                
-TRUNCATE TABLE `ejyy_feedback`;                                
-TRUNCATE TABLE `ejyy_fitment`;                                 
-TRUNCATE TABLE `ejyy_inform`;                                  
-TRUNCATE TABLE `ejyy_iot_elevator`;                            
-TRUNCATE TABLE `ejyy_iot_elevator_log`;                        
-TRUNCATE TABLE `ejyy_iot_entrance`;                            
-TRUNCATE TABLE `ejyy_iot_entrance_log`;                        
-TRUNCATE TABLE `ejyy_iot_lamp`;                                
-TRUNCATE TABLE `ejyy_iot_lamp_line`;                           
-TRUNCATE TABLE `ejyy_iot_lamp_log`;                            
-TRUNCATE TABLE `ejyy_iot_lamp_work_mode`;                      
-TRUNCATE TABLE `ejyy_iot_meter`;                               
-TRUNCATE TABLE `ejyy_iot_meter_read`;                          
-TRUNCATE TABLE `ejyy_iot_meter_repeater`;                      
-TRUNCATE TABLE `ejyy_iot_park`;                                
-TRUNCATE TABLE `ejyy_iot_park_blacklist`;                      
-TRUNCATE TABLE `ejyy_iot_park_log`;                            
-TRUNCATE TABLE `ejyy_iot_warning`;                             
-TRUNCATE TABLE `ejyy_iot_warning_log`;                         
-TRUNCATE TABLE `ejyy_material`;                                
-TRUNCATE TABLE `ejyy_material_category`;                       
-TRUNCATE TABLE `ejyy_material_purchase`;                       
-TRUNCATE TABLE `ejyy_material_purchase_flow`;                  
-TRUNCATE TABLE `ejyy_material_purchase_item`;                  
-TRUNCATE TABLE `ejyy_material_supplier`;                       
-TRUNCATE TABLE `ejyy_material_used`;                           
-TRUNCATE TABLE `ejyy_meeting`;                                 
-TRUNCATE TABLE `ejyy_meeting_participant`;                     
-TRUNCATE TABLE `ejyy_meeting_room`;                            
-TRUNCATE TABLE `ejyy_mission`;                                 
-TRUNCATE TABLE `ejyy_mission_category`;                        
-TRUNCATE TABLE `ejyy_mission_complete`;                        
-TRUNCATE TABLE `ejyy_mission_complete_node`;                   
-TRUNCATE TABLE `ejyy_mission_line`;                            
-TRUNCATE TABLE `ejyy_mission_line_node`;                       
-TRUNCATE TABLE `ejyy_mission_point`;                           
-TRUNCATE TABLE `ejyy_move_car`;                                
-TRUNCATE TABLE `ejyy_notice_to_user`;                          
-TRUNCATE TABLE `ejyy_notice_to_user_readed`;                   
-TRUNCATE TABLE `ejyy_notice_tpl`;                              
-TRUNCATE TABLE `ejyy_owner_apply`;                             
-TRUNCATE TABLE `ejyy_owner_detail_log`;                        
-TRUNCATE TABLE `ejyy_party`;                                   
-TRUNCATE TABLE `ejyy_pet`;                                     
-TRUNCATE TABLE `ejyy_pet_vaccinate`;                           
-TRUNCATE TABLE `ejyy_property_company_access`;                 
-TRUNCATE TABLE `ejyy_property_company_auth`;                   
-TRUNCATE TABLE `ejyy_property_company_building_registered`;    
-TRUNCATE TABLE `ejyy_property_company_department`;             
-TRUNCATE TABLE `ejyy_property_company_job`;                    
-TRUNCATE TABLE `ejyy_property_company_user`;                   
-TRUNCATE TABLE `ejyy_property_company_user_access_community`;  
-TRUNCATE TABLE `ejyy_property_company_user_default_community`; 
-TRUNCATE TABLE `ejyy_property_company_user_join_record`;       
-TRUNCATE TABLE `ejyy_property_company_user_login`;             
-TRUNCATE TABLE `ejyy_property_fee`;                            
-TRUNCATE TABLE `ejyy_property_fee_order`;                      
-TRUNCATE TABLE `ejyy_property_fee_order_item`;                 
-TRUNCATE TABLE `ejyy_question`;                                
-TRUNCATE TABLE `ejyy_question_option`;                         
-TRUNCATE TABLE `ejyy_questionnaire`;                           
-TRUNCATE TABLE `ejyy_questionnaire_answer`;                    
-TRUNCATE TABLE `ejyy_questionnaire_answer_result`;             
-TRUNCATE TABLE `ejyy_questionnaire_statistics`;                
-TRUNCATE TABLE `ejyy_refound`;                                 
-TRUNCATE TABLE `ejyy_refound_flow`;                            
-TRUNCATE TABLE `ejyy_refound_item`;                            
-TRUNCATE TABLE `ejyy_repair`;                                  
-TRUNCATE TABLE `ejyy_repair_urge`;                             
-TRUNCATE TABLE `ejyy_schedule`;                                
-TRUNCATE TABLE `ejyy_session_store`;                           
-TRUNCATE TABLE `ejyy_storehouse`;                              
-TRUNCATE TABLE `ejyy_topic`;                                   
-TRUNCATE TABLE `ejyy_user_building`;                           
-TRUNCATE TABLE `ejyy_user_building_operate_log`;               
-TRUNCATE TABLE `ejyy_user_car`;                                
-TRUNCATE TABLE `ejyy_user_car_operate_log`;                    
-TRUNCATE TABLE `ejyy_user_car_sync`;                           
-TRUNCATE TABLE `ejyy_user_default_community`;                  
-TRUNCATE TABLE `ejyy_virus`;                                   
-TRUNCATE TABLE `ejyy_vistor`;                                  
-TRUNCATE TABLE `ejyy_wechat_mp_auth`;                          
-TRUNCATE TABLE `ejyy_wechat_mp_user`;                          
-TRUNCATE TABLE `ejyy_wechat_mp_user_login`;                    
-TRUNCATE TABLE `ejyy_wechat_official_accounts_user`;           
-TRUNCATE TABLE `ejyy_workflow`;                                
-TRUNCATE TABLE `ejyy_workflow_node`;                           
+TRUNCATE TABLE `ipms_ask_for_leave`;                           
+TRUNCATE TABLE `ipms_ask_for_leave_flow`;                      
+TRUNCATE TABLE `ipms_building_info`;                           
+TRUNCATE TABLE `ipms_community_info`;                          
+TRUNCATE TABLE `ipms_community_remote_open_door_log`;          
+TRUNCATE TABLE `ipms_community_setting`;                       
+TRUNCATE TABLE `ipms_complain`;                                
+TRUNCATE TABLE `ipms_contract`;                                
+TRUNCATE TABLE `ipms_contract_category`;                       
+TRUNCATE TABLE `ipms_contract_item`;                           
+TRUNCATE TABLE `ipms_convenient`;                              
+TRUNCATE TABLE `ipms_employee_sign_record`;                    
+TRUNCATE TABLE `ipms_employee_sign_setting`;                   
+TRUNCATE TABLE `ipms_feedback`;                                
+TRUNCATE TABLE `ipms_fitment`;                                 
+TRUNCATE TABLE `ipms_inform`;                                  
+TRUNCATE TABLE `ipms_iot_elevator`;                            
+TRUNCATE TABLE `ipms_iot_elevator_log`;                        
+TRUNCATE TABLE `ipms_iot_entrance`;                            
+TRUNCATE TABLE `ipms_iot_entrance_log`;                        
+TRUNCATE TABLE `ipms_iot_lamp`;                                
+TRUNCATE TABLE `ipms_iot_lamp_line`;                           
+TRUNCATE TABLE `ipms_iot_lamp_log`;                            
+TRUNCATE TABLE `ipms_iot_lamp_work_mode`;                      
+TRUNCATE TABLE `ipms_iot_meter`;                               
+TRUNCATE TABLE `ipms_iot_meter_read`;                          
+TRUNCATE TABLE `ipms_iot_meter_repeater`;                      
+TRUNCATE TABLE `ipms_iot_park`;                                
+TRUNCATE TABLE `ipms_iot_park_blacklist`;                      
+TRUNCATE TABLE `ipms_iot_park_log`;                            
+TRUNCATE TABLE `ipms_iot_warning`;                             
+TRUNCATE TABLE `ipms_iot_warning_log`;                         
+TRUNCATE TABLE `ipms_material`;                                
+TRUNCATE TABLE `ipms_material_category`;                       
+TRUNCATE TABLE `ipms_material_purchase`;                       
+TRUNCATE TABLE `ipms_material_purchase_flow`;                  
+TRUNCATE TABLE `ipms_material_purchase_item`;                  
+TRUNCATE TABLE `ipms_material_supplier`;                       
+TRUNCATE TABLE `ipms_material_used`;                           
+TRUNCATE TABLE `ipms_meeting`;                                 
+TRUNCATE TABLE `ipms_meeting_participant`;                     
+TRUNCATE TABLE `ipms_meeting_room`;                            
+TRUNCATE TABLE `ipms_mission`;                                 
+TRUNCATE TABLE `ipms_mission_category`;                        
+TRUNCATE TABLE `ipms_mission_complete`;                        
+TRUNCATE TABLE `ipms_mission_complete_node`;                   
+TRUNCATE TABLE `ipms_mission_line`;                            
+TRUNCATE TABLE `ipms_mission_line_node`;                       
+TRUNCATE TABLE `ipms_mission_point`;                           
+TRUNCATE TABLE `ipms_move_car`;                                
+TRUNCATE TABLE `ipms_notice_to_user`;                          
+TRUNCATE TABLE `ipms_notice_to_user_readed`;                   
+TRUNCATE TABLE `ipms_notice_tpl`;                              
+TRUNCATE TABLE `ipms_owner_apply`;                             
+TRUNCATE TABLE `ipms_owner_detail_log`;                        
+TRUNCATE TABLE `ipms_party`;                                   
+TRUNCATE TABLE `ipms_pet`;                                     
+TRUNCATE TABLE `ipms_pet_vaccinate`;                           
+TRUNCATE TABLE `ipms_property_company_access`;                 
+TRUNCATE TABLE `ipms_property_company_auth`;                   
+TRUNCATE TABLE `ipms_property_company_building_registered`;    
+TRUNCATE TABLE `ipms_property_company_department`;             
+TRUNCATE TABLE `ipms_property_company_job`;                    
+TRUNCATE TABLE `ipms_property_company_user`;                   
+TRUNCATE TABLE `ipms_property_company_user_access_community`;  
+TRUNCATE TABLE `ipms_property_company_user_default_community`; 
+TRUNCATE TABLE `ipms_property_company_user_join_record`;       
+TRUNCATE TABLE `ipms_property_company_user_login`;             
+TRUNCATE TABLE `ipms_property_fee`;                            
+TRUNCATE TABLE `ipms_property_fee_order`;                      
+TRUNCATE TABLE `ipms_property_fee_order_item`;                 
+TRUNCATE TABLE `ipms_question`;                                
+TRUNCATE TABLE `ipms_question_option`;                         
+TRUNCATE TABLE `ipms_questionnaire`;                           
+TRUNCATE TABLE `ipms_questionnaire_answer`;                    
+TRUNCATE TABLE `ipms_questionnaire_answer_result`;             
+TRUNCATE TABLE `ipms_questionnaire_statistics`;                
+TRUNCATE TABLE `ipms_refound`;                                 
+TRUNCATE TABLE `ipms_refound_flow`;                            
+TRUNCATE TABLE `ipms_refound_item`;                            
+TRUNCATE TABLE `ipms_repair`;                                  
+TRUNCATE TABLE `ipms_repair_urge`;                             
+TRUNCATE TABLE `ipms_schedule`;                                
+TRUNCATE TABLE `ipms_session_store`;                           
+TRUNCATE TABLE `ipms_storehouse`;                              
+TRUNCATE TABLE `ipms_topic`;                                   
+TRUNCATE TABLE `ipms_user_building`;                           
+TRUNCATE TABLE `ipms_user_building_operate_log`;               
+TRUNCATE TABLE `ipms_user_car`;                                
+TRUNCATE TABLE `ipms_user_car_operate_log`;                    
+TRUNCATE TABLE `ipms_user_car_sync`;                           
+TRUNCATE TABLE `ipms_user_default_community`;                  
+TRUNCATE TABLE `ipms_vistor`;                                  
+TRUNCATE TABLE `ipms_wechat_mp_auth`;                          
+TRUNCATE TABLE `ipms_wechat_mp_user`;                          
+TRUNCATE TABLE `ipms_wechat_mp_user_login`;                    
+TRUNCATE TABLE `ipms_wechat_official_accounts_user`;           
+TRUNCATE TABLE `ipms_workflow`;                                
+TRUNCATE TABLE `ipms_workflow_node`;                           
 
 
 #redis
 
 #minio
 
+
+## 系统重命名迁移方案（ejyy → ipms）
+
+- 系统命名、数据库库名、表前缀、构建产物名、请求头、对象存储桶名全面从“ejyy”升级为“ipms”。
+- 建议先备份数据库与对象存储，再按以下步骤执行。
+
+### 变更清单（概要）
+- 配置文件：`.ejyyrc` → `.ipmsrc`，数据库名 `ipms`，MinIO 桶 `ipms`
+- 后端产物：`ejyy_server.js` → `ipms_server.js`
+- 数据库：所有表从 `ejyy_*` → `ipms_*`；库名从 `ejyy` → `ipms`
+- 前端请求头：`ejyy-pc-token` → `ipms-pc-token`；本地储存键 `EJYY_PC_TOKEN/USER_ID` → `IPMS_PC_TOKEN/USER_ID`
+
+### 数据库迁移（生产）
+```sql
+CREATE DATABASE IF NOT EXISTS `ipms` DEFAULT CHARACTER SET utf8mb4;
+
+SET @old_db='ejyy'; SET @new_db='ipms';
+SET @old_prefix='ejyy_'; SET @new_prefix='ipms_';
+
+SELECT CONCAT(
+  'RENAME TABLE `', TABLE_SCHEMA, '`.`', TABLE_NAME, '` TO `', @new_db, '`.`', REPLACE(TABLE_NAME, @old_prefix, @new_prefix), '`;'
+) AS stmt
+FROM information_schema.TABLES
+WHERE TABLE_SCHEMA=@old_db AND TABLE_NAME LIKE CONCAT(@old_prefix, '%');
+-- 将输出的语句批量执行
+```
+
+### 启动脚本示例（后端）
+```bash
+docker run -d --name api-server \
+  -p 6688:6688 \
+  -v /Users/pzq/tech/projects/ipms/api-server/dist:/www/apiserver \
+  -w /www/apiserver \
+  node:24.2.0 \
+  sh -c "npm install && node ipms_server.js"
+```
+
+### 配置文件示例（.ipmsrc）
+```yaml
+server:
+  port: 6688
+  name: "IPMS"
+
+mysql:
+  host: "localhost"
+  port: 3306
+  user: "root"
+  password: "******"
+  database: "ipms"
+
+redis:
+  host: "localhost"
+  port: 6379
+  password: ""
+
+storage:
+  mode: "local"
+  local:
+    savePath: "./uploads"
+    urlPrefix: "/static"
+    baseUrl: "http://127.0.0.1:6688"
+  minio:
+    endpoint: "http://127.0.0.1:9000"
+    accessKey: "admin"
+    secretKey: "******"
+    bucket: "ipms"
+    useSSL: false
+    baseUrl: "http://127.0.0.1:9000"
+    customDomain: ""
+```
+
+### 过渡期兼容（可选）
+- 后端同时接受 `ipms-pc-token` 与 `ejyy-pc-token`。
+- 配置加载优先 `.ipmsrc`，若不存在回退 `.ejyyrc`。
+- 观察期后删除兼容逻辑，清理旧 Redis Key。
 
 #前端服务
 
@@ -383,7 +502,7 @@ api-server/src/config.ts  IP需要修改api-server对应的IP
 2、console-web
 console-web/src/config.js  IP需要修改console-web对应的IP
 
-3、后台配饰api-server/dist/.ejyyrc
+3、后台配置 api-server/dist/.ipmsrc
 1）minio的IP
 2）mysql的IP
 3）redis的IP

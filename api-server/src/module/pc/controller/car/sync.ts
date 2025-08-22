@@ -46,11 +46,11 @@ const PcCarSyncAction = <Action>{
         const { id, community_id, building_id } = <RequestBody>ctx.request.body;
 
         const detail = await ctx.model
-            .from('ejyy_user_car')
-            .leftJoin('ejyy_building_info', 'ejyy_building_info.id', 'ejyy_user_car.building_id')
-            .where('ejyy_user_car.id', id)
-            .andWhere('ejyy_building_info.community_id', community_id)
-            .andWhere('ejyy_user_car.building_id', building_id)
+            .from('ipms_user_car')
+            .leftJoin('ipms_building_info', 'ipms_building_info.id', 'ipms_user_car.building_id')
+            .where('ipms_user_car.id', id)
+            .andWhere('ipms_building_info.community_id', community_id)
+            .andWhere('ipms_user_car.building_id', building_id)
             .select()
             .first();
 
@@ -69,12 +69,12 @@ const PcCarSyncAction = <Action>{
         }
 
         await ctx.model
-            .from('ejyy_user_car')
+            .from('ipms_user_car')
             .where('id', id)
             .update('sync', TRUE);
 
         await ctx.model
-            .from('ejyy_user_car_sync')
+            .from('ipms_user_car_sync')
             .where('user_car_id', id)
             .delete();
 

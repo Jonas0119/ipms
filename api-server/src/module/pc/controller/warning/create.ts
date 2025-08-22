@@ -63,7 +63,7 @@ const PcWarningCreateAction = <Action>{
         const { community_id, sign, secret, name, lng, lat } = <RequestBody>ctx.request.body;
 
         const exist = await ctx.model
-            .from('ejyy_iot_warning')
+            .from('ipms_iot_warning')
             .where('name', name)
             .andWhere('community_id', community_id)
             .first();
@@ -76,7 +76,7 @@ const PcWarningCreateAction = <Action>{
         }
 
         const created_at = Date.now();
-        const [id] = await ctx.model.from('ejyy_iot_warning').insert({
+        const [id] = await ctx.model.from('ipms_iot_warning').insert({
             community_id,
             sign,
             secret,

@@ -111,7 +111,7 @@ const CwCommunityManageUpdateAction = <Action>{
         } = <RequestBody>ctx.request.body;
 
         const affact = await ctx.model
-            .from('ejyy_community_info')
+            .from('ipms_community_info')
             .update({
                 name,
                 banner,
@@ -130,7 +130,7 @@ const CwCommunityManageUpdateAction = <Action>{
         }
 
         await ctx.model
-            .from('ejyy_community_setting')
+            .from('ipms_community_setting')
             .update({
                 access_nfc,
                 access_remote,

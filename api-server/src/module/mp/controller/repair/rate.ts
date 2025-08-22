@@ -48,7 +48,7 @@ const MpRepairRateAction = <Action>{
         const { rate, rate_content } = <RequestBody>ctx.request.body;
 
         const record = await ctx.model
-            .from('ejyy_repair')
+            .from('ipms_repair')
             .where('id', id)
             .andWhere('wechat_mp_user_id', ctx.mpUserInfo.id)
             .first();
@@ -67,7 +67,7 @@ const MpRepairRateAction = <Action>{
         }
 
         await ctx.model
-            .from('ejyy_repair')
+            .from('ipms_repair')
             .update({ rate, rate_content, rated_at: Date.now() })
             .where('id', id);
 

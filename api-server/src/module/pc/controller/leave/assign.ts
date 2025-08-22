@@ -52,7 +52,7 @@ const PcLeaveAssignction = <Action>{
         const { id, node_id, relation_user_id, community_id } = <RequestBody>ctx.request.body;
 
         const flowInfo = await ctx.model
-            .from('ejyy_ask_for_leave')
+            .from('ipms_ask_for_leave')
             .where('id', id)
             .andWhere('community_id', community_id)
             .first();
@@ -65,7 +65,7 @@ const PcLeaveAssignction = <Action>{
         }
 
         const flowNode = await ctx.model
-            .from('ejyy_ask_for_leave_flow')
+            .from('ipms_ask_for_leave_flow')
             .where('parent_id', id)
             .andWhere('id', node_id)
             .first();
@@ -83,7 +83,7 @@ const PcLeaveAssignction = <Action>{
         }
 
         await ctx.model
-            .from('ejyy_ask_for_leave_flow')
+            .from('ipms_ask_for_leave_flow')
             .update({ relation_user_id })
             .where('id', node_id);
 

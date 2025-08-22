@@ -42,11 +42,11 @@ const PcMoveCarFindAction = <Action>{
         const { car_number } = <RequestBody>ctx.request.body;
 
         const list = await ctx.model
-            .from('ejyy_user_car')
-            .leftJoin('ejyy_wechat_mp_user', 'ejyy_wechat_mp_user.id', 'ejyy_user_car.wechat_mp_user_id')
-            .where('ejyy_user_car.car_number', car_number)
-            .andWhere('ejyy_user_car.status', BINDING_CAR)
-            .select('ejyy_wechat_mp_user.phone');
+            .from('ipms_user_car')
+            .leftJoin('ipms_wechat_mp_user', 'ipms_wechat_mp_user.id', 'ipms_user_car.wechat_mp_user_id')
+            .where('ipms_user_car.car_number', car_number)
+            .andWhere('ipms_user_car.status', BINDING_CAR)
+            .select('ipms_wechat_mp_user.phone');
 
         ctx.body = {
             code: SUCCESS,

@@ -50,11 +50,11 @@ const MpCommunityBindingByPropertyAction = <Action>{
         }
 
         const buildingsInfo = await ctx.model
-            .from('ejyy_building_info')
-            .leftJoin('ejyy_user_building', 'ejyy_user_building.building_id', 'ejyy_building_info.id')
-            .whereIn('ejyy_building_info.id', qrInfo.building_ids)
-            .where('ejyy_user_building.building_id', null)
-            .select('ejyy_building_info.id');
+            .from('ipms_building_info')
+            .leftJoin('ipms_user_building', 'ipms_user_building.building_id', 'ipms_building_info.id')
+            .whereIn('ipms_building_info.id', qrInfo.building_ids)
+            .where('ipms_user_building.building_id', null)
+            .select('ipms_building_info.id');
 
         if (buildingsInfo.length === 0) {
             return (ctx.body = {
@@ -76,7 +76,7 @@ const MpCommunityBindingByPropertyAction = <Action>{
             });
         }
 
-        await ctx.model.from('ejyy_user_building').insert(bindingData);
+        await ctx.model.from('ipms_user_building').insert(bindingData);
 
         const communityInfo = await communityService(ctx.model, ctx.mpUserInfo.id);
 

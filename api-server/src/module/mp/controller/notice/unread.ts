@@ -39,36 +39,36 @@ const MpNoticeUnreadAction = <Action>{
         const { page_num, page_size } = <RequestBody>ctx.request.body;
 
         const list = await ctx.model
-            .from('ejyy_notice_to_user')
-            .leftJoin('ejyy_community_info', 'ejyy_community_info.id', 'ejyy_notice_to_user.community_id')
+            .from('ipms_notice_to_user')
+            .leftJoin('ipms_community_info', 'ipms_community_info.id', 'ipms_notice_to_user.community_id')
             .where(function() {
-                this.whereIn('ejyy_notice_to_user.community_id', function() {
-                    this.from('ejyy_user_building')
-                        .leftJoin('ejyy_building_info', 'ejyy_building_info.id', 'ejyy_user_building.building_id')
+                this.whereIn('ipms_notice_to_user.community_id', function() {
+                    this.from('ipms_user_building')
+                        .leftJoin('ipms_building_info', 'ipms_building_info.id', 'ipms_user_building.building_id')
                         .where('status', BINDING_BUILDING)
                         .andWhere('wechat_mp_user_id', ctx.mpUserInfo.id)
-                        .select('ejyy_building_info.community_id');
-                }).orWhere('ejyy_notice_to_user.refer', SYSTEM_NOTICE);
+                        .select('ipms_building_info.community_id');
+                }).orWhere('ipms_notice_to_user.refer', SYSTEM_NOTICE);
             })
-            .whereNotIn('ejyy_notice_to_user.id', function() {
-                this.from('ejyy_notice_to_user_readed')
+            .whereNotIn('ipms_notice_to_user.id', function() {
+                this.from('ipms_notice_to_user_readed')
                     .where('wechat_mp_user_id', ctx.mpUserInfo.id)
                     .select('notice_id');
             })
-            .andWhere('ejyy_notice_to_user.created_at', '>=', ctx.mpUserInfo.created_at)
-            .andWhere('ejyy_notice_to_user.published', TRUE)
-            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ejyy_notice_to_user.id'))
+            .andWhere('ipms_notice_to_user.created_at', '>=', ctx.mpUserInfo.created_at)
+            .andWhere('ipms_notice_to_user.published', TRUE)
+            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ipms_notice_to_user.id'))
             .select(
-                'ejyy_notice_to_user.id',
-                'ejyy_notice_to_user.title',
-                'ejyy_notice_to_user.overview',
-                'ejyy_notice_to_user.refer',
-                'ejyy_community_info.name as scope',
-                'ejyy_notice_to_user.created_at'
+                'ipms_notice_to_user.id',
+                'ipms_notice_to_user.title',
+                'ipms_notice_to_user.overview',
+                'ipms_notice_to_user.refer',
+                'ipms_community_info.name as scope',
+                'ipms_notice_to_user.created_at'
             )
             .limit(page_size)
             .offset((page_num - 1) * page_size)
-            .orderBy('ejyy_notice_to_user.id', 'desc');
+            .orderBy('ipms_notice_to_user.id', 'desc');
 
         const [res] = await ctx.model.select(ctx.model.raw('found_rows() AS total'));
 

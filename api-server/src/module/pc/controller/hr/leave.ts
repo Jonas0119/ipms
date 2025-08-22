@@ -33,7 +33,7 @@ const PcHrLeaveAction = <Action>{
         const { id } = <RequestParams>ctx.params;
 
         const info = await ctx.model
-            .from('ejyy_property_company_user')
+            .from('ipms_property_company_user')
             .where('id', id)
             .first();
 
@@ -53,10 +53,10 @@ const PcHrLeaveAction = <Action>{
 
         // 如果是流程审批人不能离职
         const workflowApproverUser = await ctx.model
-            .from('ejyy_workflow')
-            .leftJoin('ejyy_workflow_node', 'ejyy_workflow_node.workflow_id', 'ejyy_workflow.id')
-            .where('ejyy_workflow.latest', TRUE)
-            .andWhere('ejyy_workflow_node.relation_user_id', id)
+            .from('ipms_workflow')
+            .leftJoin('ipms_workflow_node', 'ipms_workflow_node.workflow_id', 'ipms_workflow.id')
+            .where('ipms_workflow.latest', TRUE)
+            .andWhere('ipms_workflow_node.relation_user_id', id)
             .first();
 
         if (workflowApproverUser) {
@@ -67,7 +67,7 @@ const PcHrLeaveAction = <Action>{
         }
 
         const affect = await ctx.model
-            .from('ejyy_property_company_user')
+            .from('ipms_property_company_user')
             .update('leave_office', TRUE)
             .where('id', id);
 
@@ -80,7 +80,7 @@ const PcHrLeaveAction = <Action>{
 
         const created_at = Date.now();
 
-        await ctx.model.from('ejyy_property_company_user_join_record').insert({
+        await ctx.model.from('ipms_property_company_user_join_record').insert({
             property_company_user_id: id,
             status: TRUE,
             created_by: ctx.pcUserInfo.id,

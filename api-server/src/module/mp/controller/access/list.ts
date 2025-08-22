@@ -41,14 +41,14 @@ const MpAccessListAction = <Action>{
         const { building_ids, community_id } = <RequestBody>ctx.request.body;
 
         const buildings = await ctx.model
-            .from('ejyy_user_building')
-            .leftJoin('ejyy_building_info', 'ejyy_building_info.id', 'ejyy_user_building.building_id')
-            .where('ejyy_building_info.community_id', community_id)
-            .whereIn('ejyy_user_building.building_id', building_ids)
-            .andWhere('ejyy_user_building.wechat_mp_user_id', ctx.mpUserInfo.id)
-            .andWhere('ejyy_user_building.status', BINDING_BUILDING)
-            .select('ejyy_user_building.building_id')
-            .orderBy('ejyy_user_building.id', 'desc');
+            .from('ipms_user_building')
+            .leftJoin('ipms_building_info', 'ipms_building_info.id', 'ipms_user_building.building_id')
+            .where('ipms_building_info.community_id', community_id)
+            .whereIn('ipms_user_building.building_id', building_ids)
+            .andWhere('ipms_user_building.wechat_mp_user_id', ctx.mpUserInfo.id)
+            .andWhere('ipms_user_building.status', BINDING_BUILDING)
+            .select('ipms_user_building.building_id')
+            .orderBy('ipms_user_building.id', 'desc');
 
         const cardList = [];
 
@@ -60,7 +60,7 @@ const MpAccessListAction = <Action>{
         });
 
         const entranceList = await ctx.model
-            .from('ejyy_iot_entrance')
+            .from('ipms_iot_entrance')
             .where('community_id', community_id)
             .select('id', 'name')
             .orderBy('id', 'desc');

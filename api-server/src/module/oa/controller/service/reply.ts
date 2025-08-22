@@ -33,12 +33,12 @@ const OaReplyAction = <OaAction>{
 
             if (userInfo.subscribe) {
                 const exist = await ctx.model
-                    .from('ejyy_wechat_official_accounts_user')
+                    .from('ipms_wechat_official_accounts_user')
                     .where('open_id', openid)
                     .first();
 
                 if (!exist) {
-                    await ctx.model.from('ejyy_wechat_official_accounts_user').insert({
+                    await ctx.model.from('ipms_wechat_official_accounts_user').insert({
                         open_id: userInfo.openid,
                         union_id: userInfo.unionid,
                         subscribed: userInfo.subscribe,
@@ -46,7 +46,7 @@ const OaReplyAction = <OaAction>{
                     });
                 } else {
                     await ctx.model
-                        .from('ejyy_wechat_official_accounts_user')
+                        .from('ipms_wechat_official_accounts_user')
                         .update({
                             subscribed: userInfo.subscribe,
                             created_at: Date.now()
@@ -55,7 +55,7 @@ const OaReplyAction = <OaAction>{
                 }
             } else {
                 await ctx.model
-                    .from('ejyy_wechat_official_accounts_user')
+                    .from('ipms_wechat_official_accounts_user')
                     .update({
                         subscribed: FALSE
                     })
@@ -76,7 +76,7 @@ const OaReplyAction = <OaAction>{
 
                     if (subscribe && unionid) {
                         const registered = await ctx.model
-                            .from('ejyy_wechat_mp_user')
+                            .from('ipms_wechat_mp_user')
                             .where('union_id', unionid)
                             .first();
 

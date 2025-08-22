@@ -59,46 +59,46 @@ const PcPaymentUnpayListAction = <Action>{
         const where = {};
 
         if (type) {
-            where['ejyy_building_info.type'] = type;
+            where['ipms_building_info.type'] = type;
         }
 
         const list = await ctx.model
-            .from('ejyy_building_info')
-            .where('ejyy_building_info.community_id', community_id)
+            .from('ipms_building_info')
+            .where('ipms_building_info.community_id', community_id)
             .andWhere(where)
-            .whereNotIn('ejyy_building_info.id', function() {
-                this.from('ejyy_property_fee')
+            .whereNotIn('ipms_building_info.id', function() {
+                this.from('ipms_property_fee')
                     .leftJoin(
-                        'ejyy_property_fee_order',
-                        'ejyy_property_fee_order.property_fee_id',
-                        'ejyy_property_fee.id'
+                        'ipms_property_fee_order',
+                        'ipms_property_fee_order.property_fee_id',
+                        'ipms_property_fee.id'
                     )
                     .leftJoin(
-                        'ejyy_property_fee_order_item',
-                        'ejyy_property_fee_order_item.property_fee_order_id',
-                        'ejyy_property_fee_order.id'
+                        'ipms_property_fee_order_item',
+                        'ipms_property_fee_order_item.property_fee_order_id',
+                        'ipms_property_fee_order.id'
                     )
-                    .where('ejyy_property_fee.id', property_fee_id)
-                    .andWhere('ejyy_property_fee_order.cancel', FALSE)
-                    .andWhere('ejyy_property_fee_order.paid', TRUE)
-                    .andWhere('ejyy_property_fee_order_item.refund', FALSE)
-                    .whereNull('ejyy_property_fee_order_item.refund_apply_at')
-                    .select('ejyy_property_fee_order_item.building_id');
+                    .where('ipms_property_fee.id', property_fee_id)
+                    .andWhere('ipms_property_fee_order.cancel', FALSE)
+                    .andWhere('ipms_property_fee_order.paid', TRUE)
+                    .andWhere('ipms_property_fee_order_item.refund', FALSE)
+                    .whereNull('ipms_property_fee_order_item.refund_apply_at')
+                    .select('ipms_property_fee_order_item.building_id');
             })
-            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ejyy_building_info.id'))
+            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ipms_building_info.id'))
             .select(
-                'ejyy_building_info.id',
-                'ejyy_building_info.type',
-                'ejyy_building_info.area',
-                'ejyy_building_info.building',
-                'ejyy_building_info.unit',
-                'ejyy_building_info.number',
-                'ejyy_building_info.construction_area',
-                'ejyy_building_info.created_at'
+                'ipms_building_info.id',
+                'ipms_building_info.type',
+                'ipms_building_info.area',
+                'ipms_building_info.building',
+                'ipms_building_info.unit',
+                'ipms_building_info.number',
+                'ipms_building_info.construction_area',
+                'ipms_building_info.created_at'
             )
             .limit(page_size)
             .offset((page_num - 1) * page_size)
-            .orderBy('ejyy_building_info.id', 'desc');
+            .orderBy('ipms_building_info.id', 'desc');
 
         const [res] = await ctx.model.select(ctx.model.raw('found_rows() AS total'));
 

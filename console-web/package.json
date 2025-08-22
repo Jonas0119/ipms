@@ -1,9 +1,9 @@
 {
-  "name": "ejyy_web",
+  "name": "ipms_web",
   "version": "1.0.0",
   "repository": {
     "type": "git",
-    "url": "git+https://gitee.com/chowa/ejyy.git"
+    "url": "git+https://github.com/Jonas0119/ipms.git"
   },
   "scripts": {
     "dev": "NODE_OPTIONS=--openssl-legacy-provider vue-cli-service serve",
@@ -15,7 +15,7 @@
   "keywords": [
     "vue",
     "webpack",
-    "ejyy"
+    "ipms"
   ],
   "engines": {
     "node": ">=12.1.0",
@@ -59,7 +59,7 @@
     "vue-template-compiler": "^2.6.11"
   },
   "bugs": {
-    "url": "https://gitee.com/chowa/ejyy/issues"
+    "url": "https://github.com/Jonas0119/ipms/issues"
   },
-  "homepage": "https://gitee.com/chowa/ejyy"
+  "homepage": "https://github.com/Jonas0119/ipms"
 }

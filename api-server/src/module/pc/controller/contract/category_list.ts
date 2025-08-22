@@ -38,24 +38,24 @@ const PcContractCategoryListAction = <Action>{
         const { page_num, page_size } = <RequestBody>ctx.request.body;
 
         const list = await ctx.model
-            .from('ejyy_contract_category')
+            .from('ipms_contract_category')
             .leftJoin(
-                'ejyy_property_company_user',
-                'ejyy_property_company_user.id',
-                'ejyy_contract_category.created_by'
+                'ipms_property_company_user',
+                'ipms_property_company_user.id',
+                'ipms_contract_category.created_by'
             )
-            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ejyy_contract_category.id'))
+            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ipms_contract_category.id'))
             .select(
-                'ejyy_contract_category.id',
-                'ejyy_contract_category.name',
-                'ejyy_contract_category.description',
-                'ejyy_contract_category.created_at',
-                'ejyy_contract_category.created_by',
-                'ejyy_property_company_user.real_name'
+                'ipms_contract_category.id',
+                'ipms_contract_category.name',
+                'ipms_contract_category.description',
+                'ipms_contract_category.created_at',
+                'ipms_contract_category.created_by',
+                'ipms_property_company_user.real_name'
             )
             .limit(page_size)
             .offset((page_num - 1) * page_size)
-            .orderBy('ejyy_contract_category.id', 'desc');
+            .orderBy('ipms_contract_category.id', 'desc');
 
         const [res] = await ctx.model.select(ctx.model.raw('found_rows() AS total'));
 

@@ -57,7 +57,7 @@ const PcLampCreateAction = <Action>{
         const { community_id, secret, name, sn, port_total } = <RequestBody>ctx.request.body;
 
         const exist = await ctx.model
-            .from('ejyy_iot_lamp')
+            .from('ipms_iot_lamp')
             .where('community_id', community_id)
             .andWhere('name', name)
             .first();
@@ -70,7 +70,7 @@ const PcLampCreateAction = <Action>{
         }
 
         const created_at = Date.now();
-        const [id] = await ctx.model.from('ejyy_iot_lamp').insert({
+        const [id] = await ctx.model.from('ipms_iot_lamp').insert({
             community_id,
             secret,
             name,

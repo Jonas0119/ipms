@@ -49,30 +49,30 @@ const PcSignRecordAction = <Action>{
         const { community_id, user_id, start, end } = <RequestBody>ctx.request.body;
 
         const info = await ctx.model
-            .from('ejyy_property_company_user')
+            .from('ipms_property_company_user')
             .leftJoin(
-                'ejyy_property_company_department',
-                'ejyy_property_company_department.id',
-                'ejyy_property_company_user.department_id'
+                'ipms_property_company_department',
+                'ipms_property_company_department.id',
+                'ipms_property_company_user.department_id'
             )
-            .leftJoin('ejyy_property_company_job', 'ejyy_property_company_job.id', 'ejyy_property_company_user.job_id')
-            .where('ejyy_property_company_user.id', user_id)
+            .leftJoin('ipms_property_company_job', 'ipms_property_company_job.id', 'ipms_property_company_user.job_id')
+            .where('ipms_property_company_user.id', user_id)
             .select(
-                'ejyy_property_company_user.id',
-                'ejyy_property_company_user.real_name',
-                'ejyy_property_company_user.idcard',
-                'ejyy_property_company_user.phone',
-                'ejyy_property_company_user.gender',
-                'ejyy_property_company_user.avatar_url',
-                'ejyy_property_company_user.join_company_at',
-                'ejyy_property_company_user.leave_office',
-                'ejyy_property_company_user.department_id',
-                'ejyy_property_company_user.job_id',
-                'ejyy_property_company_user.leave_office',
-                'ejyy_property_company_user.access_id',
-                'ejyy_property_company_user.created_by',
-                'ejyy_property_company_department.name as department',
-                'ejyy_property_company_job.name as job'
+                'ipms_property_company_user.id',
+                'ipms_property_company_user.real_name',
+                'ipms_property_company_user.idcard',
+                'ipms_property_company_user.phone',
+                'ipms_property_company_user.gender',
+                'ipms_property_company_user.avatar_url',
+                'ipms_property_company_user.join_company_at',
+                'ipms_property_company_user.leave_office',
+                'ipms_property_company_user.department_id',
+                'ipms_property_company_user.job_id',
+                'ipms_property_company_user.leave_office',
+                'ipms_property_company_user.access_id',
+                'ipms_property_company_user.created_by',
+                'ipms_property_company_department.name as department',
+                'ipms_property_company_job.name as job'
             )
             .first();
 
@@ -84,7 +84,7 @@ const PcSignRecordAction = <Action>{
         }
 
         const list = await ctx.model
-            .from('ejyy_employee_sign_record')
+            .from('ipms_employee_sign_record')
             .where('community_id', community_id)
             .andWhere('created_by', user_id)
             .andWhere('date', '>=', start ? start : Date.now() - 7000 * 24 * 60 * 60)

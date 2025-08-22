@@ -45,21 +45,21 @@ const PcStorehouseListAction = <Action>{
         const { page_num, page_size, community_id } = <RequestBody>ctx.request.body;
 
         const list = await ctx.model
-            .from('ejyy_storehouse')
-            .leftJoin('ejyy_property_company_user', 'ejyy_property_company_user.id', 'ejyy_storehouse.created_by')
+            .from('ipms_storehouse')
+            .leftJoin('ipms_property_company_user', 'ipms_property_company_user.id', 'ipms_storehouse.created_by')
             .andWhere('community_id', community_id)
-            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ejyy_storehouse.id'))
+            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ipms_storehouse.id'))
             .select(
-                'ejyy_storehouse.id',
-                'ejyy_storehouse.name',
-                'ejyy_storehouse.local',
-                'ejyy_storehouse.created_at',
-                'ejyy_storehouse.created_by',
-                'ejyy_property_company_user.real_name'
+                'ipms_storehouse.id',
+                'ipms_storehouse.name',
+                'ipms_storehouse.local',
+                'ipms_storehouse.created_at',
+                'ipms_storehouse.created_by',
+                'ipms_property_company_user.real_name'
             )
             .limit(page_size)
             .offset((page_num - 1) * page_size)
-            .orderBy('ejyy_storehouse.id', 'desc');
+            .orderBy('ipms_storehouse.id', 'desc');
 
         const [res] = await ctx.model.select(ctx.model.raw('found_rows() AS total'));
 

@@ -48,7 +48,7 @@ const MpPetLicenseAction = <Action>{
         const { pet_license, pet_license_award_at } = <RequestBody>ctx.request.body;
 
         const affect = await ctx.model
-            .from('ejyy_pet')
+            .from('ipms_pet')
             .update({ pet_license, pet_license_award_at })
             .where('id', id)
             .where('wechat_mp_user_id', ctx.mpUserInfo.id);

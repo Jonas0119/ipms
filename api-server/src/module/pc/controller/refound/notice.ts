@@ -56,32 +56,32 @@ const PcRefoundNoticeAction = <Action>{
         }
 
         const list = await ctx.model
-            .from('ejyy_refound')
-            .leftJoin('ejyy_property_company_user', 'ejyy_property_company_user.id', 'ejyy_refound.created_by')
-            .andWhere('ejyy_refound.community_id', community_id)
+            .from('ipms_refound')
+            .leftJoin('ipms_property_company_user', 'ipms_property_company_user.id', 'ipms_refound.created_by')
+            .andWhere('ipms_refound.community_id', community_id)
             .andWhere(where)
-            .whereIn('ejyy_refound.id', function() {
-                this.from('ejyy_refound_flow')
+            .whereIn('ipms_refound.id', function() {
+                this.from('ipms_refound_flow')
                     .where('node_type', WORKFLOW_NODE_NOTICE)
                     .andWhere('relation_user_id', ctx.pcUserInfo.id)
                     .select('parent_id');
             })
-            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ejyy_refound.id'))
+            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ipms_refound.id'))
             .select(
-                'ejyy_refound.id',
-                'ejyy_refound.created_by',
-                'ejyy_property_company_user.real_name',
-                'ejyy_refound.begin_date',
-                'ejyy_refound.finish_date',
-                'ejyy_refound.reason',
-                'ejyy_refound.total',
-                'ejyy_refound.success',
-                'ejyy_refound.cancel',
-                'ejyy_refound.created_at'
+                'ipms_refound.id',
+                'ipms_refound.created_by',
+                'ipms_property_company_user.real_name',
+                'ipms_refound.begin_date',
+                'ipms_refound.finish_date',
+                'ipms_refound.reason',
+                'ipms_refound.total',
+                'ipms_refound.success',
+                'ipms_refound.cancel',
+                'ipms_refound.created_at'
             )
             .limit(page_size)
             .offset((page_num - 1) * page_size)
-            .orderBy('ejyy_refound.id', 'desc');
+            .orderBy('ipms_refound.id', 'desc');
 
         const [res] = await ctx.model.select(ctx.model.raw('found_rows() AS total'));
 

@@ -32,7 +32,7 @@ const PcMaterialCategoryDeleteAction = <Action>{
         const { id } = <RequestParams>ctx.params;
 
         const exist = await ctx.model
-            .from('ejyy_material_category')
+            .from('ipms_material_category')
             .where('id', id)
             .first();
 
@@ -44,7 +44,7 @@ const PcMaterialCategoryDeleteAction = <Action>{
         }
 
         const used = await ctx.model
-            .from('ejyy_material')
+            .from('ipms_material')
             .where('category_id', id)
             .first();
 
@@ -56,7 +56,7 @@ const PcMaterialCategoryDeleteAction = <Action>{
         }
 
         await ctx.model
-            .from('ejyy_material_category')
+            .from('ipms_material_category')
             .where('id', id)
             .delete();
 

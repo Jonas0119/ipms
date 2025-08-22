@@ -53,19 +53,19 @@ const PcQuestionnaireDetailAction = <Action>{
         const { id, community_id } = <RequestBody>ctx.request.body;
 
         const info = await ctx.model
-            .from('ejyy_questionnaire')
-            .leftJoin('ejyy_property_company_user', 'ejyy_property_company_user.id', 'ejyy_questionnaire.created_by')
-            .where('ejyy_questionnaire.id', id)
-            .where('ejyy_questionnaire.community_id', community_id)
+            .from('ipms_questionnaire')
+            .leftJoin('ipms_property_company_user', 'ipms_property_company_user.id', 'ipms_questionnaire.created_by')
+            .where('ipms_questionnaire.id', id)
+            .where('ipms_questionnaire.community_id', community_id)
             .select(
-                'ejyy_questionnaire.id',
-                'ejyy_questionnaire.title',
-                'ejyy_questionnaire.expire',
-                'ejyy_questionnaire.published',
-                'ejyy_questionnaire.published_at',
-                'ejyy_questionnaire.created_at',
-                'ejyy_property_company_user.id as user_id',
-                'ejyy_property_company_user.real_name'
+                'ipms_questionnaire.id',
+                'ipms_questionnaire.title',
+                'ipms_questionnaire.expire',
+                'ipms_questionnaire.published',
+                'ipms_questionnaire.published_at',
+                'ipms_questionnaire.created_at',
+                'ipms_property_company_user.id as user_id',
+                'ipms_property_company_user.real_name'
             )
             .first();
 
@@ -77,15 +77,15 @@ const PcQuestionnaireDetailAction = <Action>{
         }
 
         const questions = await ctx.model
-            .from('ejyy_question')
-            .leftJoin('ejyy_question_option', 'ejyy_question_option.question_id', 'ejyy_question.id')
-            .where('ejyy_question.questionnaire_id', id)
+            .from('ipms_question')
+            .leftJoin('ipms_question_option', 'ipms_question_option.question_id', 'ipms_question.id')
+            .where('ipms_question.questionnaire_id', id)
             .select(
-                'ejyy_question.title as question_title',
-                'ejyy_question.type',
-                'ejyy_question_option.id as option_id',
-                'ejyy_question_option.question_id',
-                'ejyy_question_option.option_val'
+                'ipms_question.title as question_title',
+                'ipms_question.type',
+                'ipms_question_option.id as option_id',
+                'ipms_question_option.question_id',
+                'ipms_question_option.option_val'
             );
 
         const map = <QuestionMap>{};
@@ -106,7 +106,7 @@ const PcQuestionnaireDetailAction = <Action>{
         });
 
         const { content: statistics } = await ctx.model
-            .from('ejyy_questionnaire_statistics')
+            .from('ipms_questionnaire_statistics')
             .where('questionnaire_id', id)
             .first();
 

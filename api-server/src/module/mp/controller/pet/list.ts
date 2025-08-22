@@ -38,26 +38,26 @@ const MpPetListAction = <Action>{
         const { page_num, page_size } = <RequestBody>ctx.request.body;
 
         const list = await ctx.model
-            .from('ejyy_pet')
-            .leftJoin('ejyy_community_info', 'ejyy_community_info.id', 'ejyy_pet.community_id')
+            .from('ipms_pet')
+            .leftJoin('ipms_community_info', 'ipms_community_info.id', 'ipms_pet.community_id')
             .where('wechat_mp_user_id', ctx.mpUserInfo.id)
-            .andWhere('ejyy_pet.remove', FALSE)
-            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ejyy_pet.id'))
+            .andWhere('ipms_pet.remove', FALSE)
+            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ipms_pet.id'))
             .select(
-                'ejyy_pet.id',
-                'ejyy_pet.name',
-                'ejyy_pet.sex',
-                'ejyy_pet.pet_type',
-                'ejyy_pet.coat_color',
-                'ejyy_pet.breed',
-                'ejyy_pet.photo',
-                'ejyy_pet.pet_license',
-                'ejyy_pet.created_at',
-                'ejyy_community_info.name as community_name'
+                'ipms_pet.id',
+                'ipms_pet.name',
+                'ipms_pet.sex',
+                'ipms_pet.pet_type',
+                'ipms_pet.coat_color',
+                'ipms_pet.breed',
+                'ipms_pet.photo',
+                'ipms_pet.pet_license',
+                'ipms_pet.created_at',
+                'ipms_community_info.name as community_name'
             )
             .limit(page_size)
             .offset((page_num - 1) * page_size)
-            .orderBy('ejyy_pet.id', 'desc');
+            .orderBy('ipms_pet.id', 'desc');
 
         const [res] = await ctx.model.select(ctx.model.raw('found_rows() AS total'));
 

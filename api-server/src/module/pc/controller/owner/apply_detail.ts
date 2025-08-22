@@ -39,29 +39,29 @@ const PcOwerApplyDetailAction = <Action>{
         const { community_id, id } = <RequestBody>ctx.request.body;
 
         const info = await ctx.model
-            .from('ejyy_owner_apply')
-            .leftJoin('ejyy_wechat_mp_user', 'ejyy_wechat_mp_user.id', 'ejyy_owner_apply.wechat_mp_user_id')
-            .leftJoin('ejyy_property_company_user', 'ejyy_property_company_user.id', 'ejyy_owner_apply.replied_by')
-            .where('ejyy_owner_apply.id', id)
-            .andWhere('ejyy_owner_apply.community_id', community_id)
+            .from('ipms_owner_apply')
+            .leftJoin('ipms_wechat_mp_user', 'ipms_wechat_mp_user.id', 'ipms_owner_apply.wechat_mp_user_id')
+            .leftJoin('ipms_property_company_user', 'ipms_property_company_user.id', 'ipms_owner_apply.replied_by')
+            .where('ipms_owner_apply.id', id)
+            .andWhere('ipms_owner_apply.community_id', community_id)
             .select(
-                'ejyy_owner_apply.id',
-                'ejyy_owner_apply.wechat_mp_user_id',
-                'ejyy_owner_apply.community_name',
-                'ejyy_owner_apply.house',
-                'ejyy_owner_apply.carport',
-                'ejyy_owner_apply.warehouse',
-                'ejyy_owner_apply.subscribed',
-                'ejyy_owner_apply.replied',
-                'ejyy_owner_apply.replied_by',
-                'ejyy_owner_apply.reply_content',
-                'ejyy_owner_apply.replied_at',
-                'ejyy_owner_apply.replied',
-                'ejyy_owner_apply.content',
-                'ejyy_owner_apply.success',
-                'ejyy_owner_apply.created_at',
-                'ejyy_wechat_mp_user.real_name',
-                'ejyy_property_company_user.real_name as replied_real_name'
+                'ipms_owner_apply.id',
+                'ipms_owner_apply.wechat_mp_user_id',
+                'ipms_owner_apply.community_name',
+                'ipms_owner_apply.house',
+                'ipms_owner_apply.carport',
+                'ipms_owner_apply.warehouse',
+                'ipms_owner_apply.subscribed',
+                'ipms_owner_apply.replied',
+                'ipms_owner_apply.replied_by',
+                'ipms_owner_apply.reply_content',
+                'ipms_owner_apply.replied_at',
+                'ipms_owner_apply.replied',
+                'ipms_owner_apply.content',
+                'ipms_owner_apply.success',
+                'ipms_owner_apply.created_at',
+                'ipms_wechat_mp_user.real_name',
+                'ipms_property_company_user.real_name as replied_real_name'
             )
             .first();
 
@@ -76,24 +76,24 @@ const PcOwerApplyDetailAction = <Action>{
 
         if (info.replied && info.success) {
             buildings = await ctx.model
-                .from('ejyy_building_info')
-                .leftJoin('ejyy_user_building', 'ejyy_user_building.building_id', 'ejyy_building_info.id')
-                .where('ejyy_building_info.community_id', community_id)
-                .andWhere('ejyy_user_building.wechat_mp_user_id', info.wechat_mp_user_id)
-                .whereIn('ejyy_building_info.id', info.content)
+                .from('ipms_building_info')
+                .leftJoin('ipms_user_building', 'ipms_user_building.building_id', 'ipms_building_info.id')
+                .where('ipms_building_info.community_id', community_id)
+                .andWhere('ipms_user_building.wechat_mp_user_id', info.wechat_mp_user_id)
+                .whereIn('ipms_building_info.id', info.content)
                 .select(
-                    'ejyy_user_building.id',
-                    'ejyy_user_building.building_id',
-                    'ejyy_building_info.type',
-                    'ejyy_building_info.area',
-                    'ejyy_building_info.building',
-                    'ejyy_building_info.unit',
-                    'ejyy_building_info.number',
-                    'ejyy_building_info.construction_area',
-                    'ejyy_building_info.created_at',
-                    'ejyy_user_building.authenticated',
-                    'ejyy_user_building.authenticated_type',
-                    'ejyy_user_building.status'
+                    'ipms_user_building.id',
+                    'ipms_user_building.building_id',
+                    'ipms_building_info.type',
+                    'ipms_building_info.area',
+                    'ipms_building_info.building',
+                    'ipms_building_info.unit',
+                    'ipms_building_info.number',
+                    'ipms_building_info.construction_area',
+                    'ipms_building_info.created_at',
+                    'ipms_user_building.authenticated',
+                    'ipms_user_building.authenticated_type',
+                    'ipms_user_building.status'
                 );
         }
 

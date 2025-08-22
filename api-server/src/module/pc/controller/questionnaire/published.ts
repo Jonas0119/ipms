@@ -40,7 +40,7 @@ const PcQuestionnairePublishedAction = <Action>{
         const { id, community_id } = <RequestBody>ctx.request.body;
 
         const detail = await ctx.model
-            .from('ejyy_questionnaire')
+            .from('ipms_questionnaire')
             .where('id', id)
             .andWhere('community_id', community_id)
             .first();
@@ -69,7 +69,7 @@ const PcQuestionnairePublishedAction = <Action>{
         }
 
         await ctx.model
-            .from('ejyy_questionnaire')
+            .from('ipms_questionnaire')
             .where('id', id)
             .andWhere('community_id', community_id)
             .update({

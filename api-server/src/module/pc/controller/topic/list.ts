@@ -52,27 +52,27 @@ const PcTopicListAction = <Action>{
         const where = {};
 
         if (published !== undefined) {
-            where['ejyy_topic.published'] = published;
+            where['ipms_topic.published'] = published;
         }
 
         const list = await ctx.model
-            .from('ejyy_topic')
-            .leftJoin('ejyy_property_company_user', 'ejyy_property_company_user.id', 'ejyy_topic.created_by')
+            .from('ipms_topic')
+            .leftJoin('ipms_property_company_user', 'ipms_property_company_user.id', 'ipms_topic.created_by')
             .where(where)
-            .andWhere('ejyy_topic.community_id', community_id)
-            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ejyy_topic.id'))
+            .andWhere('ipms_topic.community_id', community_id)
+            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ipms_topic.id'))
             .select(
-                'ejyy_topic.id',
-                'ejyy_topic.banner_img',
-                'ejyy_topic.title',
-                'ejyy_topic.published',
-                'ejyy_topic.created_at',
-                'ejyy_topic.created_by',
-                'ejyy_property_company_user.real_name'
+                'ipms_topic.id',
+                'ipms_topic.banner_img',
+                'ipms_topic.title',
+                'ipms_topic.published',
+                'ipms_topic.created_at',
+                'ipms_topic.created_by',
+                'ipms_property_company_user.real_name'
             )
             .limit(page_size)
             .offset((page_num - 1) * page_size)
-            .orderBy('ejyy_topic.id', 'desc');
+            .orderBy('ipms_topic.id', 'desc');
 
         const [res] = await ctx.model.select(ctx.model.raw('found_rows() AS total'));
 

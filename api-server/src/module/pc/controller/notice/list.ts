@@ -52,28 +52,28 @@ const PcNoticeListAction = <Action>{
         const where = {};
 
         if (published !== undefined) {
-            where['ejyy_notice_to_user.published'] = published;
+            where['ipms_notice_to_user.published'] = published;
         }
 
         const list = await ctx.model
-            .from('ejyy_notice_to_user')
-            .leftJoin('ejyy_property_company_user', 'ejyy_property_company_user.id', 'ejyy_notice_to_user.created_by')
-            .where('ejyy_notice_to_user.community_id', community_id)
+            .from('ipms_notice_to_user')
+            .leftJoin('ipms_property_company_user', 'ipms_property_company_user.id', 'ipms_notice_to_user.created_by')
+            .where('ipms_notice_to_user.community_id', community_id)
             .andWhere(where)
-            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ejyy_notice_to_user.id'))
+            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ipms_notice_to_user.id'))
             .select(
-                'ejyy_notice_to_user.id',
-                'ejyy_notice_to_user.title',
-                'ejyy_notice_to_user.published',
-                'ejyy_notice_to_user.published_at',
-                'ejyy_notice_to_user.notice_tpl_id',
-                'ejyy_notice_to_user.created_by',
-                'ejyy_notice_to_user.created_at',
-                'ejyy_property_company_user.real_name'
+                'ipms_notice_to_user.id',
+                'ipms_notice_to_user.title',
+                'ipms_notice_to_user.published',
+                'ipms_notice_to_user.published_at',
+                'ipms_notice_to_user.notice_tpl_id',
+                'ipms_notice_to_user.created_by',
+                'ipms_notice_to_user.created_at',
+                'ipms_property_company_user.real_name'
             )
             .limit(page_size)
             .offset((page_num - 1) * page_size)
-            .orderBy('ejyy_notice_to_user.id', 'desc');
+            .orderBy('ipms_notice_to_user.id', 'desc');
 
         const [res] = await ctx.model.select(ctx.model.raw('found_rows() AS total'));
 

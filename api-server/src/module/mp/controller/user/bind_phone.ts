@@ -51,7 +51,7 @@ const MpUserBindPhoneAction = <Action>{
         }
 
         await ctx.model
-            .from('ejyy_wechat_mp_user')
+            .from('ipms_wechat_mp_user')
             .where({ id: ctx.mpUserInfo.id })
             .update({ phone: phoneInfo.data.purePhoneNumber });
 

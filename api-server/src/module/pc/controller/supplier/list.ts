@@ -38,30 +38,30 @@ const PcSupplierListAction = <Action>{
         const { page_num, page_size } = <RequestBody>ctx.request.body;
 
         const list = await ctx.model
-            .from('ejyy_material_supplier')
+            .from('ipms_material_supplier')
             .leftJoin(
-                'ejyy_property_company_user',
-                'ejyy_property_company_user.id',
-                'ejyy_material_supplier.created_by'
+                'ipms_property_company_user',
+                'ipms_property_company_user.id',
+                'ipms_material_supplier.created_by'
             )
-            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ejyy_material_supplier.id'))
+            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ipms_material_supplier.id'))
             .select(
-                'ejyy_material_supplier.id',
-                'ejyy_material_supplier.title',
-                'ejyy_material_supplier.linkman',
-                'ejyy_material_supplier.phone',
-                'ejyy_material_supplier.business',
-                'ejyy_material_supplier.bank_name',
-                'ejyy_material_supplier.bank_id',
-                'ejyy_material_supplier.bank_address',
-                'ejyy_material_supplier.business',
-                'ejyy_material_supplier.created_at',
-                'ejyy_material_supplier.created_by',
-                'ejyy_property_company_user.real_name'
+                'ipms_material_supplier.id',
+                'ipms_material_supplier.title',
+                'ipms_material_supplier.linkman',
+                'ipms_material_supplier.phone',
+                'ipms_material_supplier.business',
+                'ipms_material_supplier.bank_name',
+                'ipms_material_supplier.bank_id',
+                'ipms_material_supplier.bank_address',
+                'ipms_material_supplier.business',
+                'ipms_material_supplier.created_at',
+                'ipms_material_supplier.created_by',
+                'ipms_property_company_user.real_name'
             )
             .limit(page_size)
             .offset((page_num - 1) * page_size)
-            .orderBy('ejyy_material_supplier.id', 'desc');
+            .orderBy('ipms_material_supplier.id', 'desc');
 
         const [res] = await ctx.model.select(ctx.model.raw('found_rows() AS total'));
 

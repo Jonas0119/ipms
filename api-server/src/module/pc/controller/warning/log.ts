@@ -45,26 +45,26 @@ const PcWarningLogAction = <Action>{
         const { page_num, page_size, community_id } = <RequestBody>ctx.request.body;
 
         const list = await ctx.model
-            .from('ejyy_iot_warning_log')
-            .leftJoin('ejyy_iot_warning', 'ejyy_iot_warning.id', 'ejyy_iot_warning_log.warning_id')
-            .leftJoin('ejyy_building_info', 'ejyy_building_info.id', 'ejyy_iot_warning_log.building_id')
-            .where('ejyy_iot_warning.community_id', community_id)
-            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ejyy_iot_warning_log.id'))
+            .from('ipms_iot_warning_log')
+            .leftJoin('ipms_iot_warning', 'ipms_iot_warning.id', 'ipms_iot_warning_log.warning_id')
+            .leftJoin('ipms_building_info', 'ipms_building_info.id', 'ipms_iot_warning_log.building_id')
+            .where('ipms_iot_warning.community_id', community_id)
+            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ipms_iot_warning_log.id'))
             .select(
-                'ejyy_iot_warning_log.id',
-                'ejyy_iot_warning_log.category',
-                'ejyy_iot_warning_log.building_id',
-                'ejyy_iot_warning_log.created_at',
-                'ejyy_iot_warning.name as warning',
-                'ejyy_building_info.type',
-                'ejyy_building_info.area',
-                'ejyy_building_info.building',
-                'ejyy_building_info.unit',
-                'ejyy_building_info.number'
+                'ipms_iot_warning_log.id',
+                'ipms_iot_warning_log.category',
+                'ipms_iot_warning_log.building_id',
+                'ipms_iot_warning_log.created_at',
+                'ipms_iot_warning.name as warning',
+                'ipms_building_info.type',
+                'ipms_building_info.area',
+                'ipms_building_info.building',
+                'ipms_building_info.unit',
+                'ipms_building_info.number'
             )
             .limit(page_size)
             .offset((page_num - 1) * page_size)
-            .orderBy('ejyy_iot_warning_log.id', 'desc');
+            .orderBy('ipms_iot_warning_log.id', 'desc');
 
         const [res] = await ctx.model.select(ctx.model.raw('found_rows() AS total'));
 

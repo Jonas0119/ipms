@@ -46,7 +46,7 @@ const PcFitmentCreateAction = <Action>{
         const { community_id, building_id, wechat_mp_user_id } = <RequestBody>ctx.request.body;
 
         const exist = await ctx.model
-            .from('ejyy_fitment')
+            .from('ipms_fitment')
             .where('community_id', community_id)
             .andWhere('building_id', building_id)
             .whereNull('finished_at')
@@ -59,7 +59,7 @@ const PcFitmentCreateAction = <Action>{
             });
         }
 
-        const [id] = await ctx.model.from('ejyy_fitment').insert({
+        const [id] = await ctx.model.from('ipms_fitment').insert({
             community_id,
             building_id,
             step: USER_SUBMIT_APPLY_STEP,

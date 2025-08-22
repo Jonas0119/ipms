@@ -49,7 +49,7 @@ const PcVistorScanAction = <Action>{
         }
 
         const detail = await ctx.model
-            .from('ejyy_vistor')
+            .from('ipms_vistor')
             .where('id', id)
             .andWhere('building_id', building_id)
             .andWhere('community_id', community_id)
@@ -83,7 +83,7 @@ const PcVistorScanAction = <Action>{
         }
 
         await ctx.model
-            .from('ejyy_vistor')
+            .from('ipms_vistor')
             .where('id', id)
             .update({
                 used_at: Date.now(),

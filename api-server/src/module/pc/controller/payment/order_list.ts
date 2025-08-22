@@ -79,54 +79,54 @@ const PcPaymentOrderListAction = <Action>{
         const { page_num, page_size, community_id, property_fee_id, no, status } = <RequestBody>ctx.request.body;
 
         const list = await ctx.model
-            .from('ejyy_property_fee_order')
-            .leftJoin('ejyy_property_fee', 'ejyy_property_fee.id', 'ejyy_property_fee_order.property_fee_id')
-            .where('ejyy_property_fee.community_id', community_id)
-            .andWhere('ejyy_property_fee_order.property_fee_id', property_fee_id)
+            .from('ipms_property_fee_order')
+            .leftJoin('ipms_property_fee', 'ipms_property_fee.id', 'ipms_property_fee_order.property_fee_id')
+            .where('ipms_property_fee.community_id', community_id)
+            .andWhere('ipms_property_fee_order.property_fee_id', property_fee_id)
             .andWhere(function() {
                 if (status) {
                     switch (status) {
                         case ORDER_CANCEL_STATUS:
-                            this.where('ejyy_property_fee_order.cancel', TRUE);
+                            this.where('ipms_property_fee_order.cancel', TRUE);
                             break;
 
                         case ORDER_SUCCESS_STATUS:
-                            this.where('ejyy_property_fee_order.paid', TRUE);
+                            this.where('ipms_property_fee_order.paid', TRUE);
                             break;
 
                         case ORDER_REFUNDING_STATUS:
-                            this.where('ejyy_property_fee_order.refunding', TRUE).andWhere(
-                                'ejyy_property_fee_order.refunded',
+                            this.where('ipms_property_fee_order.refunding', TRUE).andWhere(
+                                'ipms_property_fee_order.refunded',
                                 FALSE
                             );
                             break;
 
                         case ORDER_REFUNDED_STATUS:
-                            this.where('ejyy_property_fee_order.refunding', TRUE).andWhere(
-                                'ejyy_property_fee_order.refunded',
+                            this.where('ipms_property_fee_order.refunding', TRUE).andWhere(
+                                'ipms_property_fee_order.refunded',
                                 TRUE
                             );
                             break;
 
                         case ORDER_EXPIRED_STATUS:
-                            this.where('ejyy_property_fee_order.cancel', FALSE)
-                                .andWhere('ejyy_property_fee_order.paid', FALSE)
-                                .andWhere('ejyy_property_fee_order.refunding', FALSE)
-                                .andWhere('ejyy_property_fee_order.refunded', FALSE)
+                            this.where('ipms_property_fee_order.cancel', FALSE)
+                                .andWhere('ipms_property_fee_order.paid', FALSE)
+                                .andWhere('ipms_property_fee_order.refunding', FALSE)
+                                .andWhere('ipms_property_fee_order.refunded', FALSE)
                                 .where(
-                                    'ejyy_property_fee_order.created_at',
+                                    'ipms_property_fee_order.created_at',
                                     '<=',
                                     Date.now() - config.wechat.pay.payExpire
                                 );
                             break;
 
                         case ORDER_NEED_PAY_STATUS:
-                            this.where('ejyy_property_fee_order.cancel', FALSE)
-                                .andWhere('ejyy_property_fee_order.paid', FALSE)
-                                .andWhere('ejyy_property_fee_order.refunding', FALSE)
-                                .andWhere('ejyy_property_fee_order.refunded', FALSE)
+                            this.where('ipms_property_fee_order.cancel', FALSE)
+                                .andWhere('ipms_property_fee_order.paid', FALSE)
+                                .andWhere('ipms_property_fee_order.refunding', FALSE)
+                                .andWhere('ipms_property_fee_order.refunded', FALSE)
                                 .andWhere(
-                                    'ejyy_property_fee_order.created_at',
+                                    'ipms_property_fee_order.created_at',
                                     '>',
                                     Date.now() - config.wechat.pay.payExpire
                                 );
@@ -136,25 +136,25 @@ const PcPaymentOrderListAction = <Action>{
             })
             .andWhere(function() {
                 if (no) {
-                    this.where('ejyy_property_fee_order.id', no.substring(8));
+                    this.where('ipms_property_fee_order.id', no.substring(8));
                 }
             })
-            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ejyy_property_fee_order.id'))
+            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ipms_property_fee_order.id'))
             .select(
-                'ejyy_property_fee_order.id',
-                'ejyy_property_fee_order.transaction_id',
-                'ejyy_property_fee_order.paid',
-                'ejyy_property_fee_order.refunded',
-                'ejyy_property_fee_order.refunding',
-                'ejyy_property_fee_order.cancel',
-                'ejyy_property_fee_order.fee',
-                'ejyy_property_fee_order.paid_fee',
-                'ejyy_property_fee_order.is_cash',
-                'ejyy_property_fee_order.created_at'
+                'ipms_property_fee_order.id',
+                'ipms_property_fee_order.transaction_id',
+                'ipms_property_fee_order.paid',
+                'ipms_property_fee_order.refunded',
+                'ipms_property_fee_order.refunding',
+                'ipms_property_fee_order.cancel',
+                'ipms_property_fee_order.fee',
+                'ipms_property_fee_order.paid_fee',
+                'ipms_property_fee_order.is_cash',
+                'ipms_property_fee_order.created_at'
             )
             .limit(page_size)
             .offset((page_num - 1) * page_size)
-            .orderBy('ejyy_property_fee_order.id', 'desc');
+            .orderBy('ipms_property_fee_order.id', 'desc');
 
         const [res] = await ctx.model.select(ctx.model.raw('found_rows() AS total'));
 

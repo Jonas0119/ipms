@@ -33,9 +33,9 @@ const PcEnergyRepeaterOptionAction = <Action>{
         const { community_id } = <RequestBody>ctx.request.body;
 
         const list = await ctx.model
-            .from('ejyy_iot_meter_repeater')
+            .from('ipms_iot_meter_repeater')
             .where('community_id', community_id)
-            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ejyy_iot_meter_repeater.id'))
+            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ipms_iot_meter_repeater.id'))
             .select('id', 'name');
 
         ctx.body = {

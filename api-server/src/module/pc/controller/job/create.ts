@@ -37,7 +37,7 @@ const PcJobCreateAction = <Action>{
         const { name, parent_id } = <RequestBody>ctx.request.body;
 
         const existDeparment = await ctx.model
-            .from('ejyy_property_company_department')
+            .from('ipms_property_company_department')
             .where('id', parent_id)
             .first();
 
@@ -49,7 +49,7 @@ const PcJobCreateAction = <Action>{
         }
 
         const existJob = await ctx.model
-            .from('ejyy_property_company_job')
+            .from('ipms_property_company_job')
             .where('name', name)
             .first();
 
@@ -60,7 +60,7 @@ const PcJobCreateAction = <Action>{
             });
         }
 
-        const [id] = await ctx.model.from('ejyy_property_company_job').insert({
+        const [id] = await ctx.model.from('ipms_property_company_job').insert({
             parent_id,
             name
         });

@@ -52,7 +52,7 @@ const PcComplainMergeAction = <Action>{
         const { id, community_id, merge_id } = <RequestBody>ctx.request.body;
 
         const detail = await ctx.model
-            .from('ejyy_complain')
+            .from('ipms_complain')
             .where('id', id)
             .andWhere('community_id', community_id)
             .andWhere('step', SUBMIT_COMPLAIN_STEP)
@@ -67,7 +67,7 @@ const PcComplainMergeAction = <Action>{
 
         if (detail.dispose_subscribed) {
             const { open_id } = await ctx.model
-                .from('ejyy_wechat_mp_user')
+                .from('ipms_wechat_mp_user')
                 .where('id', detail.wechat_mp_user_id)
                 .first();
 
@@ -94,7 +94,7 @@ const PcComplainMergeAction = <Action>{
         }
 
         await ctx.model
-            .from('ejyy_complain')
+            .from('ipms_complain')
             .update({ merge_id })
             .where('id', id);
 

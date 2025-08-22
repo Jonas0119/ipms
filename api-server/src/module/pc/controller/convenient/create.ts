@@ -48,7 +48,7 @@ const PcConvenientCreateAction = <Action>{
     response: async ctx => {
         const { community_id, title, location, phone } = <RequestBody>ctx.request.body;
 
-        const [id] = await ctx.model.from('ejyy_convenient').insert({
+        const [id] = await ctx.model.from('ipms_convenient').insert({
             community_id,
             title,
             location,

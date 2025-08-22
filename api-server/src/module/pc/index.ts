@@ -24,45 +24,45 @@ function PcModule(appRouter: KoaRouter) {
 
         appRouter[router.method](path.posix.join('/pc', router.path), async (ctx: Context, next) => {
             if (router.authRequired) {
-                const token = ctx.request.header['ejyy-pc-token'];
+                const token = ctx.request.header['ipms-pc-token'] as string;
 
                 if (!token) {
                     return (ctx.status = 401);
                 }
 
                 const pcUserInfo = await ctx.model
-                    .table('ejyy_property_company_auth')
+                    .table('ipms_property_company_auth')
                     .leftJoin(
-                        'ejyy_property_company_user',
-                        'ejyy_property_company_user.id',
-                        'ejyy_property_company_auth.property_company_user_id'
+                        'ipms_property_company_user',
+                        'ipms_property_company_user.id',
+                        'ipms_property_company_auth.property_company_user_id'
                     )
                     .leftJoin(
-                        'ejyy_wechat_official_accounts_user',
-                        'ejyy_wechat_official_accounts_user.union_id',
-                        'ejyy_property_company_user.union_id'
+                        'ipms_wechat_official_accounts_user',
+                        'ipms_wechat_official_accounts_user.union_id',
+                        'ipms_property_company_user.union_id'
                     )
                     .leftJoin(
-                        'ejyy_property_company_access',
-                        'ejyy_property_company_access.id',
-                        'ejyy_property_company_user.access_id'
+                        'ipms_property_company_access',
+                        'ipms_property_company_access.id',
+                        'ipms_property_company_user.access_id'
                     )
-                    .where('ejyy_property_company_auth.token', token)
-                    .where('ejyy_property_company_user.leave_office', FALSE)
+                    .where('ipms_property_company_auth.token', token)
+                    .where('ipms_property_company_user.leave_office', FALSE)
                     .select(
-                        'ejyy_property_company_user.id',
-                        'ejyy_property_company_user.account',
-                        'ejyy_property_company_user.real_name',
-                        'ejyy_property_company_user.gender',
-                        'ejyy_property_company_user.avatar_url',
-                        'ejyy_property_company_user.phone',
-                        'ejyy_property_company_user.department_id',
-                        'ejyy_property_company_user.job_id',
-                        'ejyy_property_company_user.join_company_at',
-                        'ejyy_property_company_user.admin',
-                        'ejyy_property_company_user.created_at',
-                        'ejyy_wechat_official_accounts_user.subscribed',
-                        'ejyy_property_company_access.content'
+                        'ipms_property_company_user.id',
+                        'ipms_property_company_user.account',
+                        'ipms_property_company_user.real_name',
+                        'ipms_property_company_user.gender',
+                        'ipms_property_company_user.avatar_url',
+                        'ipms_property_company_user.phone',
+                        'ipms_property_company_user.department_id',
+                        'ipms_property_company_user.job_id',
+                        'ipms_property_company_user.join_company_at',
+                        'ipms_property_company_user.admin',
+                        'ipms_property_company_user.created_at',
+                        'ipms_wechat_official_accounts_user.subscribed',
+                        'ipms_property_company_access.content'
                     )
                     .first();
 

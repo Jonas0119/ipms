@@ -32,7 +32,7 @@ const MpFitmentUnfinishedAction = <Action>{
         const { community_id } = <RequestBody>ctx.request.body;
 
         const list = await ctx.model
-            .from('ejyy_fitment')
+            .from('ipms_fitment')
             .where('community_id', community_id)
             .where('wechat_mp_user_id', ctx.mpUserInfo.id)
             .andWhereNot('step', PROPERTY_COMPANY_CONFIRM_STEP)

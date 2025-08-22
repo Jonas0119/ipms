@@ -44,40 +44,40 @@ const PcRepairDetailAction = <Action>{
         let referInfo = null;
 
         const info = await ctx.model
-            .from('ejyy_repair')
-            .leftJoin('ejyy_building_info', 'ejyy_building_info.id', 'ejyy_repair.building_id')
-            .where('ejyy_repair.id', id)
-            .andWhere('ejyy_repair.community_id', community_id)
+            .from('ipms_repair')
+            .leftJoin('ipms_building_info', 'ipms_building_info.id', 'ipms_repair.building_id')
+            .where('ipms_repair.id', id)
+            .andWhere('ipms_repair.community_id', community_id)
             .select(
-                'ejyy_repair.id',
-                'ejyy_repair.wechat_mp_user_id',
-                'ejyy_repair.property_company_user_id',
-                'ejyy_repair.repair_type',
-                'ejyy_repair.building_id',
-                'ejyy_repair.description',
-                'ejyy_repair.repair_imgs',
-                'ejyy_repair.allot_user_id',
-                'ejyy_repair.alloted_at',
-                'ejyy_repair.dispose_user_id',
-                'ejyy_repair.dispose_reply',
-                'ejyy_repair.dispose_content',
-                'ejyy_repair.dispose_imgs',
-                'ejyy_repair.disposed_at',
-                'ejyy_repair.finished_at',
-                'ejyy_repair.dispose_subscribed',
-                'ejyy_repair.confrim_subscribed',
-                'ejyy_repair.finish_subscribed',
-                'ejyy_repair.merge_id',
-                'ejyy_repair.step',
-                'ejyy_repair.rate',
-                'ejyy_repair.rate_content',
-                'ejyy_repair.rated_at',
-                'ejyy_repair.created_at',
-                'ejyy_building_info.type',
-                'ejyy_building_info.area',
-                'ejyy_building_info.building',
-                'ejyy_building_info.unit',
-                'ejyy_building_info.number'
+                'ipms_repair.id',
+                'ipms_repair.wechat_mp_user_id',
+                'ipms_repair.property_company_user_id',
+                'ipms_repair.repair_type',
+                'ipms_repair.building_id',
+                'ipms_repair.description',
+                'ipms_repair.repair_imgs',
+                'ipms_repair.allot_user_id',
+                'ipms_repair.alloted_at',
+                'ipms_repair.dispose_user_id',
+                'ipms_repair.dispose_reply',
+                'ipms_repair.dispose_content',
+                'ipms_repair.dispose_imgs',
+                'ipms_repair.disposed_at',
+                'ipms_repair.finished_at',
+                'ipms_repair.dispose_subscribed',
+                'ipms_repair.confrim_subscribed',
+                'ipms_repair.finish_subscribed',
+                'ipms_repair.merge_id',
+                'ipms_repair.step',
+                'ipms_repair.rate',
+                'ipms_repair.rate_content',
+                'ipms_repair.rated_at',
+                'ipms_repair.created_at',
+                'ipms_building_info.type',
+                'ipms_building_info.area',
+                'ipms_building_info.building',
+                'ipms_building_info.unit',
+                'ipms_building_info.number'
             )
             .first();
 
@@ -90,13 +90,13 @@ const PcRepairDetailAction = <Action>{
 
         if (info.step >= ALLOT_REPAIR_STEP) {
             allotInfo = await ctx.model
-                .from('ejyy_property_company_user')
+                .from('ipms_property_company_user')
                 .where('id', info.allot_user_id)
                 .select('id', 'real_name')
                 .first();
 
             disposedInfo = await ctx.model
-                .from('ejyy_property_company_user')
+                .from('ipms_property_company_user')
                 .where('id', info.dispose_user_id)
                 .select('id', 'real_name')
                 .first();
@@ -104,13 +104,13 @@ const PcRepairDetailAction = <Action>{
 
         if (info.property_company_user_id) {
             referInfo = await ctx.model
-                .from('ejyy_property_company_user')
+                .from('ipms_property_company_user')
                 .where('id', info.property_company_user_id)
                 .select('id', 'real_name')
                 .first();
         } else {
             referInfo = await ctx.model
-                .from('ejyy_wechat_mp_user')
+                .from('ipms_wechat_mp_user')
                 .where('id', info.wechat_mp_user_id)
                 .select('id', 'real_name')
                 .first();
@@ -118,7 +118,7 @@ const PcRepairDetailAction = <Action>{
 
         const urge_total = utils.sql.countReader(
             await ctx.model
-                .from('ejyy_repair_urge')
+                .from('ipms_repair_urge')
                 .where('repair_id', id)
                 .count()
         );

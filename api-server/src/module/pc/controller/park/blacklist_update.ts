@@ -53,7 +53,7 @@ const PcParkBlacklistUpdateAction = <Action>{
         const { id, community_id, park_id, car_number } = <RequestBody>ctx.request.body;
 
         const parkInfo = await ctx.model
-            .from('ejyy_iot_park')
+            .from('ipms_iot_park')
             .where('id', park_id)
             .andWhere('community_id', community_id)
             .first();
@@ -66,7 +66,7 @@ const PcParkBlacklistUpdateAction = <Action>{
         }
 
         const exist = await ctx.model
-            .from('ejyy_iot_park_blacklist')
+            .from('ipms_iot_park_blacklist')
             .where('park_id', park_id)
             .andWhere('car_number', car_number)
             .andWhereNot('id', id)
@@ -80,7 +80,7 @@ const PcParkBlacklistUpdateAction = <Action>{
         }
 
         await ctx.model
-            .from('ejyy_iot_park_blacklist')
+            .from('ipms_iot_park_blacklist')
             .update({
                 park_id,
                 car_number

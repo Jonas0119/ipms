@@ -45,24 +45,24 @@ const PcMeetingRoomListAction = <Action>{
         const { page_num, page_size, community_id } = <RequestBody>ctx.request.body;
 
         const list = await ctx.model
-            .from('ejyy_meeting_room')
-            .leftJoin('ejyy_property_company_user', 'ejyy_property_company_user.id', 'ejyy_meeting_room.created_by')
-            .where('ejyy_meeting_room.community_id', community_id)
-            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ejyy_meeting_room.id'))
+            .from('ipms_meeting_room')
+            .leftJoin('ipms_property_company_user', 'ipms_property_company_user.id', 'ipms_meeting_room.created_by')
+            .where('ipms_meeting_room.community_id', community_id)
+            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ipms_meeting_room.id'))
             .select(
-                'ejyy_meeting_room.id',
-                'ejyy_meeting_room.name',
-                'ejyy_meeting_room.local',
-                'ejyy_meeting_room.have_tv',
-                'ejyy_meeting_room.have_board',
-                'ejyy_meeting_room.have_projector',
-                'ejyy_meeting_room.created_at',
-                'ejyy_meeting_room.created_by',
-                'ejyy_property_company_user.real_name'
+                'ipms_meeting_room.id',
+                'ipms_meeting_room.name',
+                'ipms_meeting_room.local',
+                'ipms_meeting_room.have_tv',
+                'ipms_meeting_room.have_board',
+                'ipms_meeting_room.have_projector',
+                'ipms_meeting_room.created_at',
+                'ipms_meeting_room.created_by',
+                'ipms_property_company_user.real_name'
             )
             .limit(page_size)
             .offset((page_num - 1) * page_size)
-            .orderBy('ejyy_meeting_room.id', 'desc');
+            .orderBy('ipms_meeting_room.id', 'desc');
 
         const [res] = await ctx.model.select(ctx.model.raw('found_rows() AS total'));
 

@@ -33,7 +33,7 @@ const PcParkOptionAction = <Action>{
         const { community_id } = <RequestBody>ctx.request.body;
 
         const list = await ctx.model
-            .from('ejyy_iot_park')
+            .from('ipms_iot_park')
             .where('community_id', community_id)
             .select('id', 'name');
 

@@ -15,15 +15,15 @@ import utils from '~/utils';
 
 export async function broadcast(model: Knex, id: number) {
     const detail = await model
-        .from('ejyy_notice_to_user')
-        .leftJoin('ejyy_notice_tpl', 'ejyy_notice_tpl.id', 'ejyy_notice_to_user.notice_tpl_id')
-        .where('ejyy_notice_to_user.id', id)
+        .from('ipms_notice_to_user')
+        .leftJoin('ipms_notice_tpl', 'ipms_notice_tpl.id', 'ipms_notice_to_user.notice_tpl_id')
+        .where('ipms_notice_to_user.id', id)
         .select(
-            'ejyy_notice_to_user.community_id',
-            'ejyy_notice_to_user.notice_tpl_id',
-            'ejyy_notice_to_user.published',
-            'ejyy_notice_tpl.tpl',
-            'ejyy_notice_tpl.content'
+            'ipms_notice_to_user.community_id',
+            'ipms_notice_to_user.notice_tpl_id',
+            'ipms_notice_to_user.published',
+            'ipms_notice_tpl.tpl',
+            'ipms_notice_tpl.content'
         )
         .first();
 
@@ -32,20 +32,20 @@ export async function broadcast(model: Knex, id: number) {
     }
 
     const users = await model
-        .from('ejyy_wechat_mp_user')
+        .from('ipms_wechat_mp_user')
         .leftJoin(
-            'ejyy_wechat_official_accounts_user',
-            'ejyy_wechat_official_accounts_user.union_id',
-            'ejyy_wechat_mp_user.union_id'
+            'ipms_wechat_official_accounts_user',
+            'ipms_wechat_official_accounts_user.union_id',
+            'ipms_wechat_mp_user.union_id'
         )
-        .whereIn('ejyy_wechat_mp_user.id', function() {
-            this.from('ejyy_building_info')
-                .leftJoin('ejyy_user_building', 'ejyy_user_building.building_id', 'ejyy_building_info.id')
-                .where('ejyy_building_info.community_id', detail.community_id)
-                .select('ejyy_user_building.wechat_mp_user_id');
+        .whereIn('ipms_wechat_mp_user.id', function() {
+            this.from('ipms_building_info')
+                .leftJoin('ipms_user_building', 'ipms_user_building.building_id', 'ipms_building_info.id')
+                .where('ipms_building_info.community_id', detail.community_id)
+                .select('ipms_user_building.wechat_mp_user_id');
         })
-        .andWhere('ejyy_wechat_official_accounts_user.subscribed', TRUE)
-        .select('ejyy_wechat_official_accounts_user.open_id');
+        .andWhere('ipms_wechat_official_accounts_user.subscribed', TRUE)
+        .select('ipms_wechat_official_accounts_user.open_id');
 
     const tplData = <wechatService.TemplateData>{};
 

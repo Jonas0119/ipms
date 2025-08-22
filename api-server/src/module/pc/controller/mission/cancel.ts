@@ -40,7 +40,7 @@ const PcMissionCancelAction = <Action>{
         const { id, community_id } = <RequestBody>ctx.request.body;
 
         const info = await ctx.model
-            .from('ejyy_mission')
+            .from('ipms_mission')
             .where('community_id', community_id)
             .andWhere('id', id)
             .andWhere('created_by', ctx.pcUserInfo.id)
@@ -63,7 +63,7 @@ const PcMissionCancelAction = <Action>{
         const canceled_at = Date.now();
 
         await ctx.model
-            .from('ejyy_mission')
+            .from('ipms_mission')
             .update({
                 cancel: TRUE,
                 canceled_at

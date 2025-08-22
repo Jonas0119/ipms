@@ -37,7 +37,7 @@ const PcContractCategoryCreateAction = <Action>{
         const { name, description } = <RequestBody>ctx.request.body;
 
         const exist = await ctx.model
-            .from('ejyy_contract_category')
+            .from('ipms_contract_category')
             .where('name', name)
             .first();
 
@@ -49,7 +49,7 @@ const PcContractCategoryCreateAction = <Action>{
         }
 
         const created_at = Date.now();
-        const [id] = await ctx.model.from('ejyy_contract_category').insert({
+        const [id] = await ctx.model.from('ipms_contract_category').insert({
             name,
             description: description ? description : null,
             created_by: ctx.pcUserInfo.id,

@@ -31,11 +31,11 @@ const MpCommunityDefaultAction = <Action>{
         const { community_id } = <RequestBody>ctx.request.body;
 
         const exist = await ctx.model
-            .from('ejyy_community_info')
-            .leftJoin('ejyy_building_info', 'ejyy_building_info.community_id', 'ejyy_community_info.id')
-            .leftJoin('ejyy_user_building', 'ejyy_user_building.building_id', 'ejyy_building_info.id')
-            .where('ejyy_community_info.id', community_id)
-            .andWhere('ejyy_user_building.wechat_mp_user_id', ctx.mpUserInfo.id)
+            .from('ipms_community_info')
+            .leftJoin('ipms_building_info', 'ipms_building_info.community_id', 'ipms_community_info.id')
+            .leftJoin('ipms_user_building', 'ipms_user_building.building_id', 'ipms_building_info.id')
+            .where('ipms_community_info.id', community_id)
+            .andWhere('ipms_user_building.wechat_mp_user_id', ctx.mpUserInfo.id)
             .first();
 
         if (!exist) {
@@ -46,7 +46,7 @@ const MpCommunityDefaultAction = <Action>{
         }
 
         const affect = await ctx.model
-            .from('ejyy_user_default_community')
+            .from('ipms_user_default_community')
             .update({ community_id })
             .where({ wechat_mp_user_id: ctx.mpUserInfo.id });
 

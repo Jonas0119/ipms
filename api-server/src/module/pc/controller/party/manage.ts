@@ -57,32 +57,32 @@ const PcPartyManageAction = <Action>{
         const where = {};
 
         if (published !== undefined) {
-            where['ejyy_party.published'] = published;
+            where['ipms_party.published'] = published;
         }
 
         if (carousel !== undefined) {
-            where['ejyy_party.carousel'] = carousel;
+            where['ipms_party.carousel'] = carousel;
         }
 
         const list = await ctx.model
-            .from('ejyy_party')
-            .leftJoin('ejyy_property_company_user', 'ejyy_property_company_user.id', 'ejyy_party.created_by')
-            .where('ejyy_party.community_id', community_id)
+            .from('ipms_party')
+            .leftJoin('ipms_property_company_user', 'ipms_property_company_user.id', 'ipms_party.created_by')
+            .where('ipms_party.community_id', community_id)
             .andWhere(where)
-            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ejyy_party.id'))
+            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ipms_party.id'))
             .select(
-                'ejyy_party.id',
-                'ejyy_party.title',
-                'ejyy_party.carousel',
-                'ejyy_party.published',
-                'ejyy_party.published_at',
-                'ejyy_party.created_by',
-                'ejyy_party.created_at',
-                'ejyy_property_company_user.real_name'
+                'ipms_party.id',
+                'ipms_party.title',
+                'ipms_party.carousel',
+                'ipms_party.published',
+                'ipms_party.published_at',
+                'ipms_party.created_by',
+                'ipms_party.created_at',
+                'ipms_property_company_user.real_name'
             )
             .limit(page_size)
             .offset((page_num - 1) * page_size)
-            .orderBy('ejyy_party.id', 'desc');
+            .orderBy('ipms_party.id', 'desc');
 
         const [res] = await ctx.model.select(ctx.model.raw('found_rows() AS total'));
 

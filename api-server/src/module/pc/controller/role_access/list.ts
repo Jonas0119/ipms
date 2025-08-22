@@ -37,7 +37,7 @@ const PcRoleAccessListAction = <Action>{
         const { page_num, page_size } = <RequestBody>ctx.request.body;
 
         const list = await ctx.model
-            .from('ejyy_property_company_access')
+            .from('ipms_property_company_access')
             .select(ctx.model.raw('SQL_CALC_FOUND_ROWS id'))
             .select('id', 'name', 'content')
             .limit(page_size)

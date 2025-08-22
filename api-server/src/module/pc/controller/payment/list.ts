@@ -45,21 +45,21 @@ const PcPaymentListAction = <Action>{
         const { page_num, page_size, community_id } = <RequestBody>ctx.request.body;
 
         const list = await ctx.model
-            .from('ejyy_property_fee')
-            .leftJoin('ejyy_property_company_user', 'ejyy_property_company_user.id', 'ejyy_property_fee.created_by')
-            .where('ejyy_property_fee.community_id', community_id)
-            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ejyy_property_fee.id'))
+            .from('ipms_property_fee')
+            .leftJoin('ipms_property_company_user', 'ipms_property_company_user.id', 'ipms_property_fee.created_by')
+            .where('ipms_property_fee.community_id', community_id)
+            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ipms_property_fee.id'))
             .select(
-                'ejyy_property_fee.id',
-                'ejyy_property_fee.start_year',
-                'ejyy_property_fee.end_year',
-                'ejyy_property_fee.created_at',
-                'ejyy_property_fee.created_by',
-                'ejyy_property_company_user.real_name'
+                'ipms_property_fee.id',
+                'ipms_property_fee.start_year',
+                'ipms_property_fee.end_year',
+                'ipms_property_fee.created_at',
+                'ipms_property_fee.created_by',
+                'ipms_property_company_user.real_name'
             )
             .limit(page_size)
             .offset((page_num - 1) * page_size)
-            .orderBy('ejyy_property_fee.id', 'desc');
+            .orderBy('ipms_property_fee.id', 'desc');
 
         const [res] = await ctx.model.select(ctx.model.raw('found_rows() AS total'));
 

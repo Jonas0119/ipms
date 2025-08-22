@@ -34,7 +34,7 @@ const PcHrRecoverAction = <Action>{
         const { id } = <RequestParams>ctx.params;
 
         const info = await ctx.model
-            .from('ejyy_property_company_user')
+            .from('ipms_property_company_user')
             .where('id', id)
             .first();
 
@@ -55,7 +55,7 @@ const PcHrRecoverAction = <Action>{
         // 是否有其他公司入职记录
         const joinTotal = utils.sql.countReader(
             await ctx.model
-                .from('ejyy_property_company_user')
+                .from('ipms_property_company_user')
                 .where('open_id', info.open_id)
                 .count()
         );
@@ -68,7 +68,7 @@ const PcHrRecoverAction = <Action>{
         }
 
         const affect = await ctx.model
-            .from('ejyy_property_company_user')
+            .from('ipms_property_company_user')
             .update('leave_office', FALSE)
             .where('id', id);
 
@@ -81,7 +81,7 @@ const PcHrRecoverAction = <Action>{
 
         const created_at = Date.now();
 
-        await ctx.model.from('ejyy_property_company_user_join_record').insert({
+        await ctx.model.from('ipms_property_company_user_join_record').insert({
             property_company_user_id: id,
             status: FALSE,
             created_by: ctx.pcUserInfo.id,

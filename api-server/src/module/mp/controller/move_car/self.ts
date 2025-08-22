@@ -38,30 +38,30 @@ const MpMoveCarSelfAction = <Action>{
         const { page_num, page_size } = <RequestBody>ctx.request.body;
 
         const myCars = await ctx.model
-            .from('ejyy_user_car')
+            .from('ipms_user_car')
             .where('wechat_mp_user_id', ctx.mpUserInfo.id)
             .where('status', BINDING_CAR)
             .select('car_number');
 
         const list = await ctx.model
-            .from('ejyy_move_car')
-            .leftJoin('ejyy_community_info', 'ejyy_community_info.id', 'ejyy_move_car.community_id')
+            .from('ipms_move_car')
+            .leftJoin('ipms_community_info', 'ipms_community_info.id', 'ipms_move_car.community_id')
             .where(function() {
                 myCars.forEach(({ car_number }) => {
-                    this.orWhere('ejyy_move_car.car_number', car_number);
+                    this.orWhere('ipms_move_car.car_number', car_number);
                 });
             })
-            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ejyy_move_car.id'))
+            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ipms_move_car.id'))
             .select(
-                'ejyy_community_info.name as community_name',
-                'ejyy_move_car.car_number',
-                'ejyy_move_car.move_reason',
-                'ejyy_move_car.responsed_at',
-                'ejyy_move_car.created_at'
+                'ipms_community_info.name as community_name',
+                'ipms_move_car.car_number',
+                'ipms_move_car.move_reason',
+                'ipms_move_car.responsed_at',
+                'ipms_move_car.created_at'
             )
             .limit(page_size)
             .offset((page_num - 1) * page_size)
-            .orderBy('ejyy_move_car.id', 'desc');
+            .orderBy('ipms_move_car.id', 'desc');
 
         const [res] = await ctx.model.select(ctx.model.raw('found_rows() AS total'));
 

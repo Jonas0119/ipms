@@ -44,25 +44,25 @@ const PcMaterialPurchasection = <Action>{
         const { page_num, page_size, material_id } = <RequestBody>ctx.request.body;
 
         const list = await ctx.model
-            .from('ejyy_material_purchase_item')
+            .from('ipms_material_purchase_item')
             .leftJoin(
-                'ejyy_property_company_user',
-                'ejyy_property_company_user.id',
-                'ejyy_material_purchase_item.created_by'
+                'ipms_property_company_user',
+                'ipms_property_company_user.id',
+                'ipms_material_purchase_item.created_by'
             )
-            .where('ejyy_material_purchase_item.material_id', material_id)
-            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ejyy_material_purchase_item.id'))
+            .where('ipms_material_purchase_item.material_id', material_id)
+            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ipms_material_purchase_item.id'))
             .select(
-                'ejyy_material_purchase_item.id',
-                'ejyy_material_purchase_item.total',
-                'ejyy_material_purchase_item.origin',
-                'ejyy_material_purchase_item.finish',
-                'ejyy_material_purchase_item.created_by',
-                'ejyy_property_company_user.real_name'
+                'ipms_material_purchase_item.id',
+                'ipms_material_purchase_item.total',
+                'ipms_material_purchase_item.origin',
+                'ipms_material_purchase_item.finish',
+                'ipms_material_purchase_item.created_by',
+                'ipms_property_company_user.real_name'
             )
             .limit(page_size)
             .offset((page_num - 1) * page_size)
-            .orderBy('ejyy_material_purchase_item.id', 'desc');
+            .orderBy('ipms_material_purchase_item.id', 'desc');
 
         const [res] = await ctx.model.select(ctx.model.raw('found_rows() AS total'));
 

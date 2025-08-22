@@ -103,7 +103,7 @@ const PcHrCreateAction = <Action>{
         } = <RequestBody>ctx.request.body;
 
         const joinRecord = await ctx.model
-            .from('ejyy_property_company_user')
+            .from('ipms_property_company_user')
             .where('phone', phone)
             .select();
 
@@ -124,7 +124,7 @@ const PcHrCreateAction = <Action>{
         }
 
         const accountExist = await ctx.model
-            .from('ejyy_property_company_user')
+            .from('ipms_property_company_user')
             .where('account', account)
             .first();
 
@@ -136,7 +136,7 @@ const PcHrCreateAction = <Action>{
         }
 
         const selfAccessCommunity = await ctx.model
-            .from('ejyy_property_company_user_access_community')
+            .from('ipms_property_company_user_access_community')
             .whereIn('community_id', community_access)
             .andWhere('property_company_user_id', ctx.pcUserInfo.id)
             .select('community_id');
@@ -149,7 +149,7 @@ const PcHrCreateAction = <Action>{
         }
 
         const isExistJob = await ctx.model
-            .from('ejyy_property_company_job')
+            .from('ipms_property_company_job')
             .andWhere('id', job_id)
             .first();
 
@@ -161,7 +161,7 @@ const PcHrCreateAction = <Action>{
         }
 
         const isExistDepartment = await ctx.model
-            .from('ejyy_property_company_department')
+            .from('ipms_property_company_department')
             .andWhere('id', department_id)
             .first();
 
@@ -173,7 +173,7 @@ const PcHrCreateAction = <Action>{
         }
 
         const isExistAccess = await ctx.model
-            .from('ejyy_property_company_access')
+            .from('ipms_property_company_access')
             .andWhere('id', access_id)
             .first();
 
@@ -186,7 +186,7 @@ const PcHrCreateAction = <Action>{
 
         const created_at = Date.now();
 
-        const [id] = await ctx.model.from('ejyy_property_company_user').insert({
+        const [id] = await ctx.model.from('ipms_property_company_user').insert({
             account,
             password: utils.crypto.md5(password),
             real_name,
@@ -203,7 +203,7 @@ const PcHrCreateAction = <Action>{
             leave_office: FALSE
         });
 
-        await ctx.model.from('ejyy_property_company_auth').insert({
+        await ctx.model.from('ipms_property_company_auth').insert({
             token: null,
             property_company_user_id: id
         });
@@ -215,7 +215,7 @@ const PcHrCreateAction = <Action>{
             };
         });
 
-        await ctx.model.from('ejyy_property_company_user_access_community').insert(data);
+        await ctx.model.from('ipms_property_company_user_access_community').insert(data);
 
         ctx.body = {
             code: SUCCESS,

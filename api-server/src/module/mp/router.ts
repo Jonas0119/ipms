@@ -23,7 +23,6 @@ export { default as MpNoticeUnreadAction } from './controller/notice/unread';
 export { default as MpNoticeReadedAction } from './controller/notice/readed';
 export { default as MpNoticeReadAction } from './controller/notice/read';
 
-export { default as MpVirusReportAction } from './controller/virus/report';
 
 export { default as MpCarListAction } from './controller/car/list';
 export { default as MpCarBindingAction } from './controller/car/binding';

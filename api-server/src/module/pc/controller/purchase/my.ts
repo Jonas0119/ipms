@@ -56,7 +56,7 @@ const PcPurchaseMyAction = <Action>{
         }
 
         const list = await ctx.model
-            .from('ejyy_material_purchase')
+            .from('ipms_material_purchase')
             .where('created_by', ctx.pcUserInfo.id)
             .andWhere('community_id', community_id)
             .andWhere(where)

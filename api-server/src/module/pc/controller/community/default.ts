@@ -30,8 +30,8 @@ const PcCommunityDefaultAction = <Action>{
         const { community_id } = <RequestBody>ctx.request.body;
 
         const exist = await ctx.model
-            .from('ejyy_community_info')
-            .where('ejyy_community_info.id', community_id)
+            .from('ipms_community_info')
+            .where('ipms_community_info.id', community_id)
             .first();
 
         if (!exist) {
@@ -42,7 +42,7 @@ const PcCommunityDefaultAction = <Action>{
         }
 
         const affect = await ctx.model
-            .from('ejyy_property_company_user_default_community')
+            .from('ipms_property_company_user_default_community')
             .update({ community_id })
             .where({ property_company_user_id: ctx.pcUserInfo.id });
 

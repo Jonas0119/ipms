@@ -56,7 +56,7 @@ const PcLeaveMyAction = <Action>{
         }
 
         const list = await ctx.model
-            .from('ejyy_ask_for_leave')
+            .from('ipms_ask_for_leave')
             .where('created_by', ctx.pcUserInfo.id)
             .andWhere('community_id', community_id)
             .andWhere(where)

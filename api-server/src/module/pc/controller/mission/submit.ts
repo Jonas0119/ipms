@@ -81,7 +81,7 @@ const PcMissionSubmitAction = <Action>{
         );
 
         const mission = await ctx.model
-            .from('ejyy_mission')
+            .from('ipms_mission')
             .where('id', id)
             .andWhere('community_id', community_id)
             .andWhere('user_id', ctx.pcUserInfo.id)
@@ -116,7 +116,7 @@ const PcMissionSubmitAction = <Action>{
         }
 
         const info = await ctx.model
-            .from('ejyy_mission_complete')
+            .from('ipms_mission_complete')
             .andWhere('id', complete_id)
             .andWhere('mission_id', id)
             .first();
@@ -129,10 +129,10 @@ const PcMissionSubmitAction = <Action>{
         }
 
         const lineInfo = await ctx.model
-            .from('ejyy_mission_line_node')
-            .leftJoin('ejyy_mission_point', 'ejyy_mission_point.id', 'ejyy_mission_line_node.point_id')
-            .where('ejyy_mission_line_node.line_id', mission.line_id)
-            .select('ejyy_mission_point.local', 'ejyy_mission_point.id');
+            .from('ipms_mission_line_node')
+            .leftJoin('ipms_mission_point', 'ipms_mission_point.id', 'ipms_mission_line_node.point_id')
+            .where('ipms_mission_line_node.line_id', mission.line_id)
+            .select('ipms_mission_point.local', 'ipms_mission_point.id');
 
         const index = lineInfo.findIndex(record => record.id === point_id);
 
@@ -144,7 +144,7 @@ const PcMissionSubmitAction = <Action>{
         }
 
         const submited = await ctx.model
-            .from('ejyy_mission_complete_node')
+            .from('ipms_mission_complete_node')
             .where('complete_id', complete_id)
             .andWhere('point_id', point_id)
             .first();
@@ -156,7 +156,7 @@ const PcMissionSubmitAction = <Action>{
             });
         }
 
-        await ctx.model.from('ejyy_mission_complete_node').insert({
+        await ctx.model.from('ipms_mission_complete_node').insert({
             complete_id,
             point_id,
             remark: remark ? remark : null,
@@ -170,7 +170,7 @@ const PcMissionSubmitAction = <Action>{
         const finish = index === lineInfo.length - 1 ? TRUE : FALSE;
 
         await ctx.model
-            .from('ejyy_mission_complete')
+            .from('ipms_mission_complete')
             .where('id', complete_id)
             .update({
                 point_id,

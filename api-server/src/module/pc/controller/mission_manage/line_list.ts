@@ -45,23 +45,23 @@ const PcMissionManageLineListAction = <Action>{
         const { page_num, page_size, community_id } = <RequestBody>ctx.request.body;
 
         const list = await ctx.model
-            .from('ejyy_mission_line')
-            .leftJoin('ejyy_property_company_user', 'ejyy_property_company_user.id', 'ejyy_mission_line.created_by')
-            .leftJoin('ejyy_mission_category', 'ejyy_mission_category.id', 'ejyy_mission_line.category_id')
-            .where('ejyy_mission_line.community_id', community_id)
-            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ejyy_mission_line.id'))
+            .from('ipms_mission_line')
+            .leftJoin('ipms_property_company_user', 'ipms_property_company_user.id', 'ipms_mission_line.created_by')
+            .leftJoin('ipms_mission_category', 'ipms_mission_category.id', 'ipms_mission_line.category_id')
+            .where('ipms_mission_line.community_id', community_id)
+            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ipms_mission_line.id'))
             .select(
-                'ejyy_mission_line.id',
-                'ejyy_mission_line.name',
-                'ejyy_mission_line.description',
-                'ejyy_mission_line.created_at',
-                'ejyy_mission_line.created_by',
-                'ejyy_property_company_user.real_name',
-                'ejyy_mission_category.name as category'
+                'ipms_mission_line.id',
+                'ipms_mission_line.name',
+                'ipms_mission_line.description',
+                'ipms_mission_line.created_at',
+                'ipms_mission_line.created_by',
+                'ipms_property_company_user.real_name',
+                'ipms_mission_category.name as category'
             )
             .limit(page_size)
             .offset((page_num - 1) * page_size)
-            .orderBy('ejyy_mission_line.id', 'desc');
+            .orderBy('ipms_mission_line.id', 'desc');
 
         const [res] = await ctx.model.select(ctx.model.raw('found_rows() AS total'));
 

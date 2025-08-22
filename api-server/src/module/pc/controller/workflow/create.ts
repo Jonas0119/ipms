@@ -188,14 +188,14 @@ const PcWorkflowCreateAction = <Action>{
         const { community_id, type, node } = <RequestBody>ctx.request.body;
 
         await ctx.model
-            .from('ejyy_workflow')
+            .from('ipms_workflow')
             .where('community_id', community_id)
             .andWhere('type', type)
             .andWhere('latest', TRUE)
             .update('latest', FALSE);
 
         const created_at = Date.now();
-        const [id] = await ctx.model.from('ejyy_workflow').insert({
+        const [id] = await ctx.model.from('ipms_workflow').insert({
             community_id,
             type,
             latest: TRUE,
@@ -212,7 +212,7 @@ const PcWorkflowCreateAction = <Action>{
                 case WORKFLOW_NODE_APPROVER:
                     const approverNode = <ApproverNode>nextNode;
 
-                    [next_parent_id] = await ctx.model.from('ejyy_workflow_node').insert({
+                    [next_parent_id] = await ctx.model.from('ipms_workflow_node').insert({
                         workflow_id: id,
                         type: approverNode.type,
                         parent_id,
@@ -229,7 +229,7 @@ const PcWorkflowCreateAction = <Action>{
                 case WORKFLOW_NODE_NOTICE:
                     const noticeNode = <NoticeNode>nextNode;
 
-                    [next_parent_id] = await ctx.model.from('ejyy_workflow_node').insert({
+                    [next_parent_id] = await ctx.model.from('ipms_workflow_node').insert({
                         workflow_id: id,
                         type: noticeNode.type,
                         parent_id,
@@ -241,7 +241,7 @@ const PcWorkflowCreateAction = <Action>{
                 case WORKFLOW_NODE_JUDGE:
                     const judgeNode = <JudgeNode>nextNode;
 
-                    [next_parent_id] = await ctx.model.from('ejyy_workflow_node').insert({
+                    [next_parent_id] = await ctx.model.from('ipms_workflow_node').insert({
                         workflow_id: id,
                         type: judgeNode.type,
                         parent_id,
@@ -256,7 +256,7 @@ const PcWorkflowCreateAction = <Action>{
                 case WORKFLOW_NODE_CONDITION:
                     const conditionNode = <ConditionNode>nextNode;
 
-                    [next_parent_id] = await ctx.model.from('ejyy_workflow_node').insert({
+                    [next_parent_id] = await ctx.model.from('ipms_workflow_node').insert({
                         workflow_id: id,
                         type: conditionNode.type,
                         name: conditionNode.name,
@@ -276,7 +276,7 @@ const PcWorkflowCreateAction = <Action>{
             }
         };
 
-        const [initId] = await ctx.model.from('ejyy_workflow_node').insert({
+        const [initId] = await ctx.model.from('ipms_workflow_node').insert({
             workflow_id: id,
             type: node.type,
             from_user_ids: JSON.stringify(node.from_user_ids),

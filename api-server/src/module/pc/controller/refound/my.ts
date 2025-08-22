@@ -56,7 +56,7 @@ const PcRefoundMyAction = <Action>{
         }
 
         const list = await ctx.model
-            .from('ejyy_refound')
+            .from('ipms_refound')
             .where('created_by', ctx.pcUserInfo.id)
             .andWhere('community_id', community_id)
             .andWhere(where)

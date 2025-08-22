@@ -145,7 +145,7 @@ const PcPaymentCreateAction = <Action>{
         }
 
         const exist = await ctx.model
-            .from('ejyy_property_fee')
+            .from('ipms_property_fee')
             .where('community_id', community_id)
             .andWhere(function() {
                 this.where('start_year', start_year).orWhere('end_year', end_year);
@@ -159,7 +159,7 @@ const PcPaymentCreateAction = <Action>{
             });
         }
 
-        const [id] = await ctx.model.from('ejyy_property_fee').insert({
+        const [id] = await ctx.model.from('ipms_property_fee').insert({
             community_id,
             start_year,
             end_year,

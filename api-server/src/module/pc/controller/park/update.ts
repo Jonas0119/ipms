@@ -76,7 +76,7 @@ const PcParkUpdateAction = <Action>{
         const { id, community_id, sign, secret, name, verify_property_fee, lng, lat } = <RequestBody>ctx.request.body;
 
         const record = await ctx.model
-            .from('ejyy_iot_park')
+            .from('ipms_iot_park')
             .where('id', id)
             .andWhere('community_id', community_id)
             .first();
@@ -89,7 +89,7 @@ const PcParkUpdateAction = <Action>{
         }
 
         const exist = await ctx.model
-            .from('ejyy_iot_park')
+            .from('ipms_iot_park')
             .where('name', name)
             .andWhere('community_id', community_id)
             .andWhereNot('id', id)
@@ -103,7 +103,7 @@ const PcParkUpdateAction = <Action>{
         }
 
         await ctx.model
-            .from('ejyy_iot_park')
+            .from('ipms_iot_park')
             .update({
                 sign,
                 secret,

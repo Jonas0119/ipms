@@ -39,8 +39,7 @@ module.exports = {
     YZDA: 16,
     // 物料仓储
     WLCC: 17,
-    // 疫情防控
-    YQFK: 18,
+    
     // 巡检任务
     XJRW: 19,
     // 行政通知

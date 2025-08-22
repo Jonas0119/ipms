@@ -41,7 +41,7 @@ const PcMissionInitAction = <Action>{
         const { id, community_id } = <RequestBody>ctx.request.body;
 
         const info = await ctx.model
-            .from('ejyy_mission')
+            .from('ipms_mission')
             .where('community_id', community_id)
             .andWhere('id', id)
             .andWhere('user_id', ctx.pcUserInfo.id)
@@ -75,7 +75,7 @@ const PcMissionInitAction = <Action>{
         let point_id = null;
 
         const exist = await ctx.model
-            .from('ejyy_mission_complete')
+            .from('ipms_mission_complete')
             .where('mission_id', id)
             .andWhere('date', date)
             .first();
@@ -91,7 +91,7 @@ const PcMissionInitAction = <Action>{
             complete_id = exist.id;
             point_id = exist.point_id;
         } else {
-            [complete_id] = await ctx.model.from('ejyy_mission_complete').insert({
+            [complete_id] = await ctx.model.from('ipms_mission_complete').insert({
                 mission_id: id,
                 point_id,
                 finish: FALSE,
@@ -102,10 +102,10 @@ const PcMissionInitAction = <Action>{
         }
 
         const lineInfo = await ctx.model
-            .from('ejyy_mission_line_node')
-            .leftJoin('ejyy_mission_point', 'ejyy_mission_point.id', 'ejyy_mission_line_node.point_id')
-            .where('ejyy_mission_line_node.line_id', info.line_id)
-            .select('ejyy_mission_point.local', 'ejyy_mission_point.id');
+            .from('ipms_mission_line_node')
+            .leftJoin('ipms_mission_point', 'ipms_mission_point.id', 'ipms_mission_line_node.point_id')
+            .where('ipms_mission_line_node.line_id', info.line_id)
+            .select('ipms_mission_point.local', 'ipms_mission_point.id');
 
         ctx.body = {
             code: SUCCESS,

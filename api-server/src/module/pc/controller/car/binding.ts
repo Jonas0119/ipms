@@ -54,21 +54,21 @@ const PcCarBindingAction = <Action>{
         const { building_id, id, community_id } = <RequestBody>ctx.request.body;
 
         const detail = await ctx.model
-            .from('ejyy_user_car')
-            .leftJoin('ejyy_building_info', 'ejyy_building_info.id', 'ejyy_user_car.building_id')
+            .from('ipms_user_car')
+            .leftJoin('ipms_building_info', 'ipms_building_info.id', 'ipms_user_car.building_id')
             .leftJoin(
-                'ejyy_community_setting',
-                'ejyy_community_setting.community_id',
-                'ejyy_building_info.community_id'
+                'ipms_community_setting',
+                'ipms_community_setting.community_id',
+                'ipms_building_info.community_id'
             )
-            .where('ejyy_user_car.id', id)
-            .andWhere('ejyy_user_car.building_id', building_id)
-            .andWhere('ejyy_building_info.community_id', community_id)
+            .where('ipms_user_car.id', id)
+            .andWhere('ipms_user_car.building_id', building_id)
+            .andWhere('ipms_building_info.community_id', community_id)
             .select(
-                'ejyy_user_car.status',
-                'ejyy_community_setting.carport_max_car',
-                'ejyy_community_setting.garage_max_car',
-                'ejyy_building_info.type'
+                'ipms_user_car.status',
+                'ipms_community_setting.carport_max_car',
+                'ipms_community_setting.garage_max_car',
+                'ipms_building_info.type'
             )
             .first();
 
@@ -87,7 +87,7 @@ const PcCarBindingAction = <Action>{
         }
 
         const [{ count }] = await ctx.model
-            .from('ejyy_user_car')
+            .from('ipms_user_car')
             .where('building_id', building_id)
             .andWhere('status', BINDING_CAR)
             .count({ count: 'id' });
@@ -107,7 +107,7 @@ const PcCarBindingAction = <Action>{
         }
 
         const affect = await ctx.model
-            .from('ejyy_user_car')
+            .from('ipms_user_car')
             .update({
                 status: BINDING_CAR
             })
@@ -122,12 +122,12 @@ const PcCarBindingAction = <Action>{
 
         const created_at = Date.now();
 
-        await ctx.model.from('ejyy_user_car_sync').insert({
+        await ctx.model.from('ipms_user_car_sync').insert({
             user_car_id: id,
             is_remove: FALSE
         });
 
-        await ctx.model.from('ejyy_user_car_operate_log').insert({
+        await ctx.model.from('ipms_user_car_operate_log').insert({
             user_car_id: id,
             property_company_user_id: ctx.pcUserInfo.id,
             status: BINDING_CAR,

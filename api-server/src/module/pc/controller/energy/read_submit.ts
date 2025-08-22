@@ -46,7 +46,7 @@ const PcEnergyReadSubmitAction = <Action>{
         const { community_id, value, meter_id } = <RequestBody>ctx.request.body;
 
         const meterInfo = await ctx.model
-            .from('ejyy_iot_meter')
+            .from('ipms_iot_meter')
             .where('community_id', community_id)
             .andWhere('id', meter_id)
             .first();
@@ -59,7 +59,7 @@ const PcEnergyReadSubmitAction = <Action>{
         }
 
         const lastInfo = await ctx.model
-            .from('ejyy_iot_meter_read')
+            .from('ipms_iot_meter_read')
             .where('meter_id', meter_id)
             .orderBy('id', 'desc')
             .first();
@@ -74,7 +74,7 @@ const PcEnergyReadSubmitAction = <Action>{
             });
         }
 
-        const [id] = await ctx.model.from('ejyy_iot_meter_read').insert({
+        const [id] = await ctx.model.from('ipms_iot_meter_read').insert({
             meter_id,
             from_repeater: FALSE,
             last_value,
@@ -84,7 +84,7 @@ const PcEnergyReadSubmitAction = <Action>{
         });
 
         await ctx.model
-            .from('ejyy_iot_meter')
+            .from('ipms_iot_meter')
             .update('current_value', value)
             .where('id', meter_id);
 

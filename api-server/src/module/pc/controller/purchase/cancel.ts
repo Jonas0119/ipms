@@ -40,7 +40,7 @@ const PcPurchaseCancelAction = <Action>{
         const { id, community_id } = <RequestBody>ctx.request.body;
 
         const info = await ctx.model
-            .from('ejyy_material_purchase')
+            .from('ipms_material_purchase')
             .where('id', id)
             .andWhere('community_id', community_id)
             .andWhere('created_by', ctx.pcUserInfo.id)
@@ -62,7 +62,7 @@ const PcPurchaseCancelAction = <Action>{
 
         const canceled_at = Date.now();
         await ctx.model
-            .from('ejyy_material_purchase')
+            .from('ipms_material_purchase')
             .where('id', id)
             .andWhere('community_id', community_id)
             .update({

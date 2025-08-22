@@ -58,7 +58,7 @@ const PcTopicCreateAction = <Action>{
     response: async ctx => {
         const { community_id, title, banner_img, published, content } = <RequestBody>ctx.request.body;
 
-        const [id] = await ctx.model.from('ejyy_topic').insert({
+        const [id] = await ctx.model.from('ipms_topic').insert({
             community_id,
             title,
             banner_img,

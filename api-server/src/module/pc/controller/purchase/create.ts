@@ -97,7 +97,7 @@ const PcPurchaseCreateAction = <Action>{
         }
 
         const created_at = Date.now();
-        const [id] = await ctx.model.from('ejyy_material_purchase').insert({
+        const [id] = await ctx.model.from('ipms_material_purchase').insert({
             community_id,
             created_by: ctx.pcUserInfo.id,
             workflow_id: generater.workflow_id,
@@ -136,8 +136,8 @@ const PcPurchaseCreateAction = <Action>{
             };
         });
 
-        await ctx.model.from('ejyy_material_purchase_flow').insert(insertDta);
-        await ctx.model.from('ejyy_material_purchase_item').insert(
+        await ctx.model.from('ipms_material_purchase_flow').insert(insertDta);
+        await ctx.model.from('ipms_material_purchase_item').insert(
             items.map(item => {
                 return {
                     task_id: id,

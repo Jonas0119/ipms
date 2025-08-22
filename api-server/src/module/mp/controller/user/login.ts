@@ -66,23 +66,23 @@ const MpUserLoginAction = <Action>{
 
         const token = utils.crypto.md5(`${mpSessionInfo.data.openid}${Date.now()}`);
         let mpUserInfo = await ctx.model
-            .from('ejyy_wechat_mp_user')
+            .from('ipms_wechat_mp_user')
             .leftJoin(
-                'ejyy_wechat_official_accounts_user',
-                'ejyy_wechat_official_accounts_user.union_id',
-                'ejyy_wechat_mp_user.union_id'
+                'ipms_wechat_official_accounts_user',
+                'ipms_wechat_official_accounts_user.union_id',
+                'ipms_wechat_mp_user.union_id'
             )
-            .where('ejyy_wechat_mp_user.open_id', mpSessionInfo.data.openid)
+            .where('ipms_wechat_mp_user.open_id', mpSessionInfo.data.openid)
             .select(
-                'ejyy_wechat_mp_user.id',
-                'ejyy_wechat_mp_user.nick_name',
-                'ejyy_wechat_mp_user.phone',
-                'ejyy_wechat_mp_user.gender',
-                'ejyy_wechat_mp_user.avatar_url',
-                'ejyy_wechat_mp_user.signature',
-                'ejyy_wechat_mp_user.intact',
-                'ejyy_wechat_mp_user.created_at',
-                'ejyy_wechat_official_accounts_user.subscribed'
+                'ipms_wechat_mp_user.id',
+                'ipms_wechat_mp_user.nick_name',
+                'ipms_wechat_mp_user.phone',
+                'ipms_wechat_mp_user.gender',
+                'ipms_wechat_mp_user.avatar_url',
+                'ipms_wechat_mp_user.signature',
+                'ipms_wechat_mp_user.intact',
+                'ipms_wechat_mp_user.created_at',
+                'ipms_wechat_official_accounts_user.subscribed'
             )
             .first();
 
@@ -94,7 +94,7 @@ const MpUserLoginAction = <Action>{
                 created_at: Date.now()
             };
 
-            const [id] = await ctx.model.from('ejyy_wechat_mp_user').insert(mpUserInfo);
+            const [id] = await ctx.model.from('ipms_wechat_mp_user').insert(mpUserInfo);
 
             mpUserInfo.id = id;
             mpUserInfo.gender = 0;
@@ -105,7 +105,7 @@ const MpUserLoginAction = <Action>{
             delete mpUserInfo.open_id;
             delete mpUserInfo.union_id;
 
-            await ctx.model.from('ejyy_wechat_mp_auth').insert({
+            await ctx.model.from('ipms_wechat_mp_auth').insert({
                 wechat_mp_user_id: mpUserInfo.id,
                 token
             });
@@ -113,14 +113,14 @@ const MpUserLoginAction = <Action>{
             mpUserInfo.phone = utils.phone.hide(mpUserInfo.phone);
 
             await ctx.model
-                .from('ejyy_wechat_mp_auth')
+                .from('ipms_wechat_mp_auth')
                 .where({ wechat_mp_user_id: mpUserInfo.id })
                 .update({
                     token
                 });
         }
 
-        await ctx.model.from('ejyy_wechat_mp_user_login').insert({
+        await ctx.model.from('ipms_wechat_mp_user_login').insert({
             wechat_mp_user_id: mpUserInfo.id,
             ip: ctx.request.ip,
             brand,

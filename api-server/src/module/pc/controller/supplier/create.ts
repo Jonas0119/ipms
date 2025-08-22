@@ -65,7 +65,7 @@ const PcSupplierCreateAction = <Action>{
         const { title, linkman, phone, business, bank_name, bank_id, bank_address } = <RequestBody>ctx.request.body;
 
         const exist = await ctx.model
-            .from('ejyy_material_supplier')
+            .from('ipms_material_supplier')
             .where('title', title)
             .first();
 
@@ -77,7 +77,7 @@ const PcSupplierCreateAction = <Action>{
         }
 
         const created_at = Date.now();
-        const [id] = await ctx.model.from('ejyy_material_supplier').insert({
+        const [id] = await ctx.model.from('ipms_material_supplier').insert({
             title,
             linkman,
             phone,

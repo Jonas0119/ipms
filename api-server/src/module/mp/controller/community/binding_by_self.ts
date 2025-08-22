@@ -20,13 +20,13 @@ const MpCommunityBindingBySlefAction = <Action>{
     },
     response: async ctx => {
         const unbindingList = await ctx.model
-            .from('ejyy_property_company_building_registered')
+            .from('ipms_property_company_building_registered')
             .where(function() {
                 this.where('idcard', ctx.mpUserInfo.idcard).orWhere('phone', ctx.mpUserInfo.phone);
             })
             .andWhere('name', ctx.mpUserInfo.real_name)
             .whereNotIn('building_id', function() {
-                this.from('ejyy_user_building')
+                this.from('ipms_user_building')
                     .where('wechat_mp_user_id', ctx.mpUserInfo.id)
                     .select('building_id');
             })
@@ -52,7 +52,7 @@ const MpCommunityBindingBySlefAction = <Action>{
             });
         }
 
-        await ctx.model.from('ejyy_user_building').insert(bindingData);
+        await ctx.model.from('ipms_user_building').insert(bindingData);
 
         const communityInfo = await communityService(ctx.model, ctx.mpUserInfo.id);
 

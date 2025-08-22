@@ -45,21 +45,21 @@ const PcLampLogAction = <Action>{
         const { page_num, page_size, community_id } = <RequestBody>ctx.request.body;
 
         const list = await ctx.model
-            .from('ejyy_iot_lamp_log')
-            .leftJoin('ejyy_iot_lamp_line', 'ejyy_iot_lamp_line.id', 'ejyy_iot_lamp_log.lamp_line_id')
-            .leftJoin('ejyy_iot_lamp', 'ejyy_iot_lamp.id', 'ejyy_iot_lamp_line.lamp_id')
-            .where('ejyy_iot_lamp.community_id', community_id)
-            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ejyy_iot_lamp_log.id'))
+            .from('ipms_iot_lamp_log')
+            .leftJoin('ipms_iot_lamp_line', 'ipms_iot_lamp_line.id', 'ipms_iot_lamp_log.lamp_line_id')
+            .leftJoin('ipms_iot_lamp', 'ipms_iot_lamp.id', 'ipms_iot_lamp_line.lamp_id')
+            .where('ipms_iot_lamp.community_id', community_id)
+            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ipms_iot_lamp_log.id'))
             .select(
-                'ejyy_iot_lamp_log.id',
-                'ejyy_iot_lamp_log.off',
-                'ejyy_iot_lamp_log.created_at',
-                'ejyy_iot_lamp_line.name as line',
-                'ejyy_iot_lamp.name as lamp'
+                'ipms_iot_lamp_log.id',
+                'ipms_iot_lamp_log.off',
+                'ipms_iot_lamp_log.created_at',
+                'ipms_iot_lamp_line.name as line',
+                'ipms_iot_lamp.name as lamp'
             )
             .limit(page_size)
             .offset((page_num - 1) * page_size)
-            .orderBy('ejyy_iot_lamp_log.id', 'desc');
+            .orderBy('ipms_iot_lamp_log.id', 'desc');
 
         const [res] = await ctx.model.select(ctx.model.raw('found_rows() AS total'));
 

@@ -39,27 +39,27 @@ const PcCarHistoryAction = <Action>{
         const { id, community_id } = <RequestBody>ctx.request.body;
 
         const list = await ctx.model
-            .from('ejyy_user_car_operate_log')
-            .leftJoin('ejyy_user_car', 'ejyy_user_car.id', 'ejyy_user_car_operate_log.user_car_id')
-            .leftJoin('ejyy_building_info', 'ejyy_building_info.id', 'ejyy_user_car.building_id')
-            .leftJoin('ejyy_wechat_mp_user', 'ejyy_wechat_mp_user.id', 'ejyy_user_car_operate_log.wechat_mp_user_id')
+            .from('ipms_user_car_operate_log')
+            .leftJoin('ipms_user_car', 'ipms_user_car.id', 'ipms_user_car_operate_log.user_car_id')
+            .leftJoin('ipms_building_info', 'ipms_building_info.id', 'ipms_user_car.building_id')
+            .leftJoin('ipms_wechat_mp_user', 'ipms_wechat_mp_user.id', 'ipms_user_car_operate_log.wechat_mp_user_id')
             .leftJoin(
-                'ejyy_property_company_user',
-                'ejyy_property_company_user.id',
-                'ejyy_user_car_operate_log.property_company_user_id'
+                'ipms_property_company_user',
+                'ipms_property_company_user.id',
+                'ipms_user_car_operate_log.property_company_user_id'
             )
-            .where('ejyy_user_car_operate_log.user_car_id', id)
-            .andWhere('ejyy_building_info.community_id', community_id)
+            .where('ipms_user_car_operate_log.user_car_id', id)
+            .andWhere('ipms_building_info.community_id', community_id)
             .select(
-                'ejyy_user_car_operate_log.status',
-                'ejyy_user_car_operate_log.operate_by',
-                'ejyy_user_car_operate_log.created_at',
-                'ejyy_wechat_mp_user.id as ejyy_wechat_mp_user_id',
-                'ejyy_wechat_mp_user.real_name as ejyy_wechat_mp_user_real_name',
-                'ejyy_property_company_user.id as property_company_user_id',
-                'ejyy_property_company_user.real_name as property_company_user_real_name'
+                'ipms_user_car_operate_log.status',
+                'ipms_user_car_operate_log.operate_by',
+                'ipms_user_car_operate_log.created_at',
+                'ipms_wechat_mp_user.id as ipms_wechat_mp_user_id',
+                'ipms_wechat_mp_user.real_name as ipms_wechat_mp_user_real_name',
+                'ipms_property_company_user.id as property_company_user_id',
+                'ipms_property_company_user.real_name as property_company_user_real_name'
             )
-            .orderBy('ejyy_user_car_operate_log.id', 'desc');
+            .orderBy('ipms_user_car_operate_log.id', 'desc');
 
         ctx.body = {
             code: SUCCESS,

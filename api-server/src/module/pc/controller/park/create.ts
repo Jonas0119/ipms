@@ -70,7 +70,7 @@ const PcParkCreateAction = <Action>{
         const { community_id, sign, secret, name, verify_property_fee, lng, lat } = <RequestBody>ctx.request.body;
 
         const exist = await ctx.model
-            .from('ejyy_iot_park')
+            .from('ipms_iot_park')
             .where('name', name)
             .andWhere('community_id', community_id)
             .first();
@@ -83,7 +83,7 @@ const PcParkCreateAction = <Action>{
         }
 
         const created_at = Date.now();
-        const [id] = await ctx.model.from('ejyy_iot_park').insert({
+        const [id] = await ctx.model.from('ipms_iot_park').insert({
             community_id,
             sign,
             secret,

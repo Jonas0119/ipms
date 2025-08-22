@@ -37,7 +37,7 @@ const PcJobUpdateAction = <Action>{
         const { name, id } = <RequestBody>ctx.request.body;
 
         const exist = await ctx.model
-            .from('ejyy_property_company_job')
+            .from('ipms_property_company_job')
             .where('name', name)
             .andWhere('id', '<>', id)
             .first();
@@ -50,7 +50,7 @@ const PcJobUpdateAction = <Action>{
         }
 
         const affect = await ctx.model
-            .from('ejyy_property_company_job')
+            .from('ipms_property_company_job')
             .update({ name })
             .where('id', id);
 

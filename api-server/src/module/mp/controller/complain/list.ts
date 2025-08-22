@@ -37,23 +37,23 @@ const MpComplainListAction = <Action>{
         const { page_num, page_size } = <RequestBody>ctx.request.body;
 
         const list = await ctx.model
-            .from('ejyy_complain')
-            .leftJoin('ejyy_community_info', 'ejyy_community_info.id', 'ejyy_complain.community_id')
-            .where('ejyy_complain.wechat_mp_user_id', ctx.mpUserInfo.id)
-            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ejyy_complain.id'))
+            .from('ipms_complain')
+            .leftJoin('ipms_community_info', 'ipms_community_info.id', 'ipms_complain.community_id')
+            .where('ipms_complain.wechat_mp_user_id', ctx.mpUserInfo.id)
+            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ipms_complain.id'))
             .select(
-                'ejyy_complain.id',
-                'ejyy_complain.type',
-                'ejyy_complain.category',
-                'ejyy_complain.description',
-                'ejyy_complain.step',
-                'ejyy_complain.merge_id',
-                'ejyy_complain.created_at',
-                'ejyy_community_info.name as community_name'
+                'ipms_complain.id',
+                'ipms_complain.type',
+                'ipms_complain.category',
+                'ipms_complain.description',
+                'ipms_complain.step',
+                'ipms_complain.merge_id',
+                'ipms_complain.created_at',
+                'ipms_community_info.name as community_name'
             )
             .limit(page_size)
             .offset((page_num - 1) * page_size)
-            .orderBy('ejyy_complain.id', 'desc');
+            .orderBy('ipms_complain.id', 'desc');
 
         const [res] = await ctx.model.select(ctx.model.raw('found_rows() AS total'));
 

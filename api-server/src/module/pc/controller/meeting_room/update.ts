@@ -70,7 +70,7 @@ const PcMeetingRoomUpdateAction = <Action>{
         const { id, name, local, community_id, have_tv, have_board, have_projector } = <RequestBody>ctx.request.body;
 
         const exist = await ctx.model
-            .from('ejyy_meeting_room')
+            .from('ipms_meeting_room')
             .where('community_id', community_id)
             .andWhere('id', id)
             .first();
@@ -83,7 +83,7 @@ const PcMeetingRoomUpdateAction = <Action>{
         }
 
         const repeat = await ctx.model
-            .from('ejyy_meeting_room')
+            .from('ipms_meeting_room')
             .where('community_id', community_id)
             .andWhere('name', name)
             .andWhereNot('id', id)
@@ -97,7 +97,7 @@ const PcMeetingRoomUpdateAction = <Action>{
         }
 
         await ctx.model
-            .from('ejyy_meeting_room')
+            .from('ipms_meeting_room')
             .update({
                 name,
                 local,

@@ -44,22 +44,22 @@ const PcEnergyReadHistoryAction = <Action>{
         const { page_num, page_size, meter_id } = <RequestBody>ctx.request.body;
 
         const list = await ctx.model
-            .from('ejyy_iot_meter_read')
-            .leftJoin('ejyy_property_company_user', 'ejyy_property_company_user.id', 'ejyy_iot_meter_read.created_by')
-            .andWhere('ejyy_iot_meter_read.meter_id', meter_id)
-            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ejyy_iot_meter_read.id'))
+            .from('ipms_iot_meter_read')
+            .leftJoin('ipms_property_company_user', 'ipms_property_company_user.id', 'ipms_iot_meter_read.created_by')
+            .andWhere('ipms_iot_meter_read.meter_id', meter_id)
+            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ipms_iot_meter_read.id'))
             .select(
-                'ejyy_iot_meter_read.id',
-                'ejyy_iot_meter_read.from_repeater',
-                'ejyy_iot_meter_read.last_value',
-                'ejyy_iot_meter_read.current_value',
-                'ejyy_iot_meter_read.created_by',
-                'ejyy_iot_meter_read.created_at',
-                'ejyy_property_company_user.real_name'
+                'ipms_iot_meter_read.id',
+                'ipms_iot_meter_read.from_repeater',
+                'ipms_iot_meter_read.last_value',
+                'ipms_iot_meter_read.current_value',
+                'ipms_iot_meter_read.created_by',
+                'ipms_iot_meter_read.created_at',
+                'ipms_property_company_user.real_name'
             )
             .limit(page_size)
             .offset((page_num - 1) * page_size)
-            .orderBy('ejyy_iot_meter_read.id', 'desc');
+            .orderBy('ipms_iot_meter_read.id', 'desc');
 
         const [res] = await ctx.model.select(ctx.model.raw('found_rows() AS total'));
 

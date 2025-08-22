@@ -93,7 +93,7 @@ export async function getNode(
     type: typeof LEAVE_WORKFLOW | typeof REFOUND_WORKFLOW | typeof PURCHASE_WORKFLOW
 ): Promise<InitiateNode> {
     const workflowInfo = await model
-        .from('ejyy_workflow')
+        .from('ipms_workflow')
         .where('community_id', community_id)
         .andWhere('type', type)
         .andWhere('latest', TRUE)
@@ -103,7 +103,7 @@ export async function getNode(
         return initNode();
     }
 
-    const records = await model.from('ejyy_workflow_node').where('workflow_id', workflowInfo.id);
+    const records = await model.from('ipms_workflow_node').where('workflow_id', workflowInfo.id);
 
     const findInitRecord = () => {
         const index = records.findIndex(record => record.type === WORKFLOW_NODE_INITIATE);
@@ -414,14 +414,14 @@ export async function noticeApprover(model: Knex, params: NoticeApproverParams) 
     const { id, refer, title, created_by, relation_user_id, time, digest } = params;
 
     const approverInfo = await model
-        .from('ejyy_property_company_user')
+        .from('ipms_property_company_user')
         .leftJoin(
-            'ejyy_wechat_official_accounts_user',
-            'ejyy_wechat_official_accounts_user.union_id',
-            'ejyy_property_company_user.union_id'
+            'ipms_wechat_official_accounts_user',
+            'ipms_wechat_official_accounts_user.union_id',
+            'ipms_property_company_user.union_id'
         )
-        .where('ejyy_property_company_user.id', relation_user_id)
-        .select('ejyy_wechat_official_accounts_user.open_id', 'ejyy_wechat_official_accounts_user.subscribed')
+        .where('ipms_property_company_user.id', relation_user_id)
+        .select('ipms_wechat_official_accounts_user.open_id', 'ipms_wechat_official_accounts_user.subscribed')
         .first();
 
     if (!approverInfo.subscribed) {
@@ -429,7 +429,7 @@ export async function noticeApprover(model: Knex, params: NoticeApproverParams) 
     }
 
     const createdInfo = await model
-        .from('ejyy_property_company_user')
+        .from('ipms_property_company_user')
         .where('id', created_by)
         .first();
 
@@ -477,14 +477,14 @@ export async function noticeResult(model: Knex, params: NoticeResultParams) {
     const { id, refer, success, reason, created_by, time, digest } = params;
 
     const createdInfo = await model
-        .from('ejyy_property_company_user')
+        .from('ipms_property_company_user')
         .leftJoin(
-            'ejyy_wechat_official_accounts_user',
-            'ejyy_wechat_official_accounts_user.union_id',
-            'ejyy_property_company_user.union_id'
+            'ipms_wechat_official_accounts_user',
+            'ipms_wechat_official_accounts_user.union_id',
+            'ipms_property_company_user.union_id'
         )
-        .where('ejyy_property_company_user.id', created_by)
-        .select('ejyy_wechat_official_accounts_user.open_id', 'ejyy_wechat_official_accounts_user.subscribed')
+        .where('ipms_property_company_user.id', created_by)
+        .select('ipms_wechat_official_accounts_user.open_id', 'ipms_wechat_official_accounts_user.subscribed')
         .first();
 
     if (!createdInfo.subscribed) {

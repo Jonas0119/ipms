@@ -97,7 +97,7 @@ const NotifyWechatRefundAction = <NotifyAction>{
             }
 
             await ctx.model
-                .from('ejyy_property_fee_order_item')
+                .from('ipms_property_fee_order_item')
                 .update({
                     refund_at: info.success_time ? moment(info.success_time, 'YYYY-MM-DD HH:mm:ss').valueOf() : null,
                     refund_id: info.refund_id,
@@ -112,18 +112,18 @@ const NotifyWechatRefundAction = <NotifyAction>{
                 .where('id', orderItemId);
 
             const orderDetail = await ctx.model
-                .from('ejyy_property_fee_order')
+                .from('ipms_property_fee_order')
                 .where('id', orderId)
                 .first();
             const haveRefundingItem = await ctx.model
-                .from('ejyy_property_fee_order_item')
+                .from('ipms_property_fee_order_item')
                 .where('property_fee_order_id', orderId)
                 .whereNotNull('refund_apply_at')
                 .andWhere('refund', FALSE)
                 .first();
 
             await ctx.model
-                .from('ejyy_property_fee_order')
+                .from('ipms_property_fee_order')
                 .update({
                     refunded: !haveRefundingItem ? TRUE : FALSE,
                     paid_fee: orderDetail.paid_fee - (info.success_time ? info.refund_fee : 0)

@@ -15,7 +15,7 @@ const PcUserLogoutAction = <Action>{
     },
     response: async ctx => {
         await ctx.model
-            .from('ejyy_property_company_auth')
+            .from('ipms_property_company_auth')
             .where({ property_company_user_id: ctx.pcUserInfo.id })
             .update({
                 token: null

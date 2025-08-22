@@ -27,38 +27,38 @@ interface PostInfo {
 
 export async function postInfo(model: Knex, userId: number): Promise<PostInfo> {
     const info = await model
-        .from('ejyy_property_company_user')
+        .from('ipms_property_company_user')
         .leftJoin(
-            'ejyy_property_company_department',
-            'ejyy_property_company_department.id',
-            'ejyy_property_company_user.department_id'
+            'ipms_property_company_department',
+            'ipms_property_company_department.id',
+            'ipms_property_company_user.department_id'
         )
-        .leftJoin('ejyy_property_company_job', 'ejyy_property_company_job.id', 'ejyy_property_company_user.job_id')
-        .where('ejyy_property_company_user.id', userId)
-        .select('ejyy_property_company_department.name as department', 'ejyy_property_company_job.name as job')
+        .leftJoin('ipms_property_company_job', 'ipms_property_company_job.id', 'ipms_property_company_user.job_id')
+        .where('ipms_property_company_user.id', userId)
+        .select('ipms_property_company_department.name as department', 'ipms_property_company_job.name as job')
         .first();
 
     const communityList = info
         ? await model
-              .from('ejyy_community_info')
-              .leftJoin('ejyy_community_setting', 'ejyy_community_setting.community_id', 'ejyy_community_info.id')
-              .orWhereIn('ejyy_community_info.id', function() {
-                  this.from('ejyy_property_company_user_access_community')
+              .from('ipms_community_info')
+              .leftJoin('ipms_community_setting', 'ipms_community_setting.community_id', 'ipms_community_info.id')
+              .orWhereIn('ipms_community_info.id', function() {
+                  this.from('ipms_property_company_user_access_community')
                       .where('property_company_user_id', userId)
                       .select('community_id');
               })
               .select(
-                  'ejyy_community_setting.community_id',
-                  'ejyy_community_setting.access_nfc',
-                  'ejyy_community_setting.access_qrcode',
-                  'ejyy_community_setting.access_remote',
-                  'ejyy_community_setting.fitment_pledge',
-                  'ejyy_community_info.name'
+                  'ipms_community_setting.community_id',
+                  'ipms_community_setting.access_nfc',
+                  'ipms_community_setting.access_qrcode',
+                  'ipms_community_setting.access_remote',
+                  'ipms_community_setting.fitment_pledge',
+                  'ipms_community_info.name'
               )
         : [];
 
     const defaultInfo = await model
-        .from('ejyy_property_company_user_default_community')
+        .from('ipms_property_company_user_default_community')
         .where('property_company_user_id', userId)
         .select('community_id')
         .first();
@@ -69,7 +69,7 @@ export async function postInfo(model: Knex, userId: number): Promise<PostInfo> {
         if (communityList.length > 0) {
             default_community_id = communityList[0].community_id;
 
-            await model.from('ejyy_property_company_user_default_community').insert({
+            await model.from('ipms_property_company_user_default_community').insert({
                 property_company_user_id: userId,
                 community_id: default_community_id
             });
@@ -80,7 +80,7 @@ export async function postInfo(model: Knex, userId: number): Promise<PostInfo> {
                 default_community_id = communityList[0].community_id;
 
                 await model
-                    .from('ejyy_property_company_user_default_community')
+                    .from('ipms_property_company_user_default_community')
                     .update({
                         community_id: default_community_id
                     })
@@ -104,7 +104,7 @@ export async function verifyCommunity(model: Knex, user_id: number, community_id
     }
 
     const haveAccess = await model
-        .from('ejyy_property_company_user_access_community')
+        .from('ipms_property_company_user_access_community')
         .where('community_id', community_id)
         .andWhere('property_company_user_id', user_id)
         .first();

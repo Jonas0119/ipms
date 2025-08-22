@@ -64,7 +64,7 @@ const PcFitmentAgreeAction = <Action>{
         const agreed_at = Date.now();
 
         const affect = await ctx.model
-            .from('ejyy_fitment')
+            .from('ipms_fitment')
             .update({
                 cash_deposit: cash_deposit ? cash_deposit : null,
                 return_name: return_name ? return_name : null,

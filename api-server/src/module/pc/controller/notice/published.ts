@@ -41,7 +41,7 @@ const PcNoticePublishedAction = <Action>{
         const { id, community_id } = <RequestBody>ctx.request.body;
 
         const detail = await ctx.model
-            .from('ejyy_notice_to_user')
+            .from('ipms_notice_to_user')
             .where('id', id)
             .andWhere('community_id', community_id)
             .first();
@@ -63,7 +63,7 @@ const PcNoticePublishedAction = <Action>{
         const published_at = Date.now();
 
         const affect = await ctx.model
-            .from('ejyy_notice_to_user')
+            .from('ipms_notice_to_user')
             .update({
                 published: TRUE,
                 published_by: ctx.pcUserInfo.id,

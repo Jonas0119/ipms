@@ -38,7 +38,7 @@ const PcSignMyAction = <Action>{
             .valueOf();
 
         const list = await ctx.model
-            .from('ejyy_employee_sign_record')
+            .from('ipms_employee_sign_record')
             .where('date', date)
             .andWhere('community_id', community_id)
             .andWhere('created_by', ctx.pcUserInfo.id)

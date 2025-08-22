@@ -19,7 +19,7 @@ module.exports = {
     component: () => import('./index'),
     children: [
         require('./dashboard/router'),
-        //require('./epidemic/router'),
+        // removed obsolete module
         require('./notice/router'),
         require('./pet/router'),
         require('./fitment/router'),

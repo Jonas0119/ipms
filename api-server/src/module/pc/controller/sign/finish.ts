@@ -54,7 +54,7 @@ const PcSignFinishAction = <Action>{
         const { community_id, lng, lat, accuracy } = <RequestBody>ctx.request.body;
 
         const setting = await ctx.model
-            .from('ejyy_employee_sign_setting')
+            .from('ipms_employee_sign_setting')
             .where('community_id', community_id)
             .andWhere('latest', TRUE)
             .first();
@@ -79,7 +79,7 @@ const PcSignFinishAction = <Action>{
 
         // 检查是否有有上班打卡 但是下班没打卡
         const begined = await ctx.model
-            .from('ejyy_employee_sign_record')
+            .from('ipms_employee_sign_record')
             .whereNull('finish')
             .andWhere('community_id', community_id)
             .andWhere('created_by', ctx.pcUserInfo.id)
@@ -104,7 +104,7 @@ const PcSignFinishAction = <Action>{
         const finish = Date.now();
 
         await ctx.model
-            .from('ejyy_employee_sign_record')
+            .from('ipms_employee_sign_record')
             .update({
                 finish,
                 finish_lat: lat,

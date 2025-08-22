@@ -10,10 +10,10 @@ import * as ROLE from '~/constant/role_access';
 
 async function send(model: Knex, id: number, urge = false) {
     const { community_id } = await model
-        .from('ejyy_community_info')
-        .leftJoin('ejyy_repair', 'ejyy_repair.community_id', 'ejyy_community_info.id')
-        .where('ejyy_repair.id', id)
-        .select('ejyy_community_info.id as community_id')
+        .from('ipms_community_info')
+        .leftJoin('ipms_repair', 'ipms_repair.community_id', 'ipms_community_info.id')
+        .where('ipms_repair.id', id)
+        .select('ipms_community_info.id as community_id')
         .first();
 
     redisService.pubish(redisService.WS_NOTICE_TO_PROPERTY_COMPANY, {

@@ -1,12 +1,12 @@
 /**
  * +----------------------------------------------------------------------
- * | 「e家宜业」
+ * | IPMS
  * +----------------------------------------------------------------------
- * | Copyright (c) 2020-2024 https://www.chowa.cn All rights reserved.
+ * | Copyright (c) 2020-2025 IPMS
  * +----------------------------------------------------------------------
- * | Licensed 未经授权禁止移除「e家宜业」和「卓佤科技」相关版权
+ * | IPMS
  * +----------------------------------------------------------------------
- * | Author: contact@chowa.cn
+ * | Author: support@ipms.local
  * +----------------------------------------------------------------------
  */
 
@@ -39,7 +39,7 @@ const PcOptionBuildingAction = <Action>{
         const { community_id } = <RequestBody>ctx.request.body;
 
         const list = await ctx.model
-            .from('ejyy_building_info')
+            .from('ipms_building_info')
             .where('community_id', community_id)
             .select('id as building_id', 'type', 'area', 'building', 'unit', 'number');
 

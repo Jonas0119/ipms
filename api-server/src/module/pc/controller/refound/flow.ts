@@ -61,7 +61,7 @@ const PcRefoundFlowAction = <Action>{
         const { id, node_id, agree, reason, community_id } = <RequestBody>ctx.request.body;
 
         const flowInfo = await ctx.model
-            .from('ejyy_refound')
+            .from('ipms_refound')
             .where('id', id)
             .andWhere('community_id', community_id)
             .first();
@@ -73,7 +73,7 @@ const PcRefoundFlowAction = <Action>{
             });
         }
 
-        const flowNodes = await ctx.model.from('ejyy_refound_flow').where('parent_id', id);
+        const flowNodes = await ctx.model.from('ipms_refound_flow').where('parent_id', id);
         const index = flowNodes.findIndex(step => step.id === node_id);
 
         if (index < 0 || flowNodes[index].step !== flowInfo.step || flowNodes[index].finish === TRUE) {
@@ -85,7 +85,7 @@ const PcRefoundFlowAction = <Action>{
 
         const finished_at = Date.now();
         await ctx.model
-            .from('ejyy_refound_flow')
+            .from('ipms_refound_flow')
             .where('id', node_id)
             .update({
                 finish: TRUE,
@@ -95,7 +95,7 @@ const PcRefoundFlowAction = <Action>{
 
         if (agree === FALSE) {
             await ctx.model
-                .from('ejyy_refound')
+                .from('ipms_refound')
                 .where('id', id)
                 .update({ success: FALSE, step: flowNodes[index].step });
 
@@ -115,7 +115,7 @@ const PcRefoundFlowAction = <Action>{
                 } else {
                     if (node.node_type === WORKFLOW_NODE_APPROVER) {
                         await ctx.model
-                            .from('ejyy_refound')
+                            .from('ipms_refound')
                             .where('id', id)
                             .update({ step: node.step });
 
@@ -131,13 +131,13 @@ const PcRefoundFlowAction = <Action>{
                         break;
                     } else if (node.node_type === WORKFLOW_NODE_NOTICE) {
                         await ctx.model
-                            .from('ejyy_refound_flow')
+                            .from('ipms_refound_flow')
                             .where('id', node.id)
                             .update({ finish: TRUE, finished_at });
                         // 添加推送抄送
                     } else {
                         await ctx.model
-                            .from('ejyy_refound_flow')
+                            .from('ipms_refound_flow')
                             .where('id', node.id)
                             .update({ finish: TRUE });
                     }
@@ -145,14 +145,14 @@ const PcRefoundFlowAction = <Action>{
             }
 
             const complete = await ctx.model
-                .from('ejyy_refound_flow')
+                .from('ipms_refound_flow')
                 .where('parent_id', id)
                 .orderBy('id', 'desc')
                 .first();
 
             if (complete.finish === TRUE) {
                 await ctx.model
-                    .from('ejyy_refound')
+                    .from('ipms_refound')
                     .where('id', id)
                     .update({ step: complete.step, success: TRUE });
 

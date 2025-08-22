@@ -82,7 +82,7 @@ const PcComplainCreateAction = <Action>{
             ctx.request.body
         );
 
-        const [id] = await ctx.model.from('ejyy_complain').insert({
+        const [id] = await ctx.model.from('ipms_complain').insert({
             property_company_user_id: wechat_mp_user_id ? null : ctx.pcUserInfo.id,
             wechat_mp_user_id: wechat_mp_user_id ? wechat_mp_user_id : null,
             community_id,

@@ -40,7 +40,7 @@ const PcRepairMergeOptionAction = <Action>{
         const { id, community_id } = <RequestBody>ctx.request.body;
 
         const detail = await ctx.model
-            .from('ejyy_repair')
+            .from('ipms_repair')
             .whereNull('merge_id')
             .andWhere('id', id)
             .andWhere('community_id', community_id)
@@ -55,7 +55,7 @@ const PcRepairMergeOptionAction = <Action>{
         }
 
         const list = await ctx.model
-            .from('ejyy_repair')
+            .from('ipms_repair')
             .whereNull('merge_id')
             .andWhere('community_id', community_id)
             .andWhereNot('id', id)

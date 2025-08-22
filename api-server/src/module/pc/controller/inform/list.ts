@@ -53,29 +53,29 @@ const PcInformListAction = <Action>{
         const where = {};
 
         if (carousel !== undefined) {
-            where['ejyy_inform.carousel'] = carousel;
+            where['ipms_inform.carousel'] = carousel;
         }
 
         const list = await ctx.model
-            .from('ejyy_inform')
-            .leftJoin('ejyy_property_company_user', 'ejyy_property_company_user.id', 'ejyy_inform.created_by')
-            .where('ejyy_inform.community_id', community_id)
-            .andWhere('ejyy_inform.published', TRUE)
+            .from('ipms_inform')
+            .leftJoin('ipms_property_company_user', 'ipms_property_company_user.id', 'ipms_inform.created_by')
+            .where('ipms_inform.community_id', community_id)
+            .andWhere('ipms_inform.published', TRUE)
             .andWhere(where)
-            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ejyy_inform.id'))
+            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ipms_inform.id'))
             .select(
-                'ejyy_inform.id',
-                'ejyy_inform.title',
-                'ejyy_inform.carousel',
-                'ejyy_inform.cover_img',
-                'ejyy_inform.published_at',
-                'ejyy_inform.created_by',
-                'ejyy_inform.created_at',
-                'ejyy_property_company_user.real_name'
+                'ipms_inform.id',
+                'ipms_inform.title',
+                'ipms_inform.carousel',
+                'ipms_inform.cover_img',
+                'ipms_inform.published_at',
+                'ipms_inform.created_by',
+                'ipms_inform.created_at',
+                'ipms_property_company_user.real_name'
             )
             .limit(page_size)
             .offset((page_num - 1) * page_size)
-            .orderBy('ejyy_inform.id', 'desc');
+            .orderBy('ipms_inform.id', 'desc');
 
         const [res] = await ctx.model.select(ctx.model.raw('found_rows() AS total'));
 

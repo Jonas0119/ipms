@@ -174,9 +174,7 @@ export { default as PcContractDetailAction } from './controller/contract/detail'
 export { default as PcContractListAction } from './controller/contract/list';
 export { default as PcContractOptionAction } from './controller/contract/option';
 
-export { default as PcEpidemicCreateAction } from './controller/epidemic/create';
-export { default as PcEpidemicListAction } from './controller/epidemic/list';
-export { default as PcEpidemicDetailAction } from './controller/epidemic/detail';
+// removed obsolete module
 
 export { default as PcWorkflowCreateAction } from './controller/workflow/create';
 export { default as PcWorkflowDetailAction } from './controller/workflow/detail';

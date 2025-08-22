@@ -57,7 +57,7 @@ const PcMaterialUseAction = <Action>{
         const { community_id, id, used_by, reason, total } = <RequestBody>ctx.request.body;
 
         const info = await ctx.model
-            .from('ejyy_material')
+            .from('ipms_material')
             .where('id', id)
             .andWhere('community_id', community_id)
             .first();
@@ -76,7 +76,7 @@ const PcMaterialUseAction = <Action>{
             });
         }
 
-        await ctx.model.from('ejyy_material_used').insert({
+        await ctx.model.from('ipms_material_used').insert({
             material_id: id,
             total,
             reason,
@@ -86,7 +86,7 @@ const PcMaterialUseAction = <Action>{
         });
 
         await ctx.model
-            .from('ejyy_material')
+            .from('ipms_material')
             .update('total', info.total - total)
             .where('id', id)
             .andWhere('community_id', community_id);

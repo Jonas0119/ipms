@@ -57,47 +57,47 @@ const PcOwerListAction = <Action>{
         const where = {};
 
         if (phone) {
-            where['ejyy_wechat_mp_user.phone'] = phone;
+            where['ipms_wechat_mp_user.phone'] = phone;
         }
 
         const list = await ctx.model
-            .from('ejyy_wechat_mp_user')
+            .from('ipms_wechat_mp_user')
             .leftJoin(
-                'ejyy_wechat_official_accounts_user',
-                'ejyy_wechat_official_accounts_user.union_id',
-                'ejyy_wechat_mp_user.union_id'
+                'ipms_wechat_official_accounts_user',
+                'ipms_wechat_official_accounts_user.union_id',
+                'ipms_wechat_mp_user.union_id'
             )
             .where(where)
-            .whereIn('ejyy_wechat_mp_user.id', function() {
-                this.from('ejyy_building_info')
-                    .leftJoin('ejyy_user_building', 'ejyy_user_building.building_id', 'ejyy_building_info.id')
-                    .where('ejyy_building_info.community_id', community_id)
-                    .select('ejyy_user_building.wechat_mp_user_id');
+            .whereIn('ipms_wechat_mp_user.id', function() {
+                this.from('ipms_building_info')
+                    .leftJoin('ipms_user_building', 'ipms_user_building.building_id', 'ipms_building_info.id')
+                    .where('ipms_building_info.community_id', community_id)
+                    .select('ipms_user_building.wechat_mp_user_id');
             })
             .andWhere(function() {
                 if (subscribed !== undefined) {
                     if (subscribed) {
-                        this.where('ejyy_wechat_official_accounts_user.subscribed', subscribed);
+                        this.where('ipms_wechat_official_accounts_user.subscribed', subscribed);
                     } else {
-                        this.where('ejyy_wechat_official_accounts_user.subscribed', subscribed).orWhereNull(
-                            'ejyy_wechat_official_accounts_user.subscribed'
+                        this.where('ipms_wechat_official_accounts_user.subscribed', subscribed).orWhereNull(
+                            'ipms_wechat_official_accounts_user.subscribed'
                         );
                     }
                 }
             })
-            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ejyy_wechat_mp_user.id'))
+            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ipms_wechat_mp_user.id'))
             .select(
-                'ejyy_wechat_mp_user.id',
-                'ejyy_wechat_mp_user.real_name',
-                'ejyy_wechat_mp_user.nick_name',
-                'ejyy_wechat_mp_user.gender',
-                'ejyy_wechat_mp_user.intact',
-                'ejyy_wechat_mp_user.created_at',
-                'ejyy_wechat_official_accounts_user.subscribed'
+                'ipms_wechat_mp_user.id',
+                'ipms_wechat_mp_user.real_name',
+                'ipms_wechat_mp_user.nick_name',
+                'ipms_wechat_mp_user.gender',
+                'ipms_wechat_mp_user.intact',
+                'ipms_wechat_mp_user.created_at',
+                'ipms_wechat_official_accounts_user.subscribed'
             )
             .limit(page_size)
             .offset((page_num - 1) * page_size)
-            .orderBy('ejyy_wechat_mp_user.id', 'desc');
+            .orderBy('ipms_wechat_mp_user.id', 'desc');
 
         const [res] = await ctx.model.select(ctx.model.raw('found_rows() AS total'));
 

@@ -33,7 +33,7 @@ const PcLampOptionAction = <Action>{
         const { community_id } = <RequestBody>ctx.request.body;
 
         const list = await ctx.model
-            .from('ejyy_iot_lamp')
+            .from('ipms_iot_lamp')
             .where('community_id', community_id)
             .select('id', 'name');
 

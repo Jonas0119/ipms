@@ -31,7 +31,7 @@ const MpTopicDetailAction = <Action>{
         const { id } = <RequestParams>ctx.params;
 
         const detail = await ctx.model
-            .from('ejyy_topic')
+            .from('ipms_topic')
             .where('id', id)
             .select('title', 'banner_img', 'content', 'created_at')
             .first();

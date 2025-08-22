@@ -91,7 +91,7 @@ const MpRepairCreateAction = <Action>{
             community_id
         } = <RequestBody>ctx.request.body;
 
-        const [id] = await ctx.model.from('ejyy_repair').insert({
+        const [id] = await ctx.model.from('ipms_repair').insert({
             wechat_mp_user_id: ctx.mpUserInfo.id,
             community_id,
             dispose_subscribed,

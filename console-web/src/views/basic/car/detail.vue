@@ -188,15 +188,15 @@ export default {
                                 {
                                     on: {
                                         click: () => {
-                                            this.$router.push(`/basic/owner/detail/${p.row.ejyy_wechat_mp_user_id}`);
+                                            this.$router.push(`/basic/owner/detail/${p.row.ipms_wechat_mp_user_id}`);
                                         }
                                     }
                                 },
-                                p.row.ejyy_wechat_mp_user_real_name
+                                p.row.ipms_wechat_mp_user_real_name
                             );
                         }
 
-                        return h('span', p.row.ejyy_wechat_mp_user_real_name);
+                        return h('span', p.row.ipms_wechat_mp_user_real_name);
                     }
                 },
                 {

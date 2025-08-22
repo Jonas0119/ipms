@@ -103,7 +103,7 @@ const MpComplainCreateAction = <Action>{
             complain_imgs
         } = <RequestBody>ctx.request.body;
 
-        const [id] = await ctx.model.from('ejyy_complain').insert({
+        const [id] = await ctx.model.from('ipms_complain').insert({
             wechat_mp_user_id: ctx.mpUserInfo.id,
             type,
             category,

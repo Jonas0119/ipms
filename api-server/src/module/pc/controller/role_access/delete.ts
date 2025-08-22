@@ -31,7 +31,7 @@ const PcRoleAccessDeleteAction = <Action>{
         const { id } = <RequestParams>ctx.params;
 
         const used = await ctx.model
-            .from('ejyy_property_company_user')
+            .from('ipms_property_company_user')
             .where('access_id', id)
             .first();
 
@@ -43,7 +43,7 @@ const PcRoleAccessDeleteAction = <Action>{
         }
 
         await ctx.model
-            .from('ejyy_property_company_access')
+            .from('ipms_property_company_access')
             .where('id', id)
             .delete();
 

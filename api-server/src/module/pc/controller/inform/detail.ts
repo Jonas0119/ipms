@@ -32,23 +32,23 @@ const PcInformDetailAction = <Action>{
         const { id } = <RequestParams>ctx.params;
 
         const detail = await ctx.model
-            .from('ejyy_inform')
-            .leftJoin('ejyy_property_company_user', 'ejyy_property_company_user.id', 'ejyy_inform.created_by')
-            .leftJoin('ejyy_community_info', 'ejyy_community_info.id', 'ejyy_inform.community_id')
-            .where('ejyy_inform.id', id)
+            .from('ipms_inform')
+            .leftJoin('ipms_property_company_user', 'ipms_property_company_user.id', 'ipms_inform.created_by')
+            .leftJoin('ipms_community_info', 'ipms_community_info.id', 'ipms_inform.community_id')
+            .where('ipms_inform.id', id)
             .select(
-                'ejyy_inform.id',
-                'ejyy_inform.title',
-                'ejyy_inform.cover_img',
-                'ejyy_inform.carousel',
-                'ejyy_inform.content',
-                'ejyy_inform.created_at',
-                'ejyy_inform.published',
-                'ejyy_inform.published_at',
-                'ejyy_inform.created_by',
-                'ejyy_inform.published_by',
-                'ejyy_property_company_user.real_name',
-                'ejyy_community_info.name as community_name'
+                'ipms_inform.id',
+                'ipms_inform.title',
+                'ipms_inform.cover_img',
+                'ipms_inform.carousel',
+                'ipms_inform.content',
+                'ipms_inform.created_at',
+                'ipms_inform.published',
+                'ipms_inform.published_at',
+                'ipms_inform.created_by',
+                'ipms_inform.published_by',
+                'ipms_property_company_user.real_name',
+                'ipms_community_info.name as community_name'
             )
             .first();
 
@@ -63,7 +63,7 @@ const PcInformDetailAction = <Action>{
 
         if (detail.published_by) {
             const pInfo = await ctx.model
-                .from('ejyy_property_company_user')
+                .from('ipms_property_company_user')
                 .where('id', detail.published_by)
                 .first();
 

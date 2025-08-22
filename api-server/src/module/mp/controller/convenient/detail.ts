@@ -31,7 +31,7 @@ const MpConvenientDetailAction = <Action>{
         const { community_id } = <RequestParams>ctx.params;
 
         const list = await ctx.model
-            .from('ejyy_convenient')
+            .from('ipms_convenient')
             .where('community_id', community_id)
             .select('title', 'location', 'phone')
             .orderBy('id', 'desc');

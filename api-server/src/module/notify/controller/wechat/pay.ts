@@ -70,18 +70,18 @@ const NotifyWechatPayAction = <NotifyAction>{
             payService.verifyNonceStr(orderId, notify.nonce_str)
         ) {
             const mpUserInfo = await ctx.model
-                .from('ejyy_wechat_mp_user')
+                .from('ipms_wechat_mp_user')
                 .where('open_id', notify.openid)
                 .first();
 
             const detail = await ctx.model
-                .from('ejyy_property_fee_order')
+                .from('ipms_property_fee_order')
                 .where('id', orderId)
                 .andWhere('wechat_mp_user_id', mpUserInfo.id)
                 .first();
 
             await ctx.model
-                .from('ejyy_property_fee_order')
+                .from('ipms_property_fee_order')
                 .update({
                     transaction_id: notify.transaction_id,
                     paid: TRUE,

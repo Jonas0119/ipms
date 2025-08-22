@@ -56,7 +56,7 @@ const MpQuestionnaireQuestionsAction = <Action>{
         const { id } = <RequestParams>ctx.params;
 
         const answered = await ctx.model
-            .from('ejyy_questionnaire_answer')
+            .from('ipms_questionnaire_answer')
             .where('questionnaire_id', id)
             .where('wechat_mp_user_id', ctx.mpUserInfo.id)
             .first();
@@ -69,18 +69,18 @@ const MpQuestionnaireQuestionsAction = <Action>{
         }
 
         const records = <(EjyyQuestionnaire & EjyyQuestion & EjyyQuestionOption & ModelAs)[]>await ctx.model
-            .from('ejyy_questionnaire')
-            .leftJoin('ejyy_question', 'ejyy_question.questionnaire_id', 'ejyy_questionnaire.id')
-            .leftJoin('ejyy_question_option', 'ejyy_question_option.question_id', 'ejyy_question.id')
-            .where('ejyy_questionnaire.id', id)
+            .from('ipms_questionnaire')
+            .leftJoin('ipms_question', 'ipms_question.questionnaire_id', 'ipms_questionnaire.id')
+            .leftJoin('ipms_question_option', 'ipms_question_option.question_id', 'ipms_question.id')
+            .where('ipms_questionnaire.id', id)
             .select(
-                'ejyy_questionnaire.title',
-                'ejyy_questionnaire.expire',
-                'ejyy_question.title as question_title',
-                'ejyy_question.type',
-                'ejyy_question_option.id as option_id',
-                'ejyy_question_option.question_id',
-                'ejyy_question_option.option_val'
+                'ipms_questionnaire.title',
+                'ipms_questionnaire.expire',
+                'ipms_question.title as question_title',
+                'ipms_question.type',
+                'ipms_question_option.id as option_id',
+                'ipms_question_option.question_id',
+                'ipms_question_option.option_val'
             );
 
         if (records.length === 0) {

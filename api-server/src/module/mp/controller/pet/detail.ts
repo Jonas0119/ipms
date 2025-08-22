@@ -31,26 +31,26 @@ const MpPetDetailAction = <Action>{
         const { id } = <RequestParams>ctx.params;
 
         const info = await ctx.model
-            .from('ejyy_pet')
-            .leftJoin('ejyy_community_info', 'ejyy_community_info.id', 'ejyy_pet.community_id')
+            .from('ipms_pet')
+            .leftJoin('ipms_community_info', 'ipms_community_info.id', 'ipms_pet.community_id')
             .select(
-                'ejyy_pet.id',
-                'ejyy_pet.name',
-                'ejyy_pet.sex',
-                'ejyy_pet.pet_type',
-                'ejyy_pet.coat_color',
-                'ejyy_pet.breed',
-                'ejyy_pet.photo',
-                'ejyy_pet.pet_license',
-                'ejyy_pet.pet_license_award_at',
-                'ejyy_community_info.name as community_name'
+                'ipms_pet.id',
+                'ipms_pet.name',
+                'ipms_pet.sex',
+                'ipms_pet.pet_type',
+                'ipms_pet.coat_color',
+                'ipms_pet.breed',
+                'ipms_pet.photo',
+                'ipms_pet.pet_license',
+                'ipms_pet.pet_license_award_at',
+                'ipms_community_info.name as community_name'
             )
-            .where('ejyy_pet.id', id)
+            .where('ipms_pet.id', id)
             .where('wechat_mp_user_id', ctx.mpUserInfo.id)
             .first();
 
         const vaccinates = await ctx.model
-            .from('ejyy_pet_vaccinate')
+            .from('ipms_pet_vaccinate')
             .select('vaccinated_at', 'vaccine_type')
             .where('pet_id', id)
             .orderBy('id', 'desc');

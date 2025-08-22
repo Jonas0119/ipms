@@ -41,7 +41,7 @@ const PcFitmentConfirmAction = <Action>{
         const confirmed_at = Date.now();
 
         const affect = await ctx.model
-            .from('ejyy_fitment')
+            .from('ipms_fitment')
             .update({
                 step: PROPERTY_COMPANY_CONFIRM_STEP,
                 confirm_user_id: ctx.pcUserInfo.id,

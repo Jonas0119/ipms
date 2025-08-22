@@ -60,7 +60,7 @@ const PcLeaveFlowAction = <Action>{
         const { id, node_id, agree, reason, community_id } = <RequestBody>ctx.request.body;
 
         const flowInfo = await ctx.model
-            .from('ejyy_ask_for_leave')
+            .from('ipms_ask_for_leave')
             .where('id', id)
             .andWhere('community_id', community_id)
             .first();
@@ -72,7 +72,7 @@ const PcLeaveFlowAction = <Action>{
             });
         }
 
-        const flowNodes = await ctx.model.from('ejyy_ask_for_leave_flow').where('parent_id', id);
+        const flowNodes = await ctx.model.from('ipms_ask_for_leave_flow').where('parent_id', id);
         const index = flowNodes.findIndex(step => step.id === node_id);
 
         if (index < 0 || flowNodes[index].step !== flowInfo.step || flowNodes[index].finish === TRUE) {
@@ -84,7 +84,7 @@ const PcLeaveFlowAction = <Action>{
 
         const finished_at = Date.now();
         await ctx.model
-            .from('ejyy_ask_for_leave_flow')
+            .from('ipms_ask_for_leave_flow')
             .where('id', node_id)
             .update({
                 finish: TRUE,
@@ -94,7 +94,7 @@ const PcLeaveFlowAction = <Action>{
 
         if (agree === FALSE) {
             await ctx.model
-                .from('ejyy_ask_for_leave')
+                .from('ipms_ask_for_leave')
                 .where('id', id)
                 .update({ success: FALSE, step: flowNodes[index].step });
 
@@ -114,7 +114,7 @@ const PcLeaveFlowAction = <Action>{
                 } else {
                     if (node.node_type === WORKFLOW_NODE_APPROVER) {
                         await ctx.model
-                            .from('ejyy_ask_for_leave')
+                            .from('ipms_ask_for_leave')
                             .where('id', id)
                             .update({ step: node.step });
 
@@ -130,13 +130,13 @@ const PcLeaveFlowAction = <Action>{
                         break;
                     } else if (node.node_type === WORKFLOW_NODE_NOTICE) {
                         await ctx.model
-                            .from('ejyy_ask_for_leave_flow')
+                            .from('ipms_ask_for_leave_flow')
                             .where('id', node.id)
                             .update({ finish: TRUE, finished_at });
                         // 添加推送抄送
                     } else {
                         await ctx.model
-                            .from('ejyy_ask_for_leave_flow')
+                            .from('ipms_ask_for_leave_flow')
                             .where('id', node.id)
                             .update({ finish: TRUE });
                     }
@@ -144,14 +144,14 @@ const PcLeaveFlowAction = <Action>{
             }
 
             const complete = await ctx.model
-                .from('ejyy_ask_for_leave_flow')
+                .from('ipms_ask_for_leave_flow')
                 .where('parent_id', id)
                 .orderBy('id', 'desc')
                 .first();
 
             if (complete.finish === TRUE) {
                 await ctx.model
-                    .from('ejyy_ask_for_leave')
+                    .from('ipms_ask_for_leave')
                     .where('id', id)
                     .update({ step: complete.step, success: TRUE });
 

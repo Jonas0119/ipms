@@ -60,7 +60,7 @@ const MpApplyCreateAction = <Action>{
         }
 
         const lastInfo = await ctx.model
-            .from('ejyy_owner_apply')
+            .from('ipms_owner_apply')
             .where('wechat_mp_user_id', ctx.mpUserInfo.id)
             .orderBy('id', 'desc')
             .first();
@@ -73,11 +73,11 @@ const MpApplyCreateAction = <Action>{
         }
 
         const communityInfo = await ctx.model
-            .from('ejyy_community_info')
+            .from('ipms_community_info')
             .where('name', community_name)
             .first();
 
-        const [id] = await ctx.model.from('ejyy_owner_apply').insert({
+        const [id] = await ctx.model.from('ipms_owner_apply').insert({
             wechat_mp_user_id: ctx.mpUserInfo.id,
             community_name,
             house: house ? house : null,

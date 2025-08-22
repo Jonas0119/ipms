@@ -40,7 +40,7 @@ const PcPartyPublishedAction = <Action>{
         const { id, community_id } = <RequestBody>ctx.request.body;
 
         const exist = await ctx.model
-            .from('ejyy_party')
+            .from('ipms_party')
             .where('id', id)
             .andWhere('community_id', community_id)
             .first();
@@ -61,7 +61,7 @@ const PcPartyPublishedAction = <Action>{
 
         const published_at = Date.now();
         await ctx.model
-            .from('ejyy_party')
+            .from('ipms_party')
             .update({
                 published: TRUE,
                 published_at,

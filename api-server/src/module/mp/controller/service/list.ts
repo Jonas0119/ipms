@@ -56,7 +56,7 @@ const MpServiceListAction = <Action>{
         const { page_num, page_size, community_id, category, radius } = <RequestBody>ctx.request.body;
 
         const setting = await ctx.model
-            .from('ejyy_employee_sign_setting')
+            .from('ipms_employee_sign_setting')
             .where('community_id', community_id)
             .andWhere('latest', TRUE)
             .first();

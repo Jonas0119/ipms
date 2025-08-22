@@ -90,7 +90,7 @@ const PcElevatorUpdateAction = <Action>{
         >ctx.request.body;
 
         const record = await ctx.model
-            .from('ejyy_iot_elevator')
+            .from('ipms_iot_elevator')
             .where('id', id)
             .andWhere('community_id', community_id)
             .first();
@@ -103,7 +103,7 @@ const PcElevatorUpdateAction = <Action>{
         }
 
         const exist = await ctx.model
-            .from('ejyy_iot_elevator')
+            .from('ipms_iot_elevator')
             .where('community_id', community_id)
             .andWhere('name', name)
             .andWhereNot('id', id)
@@ -117,7 +117,7 @@ const PcElevatorUpdateAction = <Action>{
         }
 
         await ctx.model
-            .from('ejyy_iot_elevator')
+            .from('ipms_iot_elevator')
             .update({
                 sign,
                 secret,

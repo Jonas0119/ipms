@@ -17,11 +17,11 @@ const MpFamilyListAction = <Action>{
     },
     response: async ctx => {
         const list = await ctx.model
-            .from('ejyy_wechat_mp_user')
+            .from('ipms_wechat_mp_user')
             .whereIn('id', function() {
-                this.from('ejyy_user_building')
+                this.from('ipms_user_building')
                     .whereIn('building_id', function() {
-                        this.from('ejyy_user_building')
+                        this.from('ipms_user_building')
                             .where('wechat_mp_user_id', ctx.mpUserInfo.id)
                             .where('status', BINDING_BUILDING)
                             .select('building_id');

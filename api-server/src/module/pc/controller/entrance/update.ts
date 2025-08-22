@@ -81,7 +81,7 @@ const PcEntranceUpdateAction = <Action>{
         const { id, community_id, sign, secret, name, building, category, lng, lat } = <RequestBody>ctx.request.body;
 
         const record = await ctx.model
-            .from('ejyy_iot_entrance')
+            .from('ipms_iot_entrance')
             .where('id', id)
             .andWhere('community_id', community_id)
             .first();
@@ -94,7 +94,7 @@ const PcEntranceUpdateAction = <Action>{
         }
 
         const exist = await ctx.model
-            .from('ejyy_iot_entrance')
+            .from('ipms_iot_entrance')
             .where('name', name)
             .andWhere('community_id', community_id)
             .andWhereNot('id', id)
@@ -108,7 +108,7 @@ const PcEntranceUpdateAction = <Action>{
         }
 
         await ctx.model
-            .from('ejyy_iot_entrance')
+            .from('ipms_iot_entrance')
             .update({
                 sign,
                 secret,

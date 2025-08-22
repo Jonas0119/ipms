@@ -76,7 +76,7 @@ const PcLeaveCreateAction = <Action>{
         }
 
         const created_at = Date.now();
-        const [id] = await ctx.model.from('ejyy_ask_for_leave').insert({
+        const [id] = await ctx.model.from('ipms_ask_for_leave').insert({
             community_id,
             created_by: ctx.pcUserInfo.id,
             workflow_id: generater.workflow_id,
@@ -118,7 +118,7 @@ const PcLeaveCreateAction = <Action>{
             };
         });
 
-        await ctx.model.from('ejyy_ask_for_leave_flow').insert(insertDta);
+        await ctx.model.from('ipms_ask_for_leave_flow').insert(insertDta);
 
         ctx.body = {
             code: SUCCESS,

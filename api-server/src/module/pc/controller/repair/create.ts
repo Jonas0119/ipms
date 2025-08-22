@@ -70,7 +70,7 @@ const PcRepairCreateAction = <Action>{
             ctx.request.body
         );
 
-        const [id] = await ctx.model.from('ejyy_repair').insert({
+        const [id] = await ctx.model.from('ipms_repair').insert({
             property_company_user_id: wechat_mp_user_id ? null : ctx.pcUserInfo.id,
             wechat_mp_user_id: wechat_mp_user_id ? wechat_mp_user_id : null,
             community_id,

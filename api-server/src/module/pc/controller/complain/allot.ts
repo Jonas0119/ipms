@@ -53,7 +53,7 @@ const PcComplainAllotAction = <Action>{
         const { id, community_id, dispose_user_id } = <RequestBody>ctx.request.body;
 
         const detail = await ctx.model
-            .from('ejyy_complain')
+            .from('ipms_complain')
             .where('id', id)
             .andWhere('community_id', community_id)
             .andWhere('step', SUBMIT_COMPLAIN_STEP)
@@ -67,18 +67,18 @@ const PcComplainAllotAction = <Action>{
         }
 
         const disposedInfo = await ctx.model
-            .from('ejyy_property_company_user')
+            .from('ipms_property_company_user')
             .leftJoin(
-                'ejyy_wechat_official_accounts_user',
-                'ejyy_wechat_official_accounts_user.union_id',
-                'ejyy_property_company_user.union_id'
+                'ipms_wechat_official_accounts_user',
+                'ipms_wechat_official_accounts_user.union_id',
+                'ipms_property_company_user.union_id'
             )
-            .where('ejyy_property_company_user.id', dispose_user_id)
+            .where('ipms_property_company_user.id', dispose_user_id)
             .select(
-                'ejyy_property_company_user.id',
-                'ejyy_property_company_user.real_name',
-                'ejyy_wechat_official_accounts_user.open_id',
-                'ejyy_wechat_official_accounts_user.subscribed'
+                'ipms_property_company_user.id',
+                'ipms_property_company_user.real_name',
+                'ipms_wechat_official_accounts_user.open_id',
+                'ipms_wechat_official_accounts_user.subscribed'
             )
             .first();
 
@@ -91,13 +91,13 @@ const PcComplainAllotAction = <Action>{
 
         const alloted_at = Date.now();
         const { name: community_name } = await ctx.model
-            .from('ejyy_community_info')
+            .from('ipms_community_info')
             .where('id', community_id)
             .first();
 
         if (detail.dispose_subscribed) {
             const { open_id } = await ctx.model
-                .from('ejyy_wechat_mp_user')
+                .from('ipms_wechat_mp_user')
                 .where('id', detail.wechat_mp_user_id)
                 .first();
 
@@ -162,7 +162,7 @@ const PcComplainAllotAction = <Action>{
         }
 
         await ctx.model
-            .from('ejyy_complain')
+            .from('ipms_complain')
             .update({
                 step: ALLOT_COMPLAIN_STEP,
                 allot_user_id: ctx.pcUserInfo.id,

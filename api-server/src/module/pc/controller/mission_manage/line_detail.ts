@@ -39,20 +39,20 @@ const PcMissionManageLineDetailAction = <Action>{
         const { id, community_id } = <RequestBody>ctx.request.body;
 
         const info = await ctx.model
-            .from('ejyy_mission_line')
-            .leftJoin('ejyy_property_company_user', 'ejyy_property_company_user.id', 'ejyy_mission_line.created_by')
-            .leftJoin('ejyy_mission_category', 'ejyy_mission_category.id', 'ejyy_mission_line.category_id')
-            .where('ejyy_mission_line.community_id', community_id)
-            .andWhere('ejyy_mission_line.id', id)
+            .from('ipms_mission_line')
+            .leftJoin('ipms_property_company_user', 'ipms_property_company_user.id', 'ipms_mission_line.created_by')
+            .leftJoin('ipms_mission_category', 'ipms_mission_category.id', 'ipms_mission_line.category_id')
+            .where('ipms_mission_line.community_id', community_id)
+            .andWhere('ipms_mission_line.id', id)
             .select(
-                'ejyy_mission_line.id',
-                'ejyy_mission_line.name',
-                'ejyy_mission_line.description',
-                'ejyy_mission_line.category_id',
-                'ejyy_mission_line.created_at',
-                'ejyy_mission_line.created_by',
-                'ejyy_property_company_user.real_name',
-                'ejyy_mission_category.name as category'
+                'ipms_mission_line.id',
+                'ipms_mission_line.name',
+                'ipms_mission_line.description',
+                'ipms_mission_line.category_id',
+                'ipms_mission_line.created_at',
+                'ipms_mission_line.created_by',
+                'ipms_property_company_user.real_name',
+                'ipms_mission_category.name as category'
             )
             .first();
 
@@ -64,10 +64,10 @@ const PcMissionManageLineDetailAction = <Action>{
         }
 
         const points = await ctx.model
-            .from('ejyy_mission_line_node')
-            .leftJoin('ejyy_mission_point', 'ejyy_mission_point.id', 'ejyy_mission_line_node.point_id')
-            .where('ejyy_mission_line_node.line_id', id)
-            .select('ejyy_mission_point.id', 'ejyy_mission_point.local');
+            .from('ipms_mission_line_node')
+            .leftJoin('ipms_mission_point', 'ipms_mission_point.id', 'ipms_mission_line_node.point_id')
+            .where('ipms_mission_line_node.line_id', id)
+            .select('ipms_mission_point.id', 'ipms_mission_point.local');
 
         ctx.body = {
             code: SUCCESS,

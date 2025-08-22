@@ -72,7 +72,7 @@ const PcLampLineCreateAction = <Action>{
     response: async ctx => {
         const { community_id, name, port, lamp_id, work_mode } = <RequestBody>ctx.request.body;
         const lampInfo = await ctx.model
-            .from('ejyy_iot_lamp')
+            .from('ipms_iot_lamp')
             .where('community_id', community_id)
             .andWhere('id', lamp_id)
             .first();
@@ -92,7 +92,7 @@ const PcLampLineCreateAction = <Action>{
         }
 
         const portUsed = await ctx.model
-            .from('ejyy_iot_lamp_line')
+            .from('ipms_iot_lamp_line')
             .where('lamp_id', lamp_id)
             .andWhere('port', port)
             .first();
@@ -105,7 +105,7 @@ const PcLampLineCreateAction = <Action>{
         }
 
         const exist = await ctx.model
-            .from('ejyy_iot_lamp_line')
+            .from('ipms_iot_lamp_line')
             .where('lamp_id', lamp_id)
             .andWhere('name', name)
             .first();
@@ -118,7 +118,7 @@ const PcLampLineCreateAction = <Action>{
         }
 
         const created_at = Date.now();
-        const [id] = await ctx.model.from('ejyy_iot_lamp_line').insert({
+        const [id] = await ctx.model.from('ipms_iot_lamp_line').insert({
             name,
             port,
             lamp_id,
@@ -126,7 +126,7 @@ const PcLampLineCreateAction = <Action>{
             created_at
         });
 
-        await ctx.model.from('ejyy_iot_lamp_work_mode').insert(
+        await ctx.model.from('ipms_iot_lamp_work_mode').insert(
             work_mode.map(mode => {
                 return {
                     ...mode,

@@ -39,7 +39,7 @@ const PcStorehouseDeleteAction = <Action>{
         const { id, community_id } = <RequestBody>ctx.request.body;
 
         const exist = await ctx.model
-            .from('ejyy_storehouse')
+            .from('ipms_storehouse')
             .where('id', id)
             .andWhere('community_id', community_id)
             .first();
@@ -52,7 +52,7 @@ const PcStorehouseDeleteAction = <Action>{
         }
 
         const used = await ctx.model
-            .from('ejyy_material')
+            .from('ipms_material')
             .where('storehouse_id', id)
             .andWhere('community_id', community_id)
             .first();
@@ -65,7 +65,7 @@ const PcStorehouseDeleteAction = <Action>{
         }
 
         await ctx.model
-            .from('ejyy_storehouse')
+            .from('ipms_storehouse')
             .where('id', id)
             .andWhere('community_id', community_id)
             .delete();

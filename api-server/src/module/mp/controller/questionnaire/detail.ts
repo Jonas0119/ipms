@@ -63,30 +63,30 @@ const MpQuestionnaireDetailAction = <Action>{
         const { id } = <RequestParams>ctx.params;
 
         const questions = <(EjyyQuestionnaire & EjyyQuestion & EjyyQuestionOption & ModelAs)[]>await ctx.model
-            .from('ejyy_questionnaire')
-            .leftJoin('ejyy_question', 'ejyy_question.questionnaire_id', 'ejyy_questionnaire.id')
-            .leftJoin('ejyy_question_option', 'ejyy_question_option.question_id', 'ejyy_question.id')
-            .where('ejyy_questionnaire.id', id)
+            .from('ipms_questionnaire')
+            .leftJoin('ipms_question', 'ipms_question.questionnaire_id', 'ipms_questionnaire.id')
+            .leftJoin('ipms_question_option', 'ipms_question_option.question_id', 'ipms_question.id')
+            .where('ipms_questionnaire.id', id)
             .select(
-                'ejyy_questionnaire.title',
-                'ejyy_questionnaire.expire',
-                'ejyy_question.title as question_title',
-                'ejyy_question.type',
-                'ejyy_question_option.id as option_id',
-                'ejyy_question_option.question_id',
-                'ejyy_question_option.option_val'
+                'ipms_questionnaire.title',
+                'ipms_questionnaire.expire',
+                'ipms_question.title as question_title',
+                'ipms_question.type',
+                'ipms_question_option.id as option_id',
+                'ipms_question_option.question_id',
+                'ipms_question_option.option_val'
             );
 
         const answers = <(EjyyQuestionnaireAnswer & EjyyQuestionnaireAnswerResult)[]>await ctx.model
-            .from('ejyy_questionnaire_answer')
+            .from('ipms_questionnaire_answer')
             .leftJoin(
-                'ejyy_questionnaire_answer_result',
-                'ejyy_questionnaire_answer_result.answer_id',
-                'ejyy_questionnaire_answer.id'
+                'ipms_questionnaire_answer_result',
+                'ipms_questionnaire_answer_result.answer_id',
+                'ipms_questionnaire_answer.id'
             )
-            .where('ejyy_questionnaire_answer.questionnaire_id', id)
-            .andWhere('ejyy_questionnaire_answer.wechat_mp_user_id', ctx.mpUserInfo.id)
-            .select('ejyy_questionnaire_answer_result.question_id', 'ejyy_questionnaire_answer_result.option_id');
+            .where('ipms_questionnaire_answer.questionnaire_id', id)
+            .andWhere('ipms_questionnaire_answer.wechat_mp_user_id', ctx.mpUserInfo.id)
+            .select('ipms_questionnaire_answer_result.question_id', 'ipms_questionnaire_answer_result.option_id');
 
         const map = <QuestionMap>{};
 
@@ -114,7 +114,7 @@ const MpQuestionnaireDetailAction = <Action>{
         });
 
         const { content: statistics } = await ctx.model
-            .from('ejyy_questionnaire_statistics')
+            .from('ipms_questionnaire_statistics')
             .where('questionnaire_id', id)
             .first();
 

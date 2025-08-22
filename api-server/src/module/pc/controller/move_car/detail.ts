@@ -39,37 +39,37 @@ const PcMoveCarDetailAction = <Action>{
         const { id, community_id } = <RequestBody>ctx.request.body;
 
         const info = await ctx.model
-            .from('ejyy_move_car')
-            .leftJoin('ejyy_wechat_mp_user', 'ejyy_wechat_mp_user.id', 'ejyy_move_car.wechat_mp_user_id')
-            .leftJoin('ejyy_property_company_user', 'ejyy_property_company_user.id', 'ejyy_move_car.response_user_id')
+            .from('ipms_move_car')
+            .leftJoin('ipms_wechat_mp_user', 'ipms_wechat_mp_user.id', 'ipms_move_car.wechat_mp_user_id')
+            .leftJoin('ipms_property_company_user', 'ipms_property_company_user.id', 'ipms_move_car.response_user_id')
             .select(
-                'ejyy_move_car.id',
-                'ejyy_move_car.car_number',
-                'ejyy_move_car.move_reason',
-                'ejyy_move_car.live_img',
-                'ejyy_move_car.subscribed',
-                'ejyy_move_car.have_concat_info',
-                'ejyy_move_car.response_user_id',
-                'ejyy_move_car.response_content',
-                'ejyy_move_car.responsed_at',
-                'ejyy_move_car.created_at',
-                'ejyy_wechat_mp_user.real_name as wechat_mp_user_real_name',
-                'ejyy_wechat_mp_user.id as wechat_mp_user_id',
-                'ejyy_property_company_user.real_name as property_company_user_real_name',
-                'ejyy_property_company_user.id as property_company_user_id'
+                'ipms_move_car.id',
+                'ipms_move_car.car_number',
+                'ipms_move_car.move_reason',
+                'ipms_move_car.live_img',
+                'ipms_move_car.subscribed',
+                'ipms_move_car.have_concat_info',
+                'ipms_move_car.response_user_id',
+                'ipms_move_car.response_content',
+                'ipms_move_car.responsed_at',
+                'ipms_move_car.created_at',
+                'ipms_wechat_mp_user.real_name as wechat_mp_user_real_name',
+                'ipms_wechat_mp_user.id as wechat_mp_user_id',
+                'ipms_property_company_user.real_name as property_company_user_real_name',
+                'ipms_property_company_user.id as property_company_user_id'
             )
-            .where('ejyy_move_car.id', id)
-            .where('ejyy_move_car.community_id', community_id)
+            .where('ipms_move_car.id', id)
+            .where('ipms_move_car.community_id', community_id)
             .first();
 
         let concatList = [];
 
         if (info.have_concat_info) {
             concatList = await ctx.model
-                .from('ejyy_user_car')
-                .leftJoin('ejyy_wechat_mp_user', 'ejyy_wechat_mp_user.id', 'ejyy_user_car.wechat_mp_user_id')
-                .where('ejyy_user_car.car_number', info.car_number)
-                .select('ejyy_wechat_mp_user.phone', 'ejyy_user_car.car_number');
+                .from('ipms_user_car')
+                .leftJoin('ipms_wechat_mp_user', 'ipms_wechat_mp_user.id', 'ipms_user_car.wechat_mp_user_id')
+                .where('ipms_user_car.car_number', info.car_number)
+                .select('ipms_wechat_mp_user.phone', 'ipms_user_car.car_number');
         }
 
         ctx.body = {

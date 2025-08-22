@@ -37,7 +37,7 @@ const MpAccessDoorAction = <Action>{
 
         const res = await accessService.remoteOpen(id, community_id);
 
-        await ctx.model.from('ejyy_community_remote_open_door_log').insert({
+        await ctx.model.from('ipms_community_remote_open_door_log').insert({
             wechat_mp_user_id: ctx.mpUserInfo.id,
             community_id,
             door_id: id,

@@ -38,25 +38,25 @@ const MpNoticeReadedAction = <Action>{
         const { page_num, page_size } = <RequestBody>ctx.request.body;
 
         const list = await ctx.model
-            .from('ejyy_notice_to_user')
-            .leftJoin('ejyy_community_info', 'ejyy_community_info.id', 'ejyy_notice_to_user.community_id')
-            .leftJoin('ejyy_notice_to_user_readed', 'ejyy_notice_to_user_readed.notice_id', 'ejyy_notice_to_user.id')
-            .andWhere('ejyy_notice_to_user_readed.wechat_mp_user_id', ctx.mpUserInfo.id)
-            .andWhere('ejyy_notice_to_user.created_at', '>=', ctx.mpUserInfo.created_at)
-            .whereNotNull('ejyy_notice_to_user_readed.wechat_mp_user_id')
-            .andWhere('ejyy_notice_to_user.published', TRUE)
-            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ejyy_notice_to_user.id'))
+            .from('ipms_notice_to_user')
+            .leftJoin('ipms_community_info', 'ipms_community_info.id', 'ipms_notice_to_user.community_id')
+            .leftJoin('ipms_notice_to_user_readed', 'ipms_notice_to_user_readed.notice_id', 'ipms_notice_to_user.id')
+            .andWhere('ipms_notice_to_user_readed.wechat_mp_user_id', ctx.mpUserInfo.id)
+            .andWhere('ipms_notice_to_user.created_at', '>=', ctx.mpUserInfo.created_at)
+            .whereNotNull('ipms_notice_to_user_readed.wechat_mp_user_id')
+            .andWhere('ipms_notice_to_user.published', TRUE)
+            .select(ctx.model.raw('SQL_CALC_FOUND_ROWS ipms_notice_to_user.id'))
             .select(
-                'ejyy_notice_to_user.id',
-                'ejyy_notice_to_user.title',
-                'ejyy_notice_to_user.overview',
-                'ejyy_notice_to_user.refer',
-                'ejyy_community_info.name as scope',
-                'ejyy_notice_to_user.created_at'
+                'ipms_notice_to_user.id',
+                'ipms_notice_to_user.title',
+                'ipms_notice_to_user.overview',
+                'ipms_notice_to_user.refer',
+                'ipms_community_info.name as scope',
+                'ipms_notice_to_user.created_at'
             )
             .limit(page_size)
             .offset((page_num - 1) * page_size)
-            .orderBy('ejyy_notice_to_user.id', 'desc');
+            .orderBy('ipms_notice_to_user.id', 'desc');
 
         const [res] = await ctx.model.select(ctx.model.raw('found_rows() AS total'));
 

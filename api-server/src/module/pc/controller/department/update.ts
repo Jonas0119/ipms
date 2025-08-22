@@ -37,7 +37,7 @@ const PcDepartmentUpdateAction = <Action>{
         const { name, id } = <RequestBody>ctx.request.body;
 
         const exist = await ctx.model
-            .from('ejyy_property_company_department')
+            .from('ipms_property_company_department')
             .where('name', name)
             .andWhere('id', '<>', id)
             .first();
@@ -50,7 +50,7 @@ const PcDepartmentUpdateAction = <Action>{
         }
 
         const affect = await ctx.model
-            .from('ejyy_property_company_department')
+            .from('ipms_property_company_department')
             .update({ name })
             .where('id', id);
 

@@ -39,7 +39,7 @@ const PcRoleAccessCreateAction = <Action>{
         const { content, name } = <RequestBody>ctx.request.body;
 
         const exist = await ctx.model
-            .from('ejyy_property_company_access')
+            .from('ipms_property_company_access')
             .where('name', name)
             .first();
 
@@ -50,7 +50,7 @@ const PcRoleAccessCreateAction = <Action>{
             });
         }
 
-        const [id] = await ctx.model.from('ejyy_property_company_access').insert({
+        const [id] = await ctx.model.from('ipms_property_company_access').insert({
             name,
             content: JSON.stringify(content)
         });
