@@ -6,11 +6,11 @@
     "url": "git+https://github.com/Jonas0119/ipms.git"
   },
   "scripts": {
-    "dev": "NODE_OPTIONS=--openssl-legacy-provider vue-cli-service serve",
-    "build": "npm run iconfont && NODE_OPTIONS=--openssl-legacy-provider vue-cli-service build",
-    "dist": "npm run iconfont && NODE_OPTIONS=--openssl-legacy-provider vue-cli-service build",
-    "lint": "vue-cli-service lint",
-    "iconfont": "cwfont compile"
+    "dev": "NODE_OPTIONS=--openssl-legacy-provider node ./node_modules/@vue/cli-service/bin/vue-cli-service.js serve",
+    "build": "NODE_OPTIONS=--openssl-legacy-provider node ./node_modules/@vue/cli-service/bin/vue-cli-service.js build",
+    "dist": "NODE_OPTIONS=--openssl-legacy-provider node ./node_modules/@vue/cli-service/bin/vue-cli-service.js build",
+    "lint": "node ./node_modules/@vue/cli-service/bin/vue-cli-service.js lint",
+    "iconfont": "node scripts/iconfont.js"
   },
   "keywords": [
     "vue",
@@ -49,7 +49,6 @@
     "babel-eslint": "^10.1.0",
     "babel-plugin-import": "^1.13.0",
     "core-js": "^3.6.5",
-    "cwfont": "^1.1.4",
     "eslint": "^6.7.2",
     "eslint-plugin-prettier": "^3.1.3",
     "eslint-plugin-vue": "^6.2.2",

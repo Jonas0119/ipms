@@ -86,15 +86,6 @@ docker run -d --name ipms-web -p 8080:80 \
   -v ~/ipms/frontend-dist:/usr/share/nginx/html:ro nginx:1.25
 ```
 
-## SASS版及定制
-
-> 微信添加好友请备注来意，谢谢。
-
-<img src="resources/images/qrcode.jpg" width="266"/>
-
-## License
-
-![AGPL](resources/images/agplv3.png)
 
 ## 更新日志
 
@@ -190,7 +181,7 @@ await templateService.downloadTemplate('building_import');
 
 #### 📋 配置示例
 ```yaml
-# .ipmsrc 配置文件（原 .ejyyrc 升级）
+# .ipmsrc 配置文件
 storage:
   mode: "local"  # local/oss/minio
   template:
@@ -297,14 +288,99 @@ storage:
 **升级效果：** 配置完整性提升、编译警告清零、品牌标识统一、用户体验改善
 
 
-#how to run
+## 后端（Koa）架构与设计亮点
+
+### 开发者需要自研的组件（Koa 应用通用）
+- 路由与控制器：定义 URL、HTTP Method 与业务处理逻辑（本项目采用 Action 模式统一声明）。
+- 权限与认证：令牌校验、角色/资源访问控制（PC 与 MP 双端分离）。
+- 参数校验：统一的请求体验证与错误提示。
+- 中间件体系：请求解析、日志、静态资源、初始化门禁、模型注入、Header 处理等。
+- 会话管理：Session 存储与过期逻辑、清理策略。
+- 存储抽象：统一封装 Local/OSS/MinIO 的上传/直传/预签名策略。
+- 配置管理：多环境配置装载与默认值合并、敏感信息隔离。
+- 定时任务：系统性任务调度（如 Session 清理）。
+- 日志与监控：统一日志接口、可控输出与问题追踪。
+- 异步能力：WebSocket 推送、Redis 订阅等。
+
+### 本项目的实现与健壮性措施
+- 路由与 Action 模式（解耦与一致性）
+  - 每个接口以 Action 形式定义：`router + validator + response`。
+  - 统一注册：PC 端在 `api-server/src/module/pc/router.ts` 汇总导出；由 `api-server/src/module/pc/index.ts` 遍历并通过 `KoaRouter` 动态挂载。
+  - 好处：接口声明清晰、鉴权/校验可在装配层集中处理，降低重复代码。
+
+- 认证与鉴权（双端隔离）
+  - PC：在 `api-server/src/module/pc/index.ts` 校验 `ipms-pc-token`，并按 `roles`/`verifyCommunity` 做细粒度控制。
+  - MP：在 `api-server/src/module/mp/index.ts` 校验 `ipms-mp-token`，支持资料完整性 `verifyIntact` 校验。
+  - 统一常量：`api-server/src/constant/code.ts` 定义状态码与语义。
+
+- 参数校验（统一入口）
+  - `validatorService` 在装配层统一执行 `validator` 配置，失败直接返回一致的错误结构，控制器聚焦业务。
+
+- 中间件链与初始化门禁（稳定启动）
+  - 中间件顺序明确：`koa-body → 日志 → session → 静态 → 模型注入 → IP → Header → 初始化门禁 → 路由 → 监控`（见 `api-server/src/app.ts`）。
+  - 初始化门禁：`api-server/src/middleware/init.ts` 未初始化时仅放行白名单与 `/pc/init/*`，其余返回 `SYSTEMT_NOT_INIT`，前端跳转到 `/user/init`，防止系统处于未就绪状态下被访问。
+
+- 会话管理与清理（可诊断、可恢复）
+  - 存储：`MysqlSessionStore`（`api-server/src/store/mysql-session.ts`）持久化到 `ipms_session_store`。
+  - TTL：受 `config.session.maxAge` 控制（默认 30 分钟），并在 set 时写入 `expire` 时间戳。
+  - 清理：定时任务 `api-server/src/schedule/session.ts` 每小时 30 分清理已过期会话，且通过 `ipms_schedule` 去重避免多实例重复执行。
+
+- 存储服务抽象（统一能力、前端零配置）
+  - 工厂：`StorageServiceFactory`（`api-server/src/service/storage/storage-factory.ts`）按 `config.storage.mode` 返回 `Local/Oss/MinIO` 实例。
+  - 能力：统一 `getUploadConfig/handleFileUpload/getFileUrl` 接口；支持本地上传、OSS 直传、MinIO 预签名；失败路径有回退策略。
+  - 对外接口：`/storage/config`、`/storage/upload` 等由 PC/MP 分端暴露，结合初始化门禁实现“初始化前免认证、初始化后受保护”。
+
+- 配置管理（安全与一致性）
+  - 载入：`api-server/src/config.ts` 读取 `.ipmsrc`（YAML），合并默认值，提供强类型 `config`。
+  - 隔离：敏感信息只出现在 `.ipmsrc`，仓库中仅保留类型与默认值。
+
+- 日志与监控（可观测性）
+  - 统一日志：`~/utils/kjhlog`；Koa 访问日志通过自定义 transporter 写入同一日志体系，启动/任务/异常均有结构化输出。
+  - 监控中间件：`WatcherMiddleware`（请求收尾埋点、统计）。
+
+- 异步通信与实时能力
+  - WebSocket：`api-server/src/wss/index.ts` 初始化服务端推送；
+  - Redis：`api-server/src/service/redis.ts` 订阅与消息转发，解耦实时事件。
+
+- 工程化与可维护性
+  - TypeScript 全量类型声明，Action/Model/Service 分层；
+  - Webpack/ts-loader 打包后端产物，保留 `node_modules` 外置，部署轻量（见 `api-server/webpack.config.js`）；
+  - 统一代码风格（Prettier）、约定式模块别名 `~`（package.json/tsconfig/webpack 一致）。
+
+### 目录到功能的快速索引
+- 路由与注册：`api-server/src/module/pc/router.ts`、`api-server/src/module/pc/index.ts`、`api-server/src/module/mp/index.ts`
+- 中间件：`api-server/src/middleware/*`（`init.ts`、`header.ts`、`ip.ts`、`static.ts` 等）
+- 会话：`api-server/src/store/mysql-session.ts`、`api-server/src/schedule/session.ts`
+- 存储：`api-server/src/service/storage/*`、`api-server/src/types/storage.ts`
+- 配置：`api-server/src/config.ts`、部署配置 `.ipmsrc`
+- 日志：`api-server/src/utils/kjhlog.ts`
+- 实时：`api-server/src/wss/index.ts`、`api-server/src/service/redis.ts`
+
+#how to run如何启动服务
 #后台服务
-docker run -d --name api-server   -p 6688:6688   -v /Users/pzq/tech/projects/ipms/api-server/dist:/www/apiserver   -w /www/apiserver   node:24.2.0   sh -c "npm install && node ipms_server.js"
+docker run -d --name api-server1   -p 6688:6688   -v /Users/pzq/tech/projects/ipms/api-server/dist:/www/apiserver   -w /www/apiserver   node:24.2.0   \
+  sh -c "echo '开始安装依赖...' && npm install  && echo '依赖安装完成，等待5秒...' && sleep 20 && echo '启动服务器...' && node ipms_server.js"
+
+docker run -d --name api-server1   -p 6688:6688   -v /Users/pzq/tech/projects/ipms/api-server/dist:/www/apiserver   -w /www/apiserver   node:24.2.0   sh -c "node ipms_server.js"
+
+#前端服务
+docker run -d   --name my-nginx1    -p 8080:80     -v /Users/pzq/tech/projects/ipms/console-web/nginx-conf/custom.conf:/etc/nginx/conf.d/default.conf   -v /Users/pzq/tech/projects/ipms/console-web/dist:/usr/share/nginx/html   nginx
+注意需要修改配置文件中的server本地IP地址
+
 
 #mysql
-docker run -d --name my-redis -p 6379:6379 redis:6.2.6
+docker run -d --name mysql57 -p 3306:3306 -e MYSQL_ROOT_PASSWORD=Tjfae@123    mysql:5.7 --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+
 docker exec -it mysql57 mysql -u root -p
 
+### 数据库初始化（生产/测试）
+```sql
+CREATE DATABASE IF NOT EXISTS `ipms` DEFAULT CHARACTER SET utf8mb4;
+-- 导入初始化脚本
+-- mysql -h127.0.0.1 -uroot -p'***' < resources/db_ipms.sql
+```
+
+#删除表中的历史数据，中心初始化整个系统
 TRUNCATE TABLE `ipms_ask_for_leave`;                           
 TRUNCATE TABLE `ipms_ask_for_leave_flow`;                      
 TRUNCATE TABLE `ipms_building_info`;                           
@@ -407,35 +483,15 @@ TRUNCATE TABLE `ipms_workflow_node`;
 
 
 #redis
+docker run -d --name my-redis -p 6379:6379 redis:6.2.6
 
 #minio
+docker run -d --name my-minio \
+  -e MINIO_ROOT_USER=admin -e MINIO_ROOT_PASSWORD=minioadmin \
+  -v ~/ipms/minio-data:/data -v ~/ipms/minio-config:/root/.minio \
+  -p 9000:9000 -p 9001:9001 minio/minio 
 
 
-## 系统重命名迁移方案（ejyy → ipms）
-
-- 系统命名、数据库库名、表前缀、构建产物名、请求头、对象存储桶名全面从“ejyy”升级为“ipms”。
-- 建议先备份数据库与对象存储，再按以下步骤执行。
-
-### 变更清单（概要）
-- 配置文件：`.ejyyrc` → `.ipmsrc`，数据库名 `ipms`，MinIO 桶 `ipms`
-- 后端产物：`ejyy_server.js` → `ipms_server.js`
-- 数据库：所有表从 `ejyy_*` → `ipms_*`；库名从 `ejyy` → `ipms`
-- 前端请求头：`ejyy-pc-token` → `ipms-pc-token`；本地储存键 `EJYY_PC_TOKEN/USER_ID` → `IPMS_PC_TOKEN/USER_ID`
-
-### 数据库迁移（生产）
-```sql
-CREATE DATABASE IF NOT EXISTS `ipms` DEFAULT CHARACTER SET utf8mb4;
-
-SET @old_db='ejyy'; SET @new_db='ipms';
-SET @old_prefix='ejyy_'; SET @new_prefix='ipms_';
-
-SELECT CONCAT(
-  'RENAME TABLE `', TABLE_SCHEMA, '`.`', TABLE_NAME, '` TO `', @new_db, '`.`', REPLACE(TABLE_NAME, @old_prefix, @new_prefix), '`;'
-) AS stmt
-FROM information_schema.TABLES
-WHERE TABLE_SCHEMA=@old_db AND TABLE_NAME LIKE CONCAT(@old_prefix, '%');
--- 将输出的语句批量执行
-```
 
 ### 启动脚本示例（后端）
 ```bash
@@ -481,10 +537,8 @@ storage:
     customDomain: ""
 ```
 
-### 过渡期兼容（可选）
-- 后端同时接受 `ipms-pc-token` 与 `ejyy-pc-token`。
-- 配置加载优先 `.ipmsrc`，若不存在回退 `.ejyyrc`。
-- 观察期后删除兼容逻辑，清理旧 Redis Key。
+### 说明
+- 如由旧系统迁移，请根据自身情况自定义迁移脚本。
 
 #前端服务
 

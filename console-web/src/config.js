@@ -18,7 +18,8 @@ export const DEGAULT_PAGE_SIZE = 10;
 
 export const FORM_ADAPT_WIDTH = 992;
 
-export const HOST_NAME = '172.17.0.5';
+export const HOST_NAME = '172.17.0.6';  
+//export const HOST_NAME = '127.0.0.1';
 
 // 动态获取资源主机地址
 export const getAssetHost = async () => {

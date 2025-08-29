@@ -16,7 +16,7 @@
   },
   "main": "src/app.ts",
   "scripts": {
-    "dev": "nodemon -e ts --exec 'NODE_ENV=development ts-node' src/app.ts",
+    "dev": "node ./node_modules/nodemon/bin/nodemon.js -e ts --exec \"NODE_ENV=development node ./node_modules/ts-node/dist/bin.js\" src/app.ts",
     "lint": "prettier --write src/*.ts src/**/*.ts src/**/**/*.ts src/**/**/**/*.ts",
     "dist": "webpack --config webpack.config.js"
   },

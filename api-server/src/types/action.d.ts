@@ -15,7 +15,7 @@ declare namespace Action {
         // 此处针对mp模块
         verifyIntact?: boolean;
         // 此处针对pc模块
-        roles?: Role[];
+        roles?: number[];
         verifyCommunity?: boolean;
     }
 

@@ -19,10 +19,10 @@
     semi: true
     endOfLine: "lf"
   input:
-    svgsDir: './cwfont/svg-icons'
-    styleTpl: './cwfont/style.tpl'
+    svgsDir: './ipms-font/svg-icons'
+    styleTpl: './ipms-font/style.tpl'
     previewTpl: null
   output:
     font: './src/styles/iconfont'
     style: './src/styles'
-    preview: './cwfont'
+    preview: './ipms-font'

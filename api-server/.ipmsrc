@@ -17,7 +17,8 @@ redis:
   password: ""
 
 storage:
-  mode: "local"
+  #mode: "local"
+  mode: "minio"
   template:
     path: "template"
     files:
@@ -27,12 +28,12 @@ storage:
     urlPrefix: "/static"
     baseUrl: "http://127.0.0.1:6688"
   minio:
-    endpoint: "http://172.17.0.6:9000"
+    endpoint: "http://127.0.0.1:9000"
     accessKey: "admin"
     secretKey: "minioadmin"
     bucket: "ipms"
     useSSL: false
-    baseUrl: "http://172.17.0.6:9000"
+    baseUrl: "http://127.0.0.1:9000"
     customDomain: "http://127.0.0.1:9000"
 
 wechat:
