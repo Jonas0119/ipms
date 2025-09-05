@@ -2,6 +2,69 @@
 
 本篇文档详细梳理当访问 `/user/init` 时，前端如何一步步解析路由、加载页面、装配自定义与三方组件、触发表单校验与提交流程；并给出组件树与时序图，标注每个模块来源（自定义 or 三方库）与职责。
 
+### 0. 启动与首个请求
+
+运行环境与入口：
+
+- 开发环境（webpack-dev-server / vue-cli-service serve）
+  - 启动本地静态资源服务器与 HMR 热更新；
+  - 开启 History Fallback：除真实存在的静态资源外，所有路径回退到 `index.html`，支持 SPA 多路由；
+  - 依据 `vue.config.js` 配置代理、静态资源、publicPath 等。
+- 生产环境（Nginx 等静态服务器）
+  - 提供 `index.html` 与 `dist/` 目录；
+  - 配置 History Fallback（如 `try_files $uri /index.html;`）；
+  - 可配置 gzip、缓存、反代 API。
+
+加载顺序：
+
+1) 浏览器访问任意 URL（如 `/anything`）→ 前端服务器返回 `index.html`；
+2) 浏览器加载打包 JS，执行 `src/main.js`：
+   - 创建根实例 `new Vue({ router, store, render: h => h(App) }).$mount('#app')`；
+   - `App` 即 `views/app/index.vue`，应用一启动就加载；
+3) 前端路由 `src/router/index.js` 根据当前 URL 做匹配，执行 `beforeEach/afterEach`；
+4) 进入页面后，壳组件或页面组件触发“首个 API 请求”，常见触发点：
+   - 鉴权页面：`views/app/index.vue` 监听 `$route`，在目标路由 `meta.authRequired` 且尚未拿到 `userInfo` 时派发 `store/common/actions.js > fetchUserInfo()`，内部 `utils.request.get('/user/info')`；
+   - 组件初始化：如 `components/image-upload/index.vue` 在 `created` 获取存储配置；
+5) 统一请求封装 `src/utils/request.js`：
+   - 请求拦截：加 token、`/pc` 前缀、设置 `Content-Type`；
+   - 响应拦截：`code===-66`（系统未初始化）时执行 `router.replace('/user/init')`，从而把用户引导到初始化页面。
+
+Store 与 Vuex：
+
+- `src/store/index.js` 导出的是一个 Vuex Store：
+  - 通过 `Vue.use(Vuex)` 安装；
+  - `new Vuex.Store({ state, mutations, actions, modules })` 创建；
+  - 被注入到根实例（`main.js` 的 `store` 字段），在所有组件内可通过 `this.$store` 使用；
+- 与 Vuex 的关系：`store` 就是 Vuex 的实例，负责全局状态（如 `common` 模块中的 `userInfo/postInfo` 等）、同步变更（`mutations`）、异步流程（`actions`）。
+- 典型用法：
+  - `views/app/index.vue` 使用 `mapActions` 派发 `common/fetchUserInfo`；
+  - `store/common/actions.js` 中 `fetchUserInfo` 调用 `utils.request.get('/user/info')` 获取用户信息并提交 `mutations`；
+  - 组件通过 `mapGetters` 读取 `common/userInfo`、`common/postInfo` 等。
+
+简要时序（从输入 URL 到引导 `/user/init`）：
+
+```mermaid
+sequenceDiagram
+  participant B as Browser
+  participant FE as Frontend Server
+  participant M as main.js
+  participant R as router/index.js
+  participant A as App.vue
+  participant S as store/common/actions
+  participant Q as utils/request
+
+  B->>FE: GET /any-url
+  FE-->>B: index.html
+  B->>M: 执行打包后的 main.js
+  M->>A: 渲染 App（views/app/index.vue）
+  M->>R: 注入 router 并匹配当前 URL
+  A->>S: 如果需要鉴权且未加载用户，dispatch fetchUserInfo()
+  S->>Q: GET /pc/user/info（经 request 封装）
+  Q-->>S: 若后端返回 code = -66
+  Q->>R: router.replace('/user/init')
+  R-->>B: 显示 /user/init 页面
+```
+
 ### 1. 顶层入口与全局依赖
 
 涉及文件：
