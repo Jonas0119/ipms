@@ -8,6 +8,7 @@ import { Action } from '~/types/action';
 import { SUCCESS, WEHCAT_MP_GET_PHONE_ERROR } from '~/constant/code';
 import * as wechatService from '~/service/wechat';
 import utils from '~/utils';
+import kjhlog from '~/utils/kjhlog';
 
 interface RequestBody {
     code: string;
@@ -40,22 +41,61 @@ const MpUserBindPhoneAction = <Action>{
     },
     response: async ctx => {
         const { code, encryptedData, iv } = <RequestBody>ctx.request.body;
+        
+        kjhlog.info('用户绑定手机号请求开始', {
+            userId: ctx.mpUserInfo.id,
+            code: code.substring(0, 8) + '...',
+            hasEncryptedData: !!encryptedData,
+            hasIv: !!iv
+        });
 
         const phoneInfo = await wechatService.getUserMpPhone(code, iv, encryptedData);
 
         if (!phoneInfo.success) {
+            kjhlog.error('获取微信手机号失败', {
+                userId: ctx.mpUserInfo.id,
+                error: phoneInfo.message,
+                code: code.substring(0, 8) + '...'
+            });
             return (ctx.body = {
                 code: WEHCAT_MP_GET_PHONE_ERROR,
                 message: '获取手机号码失败'
             });
         }
 
-        await ctx.model
-            .from('ipms_wechat_mp_user')
-            .where({ id: ctx.mpUserInfo.id })
-            .update({ phone: phoneInfo.data.purePhoneNumber });
+        kjhlog.info('成功获取微信手机号', {
+            userId: ctx.mpUserInfo.id,
+            phone: phoneInfo.data.purePhoneNumber.substring(0, 3) + '****' + phoneInfo.data.purePhoneNumber.substring(7)
+        });
+
+        try {
+            await ctx.model
+                .from('ipms_wechat_mp_user')
+                .where({ id: ctx.mpUserInfo.id })
+                .update({ phone: phoneInfo.data.purePhoneNumber });
+
+            kjhlog.info('用户手机号更新成功', {
+                userId: ctx.mpUserInfo.id,
+                phone: phoneInfo.data.purePhoneNumber.substring(0, 3) + '****' + phoneInfo.data.purePhoneNumber.substring(7)
+            });
+        } catch (error) {
+            kjhlog.error('更新用户手机号失败', {
+                userId: ctx.mpUserInfo.id,
+                error: error.message,
+                phone: phoneInfo.data.purePhoneNumber.substring(0, 3) + '****' + phoneInfo.data.purePhoneNumber.substring(7)
+            });
+            return (ctx.body = {
+                code: WEHCAT_MP_GET_PHONE_ERROR,
+                message: '绑定手机号失败'
+            });
+        }
 
         const { purePhoneNumber: phone } = phoneInfo.data;
+
+        kjhlog.info('用户绑定手机号成功', {
+            userId: ctx.mpUserInfo.id,
+            hiddenPhone: utils.phone.hide(phone)
+        });
 
         ctx.body = {
             code: SUCCESS,

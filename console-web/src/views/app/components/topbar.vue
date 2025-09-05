@@ -25,6 +25,7 @@
                 <Icon type="refresh" />
             </button>
 
+            <!-- 模块导航：根据 routes 元信息与权限计算可见模块，宽度不足时收起为下拉 -->
             <ul class="cw-layout-topbar-menu" ref="menu" v-show="showMenu">
                 <template v-for="(item, key) in moduleRoutes">
                     <li
@@ -56,6 +57,7 @@
                 </li>
             </ul>
 
+            <!-- 面包屑：从 $route.matched 收集 meta.title 与 meta.icon -->
             <Breadcrumb
                 class="layout-breadcrumb"
                 v-if="settings.showBreadcurmd && (mediaQuery === 'xxl' || mediaQuery === 'xl' || mediaQuery === 'lg')"
@@ -72,6 +74,7 @@
                 <Icon :type="inFullScreen ? 'exit-full-screen' : 'full-screen'" />
             </button>
 
+            <!-- 默认社区切换：改变 postInfo.default_community_id 并触发后端更新 -->
             <Dropdown placement="bottom-start" transfer>
                 <button class="cw-layout-topbar-avatar">
                     <Icon type="address" />
@@ -89,6 +92,7 @@
                 </DropdownMenu>
             </Dropdown>
 
+            <!-- 用户下拉：个人中心与退出登录入口 -->
             <Dropdown placement="bottom-start" transfer>
                 <button class="cw-layout-topbar-avatar">
                     <Avatar

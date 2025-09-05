@@ -13,7 +13,7 @@ import router from '@/router';
 // 导入工具函数，主要用于token相关操作
 import * as utils from '@/utils';
 // 导入配置文件，获取API基础URL等配置信息
-import config from '@/config';
+//import config from '@/config';
 
 /**
  * HTTP请求工具模块

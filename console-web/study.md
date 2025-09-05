@@ -1,3 +1,64 @@
+## 整体启动与工作流概览
+
+- 前端入口
+  - `src/main.js`：创建 Vue 根实例，注入 `router` 和 `store`，`render: h => h(App)` 渲染 `views/app/index.vue`，挂载到 `#app`，这是前端的真正启动点。
+  - `src/router/index.js`：`history` 模式路由聚合，`beforeEach` 统一设标题、启动 `LoadingBar`，做登录校验；`afterEach` 结束 `LoadingBar`。`history` 模式依赖后端做 SPA 回退。
+  - `views/app/index.vue`：应用壳组件，装配 `Sider/Nav/Topbar/Content/Footer/Setting`，按 `meta.layout` 切换布局，内部建立 `/cws` WebSocket，按岗位社区过滤并推送通知。
+
+- 后端入口
+  - `api-server/src/app.ts`：Koa 主应用，装配中间件链、模块路由（`/pc`、`/mp`、`/oa`、`/notify`），初始化 `/cws` WebSocket，启动定时任务与 Redis 订阅，启动 HTTP/WS 服务器。
+  - 典型中间件链：`koa-body` → `koa-logger` → `koa-session` → `StaticMiddleware` → `ModelMiddleware` → `IpMiddleware` → `HeaderMiddleware` → `InitMiddleware` → `router.routes()` → `WatcherMiddleware`（兜底异常与 SPA 回退）。
+
+- 请求入口
+  - HTTP：浏览器/API → Koa 中间件 → `router.routes()` → 相应模块路由（如 `/pc/**`）。
+  - WebSocket：前端 `wss://host/cws?token=...` 连接 → 服务端鉴权绑定权限 → 服务端业务或 Redis 发布通过 `wss.sendToPc` 定向推送。
+
+## 前端入口链路详解（main → router → store → App）
+
+1) main：创建根实例并挂载 `App`，这是渲染链路与全局依赖的起点。
+2) router：聚合模块路由，前置守卫处理标题、加载条、登录态；后置守卫结束加载条；`history` 模式依赖后端 SPA 回退（见 `WatcherMiddleware`）。
+3) store：`store/index.js` 注入模块（当前仅 `common`），组件通过 `mapActions/mapGetters` 使用；`common/actions.js` 的 `fetchUserInfo` 会在需要时获取用户/岗位信息并落入 `mutations`。
+4) App：壳组件负责布局、侧栏/头部/抽屉/设置面板的装配与响应式；监听路由变化做登录态补偿与权限拦截；在用户登录后建立 `/cws` WebSocket 并以岗位默认社区过滤实时消息。
+
+## Vue Router 核心概念：$router vs $route
+
+Vue Router 插件会为所有组件自动注入两个重要对象：
+
+### $router（路由控制器）
+- **作用**：主动控制路由跳转的方向盘和油门
+- **使用时机**：需要跳转页面、导航控制时
+- **常用方法**：
+  - `this.$router.push('/path')` - 跳转页面
+  - `this.$router.replace('/path')` - 替换当前页面
+  - `this.$router.go(-1)` - 后退
+  - `this.$router.back()` - 返回上一页
+
+### $route（路由状态）
+- **作用**：当前路由信息的仪表盘
+- **使用时机**：需要读取当前路由信息、监听路由变化时
+- **常用属性**：
+  - `this.$route.path` - 当前路径
+  - `this.$route.params` - 路由参数
+  - `this.$route.query` - 查询参数
+  - `this.$route.meta` - 路由元信息
+
+### 执行时机差异
+1. **路由守卫**（`router/index.js`）：在跳转前执行，类似"门卫"检查权限
+2. **组件 $route watcher**：在跳转后执行，类似"到达目的地后"的处理逻辑
+
+### 实际应用场景
+- **跳转页面**：用 `$router.push('/user/login')`
+- **监听路由变化**：用 `$route` watcher 处理页面切换后的逻辑
+- **获取当前页面信息**：用 `$route.path` 或 `$route.meta.title`
+
+## 从浏览器发起到前端处理（关键流程）
+
+- 浏览器访问 URL → 返回 `index.html` → 执行打包后的 `main.js`：创建根实例、渲染 `App`。
+- 路由匹配：`router/index.js` 根据 URL 匹配路由，`beforeEach` 启动 `LoadingBar`，并在 `to.meta.authRequired` 且未登录时重定向到 `/user/login`。
+- 页面初始化：`views/app/index.vue` 监听 `$route` 与 `userInfo.id`，当路由需要权限且尚未有用户信息时派发 `common/fetchUserInfo()`；若登录后且具备权限且未建立 WS，则建立 `/cws` 连接。
+- 统一请求：页面或组件发起 API 调用走 `utils.request` 拦截器，自动加 `/pc` 前缀与 token，统一处理 `code`。当后端返回“未初始化”码时强制跳转 `/user/init`。
+- 实时消息：后端通过 `wss.sendToPc` 推送 `PcData`，前端 `App` 的 `ws.onmessage` 按默认社区过滤并通过通知 UI 展示，点击跳转到相应详情页。
+
 ## /user/init 渲染链路与组件说明（console-web）
 
 本篇文档详细梳理当访问 `/user/init` 时，前端如何一步步解析路由、加载页面、装配自定义与三方组件、触发表单校验与提交流程；并给出组件树与时序图，标注每个模块来源（自定义 or 三方库）与职责。

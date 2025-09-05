@@ -41,13 +41,14 @@ export const routes = [
     require('@/views/404/router')        // 404错误页面路由
 ];
 
-// 创建路由实例，使用history模式
+// 创建路由实例，使用 history 模式（需要后端使用 SPA 回退，见 api-server WatcherMiddleware）
 const router = new VueRouter({
     mode: 'history',
     routes
 });
 
 // 路由前置守卫，处理页面标题和权限验证
+// 顶层前置守卫：统一设置标题、开始加载条，并进行登录校验
 router.beforeEach((to, from, next) => {
     // 收集路由层级中的标题信息
     const titles = [];
@@ -61,7 +62,7 @@ router.beforeEach((to, from, next) => {
     // 开始显示页面加载进度条
     LoadingBar.start();
     
-    // 检查路由是否需要登录权限
+    // 检查路由是否需要登录权限（后端也会做二次校验）
     if (to.meta.authRequired && !utils.auth.isLogin()) {
         // 未登录且需要权限，跳转到登录页面，并记录重定向地址
         next({
@@ -76,7 +77,7 @@ router.beforeEach((to, from, next) => {
     }
 });
 
-// 路由后置守卫，处理页面加载完成后的操作
+// 后置守卫：结束加载条
 router.afterEach(() => {
     // 结束页面加载进度条
     LoadingBar.finish();

@@ -163,9 +163,10 @@ export default {
         updateMobileMenuVisible() {
             this.mobileMenuVisible = !this.mobileMenuVisible;
         },
-        // 建立WebSocket连接用于实时通知
+        // 建立WebSocket连接用于实时通知（与后端 /cws 保持一致）
         connect() {
             // 创建WebSocket连接，根据当前协议选择ws或wss
+            // 统一 WS 入口：/cws，并通过 token 完成鉴权（见 api-server/src/wss/index.ts）
             const ws = new WebSocket(
                 `${location.protocol === 'https:' ? 'wss' : 'ws'}://${location.host}/cws?token=${utils.auth.getToken()}`
             );
@@ -184,12 +185,12 @@ export default {
                 heartCheck();
             };
 
-            // 接收到WebSocket消息时的处理
+            // 接收到WebSocket消息时的处理（PcData 结构，见 wss/index.ts）
             ws.onmessage = e => {
                 // 解析接收到的JSON数据
                 const { type, id, community_id, urge } = JSON.parse(e.data);
 
-                // 如果消息的社区ID与用户默认社区不匹配则忽略
+                // 只提示与当前岗位默认社区相关的消息
                 if (this.postInfo.default_community_id !== community_id) {
                     return;
                 }
@@ -226,7 +227,7 @@ export default {
                         break;
                 }
 
-                // 尝试播放通知声音，失败时静默处理
+                // 播放提示音（静默失败）
                 try {
                     this.$refs.audio.play();
                 } catch (e) {
@@ -268,7 +269,7 @@ export default {
                 }
             };
 
-            // 页面关闭前关闭WebSocket连接
+            // 页面关闭前关闭WebSocket连接（释放心跳定时器与连接）
             window.onbeforeunload = () => {
                 ws.close();
             };
@@ -332,7 +333,7 @@ export default {
 
             return {
                 'cw-layout-mobile-menu': true, // 基础类名
-                [`cw-layout-moible-menu-${siderTheme}`]: true // 主题类名（注意这里有拼写错误mobile写成了moible）
+                [`cw-layout-mobile-menu-${siderTheme}`]: true // 主题类名（注意这里有拼写错误mobile写成了moible）
             };
         }
     },
@@ -368,7 +369,7 @@ export default {
                 this.$router.replace('/login');
             }
         },
-        // 监听用户ID变化
+        // 监听用户ID变化后建立 WS（仅在已登录且有权限时）
         'userInfo.id'(cur) {
             // 如果用户未登录、无权限或已连接WebSocket则返回
             if (!cur || !this.userInfo.access.length === 0 || this.socketConnected) {

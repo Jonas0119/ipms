@@ -7,6 +7,7 @@
 import * as mutationTypes from '@/constants/mutationTypes';
 
 export default {
+    // 合并后端返回的 userInfo/postInfo，并生成页面水印（基于用户与默认社区）
     [mutationTypes.UPDATE_USERINFO](state, data) {
         state.userInfo = Object.assign(state.userInfo, data.userInfo);
         state.postInfo = Object.assign(state.postInfo, data.postInfo);
@@ -38,12 +39,15 @@ export default {
 
         state.waterMark = canvas.toDataURL('image/png');
     },
+    // 将新通知追加到未读列表头部（与 Topbar 通知下拉联动）
     [mutationTypes.PUSH_UNREAD_NOTICES](state, data) {
         state.unreadNotices = [].concat(data, state.unreadNotices);
     },
+    // 清空全部未读
     [mutationTypes.CLEAR_UNREAD_NOTICES](state) {
         state.unreadNotices = [];
     },
+    // 清空单条未读（按 id）
     [mutationTypes.CLEAR_UNREAD_NOTICE](state, id) {
         const notices = [].concat(state.unreadNotices);
 

@@ -38,8 +38,8 @@ storage:
 
 wechat:
   ump:
-    appid: "your_user_miniprogram_appid"
-    secret: "your_user_miniprogram_secret"
+    appid: "wx77ec1da846897283"
+    secret: "a0fafd57b40b4a95c192ad378d01683d"
   oa:
     appid: "your_official_account_appid"
     secret: "your_official_account_secret"

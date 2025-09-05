@@ -9,12 +9,14 @@ import crypto from 'crypto';
 import xml2js from 'xml2js';
 import config from '~/config';
 
+// 微信小程序会话信息接口
 interface WechatMpSessionInfo {
     openid: string;
     session_key: string;
     unionid: string;
 }
 
+// 微信小程序手机号信息接口
 interface WechatMpPhoneInfo {
     phoneNumber: string;
     purePhoneNumber: string;
@@ -23,24 +25,28 @@ interface WechatMpPhoneInfo {
     unionid: string;
 }
 
+// 微信小程序会话信息响应接口
 export interface WechatMpSessionInfoResponse {
     success?: boolean;
     message?: string;
     data?: WechatMpSessionInfo;
 }
 
+// 微信小程序手机号信息响应接口
 export interface WechatMpPhoneInfoResponse {
     success?: boolean;
     message?: string;
     data?: WechatMpPhoneInfo;
 }
 
+// 模板数据接口
 export interface TemplateData {
     [key: string]: {
         value: string;
     };
 }
 
+// 发送小程序订阅消息参数接口
 export interface SendSubscribeMessageParams {
     // openid
     touser: string;
@@ -50,6 +56,7 @@ export interface SendSubscribeMessageParams {
     lang?: 'zh_CN';
 }
 
+// 发送公众号模板消息参数接口
 export interface SendOaTemplateMessageParams {
     touser: string;
     template_id: string;
@@ -61,11 +68,13 @@ export interface SendOaTemplateMessageParams {
     data: TemplateData;
 }
 
+// 发送订阅消息响应接口
 interface SendSubscribeMessageResponse {
     errcode: number;
     errmsg?: string;
 }
 
+// 微信公众号用户信息接口
 export interface WechatOaUserInfo {
     subscribe: 0 | 1;
     openid: string;
@@ -73,6 +82,13 @@ export interface WechatOaUserInfo {
     unionid: string;
 }
 
+/**
+ * AES解密函数
+ * @param session_key 会话密钥
+ * @param iv 初始化向量
+ * @param encryptedData 加密数据
+ * @returns 解密结果
+ */
 function decode(session_key: string, iv: string, encryptedData: string) {
     const sessionKeyBuffer = Buffer.from(session_key, 'base64');
     const ivBuffer = Buffer.from(iv, 'base64');
@@ -94,6 +110,11 @@ function decode(session_key: string, iv: string, encryptedData: string) {
     }
 }
 
+/**
+ * 获取用户小程序会话信息
+ * @param js_code 微信小程序授权码
+ * @returns 会话信息响应
+ */
 export async function getUserMpSession(js_code: string): Promise<WechatMpSessionInfoResponse> {
     const res = await axios.request({
         url: 'https://api.weixin.qq.com/sns/jscode2session',
@@ -104,6 +125,8 @@ export async function getUserMpSession(js_code: string): Promise<WechatMpSession
             grant_type: 'authorization_code'
         }
     });
+    console.log('getUserMpSession config:', config.wechat.ump);
+    console.log('getUserMpSession res:', res.data);
 
     if (res.data.errcode) {
         return {
@@ -118,6 +141,11 @@ export async function getUserMpSession(js_code: string): Promise<WechatMpSession
     };
 }
 
+/**
+ * 获取PC端小程序会话信息
+ * @param js_code 微信小程序授权码
+ * @returns 会话信息响应
+ */
 export async function getPcMpSession(js_code: string): Promise<WechatMpSessionInfoResponse> {
     const res = await axios.request({
         url: 'https://api.weixin.qq.com/sns/jscode2session',
@@ -142,7 +170,13 @@ export async function getPcMpSession(js_code: string): Promise<WechatMpSessionIn
     };
 }
 
-// 小程序用户信息
+/**
+ * 获取小程序用户手机号信息
+ * @param js_code 微信小程序授权码
+ * @param iv 初始化向量
+ * @param encryptedData 加密数据
+ * @returns 手机号信息响应
+ */
 export async function getUserMpPhone(
     js_code: string,
     iv: string,
@@ -169,11 +203,15 @@ export async function getUserMpPhone(
     };
 }
 
-// 用户小程序接口凭证
+// 用户小程序接口凭证缓存
 let userMpAccessToken = null;
 let userMpAccessTokenExpire = 0;
 let userMpAccessTokenStartAt = 0;
 
+/**
+ * 获取用户小程序访问令牌
+ * @returns 访问令牌
+ */
 export async function getUserMpAccessToken(): Promise<string> {
     if (userMpAccessToken === null || Date.now() - userMpAccessTokenStartAt >= userMpAccessTokenExpire) {
         userMpAccessTokenStartAt = Date.now();
@@ -198,11 +236,15 @@ export async function getUserMpAccessToken(): Promise<string> {
     return userMpAccessToken;
 }
 
-// 公众号
+// 公众号接口凭证缓存
 let oaAccessToken = null;
 let oaAccessTokenExpire = 0;
 let oaAccessTokenStartAt = 0;
 
+/**
+ * 获取公众号访问令牌
+ * @returns 访问令牌
+ */
 export async function getOaAccessToken(): Promise<string> {
     if (oaAccessToken === null || Date.now() - oaAccessTokenStartAt >= oaAccessTokenExpire) {
         oaAccessTokenStartAt = Date.now();
@@ -227,7 +269,11 @@ export async function getOaAccessToken(): Promise<string> {
     return oaAccessToken;
 }
 
-// 小程序模板信息
+/**
+ * 发送小程序订阅消息
+ * @param params 消息参数
+ * @returns 发送结果
+ */
 export async function sendMpSubscribeMessage({
     touser,
     template_id,
@@ -253,7 +299,11 @@ export async function sendMpSubscribeMessage({
     return res.data;
 }
 
-// 公众号消息推送
+/**
+ * 发送公众号模板消息
+ * @param params 消息参数
+ * @returns 发送结果
+ */
 export async function sendOaTemplateMessage({
     touser,
     template_id,
@@ -278,18 +328,35 @@ export async function sendOaTemplateMessage({
     return res.data;
 }
 
+// XML数据接口
 export interface XmlData {
     [key: string]: any;
 }
 
+/**
+ * 构建XML字符串
+ * @param data 数据对象
+ * @param rootName 根节点名称
+ * @returns XML字符串
+ */
 export function buildXML(data: XmlData, rootName = 'xml'): string {
     return new xml2js.Builder({ xmldec: null, rootName, allowSurrogateChars: true, cdata: true }).buildObject(data);
 }
 
+/**
+ * 解析XML字符串
+ * @param xml XML字符串
+ * @returns 解析后的数据对象
+ */
 export async function parseXML(xml: string): Promise<XmlData> {
     return await xml2js.parseStringPromise(xml, { trim: true, explicitArray: false, explicitRoot: false });
 }
 
+/**
+ * PKCS7解码器
+ * @param buff 缓冲区
+ * @returns 解码后的缓冲区
+ */
 function PKCS7Decoder(buff: Buffer) {
     let pad = buff[buff.length - 1];
 
@@ -300,6 +367,11 @@ function PKCS7Decoder(buff: Buffer) {
     return buff.slice(0, buff.length - pad);
 }
 
+/**
+ * 公众号消息解密
+ * @param encrypted 加密字符串
+ * @returns 解密后的字符串
+ */
 export function oaDecrypt(encrypted: string): string {
     const aesKey = Buffer.from(config.wechat.oa.key + '=', 'base64');
     const iv = aesKey.slice(0, 16);
@@ -323,6 +395,11 @@ export function oaDecrypt(encrypted: string): string {
     return result;
 }
 
+/**
+ * 获取公众号用户信息
+ * @param openid 用户openid
+ * @returns 用户信息
+ */
 export async function getOaUserInfo(openid: string): Promise<WechatOaUserInfo> {
     const access_token = await getOaAccessToken();
 
@@ -338,6 +415,11 @@ export async function getOaUserInfo(openid: string): Promise<WechatOaUserInfo> {
     return res.data;
 }
 
+/**
+ * 创建公众号菜单
+ * @param data 菜单数据
+ * @returns 创建结果
+ */
 export async function createOaMenu(data: object): Promise<SendSubscribeMessageResponse> {
     const access_token = await getOaAccessToken();
 
@@ -353,6 +435,10 @@ export async function createOaMenu(data: object): Promise<SendSubscribeMessageRe
     return res.data;
 }
 
+/**
+ * 获取公众号模板列表
+ * @returns 模板列表
+ */
 export async function getOaTplList(): Promise<any> {
     const access_token = await getOaAccessToken();
 

@@ -54,10 +54,13 @@ const MpUserLoginAction = <Action>{
 
     response: async ctx => {
         const { code, brand, model, system, platform } = <RequestBody>ctx.request.body;
+        console.log('Login request params:', { code, brand, model, system, platform });
 
         const mpSessionInfo = await wechatService.getUserMpSession(code);
 
         if (!mpSessionInfo.success) {
+            console.log('Login error:', mpSessionInfo.message);
+            console.log('Login error code:', WEHCAT_MP_LOGIN_ERROR);
             return (ctx.body = {
                 code: WEHCAT_MP_LOGIN_ERROR,
                 message: mpSessionInfo.message
@@ -89,7 +92,8 @@ const MpUserLoginAction = <Action>{
         if (!mpUserInfo) {
             mpUserInfo = {
                 open_id: mpSessionInfo.data.openid,
-                union_id: mpSessionInfo.data.unionid,
+                // unionid 并非总能返回，未返回时写入 null，避免 DB 非空约束错误
+                union_id: mpSessionInfo.data.unionid || null,
                 phone: null,
                 created_at: Date.now()
             };

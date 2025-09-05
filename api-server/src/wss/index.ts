@@ -36,6 +36,8 @@ export interface PcData {
  * 2. 处理客户端连接的身份验证
  * 3. 提供向特定权限用户推送消息的功能
  */
+// WebSocket 统一入口（/cws），为 PC 控制台推送工单/投诉等实时事件
+// 服务与 HTTP 复用同一端口，由 app.ts 中的 server 注入
 class ws {
     // WebSocket 服务器实例
     static ws: WebSocket.Server;
@@ -61,7 +63,7 @@ class ws {
                 return ws.close();
             }
 
-            // 根据 token 查询用户信息和权限
+            // 根据 token 查询用户信息和权限（与 PC 模块认证保持一致）
             const userInfo = await model
                 .table('ipms_property_company_auth')
                 .leftJoin(
@@ -83,7 +85,7 @@ class ws {
                 return ws.close();
             }
 
-            // 将用户信息绑定到 WebSocket 连接上
+            // 将用户信息绑定到 WebSocket 连接上，后续推送时按权限过滤
             ws.user_id = userInfo.id;        // 设置用户ID
             ws.access = userInfo.content;    // 设置用户权限列表
         });
@@ -102,7 +104,7 @@ class ws {
             return;
         }
 
-        // 遍历所有连接的客户端
+        // 遍历所有连接的客户端，将消息定向给具备 data.type 权限的在线用户
         this.ws.clients.forEach((client: CwWebSocket) => {
             // 检查客户端连接状态是否正常，且用户具有相应权限
             if (client.readyState === WebSocket.OPEN && client.access.includes(data.type)) {
