@@ -62,10 +62,15 @@ service.interceptors.request.use(
 
         // 获取用户认证token，用于身份验证
         const token = utils.auth.getToken();
+        console.log('🌐 [REQUEST-DEBUG] Request interceptor - getting token for:', options.url);
+        console.log('🌐 [REQUEST-DEBUG] Token for request:', token ? token.substring(0, 10) + '...' : 'undefined');
 
         // 如果存在token，添加到请求头中进行身份认证
         if (token) {
             options.headers['ipms-pc-token'] = token;
+            console.log('🌐 [REQUEST-DEBUG] Token added to headers with key: ipms-pc-token');
+        } else {
+            console.log('🌐 [REQUEST-DEBUG] No token available, request will be sent without auth header');
         }
 
         // 为所有请求URL添加'/pc'前缀，匹配后端API路由规则

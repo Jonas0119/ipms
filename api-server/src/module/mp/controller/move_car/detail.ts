@@ -7,11 +7,11 @@
 import { Action } from '~/types/action';
 import { SUCCESS } from '~/constant/code';
 import {
-    EjyyMoveCar,
-    EjyyCommunityInfo,
-    EjyyPropertyCompanyUser,
-    EjyyPropertyCompanyDepartment,
-    EjyyPropertyCompanyJob
+    IpmsMoveCar,
+    IpmsCommunityInfo,
+    IpmsPropertyCompanyUser,
+    IpmsPropertyCompanyDepartment,
+    IpmsPropertyCompanyJob
 } from '~/types/model';
 
 interface RequestParams {
@@ -36,9 +36,9 @@ const MpMoveCarDetailAction = <Action>{
     },
     response: async ctx => {
         const { id } = <RequestParams>ctx.params;
-        let resInfo = <EjyyPropertyCompanyUser & EjyyPropertyCompanyDepartment & EjyyPropertyCompanyJob>null;
+        let resInfo = <IpmsPropertyCompanyUser & IpmsPropertyCompanyDepartment & IpmsPropertyCompanyJob>null;
 
-        const info = <EjyyMoveCar & EjyyCommunityInfo>await ctx.model
+        const info = <IpmsMoveCar & IpmsCommunityInfo>await ctx.model
             .from('ipms_move_car')
             .leftJoin('ipms_community_info', 'ipms_community_info.id', 'ipms_move_car.community_id')
             .select(

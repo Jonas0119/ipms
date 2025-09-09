@@ -167,9 +167,15 @@ export default {
         connect() {
             // 创建WebSocket连接，根据当前协议选择ws或wss
             // 统一 WS 入口：/cws，并通过 token 完成鉴权（见 api-server/src/wss/index.ts）
-            const ws = new WebSocket(
-                `${location.protocol === 'https:' ? 'wss' : 'ws'}://${location.host}/cws?token=${utils.auth.getToken()}`
-            );
+            const token = utils.auth.getToken();
+            console.log('🔗 [WEBSOCKET-DEBUG] Attempting to connect...');
+            console.log('🔗 [WEBSOCKET-DEBUG] Token for WebSocket:', token ? token.substring(0, 10) + '...' : 'undefined');
+            console.log('🔗 [WEBSOCKET-DEBUG] Is logged in:', utils.auth.isLogin());
+            
+            const wsUrl = `${location.protocol === 'https:' ? 'wss' : 'ws'}://${location.host}/cws?token=${token}`;
+            console.log('🔗 [WEBSOCKET-DEBUG] WebSocket URL:', wsUrl);
+            
+            const ws = new WebSocket(wsUrl);
             let timer = null; // 心跳检测定时器
             
             // 心跳检测函数，每3秒发送一次ping
@@ -182,6 +188,7 @@ export default {
 
             // WebSocket连接成功时启动心跳检测
             ws.onopen = () => {
+                console.log('🔗 [WEBSOCKET-DEBUG] WebSocket connection opened successfully');
                 heartCheck();
             };
 
@@ -371,11 +378,18 @@ export default {
         },
         // 监听用户ID变化后建立 WS（仅在已登录且有权限时）
         'userInfo.id'(cur) {
+            console.log('🔗 [WEBSOCKET-DEBUG] User ID changed, current value:', cur);
+            console.log('🔗 [WEBSOCKET-DEBUG] User access length:', this.userInfo.access?.length);
+            console.log('🔗 [WEBSOCKET-DEBUG] Socket already connected:', this.socketConnected);
+            console.log('🔗 [WEBSOCKET-DEBUG] Current token when user ID changed:', utils.auth.getToken() ? 'exists' : 'missing');
+            
             // 如果用户未登录、无权限或已连接WebSocket则返回
             if (!cur || !this.userInfo.access.length === 0 || this.socketConnected) {
+                console.log('🔗 [WEBSOCKET-DEBUG] Conditions not met for WebSocket connection');
                 return;
             }
 
+            console.log('🔗 [WEBSOCKET-DEBUG] All conditions met, establishing WebSocket connection...');
             // 标记WebSocket已连接并建立连接
             this.socketConnected = true;
             this.connect();

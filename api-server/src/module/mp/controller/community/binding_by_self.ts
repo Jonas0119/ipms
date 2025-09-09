@@ -5,7 +5,7 @@
  */
 
 import { Action } from '~/types/action';
-import { EjyyUserBuilding } from '~/types/model';
+import { IpmsUserBuilding } from '~/types/model';
 import { SUCCESS, NOT_FOUND_BINDING_BUILDING } from '~/constant/code';
 import { AUTHENTICTED_BY_SELF } from '~/constant/authenticated_type';
 import communityService from '~/service/community';
@@ -39,7 +39,7 @@ const MpCommunityBindingBySlefAction = <Action>{
             });
         }
 
-        const bindingData: EjyyUserBuilding[] = [];
+        const bindingData: IpmsUserBuilding[] = [];
 
         for (const record of unbindingList) {
             bindingData.push({

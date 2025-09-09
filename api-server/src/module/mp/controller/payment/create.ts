@@ -10,7 +10,7 @@ import { Action } from '~/types/action';
 import { SUCCESS, PAYMENT_CREATE_ORDER_FAIL, PAYMENT_BUILDING_ILLEGAL } from '~/constant/code';
 import { FALSE, TRUE, BINDING_BUILDING } from '~/constant/status';
 import { PAY_SUCCESS, PAY_FAIL } from '~/constant/pay';
-import { EjyyBuildingInfo, EjyyCommunityInfo, EjyyPropertyFee } from '~/types/model';
+import { IpmsBuildingInfo, IpmsCommunityInfo, IpmsPropertyFee } from '~/types/model';
 import * as payService from '~/service/pay';
 import * as feeService from '~/service/fee';
 import utils from '~/utils';
@@ -47,7 +47,7 @@ const MpPaymentCreateAction = <Action>{
     response: async ctx => {
         const { fee_id, building_ids } = <RequestBody>ctx.request.body;
 
-        const feeDetail = <EjyyPropertyFee & EjyyCommunityInfo>await ctx.model
+        const feeDetail = <IpmsPropertyFee & IpmsCommunityInfo>await ctx.model
             .from('ipms_property_fee')
             .leftJoin('ipms_community_info', 'ipms_community_info.id', 'ipms_property_fee.community_id')
             .where('ipms_property_fee.id', fee_id)
@@ -77,7 +77,7 @@ const MpPaymentCreateAction = <Action>{
             });
         }
 
-        const selfBuilding = <EjyyBuildingInfo[]>await ctx.model
+        const selfBuilding = <IpmsBuildingInfo[]>await ctx.model
             .from('ipms_user_building')
             .leftJoin('ipms_building_info', 'ipms_building_info.id', 'ipms_user_building.building_id')
             .where('ipms_user_building.wechat_mp_user_id', ctx.mpUserInfo.id)

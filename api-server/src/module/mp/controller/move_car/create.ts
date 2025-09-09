@@ -65,8 +65,7 @@ const MpMoveCarCreateAction = <Action>{
             },
             {
                 name: 'live_img',
-                max: 128,
-                regex: /^\/move_car\/[a-z0-9]{32}\.(jpg|jpeg|png)$/,
+                validator: val => typeof val === 'string' && val.length > 0 && val.length < 512,
                 required: true
             },
             {

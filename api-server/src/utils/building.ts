@@ -1,20 +1,14 @@
 /**
  * +----------------------------------------------------------------------
- * | IPMS
- * +----------------------------------------------------------------------
- * | Copyright (c) 2020-2025 IPMS
- * +----------------------------------------------------------------------
- * | IPMS
- * +----------------------------------------------------------------------
- * | Author: support@ipms.local
+ * | 开源物业管理系统，敬请使用
  * +----------------------------------------------------------------------
  */
 
-import { EjyyBuildingInfo } from '~/types/model';
+import { IpmsBuildingInfo } from '~/types/model';
 import { HOUSE, WAREHOUSE, CARPORT, MERCHANT, GARAGE } from '~/constant/building';
 
 export function name(
-    detail: Pick<EjyyBuildingInfo, 'type' | 'area' | 'building' | 'unit' | 'number' | 'construction_area'>,
+    detail: Pick<IpmsBuildingInfo, 'type' | 'area' | 'building' | 'unit' | 'number' | 'construction_area'>,
     type = false
 ) {
     let typeName = '';

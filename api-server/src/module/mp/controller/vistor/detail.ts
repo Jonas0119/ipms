@@ -41,7 +41,6 @@ const MpVistorDetailAction = <Action>{
                 'ipms_vistor.vistor_name',
                 'ipms_vistor.vistor_phone',
                 'ipms_vistor.car_number',
-                'ipms_vistor.uid',
                 'ipms_vistor.have_vistor_info',
                 'ipms_vistor.expire',
                 'ipms_vistor.used_at',

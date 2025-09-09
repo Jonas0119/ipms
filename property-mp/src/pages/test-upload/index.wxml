@@ -1,0 +1,57 @@
+<view class="container">
+    <view class="section">
+        <view class="section-title">原有上传方式（完全兼容）</view>
+        <cw-uploader 
+            file-list="{{ originalFileList }}"
+            bind:after-read="onOriginalUpload"
+            max-count="3"
+            accept="image"
+        />
+    </view>
+
+    <view class="section">
+        <view class="section-title">统一存储上传方式（新功能）</view>
+        <cw-uploader 
+            file-list="{{ unifiedFileList }}"
+            use-unified-storage="{{ true }}"
+            upload-dir="{{ uploadDir }}"
+            bind:after-read="onUnifiedUpload"
+            bind:upload-success="onUploadSuccess"
+            bind:upload-error="onUploadError"
+            max-count="3"
+            accept="image"
+        />
+    </view>
+
+    <view class="section">
+        <view class="section-title">直接调用测试</view>
+        <cw-button 
+            type="primary" 
+            bind:click="testDirectUpload"
+            block
+        >
+            直接调用统一存储服务
+        </cw-button>
+    </view>
+
+    <view class="section">
+        <view class="section-title">工具函数</view>
+        <cw-button 
+            type="warning" 
+            bind:click="clearStorageCache"
+            block
+        >
+            清除存储配置缓存
+        </cw-button>
+    </view>
+
+    <view class="section">
+        <view class="section-title">使用说明</view>
+        <view class="tips">
+            <text>1. 原有上传方式：使用现有OSS逻辑，完全兼容</text>
+            <text>2. 统一存储方式：支持 MinIO POST、OSS、Local 三种上传</text>
+            <text>3. 直接调用：可在代码中直接使用 utils.unifiedStorage.upload()</text>
+            <text>4. 智能降级：统一存储失败时自动回退到原有OSS逻辑</text>
+        </view>
+    </view>
+</view>

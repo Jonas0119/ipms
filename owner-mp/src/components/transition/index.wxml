@@ -1,0 +1,15 @@
+<!--
+ +----------------------------------------------------------------------
+ | 开源物业管理系统，敬请使用
+ +----------------------------------------------------------------------
+-->
+<wxs src="./index.wxs" module="computed" />
+
+<view
+    wx:if="{{ inited }}"
+    class="cw-transition custom-class {{ classes }}"
+    style="{{ computed.rootStyle({ currentDuration, display, customStyle }) }}"
+    bind:transitionend="onTransitionEnd"
+>
+    <slot />
+</view>

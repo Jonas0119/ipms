@@ -6,7 +6,7 @@
 
 import { Action } from '~/types/action';
 import { SUCCESS, QUERY_ILLEFAL, QUESTIONNAIRE_HAS_ANSWERED } from '~/constant/code';
-import { EjyyQuestionnaire, EjyyQuestion, EjyyQuestionOption } from '~/types/model';
+import { IpmsQuestionnaire, IpmsQuestion, IpmsQuestionOption } from '~/types/model';
 import { SIGNLE_CHOICE, MULTIPLE_CHOICE } from '~/constant/questionnaire';
 
 interface RequestParams {
@@ -32,8 +32,8 @@ interface QuestionMap {
 type ModelType<T, K extends keyof T> = T[K];
 
 interface ModelAs {
-    question_title: ModelType<EjyyQuestion, 'title'>;
-    option_id: ModelType<EjyyQuestionOption, 'id'>;
+    question_title: ModelType<IpmsQuestion, 'title'>;
+    option_id: ModelType<IpmsQuestionOption, 'id'>;
 }
 
 const MpQuestionnaireQuestionsAction = <Action>{
@@ -68,7 +68,7 @@ const MpQuestionnaireQuestionsAction = <Action>{
             });
         }
 
-        const records = <(EjyyQuestionnaire & EjyyQuestion & EjyyQuestionOption & ModelAs)[]>await ctx.model
+        const records = <(IpmsQuestionnaire & IpmsQuestion & IpmsQuestionOption & ModelAs)[]>await ctx.model
             .from('ipms_questionnaire')
             .leftJoin('ipms_question', 'ipms_question.questionnaire_id', 'ipms_questionnaire.id')
             .leftJoin('ipms_question_option', 'ipms_question_option.question_id', 'ipms_question.id')

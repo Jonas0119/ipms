@@ -15,14 +15,14 @@ import { HOUSE, CARPORT, WAREHOUSE, MERCHANT, GARAGE } from '~/constant/building
 import { BINDING_BUILDING, TRUE } from '~/constant/status';
 import * as wechatService from '~/service/wechat';
 import * as smsService from '~/service/sms';
-import { EjyyWechatMpUser, EjyyBuildingInfo, EjyyWechatOfficialAccountsUser, EjyyPropertyFee } from '~/types/model';
+import { IpmsWechatMpUser, IpmsBuildingInfo, IpmsWechatOfficialAccountsUser, IpmsPropertyFee } from '~/types/model';
 import utils from '~/utils';
 import config from '~/config';
 
-type UserInfo = Pick<EjyyWechatMpUser, 'id' | 'phone' | 'real_name'> &
-    Pick<EjyyWechatOfficialAccountsUser, 'open_id' | 'subscribed'>;
+type UserInfo = Pick<IpmsWechatMpUser, 'id' | 'phone' | 'real_name'> &
+    Pick<IpmsWechatOfficialAccountsUser, 'open_id' | 'subscribed'>;
 
-type Record = UserInfo & Pick<EjyyBuildingInfo, 'type' | 'area' | 'building' | 'unit' | 'number' | 'construction_area'>;
+type Record = UserInfo & Pick<IpmsBuildingInfo, 'type' | 'area' | 'building' | 'unit' | 'number' | 'construction_area'>;
 
 interface UserFee extends UserInfo {
     buildings: string[];
@@ -45,7 +45,7 @@ export function yuan(num: number): string {
     return `${Math.floor(num / 100)}.${double(num % 100)}`;
 }
 
-export function computed(building: Pick<EjyyBuildingInfo, 'construction_area' | 'type'>, fee: EjyyPropertyFee): number {
+export function computed(building: Pick<IpmsBuildingInfo, 'construction_area' | 'type'>, fee: IpmsPropertyFee): number {
     let fen = 0;
     const { type, construction_area } = building;
 
@@ -86,7 +86,7 @@ export function computed(building: Pick<EjyyBuildingInfo, 'construction_area' | 
 
 interface FeeComputed {
     list: UserFee[];
-    fee: EjyyPropertyFee & { community_name: string };
+    fee: IpmsPropertyFee & { community_name: string };
 }
 
 async function usersComputed(

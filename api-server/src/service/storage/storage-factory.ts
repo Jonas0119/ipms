@@ -17,27 +17,38 @@ export class StorageServiceFactory {
 
     static getStorageService(): IStorageService {
         const { mode } = config.storage;
+        console.log(`[StorageFactory] Getting storage service for mode: ${mode}`);
 
         switch (mode) {
             case 'local':
                 if (!this.localService) {
+                    console.log(`[StorageFactory] Creating new LocalStorageService instance`);
                     this.localService = new LocalStorageService();
+                } else {
+                    console.log(`[StorageFactory] Reusing existing LocalStorageService instance`);
                 }
                 return this.localService;
 
             case 'oss':
                 if (!this.ossService) {
+                    console.log(`[StorageFactory] Creating new OssStorageService instance`);
                     this.ossService = new OssStorageService();
+                } else {
+                    console.log(`[StorageFactory] Reusing existing OssStorageService instance`);
                 }
                 return this.ossService;
 
             case 'minio':
                 if (!this.minioService) {
+                    console.log(`[StorageFactory] Creating new MinioStorageService instance`);
                     this.minioService = new MinioStorageService();
+                } else {
+                    console.log(`[StorageFactory] Reusing existing MinioStorageService instance`);
                 }
                 return this.minioService;
 
             default:
+                console.error(`[StorageFactory] Unsupported storage mode: ${mode}`);
                 throw new Error(`Unsupported storage mode: ${mode}`);
         }
     }

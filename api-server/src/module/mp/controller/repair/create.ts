@@ -75,7 +75,7 @@ const MpRepairCreateAction = <Action>{
             {
                 name: 'repair_imgs',
                 validator: val =>
-                    Array.isArray(val) && val.every(item => /^\/repair\/[a-z0-9]{32}\.(jpg|jpeg|png)$/.test(item))
+                    Array.isArray(val) && val.every(item => typeof item === 'string' && item.length > 0 && item.length < 512)
             }
         ]
     },

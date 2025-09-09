@@ -1,0 +1,28 @@
+/**
+ * +----------------------------------------------------------------------
+ * | 开源物业管理系统，敬请使用
+ * +----------------------------------------------------------------------
+ */
+
+import { CwComponent } from '../common/component';
+CwComponent({
+    props: {
+        show: Boolean,
+        customStyle: String,
+        duration: {
+            type: null,
+            value: 300
+        },
+        zIndex: {
+            type: Number,
+            value: 1
+        }
+    },
+    methods: {
+        onClick() {
+            this.$emit('click');
+        },
+        // for prevent touchmove
+        noop() {}
+    }
+});

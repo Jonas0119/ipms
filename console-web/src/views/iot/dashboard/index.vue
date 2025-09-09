@@ -1,5 +1,8 @@
-/** * +---------------------------------------------------------------------- * | 开源物业管理系统，敬请使用 *
-+---------------------------------------------------------------------- */
+/**
+ * +----------------------------------------------------------------------
+ * | 开源物业管理系统，敬请使用
+ * +----------------------------------------------------------------------
+ */
 
 <template>
     <section class="iot-dashboard">
@@ -163,7 +166,7 @@ export default {
                 this.detail = res.data;
 
                 const graph = new dagre.graphlib.Graph();
-                const ejyy = 'ipms';
+                const ipms = 'ipms';
                 const nodeOption = {
                     width: 30,
                     height: 50
@@ -181,7 +184,7 @@ export default {
                 });
 
                 // 添加logo
-                graph.setNode(ejyy, { label: SITE_TITLE, ...nodeOption, symbol: `path://${LOGO}`, color: '#3EDCD9' });
+                graph.setNode(ipms, { label: SITE_TITLE, ...nodeOption, symbol: `path://${LOGO}`, color: '#3EDCD9' });
 
                 if (Array.isArray(res.data.entrance)) {
                     graph.setNode('entrance', {
@@ -190,7 +193,7 @@ export default {
                         symbol: `path://${CLOUD}`,
                         color: '#ffa2d3'
                     });
-                    graph.setEdge(ejyy, 'entrance');
+                    graph.setEdge(ipms, 'entrance');
 
                     res.data.entrance.forEach(({ name }, key) => {
                         const nodeName = `门禁${key}`;
@@ -212,7 +215,7 @@ export default {
                         symbol: `path://${CLOUD}`,
                         color: '#ffa2d3'
                     });
-                    graph.setEdge(ejyy, 'elevator');
+                    graph.setEdge(ipms, 'elevator');
 
                     res.data.elevator.forEach(({ name }, key) => {
                         const nodeName = `梯控${key}`;
@@ -234,7 +237,7 @@ export default {
                         symbol: `path://${CLOUD}`,
                         color: '#ffa2d3'
                     });
-                    graph.setEdge(ejyy, 'lamp');
+                    graph.setEdge(ipms, 'lamp');
 
                     res.data.lamp.forEach(({ name, line }, key) => {
                         const nodeName = `灯控${key}`;
@@ -268,7 +271,7 @@ export default {
                         symbol: `path://${CLOUD}`,
                         color: '#ffa2d3'
                     });
-                    graph.setEdge(ejyy, 'repeater');
+                    graph.setEdge(ipms, 'repeater');
 
                     res.data.repeater.forEach(({ name }, key) => {
                         const nodeName = `中继${key}`;
@@ -290,7 +293,7 @@ export default {
                         symbol: `path://${CLOUD}`,
                         color: '#ffa2d3'
                     });
-                    graph.setEdge(ejyy, 'park');
+                    graph.setEdge(ipms, 'park');
 
                     res.data.park.forEach(({ name }, key) => {
                         const nodeName = `停车场${key}`;
@@ -312,7 +315,7 @@ export default {
                         symbol: `path://${CLOUD}`,
                         color: '#ffa2d3'
                     });
-                    graph.setEdge(ejyy, 'warning');
+                    graph.setEdge(ipms, 'warning');
 
                     res.data.warning.forEach(({ name }, key) => {
                         const nodeName = `预警中控${key}`;

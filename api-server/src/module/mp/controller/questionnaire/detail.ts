@@ -7,11 +7,11 @@
 import { Action } from '~/types/action';
 import { SUCCESS } from '~/constant/code';
 import {
-    EjyyQuestionnaire,
-    EjyyQuestion,
-    EjyyQuestionOption,
-    EjyyQuestionnaireAnswer,
-    EjyyQuestionnaireAnswerResult
+    IpmsQuestionnaire,
+    IpmsQuestion,
+    IpmsQuestionOption,
+    IpmsQuestionnaireAnswer,
+    IpmsQuestionnaireAnswerResult
 } from '~/types/model';
 import { SIGNLE_CHOICE, MULTIPLE_CHOICE } from '~/constant/questionnaire';
 
@@ -39,8 +39,8 @@ interface QuestionMap {
 type ModelType<T, K extends keyof T> = T[K];
 
 interface ModelAs {
-    question_title: ModelType<EjyyQuestion, 'title'>;
-    option_id: ModelType<EjyyQuestionOption, 'id'>;
+    question_title: ModelType<IpmsQuestion, 'title'>;
+    option_id: ModelType<IpmsQuestionOption, 'id'>;
 }
 
 const MpQuestionnaireDetailAction = <Action>{
@@ -62,7 +62,7 @@ const MpQuestionnaireDetailAction = <Action>{
     response: async ctx => {
         const { id } = <RequestParams>ctx.params;
 
-        const questions = <(EjyyQuestionnaire & EjyyQuestion & EjyyQuestionOption & ModelAs)[]>await ctx.model
+        const questions = <(IpmsQuestionnaire & IpmsQuestion & IpmsQuestionOption & ModelAs)[]>await ctx.model
             .from('ipms_questionnaire')
             .leftJoin('ipms_question', 'ipms_question.questionnaire_id', 'ipms_questionnaire.id')
             .leftJoin('ipms_question_option', 'ipms_question_option.question_id', 'ipms_question.id')
@@ -77,7 +77,7 @@ const MpQuestionnaireDetailAction = <Action>{
                 'ipms_question_option.option_val'
             );
 
-        const answers = <(EjyyQuestionnaireAnswer & EjyyQuestionnaireAnswerResult)[]>await ctx.model
+        const answers = <(IpmsQuestionnaireAnswer & IpmsQuestionnaireAnswerResult)[]>await ctx.model
             .from('ipms_questionnaire_answer')
             .leftJoin(
                 'ipms_questionnaire_answer_result',

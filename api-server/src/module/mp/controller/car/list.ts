@@ -8,13 +8,13 @@ import { Action } from '~/types/action';
 import { SUCCESS } from '~/constant/code';
 import { BINDING_BUILDING, BINDING_CAR } from '~/constant/status';
 import { CARPORT, GARAGE } from '~/constant/building';
-import { EjyyUserCar, EjyyBuildingInfo } from '~/types/model';
+import { IpmsUserCar, IpmsBuildingInfo } from '~/types/model';
 
-type CarInfo = Pick<EjyyUserCar, 'car_number' | 'car_type' | 'is_new_energy' | 'building_id' | 'status' | 'sync'> & {
+type CarInfo = Pick<IpmsUserCar, 'car_number' | 'car_type' | 'is_new_energy' | 'building_id' | 'status' | 'sync'> & {
     car_id: number;
 };
 
-type BuildingInfo = Pick<EjyyBuildingInfo, 'area' | 'unit' | 'building' | 'unit' | 'number' | 'type'> & {
+type BuildingInfo = Pick<IpmsBuildingInfo, 'area' | 'unit' | 'building' | 'unit' | 'number' | 'type'> & {
     cars: CarInfo[];
     building_id: number;
 };

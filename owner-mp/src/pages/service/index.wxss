@@ -1,0 +1,9 @@
+/**
+ * +----------------------------------------------------------------------
+ * | 开源物业管理系统，敬请使用
+ * +----------------------------------------------------------------------
+ */
+.container {
+    padding-bottom: calc(constant(safe-area-inset-bottom) + 50px);
+    padding-bottom: calc(env(safe-area-inset-bottom) + 50px);
+}

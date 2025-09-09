@@ -1,0 +1,19 @@
+/**
+ * +----------------------------------------------------------------------
+ * | 开源物业管理系统，敬请使用
+ * +----------------------------------------------------------------------
+ */
+
+export const API_HOST = 'http://127.0.0.1:6688';
+
+export const ASSETS_HOST = '';
+
+export const TOKEN_NAME = 'IPMS-TOKEN';
+
+export const USER_ID = 'USER_ID';
+
+export const WECHAT_VERSION = '7.0.0';
+
+export const SDK_VERSION = '2.16.0';
+
+export const VERSION = '1.1.10';

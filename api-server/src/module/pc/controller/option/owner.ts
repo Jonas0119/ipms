@@ -5,7 +5,7 @@
  */
 
 import { Action } from '~/types/action';
-import { EjyyBuildingInfo, EjyyUserBuilding } from '~/types/model';
+import { IpmsBuildingInfo, IpmsUserBuilding } from '~/types/model';
 import { SUCCESS, QUERY_ILLEFAL } from '~/constant/code';
 import { NORMAL_STATUS, TRUE, BINDING_BUILDING } from '~/constant/status';
 import { HOUSE, CARPORT, WAREHOUSE, MERCHANT, GARAGE } from '~/constant/building';
@@ -22,8 +22,8 @@ interface ModalAlias {
 }
 
 type Building = ModalAlias &
-    Pick<EjyyUserBuilding, 'building_id' | 'authenticated' | 'authenticated_type'> &
-    Pick<EjyyBuildingInfo, 'type' | 'area' | 'building' | 'unit' | 'number'>;
+    Pick<IpmsUserBuilding, 'building_id' | 'authenticated' | 'authenticated_type'> &
+    Pick<IpmsBuildingInfo, 'type' | 'area' | 'building' | 'unit' | 'number'>;
 
 const PcOptionOwerAction = <Action>{
     router: {

@@ -35,8 +35,16 @@ const PcStorageConfigAction = <Action>{
     response: async ctx => {
         // 记录接口调用日志，便于调试和监控
         kjhlog.info('=== STORAGE CONFIG API CALLED ===');
-        kjhlog.info(`Request URL: ${ctx.request.url}`);
-        kjhlog.info(`Query string: ${JSON.stringify(ctx.query)}`);
+        kjhlog.info(`🚀 [STORAGE-CONFIG-DEBUG] 收到存储配置请求`);
+        kjhlog.info(`🌐 [STORAGE-CONFIG-DEBUG] Request URL: ${ctx.request.url}`);
+        kjhlog.info(`📋 [STORAGE-CONFIG-DEBUG] Request method: ${ctx.request.method}`);
+        kjhlog.info(`📤 [STORAGE-CONFIG-DEBUG] Query string: ${JSON.stringify(ctx.query)}`);
+        kjhlog.info(`📋 [STORAGE-CONFIG-DEBUG] Headers: ${JSON.stringify({
+            'ipms-pc-token': ctx.request.header['ipms-pc-token'] ? 'present' : 'missing',
+            'wechat-mp-request': ctx.request.header['wechat-mp-request'] || 'not provided',
+            'user-agent': ctx.request.header['user-agent'] || 'not provided'
+        })}`);
+        kjhlog.info(`🔍 [STORAGE-CONFIG-DEBUG] Request Body: ${JSON.stringify(ctx.request.body)}`);
         
         // 解析查询参数中的文件信息
         let filenameStr: string | undefined;  // 文件名
@@ -97,16 +105,51 @@ const PcStorageConfigAction = <Action>{
         });
 
         try {
+            // 检测是否为小程序请求
+            const isMiniProgram = ctx.request.header['wechat-mp-request'] === 'true';
+            kjhlog.info(`kjh isMiniProgram: ${isMiniProgram}`);
+            const requestType = isMiniProgram ? 'MiniProgram' : 'PC';
+            kjhlog.info(`[${requestType}] Storage config request started`);
+            kjhlog.info(`[${requestType}] Request headers:`, {
+                'ipms-pc-token': ctx.request.header['ipms-pc-token'] ? 'provided' : 'missing',
+                'wechat-mp-request': ctx.request.header['wechat-mp-request'] || 'not provided',
+                'user-agent': ctx.request.header['user-agent'] || 'not provided'
+            });
+
             // 获取存储服务实例并生成上传配置
+            kjhlog.info(`🔧 [STORAGE-CONFIG-DEBUG] [${requestType}] 开始获取存储服务实例...`);
+            kjhlog.info(`📋 [STORAGE-CONFIG-DEBUG] [${requestType}] 当前存储模式: ${currentMode}`);
+            
             const storageService = StorageServiceFactory.getStorageService();
+            kjhlog.info(`✅ [STORAGE-CONFIG-DEBUG] [${requestType}] 存储服务实例获取成功`);
+            kjhlog.info(`🔧 [STORAGE-CONFIG-DEBUG] [${requestType}] 开始生成上传配置...`);
+            kjhlog.info(`📤 [STORAGE-CONFIG-DEBUG] [${requestType}] getUploadConfig参数: filename=${filenameStr}, mimetype=${mimetypeStr}, dir=${dirStr}`);
+            
             const uploadConfig = await storageService.getUploadConfig(filenameStr, mimetypeStr, dirStr);
+            
+            kjhlog.info(`✅ [STORAGE-CONFIG-DEBUG] [${requestType}] 上传配置生成完成!`);
+            kjhlog.info(`📋 [STORAGE-CONFIG-DEBUG] [${requestType}] 配置检查:`, {
+                hasPolicy: !!uploadConfig.policy,
+                hasSignature: !!uploadConfig.signature,
+                hasAccessId: !!uploadConfig.accessid,
+                hasHost: !!uploadConfig.host,
+                hasPostURL: !!uploadConfig.postURL,
+                hasFormData: !!uploadConfig.formData,
+                hasPresignedUrl: !!uploadConfig.presignedUrl,
+                bucket: uploadConfig.bucket,
+                key: uploadConfig.key,
+                expire: uploadConfig.expire,
+                mode: uploadConfig.mode,
+                uploadStrategy: uploadConfig.uploadStrategy
+            });
+            kjhlog.info(`🔗 [STORAGE-CONFIG-DEBUG] [${requestType}] 完整配置对象:`, JSON.stringify(uploadConfig, null, 2));
 
             // 构建统一的配置响应格式
             const response: any = {
                 mode: currentMode,                                      // 存储模式
                 baseUrl: baseUrl,                                      // 文件访问基础URL
                 expire: uploadConfig.expire || Date.now() + 30 * 60 * 1000,  // 配置过期时间（默认30分钟）
-                uploadStrategy: getUploadStrategy(currentMode)          // 上传策略
+                uploadStrategy: getUploadStrategy(currentMode, isMiniProgram)          // 上传策略
             };
 
             // 根据不同存储模式添加特定的上传配置
@@ -114,11 +157,25 @@ const PcStorageConfigAction = <Action>{
                 case 'local':
                     // 本地存储：文件上传到服务器
                     response.uploadUrl = '/pc/storage/upload';
-                    kjhlog.info(`Local storage configured with upload URL: ${response.uploadUrl}`);
+                    kjhlog.info(`[${requestType}] Local storage configured:`, {
+                        uploadUrl: response.uploadUrl,
+                        baseUrl: response.baseUrl,
+                        uploadStrategy: response.uploadStrategy
+                    });
                     break;
 
                 case 'oss':
                     // 阿里云OSS：直传到OSS，需要提供签名等信息
+                    kjhlog.info(`[${requestType}] OSS mode - checking signature support`);
+                    kjhlog.info(`[${requestType}] OSS config check:`, {
+                        hasPolicy: !!uploadConfig.policy,
+                        hasSignature: !!uploadConfig.signature,
+                        hasAccessId: !!uploadConfig.accessid,
+                        hasHost: !!uploadConfig.host,
+                        bucket: uploadConfig.bucket,
+                        key: uploadConfig.key
+                    });
+                    
                     if (uploadConfig.policy && uploadConfig.signature) {
                         response.formData = {
                             policy: uploadConfig.policy,                    // 上传策略
@@ -128,39 +185,143 @@ const PcStorageConfigAction = <Action>{
                             dir: uploadConfig.dir || '',                    // 上传目录
                             success_action_status: '200'                    // 成功状态码
                         };
-                        kjhlog.info(`OSS storage configured with direct upload to: ${uploadConfig.host}`);
+                        response.bucket = uploadConfig.bucket;              // 存储桶名称
+                        response.key = uploadConfig.key;                    // 文件路径
+                        kjhlog.info(`[${requestType}] OSS direct upload configured:`, {
+                            host: uploadConfig.host,
+                            bucket: uploadConfig.bucket,
+                            key: uploadConfig.key,
+                            hasFormData: !!response.formData
+                        });
+                    } else {
+                        // OSS签名生成失败时，回退到服务端上传
+                        response.uploadStrategy = 'server';
+                        response.uploadUrl = '/pc/storage/upload';
+                        kjhlog.warn(`[${requestType}] OSS fallback to server upload:`, {
+                            reason: 'Missing policy or signature',
+                            hasPolicy: !!uploadConfig.policy,
+                            hasSignature: !!uploadConfig.signature
+                        });
                     }
                     break;
 
                 case 'minio':
-                    // MinIO存储：优先使用预签名URL直传
-                    if (uploadConfig.presignedUrl) {
-                        response.presignedUrl = uploadConfig.presignedUrl;  // 预签名上传URL
-                        response.bucket = uploadConfig.bucket;              // 存储桶名称
-                        response.key = uploadConfig.key;                    // 对象键名
-                        kjhlog.info(`MinIO storage configured with presigned URL for bucket: ${uploadConfig.bucket}`);
+                    if (isMiniProgram) {
+                        // 小程序请求：使用MinIO POST直传
+                        kjhlog.info(`MinIO mode for MiniProgram - checking POST upload support`);
+                        kjhlog.info(`MinIO upload strategy: ${uploadConfig.uploadStrategy}`);
+                        kjhlog.info(`MinIO postURL: ${uploadConfig.postURL ? 'provided' : 'not provided'}`);
+                        kjhlog.info(`MinIO formData: ${uploadConfig.formData ? 'provided' : 'not provided'}`);
+                        
+                        if (uploadConfig.uploadStrategy === 'direct' && uploadConfig.postURL && uploadConfig.formData) {
+                            // 使用 MinIO POST Policy 直传
+                            response.uploadStrategy = 'direct';
+                            response.postURL = uploadConfig.postURL;
+                            response.formData = uploadConfig.formData;
+                            response.bucket = uploadConfig.bucket;
+                            response.key = uploadConfig.key;
+                            kjhlog.info(`[${requestType}] MinIO POST direct upload configured for MiniProgram`);
+                            kjhlog.info(`[${requestType}] MinIO POST URL: ${uploadConfig.postURL}`);
+                            kjhlog.info(`[${requestType}] MinIO bucket: ${uploadConfig.bucket}`);
+                            kjhlog.info(`[${requestType}] MinIO key: ${uploadConfig.key}`);
+                            kjhlog.info(`[${requestType}] MinIO formData keys:`, Object.keys(uploadConfig.formData || {}));
+                        } else {
+                            // 回退到服务器上传
+                            response.uploadStrategy = 'server';
+                            response.uploadUrl = '/pc/storage/upload';
+                            kjhlog.warn(`[${requestType}] MinIO fallback to server upload for MiniProgram`);
+                            kjhlog.warn(`[${requestType}] MinIO POST config missing:`, {
+                                uploadStrategy: uploadConfig.uploadStrategy,
+                                hasPostURL: !!uploadConfig.postURL,
+                                hasFormData: !!uploadConfig.formData
+                            });
+                        }
                     } else {
-                        // 预签名URL生成失败时，回退到服务端上传
-                        response.uploadStrategy = 'server';
-                        response.uploadUrl = '/pc/storage/upload';
-                        kjhlog.info(`MinIO storage fallback to server upload`);
+                        // PC端请求：使用预签名URL直传
+                        kjhlog.info(`[${requestType}] MinIO mode for PC - checking presigned URL support`);
+                        kjhlog.info(`[${requestType}] MinIO presigned URL check:`, {
+                            hasPresignedUrl: !!uploadConfig.presignedUrl,
+                            bucket: uploadConfig.bucket,
+                            key: uploadConfig.key
+                        });
+                        
+                        if (uploadConfig.presignedUrl) {
+                            response.presignedUrl = uploadConfig.presignedUrl;  // 预签名上传URL
+                            response.bucket = uploadConfig.bucket;              // 存储桶名称
+                            response.key = uploadConfig.key;                    // 对象键名
+                            kjhlog.info(`[${requestType}] MinIO presigned URL configured:`, {
+                                bucket: uploadConfig.bucket,
+                                key: uploadConfig.key,
+                                presignedUrl: uploadConfig.presignedUrl.substring(0, 100) + '...'
+                            });
+                        } else {
+                            // 预签名URL生成失败时，回退到服务端上传
+                            response.uploadStrategy = 'server';
+                            response.uploadUrl = '/pc/storage/upload';
+                            kjhlog.warn(`[${requestType}] MinIO fallback to server upload for PC:`, {
+                                reason: 'Missing presigned URL',
+                                hasPresignedUrl: !!uploadConfig.presignedUrl
+                            });
+                        }
                     }
                     break;
             }
 
-            kjhlog.success(`Storage config response prepared for mode: ${currentMode}`);
+            kjhlog.success(`[${requestType}] Storage config response prepared for mode: ${currentMode}`);
+            kjhlog.info(`📋 [STORAGE-CONFIG-DEBUG] [${requestType}] 最终响应配置概览:`, {
+                mode: response.mode,
+                uploadStrategy: response.uploadStrategy,
+                baseUrl: response.baseUrl,
+                hasFormData: !!response.formData,
+                hasPostURL: !!response.postURL,
+                hasPresignedUrl: !!response.presignedUrl,
+                hasUploadUrl: !!response.uploadUrl,
+                expire: response.expire
+            });
+            
+            kjhlog.info(`📤 [STORAGE-CONFIG-DEBUG] [${requestType}] 完整响应体:`, JSON.stringify({
+                code: SUCCESS,
+                data: response
+            }, null, 2));
 
             // 返回成功响应
             ctx.body = {
                 code: SUCCESS,
                 data: response
             };
+            
+            kjhlog.info(`✅ [STORAGE-CONFIG-DEBUG] [${requestType}] 存储配置请求处理完成!`);
         } catch (error) {
             // 处理配置获取失败的情况
-            kjhlog.error('Get storage config error:', error);
+            const isMiniProgram = ctx.request.header['wechat-mp-request'] === 'true';
+            const requestType = isMiniProgram ? 'MiniProgram' : 'PC';
+            
+            kjhlog.error(`[${requestType}] Get storage config error:`, error);
+            kjhlog.error(`[${requestType}] Error stack:`, error.stack);
+            kjhlog.error(`[${requestType}] Request details:`, {
+                url: ctx.request.url,
+                method: ctx.request.method,
+                headers: {
+                    'ipms-pc-token': ctx.request.header['ipms-pc-token'] ? 'provided' : 'missing',
+                    'wechat-mp-request': ctx.request.header['wechat-mp-request'] || 'not provided'
+                },
+                query: ctx.query
+            });
+            
+            // 为小程序提供更友好的错误响应
+            const errorMessage = isMiniProgram 
+                ? `文件上传配置获取失败: ${error.message || '请检查网络连接后重试'}`
+                : error.message || '获取存储配置失败';
+                
             ctx.body = {
                 code: DATA_MODEL_UPDATE_FAIL,
-                message: error.message || '获取存储配置失败'
+                message: errorMessage,
+                ...(isMiniProgram && { 
+                    debug: {
+                        error: error.message,
+                        timestamp: new Date().toISOString()
+                    }
+                })
             };
         }
     }
@@ -170,21 +331,22 @@ const PcStorageConfigAction = <Action>{
  * 根据存储模式获取对应的上传策略
  * 
  * @param mode 存储模式 ('local' | 'oss' | 'minio')
+ * @param isMiniProgram 是否为小程序请求
  * @returns 上传策略字符串
  * 
  * 上传策略说明：
  * - server: 文件上传到服务器，由服务器处理存储
- * - direct: 前端直接上传到云存储（如OSS）
- * - presigned: 使用预签名URL上传（如MinIO）
+ * - direct: 前端直接上传到云存储（如OSS、MinIO POST）
+ * - presigned: 使用预签名URL上传（如MinIO PUT，仅PC端）
  */
-function getUploadStrategy(mode: string): string {
+function getUploadStrategy(mode: string, isMiniProgram: boolean = false): string {
     switch (mode) {
         case 'local':
             return 'server';      // 本地存储使用服务器上传
         case 'oss':
             return 'direct';      // OSS使用直传
         case 'minio':
-            return 'presigned';   // MinIO使用预签名URL
+            return isMiniProgram ? 'direct' : 'presigned';   // 小程序使用POST直传，PC端使用预签名URL
         default:
             return 'server';      // 默认使用服务器上传
     }

@@ -1,3 +1,8 @@
+/**
+ * +----------------------------------------------------------------------
+ * | 开源物业管理系统，敬请使用
+ * +----------------------------------------------------------------------
+ */
 import { Action } from '~/types/action';
 import { SUCCESS, QUERY_ILLEFAL } from '~/constant/code';
 import * as ROLE from '~/constant/role_access';

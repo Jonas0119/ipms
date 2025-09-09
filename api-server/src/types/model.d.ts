@@ -119,10 +119,10 @@ import {
     WARNING_OF_GAS
 } from '~/constant/iot';
 
-declare namespace EjyyModel {
+declare namespace IpmsModel {
     type Gender = 0 | 1 | 2; //未知 男 女
 
-    interface EjyyWechatMpUser {
+    interface IpmsWechatMpUser {
         id?: number;
         open_id: string;
         union_id: string;
@@ -139,13 +139,13 @@ declare namespace EjyyModel {
         created_at: number;
     }
 
-    interface EjyyWechatMpAuth {
+    interface IpmsWechatMpAuth {
         id?: number;
         wechat_mp_user_id: number;
         token: string | null;
     }
 
-    interface EjyyWechatMpUserLogin {
+    interface IpmsWechatMpUserLogin {
         id?: number;
         wechat_mp_user_id: number;
         ip: string;
@@ -156,7 +156,7 @@ declare namespace EjyyModel {
         login_at: number;
     }
 
-    interface EjyyWechatOfficialAccountsUser {
+    interface IpmsWechatOfficialAccountsUser {
         id?: number;
         union_id: string;
         open_id: string;
@@ -164,19 +164,19 @@ declare namespace EjyyModel {
         created_at: number;
     }
 
-    interface EjyyPropertyCompanyDepartment {
+    interface IpmsPropertyCompanyDepartment {
         id?: number;
         name: string;
     }
 
-    interface EjyyPropertyCompanyJob {
+    interface IpmsPropertyCompanyJob {
         id?: number;
         parent_id: number;
         name: string;
     }
 
     // 每个公司都仅有一条员工的记录，所一open_id会有重复
-    interface EjyyPropertyCompanyUser {
+    interface IpmsPropertyCompanyUser {
         id?: number;
         account?: string;
         password?: string;
@@ -198,7 +198,7 @@ declare namespace EjyyModel {
         created_at: number;
     }
 
-    interface EjyyPropertyCompanyUserJoinRecord {
+    interface IpmsPropertyCompanyUserJoinRecord {
         id?: number;
         property_company_user_id: number;
         status: typeof TRUE | typeof FALSE;
@@ -206,13 +206,13 @@ declare namespace EjyyModel {
         created_at: number;
     }
 
-    interface EjyyPropertyCompanyAuth {
+    interface IpmsPropertyCompanyAuth {
         id?: number;
         property_company_user_id: number;
         token?: string;
     }
 
-    interface EjyyPropertyCompanyUserLogin {
+    interface IpmsPropertyCompanyUserLogin {
         id?: number;
         property_company_user_id: number;
         ip: string;
@@ -220,25 +220,25 @@ declare namespace EjyyModel {
         login_at: number;
     }
 
-    interface EjyyPropertyCompanyUserDefaultCommunity {
+    interface IpmsPropertyCompanyUserDefaultCommunity {
         id?: number;
         property_company_user_id: number;
         community_id?: number;
     }
 
-    interface EjyyPropertyCompanyUserAccessCommunity {
+    interface IpmsPropertyCompanyUserAccessCommunity {
         id?: number;
         property_company_user_id: number;
         community_id?: number;
     }
 
-    interface EjyyPropertyCompanyAccess {
+    interface IpmsPropertyCompanyAccess {
         id?: number;
         name: string;
         content: string | typeof Role[];
     }
 
-    interface EjyyPropertyCompanyBuildingRegistered {
+    interface IpmsPropertyCompanyBuildingRegistered {
         id?: number;
         building_id: number;
         // 业主姓名
@@ -250,7 +250,7 @@ declare namespace EjyyModel {
         created_at: number;
     }
 
-    interface EjyyCommunityInfo {
+    interface IpmsCommunityInfo {
         // 非自增id，和apply表的id一致
         id: number;
         name: string;
@@ -263,7 +263,7 @@ declare namespace EjyyModel {
         created_at: number;
     }
 
-    interface EjyyCommunitySetting {
+    interface IpmsCommunitySetting {
         id?: number;
         community_id: number;
         access_nfc: typeof ACCESS_NFC_DISABLED | typeof ACCESS_NFC_AVAILABLE;
@@ -274,7 +274,7 @@ declare namespace EjyyModel {
         fitment_pledge: typeof FIXMENT_PLEDGE_AVAILABLE | typeof FIXMENT_PLEDGE_DISABLED;
     }
 
-    interface EjyyCommunityRemoteOpenDoorLog {
+    interface IpmsCommunityRemoteOpenDoorLog {
         id?: number;
         wechat_mp_user_id: number;
         community_id: number;
@@ -283,7 +283,7 @@ declare namespace EjyyModel {
         created_at: number;
     }
 
-    interface EjyyBuildingInfo {
+    interface IpmsBuildingInfo {
         id?: number;
         community_id: number;
         // 	1 住宅 ；2 车位； 3仓房
@@ -297,7 +297,7 @@ declare namespace EjyyModel {
         created_at: number;
     }
 
-    interface EjyyUserBuilding {
+    interface IpmsUserBuilding {
         id?: number;
         building_id: number;
         wechat_mp_user_id: number;
@@ -313,7 +313,7 @@ declare namespace EjyyModel {
         created_at: number;
     }
 
-    interface EjyyUserBuildingOperateLog {
+    interface IpmsUserBuildingOperateLog {
         id?: number;
         user_building_id: number;
         wechat_mp_user_id?: number;
@@ -325,13 +325,13 @@ declare namespace EjyyModel {
         created_at: number;
     }
 
-    interface EjyyUserDefaultCommunity {
+    interface IpmsUserDefaultCommunity {
         id?: number;
         community_id: number;
         wechat_mp_user_id: number;
     }
 
-    interface EjyyUserCar {
+    interface IpmsUserCar {
         id?: number;
         wechat_mp_user_id: number;
         building_id: number;
@@ -345,13 +345,13 @@ declare namespace EjyyModel {
     }
 
     // order id desc 以最后一次结果为准
-    interface EjyyUserCarSync {
+    interface IpmsUserCarSync {
         id?: number;
         user_car_id: number;
         is_remove: typeof TRUE | typeof FALSE;
     }
 
-    interface EjyyUserCarOperateLog {
+    interface IpmsUserCarOperateLog {
         id?: number;
         user_car_id: number;
         wechat_mp_user_id?: number;
@@ -363,7 +363,7 @@ declare namespace EjyyModel {
         created_at: number;
     }
 
-    interface EjyyNoticeToUser {
+    interface IpmsNoticeToUser {
         id?: number;
         title: string;
         overview: string;
@@ -379,20 +379,20 @@ declare namespace EjyyModel {
         created_at: number;
     }
 
-    interface EjyyNoticeTpl {
+    interface IpmsNoticeTpl {
         id?: number;
         tpl: string;
         content: string | TemplateMessage;
     }
 
-    interface EjyyNoticeToUserReaded {
+    interface IpmsNoticeToUserReaded {
         id?: number;
         notice_id: number;
         wechat_mp_user_id: number;
         created_at: number;
     }
 
-    interface EjyyFeedback {
+    interface IpmsFeedback {
         id: number;
         wechat_mp_user_id: number;
         type: typeof FEEDBACK_OF_PROBLEM | typeof FEEDBACK_OF_FEATURE;
@@ -404,7 +404,7 @@ declare namespace EjyyModel {
         replyed_at?: number;
     }
 
-    interface EjyyRepair {
+    interface IpmsRepair {
         id?: number;
         wechat_mp_user_id?: number;
         property_company_user_id?: number;
@@ -436,7 +436,7 @@ declare namespace EjyyModel {
         created_at: number;
     }
 
-    interface EjyyRepairUrge {
+    interface IpmsRepairUrge {
         id?: number;
         repair_id: number;
         step:
@@ -448,7 +448,7 @@ declare namespace EjyyModel {
         created_at: number;
     }
 
-    interface EjyyComplain {
+    interface IpmsComplain {
         id?: number;
         community_id: number;
         type: typeof COMPLAIN | typeof SUGGEST;
@@ -487,7 +487,7 @@ declare namespace EjyyModel {
         created_at: number;
     }
 
-    interface EjyyConvenient {
+    interface IpmsConvenient {
         id?: number;
         community_id: number;
         title: string;
@@ -497,7 +497,7 @@ declare namespace EjyyModel {
         created_at: number;
     }
 
-    interface EjyyPropertyFee {
+    interface IpmsPropertyFee {
         id?: number;
         start_year: number;
         end_year: number;
@@ -518,7 +518,7 @@ declare namespace EjyyModel {
         created_at: number;
     }
 
-    interface EjyyPropertyFeeOrder {
+    interface IpmsPropertyFeeOrder {
         id?: number;
         property_fee_id: number;
         wechat_mp_user_id?: number;
@@ -536,7 +536,7 @@ declare namespace EjyyModel {
         created_at: number;
     }
 
-    interface EjyyPropertyFeeOrderItem {
+    interface IpmsPropertyFeeOrderItem {
         id?: number;
         property_fee_order_id: number;
         building_id: number;
@@ -553,7 +553,7 @@ declare namespace EjyyModel {
         refund_recv_accout?: string;
     }
 
-    interface EjyyPet {
+    interface IpmsPet {
         id?: number;
         community_id: number;
         wechat_mp_user_id: number;
@@ -575,7 +575,7 @@ declare namespace EjyyModel {
         created_at: number;
     }
 
-    interface EjyyPetVaccinate {
+    interface IpmsPetVaccinate {
         id?: number;
         pet_id: number;
         vaccinated_at: number;
@@ -583,7 +583,7 @@ declare namespace EjyyModel {
         created_at: number;
     }
 
-    interface EjyyFitment {
+    interface IpmsFitment {
         id?: number;
         community_id: number;
         wechat_mp_user_id: number;
@@ -608,7 +608,7 @@ declare namespace EjyyModel {
         created_at: number;
     }
 
-    interface EjyyMoveCar {
+    interface IpmsMoveCar {
         id?: number;
         community_id: number;
         wechat_mp_user_id: number;
@@ -628,7 +628,7 @@ declare namespace EjyyModel {
         created_at: number;
     }
 
-    interface EjyyVistor {
+    interface IpmsVistor {
         id?: number;
         community_id: number;
         building_id: number;
@@ -644,13 +644,13 @@ declare namespace EjyyModel {
         created_at: number;
     }
 
-    interface EjyySchedule {
+    interface IpmsSchedule {
         id?: number;
         job: string;
         created_at: number;
     }
 
-    interface EjyyQuestionnaire {
+    interface IpmsQuestionnaire {
         id?: number;
         community_id: number;
         title: string;
@@ -661,40 +661,40 @@ declare namespace EjyyModel {
         created_at: number;
     }
 
-    interface EjyyQuestion {
+    interface IpmsQuestion {
         id?: number;
         questionnaire_id: number;
         title: string;
         type: typeof SIGNLE_CHOICE | typeof MULTIPLE_CHOICE;
     }
 
-    interface EjyyQuestionOption {
+    interface IpmsQuestionOption {
         id?: number;
         question_id: number;
         option_val: string;
     }
 
-    interface EjyyQuestionnaireStatistics {
+    interface IpmsQuestionnaireStatistics {
         id?: number;
         questionnaire_id: number;
         content: string | QuestionnaireStatistics;
     }
 
-    interface EjyyQuestionnaireAnswer {
+    interface IpmsQuestionnaireAnswer {
         id?: number;
         questionnaire_id: number;
         wechat_mp_user_id: number;
         created_at: number;
     }
 
-    interface EjyyQuestionnaireAnswerResult {
+    interface IpmsQuestionnaireAnswerResult {
         id?: number;
         answer_id: number;
         question_id: number;
         option_id: number;
     }
 
-    interface EjyyTopic {
+    interface IpmsTopic {
         id?: number;
         community_id: number;
         banner_img: string;
@@ -705,13 +705,13 @@ declare namespace EjyyModel {
         created_at: number;
     }
 
-    interface EjyySessionStore {
+    interface IpmsSessionStore {
         id?: string;
         expire: number;
         data: string;
     }
 
-    interface EjyyContractCategory {
+    interface IpmsContractCategory {
         id?: number;
         name: string;
         description?: string;
@@ -719,7 +719,7 @@ declare namespace EjyyModel {
         created_at: number;
     }
 
-    interface EjyyContract {
+    interface IpmsContract {
         id?: number;
         community_id: number;
         title: string;
@@ -738,7 +738,7 @@ declare namespace EjyyModel {
         created_at: number;
     }
 
-    interface EjyyContractItem {
+    interface IpmsContractItem {
         id?: number;
         contract_id: number;
         title: string;
@@ -750,7 +750,7 @@ declare namespace EjyyModel {
         created_at: number;
     }
 
-    interface EjyyOwerApply {
+    interface IpmsOwerApply {
         id?: number;
         wechat_mp_user_id: number;
         community_name: string;
@@ -768,14 +768,14 @@ declare namespace EjyyModel {
         created_at: number;
     }
 
-    interface EjyyOwerDetailLog {
+    interface IpmsOwerDetailLog {
         id?: number;
         wechat_mp_user_id: number;
         property_company_user_id: number;
         created_at: number;
     }
 
-    interface EjyyWorkflow {
+    interface IpmsWorkflow {
         id?: number;
         community_id: number;
         type: typeof LEAVE_WORKFLOW | typeof REFOUND_WORKFLOW | typeof PURCHASE_WORKFLOW;
@@ -783,7 +783,7 @@ declare namespace EjyyModel {
         created_at: number;
     }
 
-    interface EjyyWorkflowNode {
+    interface IpmsWorkflowNode {
         id?: number;
         workflow_id: number;
         type:
@@ -812,7 +812,7 @@ declare namespace EjyyModel {
         created_at: number;
     }
 
-    interface EjyyCustomWorkflow {
+    interface IpmsCustomWorkflow {
         created_by: number;
         community_id: number;
         workflow_id: number;
@@ -823,7 +823,7 @@ declare namespace EjyyModel {
         created_at?: number;
     }
 
-    interface EjyyAskForLeave extends EjyyCustomWorkflow {
+    interface IpmsAskForLeave extends IpmsCustomWorkflow {
         id?: number;
         begin_date: number;
         reason: string;
@@ -843,9 +843,9 @@ declare namespace EjyyModel {
         finished_at?: number;
     }
 
-    interface EjyyAskForLeaveFlow extends CustomWorkflowNode {}
+    interface IpmsAskForLeaveFlow extends CustomWorkflowNode {}
 
-    interface EjyyRefound extends EjyyCustomWorkflow {
+    interface IpmsRefound extends IpmsCustomWorkflow {
         id?: number;
         begin_date: number;
         finish_date: number;
@@ -853,9 +853,9 @@ declare namespace EjyyModel {
         total: number;
     }
 
-    interface EjyyRefoundFlow extends CustomWorkflowNode {}
+    interface IpmsRefoundFlow extends CustomWorkflowNode {}
 
-    interface EjyyRefoundItem {
+    interface IpmsRefoundItem {
         id?: number;
         refound_id: number;
         reason: string;
@@ -866,7 +866,7 @@ declare namespace EjyyModel {
         fee: number;
     }
 
-    interface EjyyStorehouse {
+    interface IpmsStorehouse {
         id?: number;
         community_id: number;
         name: string;
@@ -875,7 +875,7 @@ declare namespace EjyyModel {
         created_at: number;
     }
 
-    interface EjyyMaterialCategory {
+    interface IpmsMaterialCategory {
         id?: number;
         name: string;
         description?: string;
@@ -883,7 +883,7 @@ declare namespace EjyyModel {
         created_at: number;
     }
 
-    interface EjyyMaterialSupplier {
+    interface IpmsMaterialSupplier {
         id?: number;
         title: string;
         linkman: string;
@@ -896,7 +896,7 @@ declare namespace EjyyModel {
         created_at: number;
     }
 
-    interface EjyyMaterial {
+    interface IpmsMaterial {
         id?: number;
         community_id: number;
         name: string;
@@ -907,7 +907,7 @@ declare namespace EjyyModel {
         created_at: number;
     }
 
-    interface EjyyMaterialUsed {
+    interface IpmsMaterialUsed {
         id?: number;
         material_id: number;
         total: number;
@@ -917,15 +917,15 @@ declare namespace EjyyModel {
         created_at: number;
     }
 
-    interface EjyyMaterialPurchase extends EjyyCustomWorkflow {
+    interface IpmsMaterialPurchase extends IpmsCustomWorkflow {
         id?: number;
         total: number;
         remark?: string;
     }
 
-    interface EjyyMaterialPurchaseFlow extends CustomWorkflowNode {}
+    interface IpmsMaterialPurchaseFlow extends CustomWorkflowNode {}
 
-    interface EjyyMaterialPurchaseItem {
+    interface IpmsMaterialPurchaseItem {
         id?: number;
         material_id: number;
         origin: typeof MATERIAL_ORIGIN_INIT | typeof MATERIAL_ORIGIN_BUY | typeof MATERIAL_ORIGIN_TRANSFER;
@@ -938,7 +938,7 @@ declare namespace EjyyModel {
         created_at: number;
     }
 
-    interface EjyyMeetingRoom {
+    interface IpmsMeetingRoom {
         id?: number;
         community_id: number;
         name: string;
@@ -950,7 +950,7 @@ declare namespace EjyyModel {
         created_at: number;
     }
 
-    interface EjyyMeeting {
+    interface IpmsMeeting {
         id?: number;
         community_id: number;
         meeting_room_id: number;
@@ -962,13 +962,13 @@ declare namespace EjyyModel {
         created_at: number;
     }
 
-    interface EjyyMeetingParticipant {
+    interface IpmsMeetingParticipant {
         id?: number;
         meeting_id: number;
         user_id: number;
     }
 
-    interface EjyyMissionPoint {
+    interface IpmsMissionPoint {
         id?: number;
         community_id: number;
         category_id: number;
@@ -977,7 +977,7 @@ declare namespace EjyyModel {
         created_at: number;
     }
 
-    interface EjyyMissionCategory {
+    interface IpmsMissionCategory {
         id?: number;
         name: string;
         description?: string;
@@ -985,7 +985,7 @@ declare namespace EjyyModel {
         created_at: number;
     }
 
-    interface EjyyMissionLine {
+    interface IpmsMissionLine {
         id?: number;
         community_id: number;
         name: string;
@@ -995,13 +995,13 @@ declare namespace EjyyModel {
         created_at: number;
     }
 
-    interface EjyyMissionLineNode {
+    interface IpmsMissionLineNode {
         id?: number;
         line_id: number;
         point_id: number;
     }
 
-    interface EjyyMission {
+    interface IpmsMission {
         id?: number;
         community_id: number;
         category_id: number;
@@ -1017,7 +1017,7 @@ declare namespace EjyyModel {
         created_at: number;
     }
 
-    interface EjyyMissionComplete {
+    interface IpmsMissionComplete {
         id?: number;
         mission_id: number;
         point_id?: number;
@@ -1027,7 +1027,7 @@ declare namespace EjyyModel {
         created_at: number;
     }
 
-    interface EjyyMissionCompleteNode {
+    interface IpmsMissionCompleteNode {
         id?: number;
         complete_id: number;
         point_id: number;
@@ -1039,7 +1039,7 @@ declare namespace EjyyModel {
         created_at: number;
     }
 
-    interface EjyyInform {
+    interface IpmsInform {
         id?: number;
         title: string;
         cover_img?: string;
@@ -1053,7 +1053,7 @@ declare namespace EjyyModel {
         created_at: number;
     }
 
-    interface EjyyParty {
+    interface IpmsParty {
         id?: number;
         title: string;
         cover_img?: string;
@@ -1067,7 +1067,7 @@ declare namespace EjyyModel {
         created_at: number;
     }
 
-    interface EjyyEmployeeSignSetting {
+    interface IpmsEmployeeSignSetting {
         id?: number;
         community_id: number;
         lng: number;
@@ -1077,7 +1077,7 @@ declare namespace EjyyModel {
         created_at: number;
     }
 
-    interface EjyyEmployeeSignRecord {
+    interface IpmsEmployeeSignRecord {
         id?: number;
         community_id: number;
         date: number;
@@ -1092,7 +1092,7 @@ declare namespace EjyyModel {
         created_by: number;
     }
 
-    interface EjyyIotEntrance {
+    interface IpmsIotEntrance {
         id?: number;
         community_id: number;
         sign: string;
@@ -1107,7 +1107,7 @@ declare namespace EjyyModel {
         created_at: number;
     }
 
-    interface EjyyIotEntranceLog {
+    interface IpmsIotEntranceLog {
         id?: number;
         wechat_mp_user_id?: number;
         vistor_id?: number;
@@ -1116,7 +1116,7 @@ declare namespace EjyyModel {
         created_at: number;
     }
 
-    interface EjyyIotElevator {
+    interface IpmsIotElevator {
         id?: number;
         community_id: number;
         sign: string;
@@ -1132,7 +1132,7 @@ declare namespace EjyyModel {
         created_at: number;
     }
 
-    interface EjyyIotElevatorLog {
+    interface IpmsIotElevatorLog {
         id?: number;
         wechat_mp_user_id?: number;
         vistor_id?: number;
@@ -1141,7 +1141,7 @@ declare namespace EjyyModel {
         created_at: number;
     }
 
-    interface EjyyIotLamp {
+    interface IpmsIotLamp {
         id?: number;
         community_id: number;
         name: string;
@@ -1155,7 +1155,7 @@ declare namespace EjyyModel {
         created_at: number;
     }
 
-    interface EjyyIotLampLine {
+    interface IpmsIotLampLine {
         id?: number;
         name: string;
         port: number;
@@ -1165,7 +1165,7 @@ declare namespace EjyyModel {
         created_at: number;
     }
 
-    interface EjyyIotLampWorkMode {
+    interface IpmsIotLampWorkMode {
         id?: number;
         lamp_line_id: number;
         start_time: string;
@@ -1175,14 +1175,14 @@ declare namespace EjyyModel {
         created_at: number;
     }
 
-    interface EjyyIotLampLog {
+    interface IpmsIotLampLog {
         id?: number;
         lamp_line_id: number;
         off: typeof TRUE | typeof FALSE;
         created_at: number;
     }
 
-    interface EjyyIotMeterRepeater {
+    interface IpmsIotMeterRepeater {
         id?: number;
         community_id: number;
         name: string;
@@ -1197,7 +1197,7 @@ declare namespace EjyyModel {
         created_at: number;
     }
 
-    interface EjyyIotMeter {
+    interface IpmsIotMeter {
         id?: number;
         community_id: number;
         // 没有就代表公摊
@@ -1217,7 +1217,7 @@ declare namespace EjyyModel {
         created_at: number;
     }
 
-    interface EjyyIotMeterRead {
+    interface IpmsIotMeterRead {
         id?: number;
         community_id: number;
         meter_id: number;
@@ -1228,7 +1228,7 @@ declare namespace EjyyModel {
         created_at: number;
     }
 
-    interface EjyyIotPark {
+    interface IpmsIotPark {
         id?: number;
         community_id: number;
         name: string;
@@ -1242,7 +1242,7 @@ declare namespace EjyyModel {
         created_at: number;
     }
 
-    interface EjyyIotParkBlacklist {
+    interface IpmsIotParkBlacklist {
         id?: number;
         park_id: number;
         car_number: string;
@@ -1250,7 +1250,7 @@ declare namespace EjyyModel {
         created_at: number;
     }
 
-    interface EjyyIotParkLog {
+    interface IpmsIotParkLog {
         id?: number;
         park_id: number;
         car_number: string;
@@ -1259,7 +1259,7 @@ declare namespace EjyyModel {
         created_at: number;
     }
 
-    interface EjyyIotWarning {
+    interface IpmsIotWarning {
         id?: number;
         community_id: number;
         name: string;
@@ -1272,7 +1272,7 @@ declare namespace EjyyModel {
         created_at: number;
     }
 
-    interface EjyyIotWarningLog {
+    interface IpmsIotWarningLog {
         id?: number;
         warning_id: number;
         building_id: number;
@@ -1281,108 +1281,108 @@ declare namespace EjyyModel {
     }
 }
 
-export = EjyyModel;
+export = IpmsModel;
 
 declare module 'knex/types/tables' {
     export interface Tables {
-        ipms_wechat_mp_user: EjyyModel.EjyyWechatMpUser;
-        ipms_wechat_mp_auth: EjyyModel.EjyyWechatMpAuth;
-        ipms_wechat_mp_user_login: EjyyModel.EjyyWechatMpUserLogin;
-        ipms_wechat_official_accounts_user: EjyyModel.EjyyWechatOfficialAccountsUser;
-        ipms_property_company_department: EjyyModel.EjyyPropertyCompanyDepartment;
-        ipms_property_company_job: EjyyModel.EjyyPropertyCompanyJob;
-        ipms_property_company_user: EjyyModel.EjyyPropertyCompanyUser;
-        ipms_property_company_user_join_record: EjyyModel.EjyyPropertyCompanyUserJoinRecord;
-        ipms_property_company_auth: EjyyModel.EjyyPropertyCompanyAuth;
-        ipms_property_company_user_login: EjyyModel.EjyyPropertyCompanyUserLogin;
-        ipms_property_company_user_default_community: EjyyModel.EjyyPropertyCompanyUserDefaultCommunity;
-        ipms_property_company_user_access_community: EjyyModel.EjyyPropertyCompanyUserAccessCommunity;
-        ipms_property_company_access: EjyyModel.EjyyPropertyCompanyAccess;
-        ipms_property_company_building_registered: EjyyModel.EjyyPropertyCompanyBuildingRegistered;
-        ipms_community_info: EjyyModel.EjyyCommunityInfo;
-        ipms_community_setting: EjyyModel.EjyyCommunitySetting;
-        ipms_community_remote_open_door_log: EjyyModel.EjyyCommunityRemoteOpenDoorLog;
-        ipms_building_info: EjyyModel.EjyyBuildingInfo;
-        ipms_user_building: EjyyModel.EjyyUserBuilding;
-        ipms_user_building_operate_log: EjyyModel.EjyyUserBuildingOperateLog;
-        ipms_user_default_community: EjyyModel.EjyyUserDefaultCommunity;
-        ipms_user_car: EjyyModel.EjyyUserCar;
-        ipms_user_car_operate_log: EjyyModel.EjyyUserCarOperateLog;
-        ipms_user_car_sync: EjyyModel.EjyyUserCarSync;
-        ipms_notice_to_user: EjyyModel.EjyyNoticeToUser;
-        ipms_notice_to_user_readed: EjyyModel.EjyyNoticeToUserReaded;
-        ipms_notice_tpl: EjyyModel.EjyyNoticeTpl;
-        ipms_feedback: EjyyModel.EjyyFeedback;
-        ipms_repair: EjyyModel.EjyyRepair;
-        ipms_repair_urge: EjyyModel.EjyyRepairUrge;
-        ipms_complain: EjyyModel.EjyyComplain;
-        ipms_convenient: EjyyModel.EjyyConvenient;
-        ipms_property_fee: EjyyModel.EjyyPropertyFee;
-        ipms_property_fee_order: EjyyModel.EjyyPropertyFeeOrder;
-        ipms_property_fee_order_item: EjyyModel.EjyyPropertyFeeOrderItem;
-        ipms_pet: EjyyModel.EjyyPet;
-        ipms_pet_vaccinate: EjyyModel.EjyyPetVaccinate;
-        ipms_fitment: EjyyModel.EjyyFitment;
-        ipms_move_car: EjyyModel.EjyyMoveCar;
-        ipms_vistor: EjyyModel.EjyyVistor;
-        ipms_schedule: EjyyModel.EjyySchedule;
-        ipms_questionnaire: EjyyModel.EjyyQuestionnaire;
-        ipms_question: EjyyModel.EjyyQuestion;
-        ipms_question_option: EjyyModel.EjyyQuestionOption;
-        ipms_questionnaire_statistics: EjyyModel.EjyyQuestionnaireStatistics;
-        ipms_questionnaire_answer: EjyyModel.EjyyQuestionnaireAnswer;
-        ipms_questionnaire_answer_result: EjyyModel.EjyyQuestionnaireAnswerResult;
-        ipms_topic: EjyyModel.EjyyTopic;
-        ipms_session_store: EjyyModel.EjyySessionStore;
-        ipms_contract_category: EjyyModel.EjyyContractCategory;
-        ipms_contract: EjyyModel.EjyyContract;
-        ipms_contract_item: EjyyModel.EjyyContractItem;
-        ipms_owner_apply: EjyyModel.EjyyOwerApply;
-        ipms_owner_detail_log: EjyyModel.EjyyOwerDetailLog;
-        ipms_workflow: EjyyModel.EjyyWorkflow;
-        ipms_workflow_node: EjyyModel.EjyyWorkflowNode;
-        ipms_ask_for_leave: EjyyModel.EjyyAskForLeave;
-        ipms_ask_for_leave_flow: EjyyModel.EjyyAskForLeaveFlow;
-        ipms_refound: EjyyModel.EjyyRefound;
-        ipms_refound_flow: EjyyModel.EjyyRefoundFlow;
-        ipms_refound_item: EjyyModel.EjyyRefoundItem;
-        ipms_storehouse: EjyyModel.EjyyStorehouse;
-        ipms_material_category: EjyyModel.EjyyMaterialCategory;
-        ipms_material_supplier: EjyyModel.EjyyMaterialSupplier;
-        ipms_material: EjyyModel.EjyyMaterial;
-        ipms_material_used: EjyyModel.EjyyMaterialUsed;
-        ipms_material_purchase: EjyyModel.EjyyMaterialPurchase;
-        ipms_material_purchase_flow: EjyyModel.EjyyMaterialPurchaseFlow;
-        ipms_material_purchase_item: EjyyModel.EjyyMaterialPurchaseItem;
-        ipms_meeting_room: EjyyModel.EjyyMeetingRoom;
-        ipms_meeting: EjyyModel.EjyyMeeting;
-        ipms_meeting_participant: EjyyModel.EjyyMeetingParticipant;
-        ipms_mission_point: EjyyModel.EjyyMissionPoint;
-        ipms_mission_category: EjyyModel.EjyyMissionCategory;
-        ipms_mission_line: EjyyModel.EjyyMissionLine;
-        ipms_mission_line_node: EjyyModel.EjyyMissionLineNode;
-        ipms_mission: EjyyModel.EjyyMission;
-        ipms_mission_complete: EjyyModel.EjyyMissionComplete;
-        ipms_mission_complete_node: EjyyModel.EjyyMissionCompleteNode;
-        ipms_inform: EjyyModel.EjyyInform;
-        ipms_party: EjyyModel.EjyyParty;
-        ipms_employee_sign_setting: EjyyModel.EjyyEmployeeSignSetting;
-        ipms_employee_sign_reocrd: EjyyModel.EjyyEmployeeSignRecord;
-        ipms_iot_elevator: EjyyModel.EjyyIotElevator;
-        ipms_iot_elevator_log: EjyyModel.EjyyIotElevatorLog;
-        ipms_iot_entrance: EjyyModel.EjyyIotEntrance;
-        ipms_iot_entrance_log: EjyyModel.EjyyIotEntranceLog;
-        ipms_iot_lamp: EjyyModel.EjyyIotLamp;
-        ipms_iot_lamp_line: EjyyModel.EjyyIotLampLine;
-        ipms_iot_lamp_work_mode: EjyyModel.EjyyIotLampWorkMode;
-        ipms_iot_lamp_log: EjyyModel.EjyyIotLampLog;
-        ipms_iot_meter_repeater: EjyyModel.EjyyIotMeterRepeater;
-        ipms_iot_meter: EjyyModel.EjyyIotMeter;
-        ipms_iot_meter_read: EjyyModel.EjyyIotMeterRead;
-        ipms_iot_park: EjyyModel.EjyyIotPark;
-        ipms_iot_park_blacklist: EjyyModel.EjyyIotParkBlacklist;
-        ipms_iot_park_log: EjyyModel.EjyyIotParkLog;
-        ipms_iot_warning: EjyyModel.EjyyIotWarning;
-        ipms_iot_warning_log: EjyyModel.EjyyIotWarningLog;
+        ipms_wechat_mp_user: IpmsModel.IpmsWechatMpUser;
+        ipms_wechat_mp_auth: IpmsModel.IpmsWechatMpAuth;
+        ipms_wechat_mp_user_login: IpmsModel.IpmsWechatMpUserLogin;
+        ipms_wechat_official_accounts_user: IpmsModel.IpmsWechatOfficialAccountsUser;
+        ipms_property_company_department: IpmsModel.IpmsPropertyCompanyDepartment;
+        ipms_property_company_job: IpmsModel.IpmsPropertyCompanyJob;
+        ipms_property_company_user: IpmsModel.IpmsPropertyCompanyUser;
+        ipms_property_company_user_join_record: IpmsModel.IpmsPropertyCompanyUserJoinRecord;
+        ipms_property_company_auth: IpmsModel.IpmsPropertyCompanyAuth;
+        ipms_property_company_user_login: IpmsModel.IpmsPropertyCompanyUserLogin;
+        ipms_property_company_user_default_community: IpmsModel.IpmsPropertyCompanyUserDefaultCommunity;
+        ipms_property_company_user_access_community: IpmsModel.IpmsPropertyCompanyUserAccessCommunity;
+        ipms_property_company_access: IpmsModel.IpmsPropertyCompanyAccess;
+        ipms_property_company_building_registered: IpmsModel.IpmsPropertyCompanyBuildingRegistered;
+        ipms_community_info: IpmsModel.IpmsCommunityInfo;
+        ipms_community_setting: IpmsModel.IpmsCommunitySetting;
+        ipms_community_remote_open_door_log: IpmsModel.IpmsCommunityRemoteOpenDoorLog;
+        ipms_building_info: IpmsModel.IpmsBuildingInfo;
+        ipms_user_building: IpmsModel.IpmsUserBuilding;
+        ipms_user_building_operate_log: IpmsModel.IpmsUserBuildingOperateLog;
+        ipms_user_default_community: IpmsModel.IpmsUserDefaultCommunity;
+        ipms_user_car: IpmsModel.IpmsUserCar;
+        ipms_user_car_operate_log: IpmsModel.IpmsUserCarOperateLog;
+        ipms_user_car_sync: IpmsModel.IpmsUserCarSync;
+        ipms_notice_to_user: IpmsModel.IpmsNoticeToUser;
+        ipms_notice_to_user_readed: IpmsModel.IpmsNoticeToUserReaded;
+        ipms_notice_tpl: IpmsModel.IpmsNoticeTpl;
+        ipms_feedback: IpmsModel.IpmsFeedback;
+        ipms_repair: IpmsModel.IpmsRepair;
+        ipms_repair_urge: IpmsModel.IpmsRepairUrge;
+        ipms_complain: IpmsModel.IpmsComplain;
+        ipms_convenient: IpmsModel.IpmsConvenient;
+        ipms_property_fee: IpmsModel.IpmsPropertyFee;
+        ipms_property_fee_order: IpmsModel.IpmsPropertyFeeOrder;
+        ipms_property_fee_order_item: IpmsModel.IpmsPropertyFeeOrderItem;
+        ipms_pet: IpmsModel.IpmsPet;
+        ipms_pet_vaccinate: IpmsModel.IpmsPetVaccinate;
+        ipms_fitment: IpmsModel.IpmsFitment;
+        ipms_move_car: IpmsModel.IpmsMoveCar;
+        ipms_vistor: IpmsModel.IpmsVistor;
+        ipms_schedule: IpmsModel.IpmsSchedule;
+        ipms_questionnaire: IpmsModel.IpmsQuestionnaire;
+        ipms_question: IpmsModel.IpmsQuestion;
+        ipms_question_option: IpmsModel.IpmsQuestionOption;
+        ipms_questionnaire_statistics: IpmsModel.IpmsQuestionnaireStatistics;
+        ipms_questionnaire_answer: IpmsModel.IpmsQuestionnaireAnswer;
+        ipms_questionnaire_answer_result: IpmsModel.IpmsQuestionnaireAnswerResult;
+        ipms_topic: IpmsModel.IpmsTopic;
+        ipms_session_store: IpmsModel.IpmsSessionStore;
+        ipms_contract_category: IpmsModel.IpmsContractCategory;
+        ipms_contract: IpmsModel.IpmsContract;
+        ipms_contract_item: IpmsModel.IpmsContractItem;
+        ipms_owner_apply: IpmsModel.IpmsOwerApply;
+        ipms_owner_detail_log: IpmsModel.IpmsOwerDetailLog;
+        ipms_workflow: IpmsModel.IpmsWorkflow;
+        ipms_workflow_node: IpmsModel.IpmsWorkflowNode;
+        ipms_ask_for_leave: IpmsModel.IpmsAskForLeave;
+        ipms_ask_for_leave_flow: IpmsModel.IpmsAskForLeaveFlow;
+        ipms_refound: IpmsModel.IpmsRefound;
+        ipms_refound_flow: IpmsModel.IpmsRefoundFlow;
+        ipms_refound_item: IpmsModel.IpmsRefoundItem;
+        ipms_storehouse: IpmsModel.IpmsStorehouse;
+        ipms_material_category: IpmsModel.IpmsMaterialCategory;
+        ipms_material_supplier: IpmsModel.IpmsMaterialSupplier;
+        ipms_material: IpmsModel.IpmsMaterial;
+        ipms_material_used: IpmsModel.IpmsMaterialUsed;
+        ipms_material_purchase: IpmsModel.IpmsMaterialPurchase;
+        ipms_material_purchase_flow: IpmsModel.IpmsMaterialPurchaseFlow;
+        ipms_material_purchase_item: IpmsModel.IpmsMaterialPurchaseItem;
+        ipms_meeting_room: IpmsModel.IpmsMeetingRoom;
+        ipms_meeting: IpmsModel.IpmsMeeting;
+        ipms_meeting_participant: IpmsModel.IpmsMeetingParticipant;
+        ipms_mission_point: IpmsModel.IpmsMissionPoint;
+        ipms_mission_category: IpmsModel.IpmsMissionCategory;
+        ipms_mission_line: IpmsModel.IpmsMissionLine;
+        ipms_mission_line_node: IpmsModel.IpmsMissionLineNode;
+        ipms_mission: IpmsModel.IpmsMission;
+        ipms_mission_complete: IpmsModel.IpmsMissionComplete;
+        ipms_mission_complete_node: IpmsModel.IpmsMissionCompleteNode;
+        ipms_inform: IpmsModel.IpmsInform;
+        ipms_party: IpmsModel.IpmsParty;
+        ipms_employee_sign_setting: IpmsModel.IpmsEmployeeSignSetting;
+        ipms_employee_sign_reocrd: IpmsModel.IpmsEmployeeSignRecord;
+        ipms_iot_elevator: IpmsModel.IpmsIotElevator;
+        ipms_iot_elevator_log: IpmsModel.IpmsIotElevatorLog;
+        ipms_iot_entrance: IpmsModel.IpmsIotEntrance;
+        ipms_iot_entrance_log: IpmsModel.IpmsIotEntranceLog;
+        ipms_iot_lamp: IpmsModel.IpmsIotLamp;
+        ipms_iot_lamp_line: IpmsModel.IpmsIotLampLine;
+        ipms_iot_lamp_work_mode: IpmsModel.IpmsIotLampWorkMode;
+        ipms_iot_lamp_log: IpmsModel.IpmsIotLampLog;
+        ipms_iot_meter_repeater: IpmsModel.IpmsIotMeterRepeater;
+        ipms_iot_meter: IpmsModel.IpmsIotMeter;
+        ipms_iot_meter_read: IpmsModel.IpmsIotMeterRead;
+        ipms_iot_park: IpmsModel.IpmsIotPark;
+        ipms_iot_park_blacklist: IpmsModel.IpmsIotParkBlacklist;
+        ipms_iot_park_log: IpmsModel.IpmsIotParkLog;
+        ipms_iot_warning: IpmsModel.IpmsIotWarning;
+        ipms_iot_warning_log: IpmsModel.IpmsIotWarningLog;
     }
 }

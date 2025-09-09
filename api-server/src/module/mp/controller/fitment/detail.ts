@@ -7,13 +7,13 @@
 import { Action } from '~/types/action';
 import { SUCCESS } from '~/constant/code';
 import {
-    EjyyFitment,
-    EjyyCommunityInfo,
-    EjyyBuildingInfo,
-    EjyyCommunitySetting,
-    EjyyPropertyCompanyUser,
-    EjyyPropertyCompanyDepartment,
-    EjyyPropertyCompanyJob
+    IpmsFitment,
+    IpmsCommunityInfo,
+    IpmsBuildingInfo,
+    IpmsCommunitySetting,
+    IpmsPropertyCompanyUser,
+    IpmsPropertyCompanyDepartment,
+    IpmsPropertyCompanyJob
 } from '~/types/model';
 import { PROPERTY_COMPANY_ALLOW_STEP, PROPERTY_COMPANY_CONFIRM_STEP } from '~/constant/fitment';
 
@@ -39,11 +39,11 @@ const MpFitmentDetailAction = <Action>{
     },
     response: async ctx => {
         const { id } = <RequestParams>ctx.params;
-        let agreeInfo = <EjyyPropertyCompanyUser & EjyyPropertyCompanyDepartment & EjyyPropertyCompanyJob>null;
-        let confirmInfo = <EjyyPropertyCompanyUser & EjyyPropertyCompanyDepartment & EjyyPropertyCompanyJob>null;
-        let returnInfo = <EjyyPropertyCompanyUser & EjyyPropertyCompanyDepartment & EjyyPropertyCompanyJob>null;
+        let agreeInfo = <IpmsPropertyCompanyUser & IpmsPropertyCompanyDepartment & IpmsPropertyCompanyJob>null;
+        let confirmInfo = <IpmsPropertyCompanyUser & IpmsPropertyCompanyDepartment & IpmsPropertyCompanyJob>null;
+        let returnInfo = <IpmsPropertyCompanyUser & IpmsPropertyCompanyDepartment & IpmsPropertyCompanyJob>null;
 
-        const detail = <EjyyFitment & EjyyCommunityInfo & EjyyBuildingInfo & EjyyCommunitySetting>await ctx.model
+        const detail = <IpmsFitment & IpmsCommunityInfo & IpmsBuildingInfo & IpmsCommunitySetting>await ctx.model
             .from('ipms_fitment')
             .leftJoin('ipms_community_setting', 'ipms_community_setting.community_id', 'ipms_fitment.community_id')
             .leftJoin('ipms_community_info', 'ipms_community_info.id', 'ipms_fitment.community_id')

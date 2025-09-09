@@ -32,9 +32,10 @@ export class OssStorageService implements IStorageService {
             .digest('base64');
 
         return {
-            mode: 'oss',
+            mode: 'oss' as const,
             baseUrl: customDomain || host,
             expire,
+            uploadStrategy: 'direct' as const,
             policy,
             signature,
             accessid: accessKeyId,

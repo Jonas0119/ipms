@@ -1,0 +1,7 @@
+{
+    "navigationBarTitleText": "文件上传测试",
+    "usingComponents": {
+        "cw-uploader": "../../components/uploader/index",
+        "cw-button": "../../components/button/index"
+    }
+}

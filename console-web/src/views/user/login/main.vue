@@ -1,5 +1,8 @@
-/** * +---------------------------------------------------------------------- * | 开源物业管理系统，敬请使用 *
-+---------------------------------------------------------------------- */
+/**
+ * +----------------------------------------------------------------------
+ * | 开源物业管理系统，敬请使用
+ * +----------------------------------------------------------------------
+ */
 
 <template>
     <section class="login">
@@ -142,10 +145,25 @@ export default {
                 utils.request
                     .post('/user/account_login', { ...this.form })
                     .then(res => {
+                        console.log('🔑 [FRONTEND-LOGIN-DEBUG] Login response received:', res);
+                        console.log('🔑 [FRONTEND-LOGIN-DEBUG] Response code:', res.code);
+                        console.log('🔑 [FRONTEND-LOGIN-DEBUG] Token from response:', res.data?.token);
+                        console.log('🔑 [FRONTEND-LOGIN-DEBUG] UserInfo from response:', res.data?.userInfo ? 'exists' : 'missing');
+                        
                         this.submiting = false;
+                        
+                        console.log('🔑 [FRONTEND-LOGIN-DEBUG] Before saving token...');
                         utils.auth.login(res.data.userInfo.id, res.data.token);
+                        console.log('🔑 [FRONTEND-LOGIN-DEBUG] After saving token, checking localStorage...');
+                        console.log('🔑 [FRONTEND-LOGIN-DEBUG] Token from localStorage:', utils.auth.getToken());
+                        console.log('🔑 [FRONTEND-LOGIN-DEBUG] Is logged in:', utils.auth.isLogin());
+                        
                         this.updateUserInfo(res.data);
-                        this.$router.replace(this.$route.query.redirect ? this.$route.query.redirect : '/');
+                        
+                        const redirectPath = this.$route.query.redirect ? this.$route.query.redirect : '/';
+                        console.log('🔑 [FRONTEND-LOGIN-DEBUG] Redirecting to:', redirectPath);
+                        
+                        this.$router.replace(redirectPath);
                         Message.success('登录成功');
                     })
                     .catch(() => {

@@ -17,19 +17,47 @@ const PcStorageUploadAction = <Action>{
     },
 
     response: async ctx => {
+        const isMiniProgram = ctx.request.header['wechat-mp-request'] === 'true';
+        const requestType = isMiniProgram ? 'MiniProgram' : 'PC';
+        
+        console.log(`[${requestType}] Storage upload request started`);
+        console.log(`[${requestType}] Upload headers:`, {
+            'ipms-pc-token': ctx.request.header['ipms-pc-token'] ? 'provided' : 'missing',
+            'wechat-mp-request': ctx.request.header['wechat-mp-request'] || 'not provided',
+            'content-type': ctx.request.header['content-type'] || 'not provided'
+        });
+        
         try {
+            console.log(`[${requestType}] Getting storage service instance...`);
             const storageService = StorageServiceFactory.getStorageService();
+            console.log(`[${requestType}] Storage service instance obtained`);
 
             // 检查是否支持服务端上传
             if (!storageService.handleFileUpload) {
+                console.warn(`[${requestType}] Current storage mode does not support server upload`);
                 ctx.body = {
                     code: DATA_MODEL_UPDATE_FAIL,
-                    message: '当前存储模式不支持服务端上传'
+                    message: isMiniProgram 
+                        ? '当前存储模式不支持服务端上传，请使用直传方式'
+                        : '当前存储模式不支持服务端上传'
                 };
                 return;
             }
 
+            console.log(`[${requestType}] Starting file upload via storage service`);
+            console.log(`[${requestType}] Upload request details:`, {
+                hasFile: !!ctx.request.files,
+                fileCount: ctx.request.files ? Object.keys(ctx.request.files).length : 0,
+                contentType: ctx.request.header['content-type'],
+                contentLength: ctx.request.header['content-length']
+            });
+            
             const result = await storageService.handleFileUpload(ctx);
+            console.log(`[${requestType}] File upload successful:`, {
+                url: result.url,
+                key: result.key,
+                fileSize: result.size || 'unknown'
+            });
 
             ctx.body = {
                 code: SUCCESS,
@@ -40,10 +68,22 @@ const PcStorageUploadAction = <Action>{
                 }
             };
         } catch (error) {
-            console.error('Storage upload error:', error);
+            console.error(`[${requestType}] Storage upload error:`, error);
+            console.error(`[${requestType}] Error stack:`, error.stack);
+            
+            const errorMessage = isMiniProgram 
+                ? `文件上传失败: ${error.message || '请检查网络连接后重试'}`
+                : error.message || '文件上传失败';
+                
             ctx.body = {
                 code: DATA_MODEL_UPDATE_FAIL,
-                message: error.message || '文件上传失败'
+                message: errorMessage,
+                ...(isMiniProgram && { 
+                    debug: {
+                        error: error.message,
+                        timestamp: new Date().toISOString()
+                    }
+                })
             };
         }
     }

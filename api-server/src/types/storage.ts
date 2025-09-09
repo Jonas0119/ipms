@@ -10,7 +10,8 @@ export interface StorageConfig {
     baseUrl: string;
     expire: number;
 
-    // 本地上传特有
+    // 通用属性
+    uploadStrategy?: 'direct' | 'presigned' | 'server';
     uploadUrl?: string;
 
     // OSS上传特有
@@ -20,7 +21,13 @@ export interface StorageConfig {
     host?: string;
     dir?: string;
 
-    // MinIO上传特有
+    // 直传通用（OSS 和 MinIO）
+    formData?: { [key: string]: any };
+    
+    // MinIO 直传特有
+    postURL?: string;  // MinIO POST URL
+    
+    // MinIO 服务器上传特有
     endpoint?: string;
     accessKey?: string;
     secretKey?: string;
@@ -33,6 +40,7 @@ export interface StorageConfig {
 export interface UploadResult {
     url: string;
     key: string;
+    size?: number;  // 文件大小（可选）
 }
 
 // 统一存储服务接口

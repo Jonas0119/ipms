@@ -8,7 +8,7 @@ import { Action } from '~/types/action';
 import { SUCCESS, QUERY_ILLEFAL, METER_NAME_EXIST } from '~/constant/code';
 import * as ROLE from '~/constant/role_access';
 import { IOT_METER_WATER, IOT_METER_ELECTRICITY, IOT_METER_GAS } from '~/constant/iot';
-import { EjyyBuildingInfo } from '~/types/model';
+import { IpmsBuildingInfo } from '~/types/model';
 
 interface RequestBody {
     id: number;
@@ -128,7 +128,7 @@ const PcEnergyMeterUpdateAction = <Action>{
             });
         }
 
-        let buildingInfo: Pick<EjyyBuildingInfo, 'type' | 'area' | 'building' | 'unit' | 'number'>;
+        let buildingInfo: Pick<IpmsBuildingInfo, 'type' | 'area' | 'building' | 'unit' | 'number'>;
 
         if (building_id) {
             buildingInfo = await ctx.model

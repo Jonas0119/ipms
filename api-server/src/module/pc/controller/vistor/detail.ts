@@ -57,7 +57,6 @@ const PcVistorDetailAction = <Action>{
                 'ipms_vistor.property_company_user_id',
                 'ipms_vistor.wechat_mp_user_id as owner_id',
                 'ipms_wechat_mp_user.real_name as owner_name',
-                'ipms_vistor.uid',
                 'ipms_vistor.expire',
                 'ipms_vistor.used_at',
                 'ipms_vistor.created_at',

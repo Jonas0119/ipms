@@ -1,0 +1,17 @@
+/**
+ * +----------------------------------------------------------------------
+ * | 开源物业管理系统，敬请使用
+ * +----------------------------------------------------------------------
+ */
+
+export const basic = Behavior({
+    methods: {
+        $emit(name, detail, options) {
+            this.triggerEvent(name, detail, options);
+        },
+        set(data) {
+            this.setData(data);
+            return new Promise(resolve => wx.nextTick(resolve));
+        }
+    }
+});

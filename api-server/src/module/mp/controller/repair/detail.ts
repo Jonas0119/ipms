@@ -8,12 +8,12 @@ import { Action } from '~/types/action';
 import { SUCCESS, QUERY_ILLEFAL } from '~/constant/code';
 import { ALLOT_REPAIR_STEP } from '~/constant/repair';
 import {
-    EjyyRepair,
-    EjyyPropertyCompanyUser,
-    EjyyBuildingInfo,
-    EjyyCommunityInfo,
-    EjyyPropertyCompanyDepartment,
-    EjyyPropertyCompanyJob
+    IpmsRepair,
+    IpmsPropertyCompanyUser,
+    IpmsBuildingInfo,
+    IpmsCommunityInfo,
+    IpmsPropertyCompanyDepartment,
+    IpmsPropertyCompanyJob
 } from '~/types/model';
 
 interface RequestParams {
@@ -38,11 +38,11 @@ const MpRepairDetailAction = <Action>{
     },
     response: async ctx => {
         const { id } = <RequestParams>ctx.params;
-        let allotInfo = <EjyyPropertyCompanyUser & EjyyPropertyCompanyDepartment & EjyyPropertyCompanyJob>null;
-        let disposedInfo = <EjyyPropertyCompanyUser & EjyyPropertyCompanyDepartment & EjyyPropertyCompanyJob>null;
-        let mergeDetail = <EjyyRepair & EjyyBuildingInfo & EjyyCommunityInfo>null;
+        let allotInfo = <IpmsPropertyCompanyUser & IpmsPropertyCompanyDepartment & IpmsPropertyCompanyJob>null;
+        let disposedInfo = <IpmsPropertyCompanyUser & IpmsPropertyCompanyDepartment & IpmsPropertyCompanyJob>null;
+        let mergeDetail = <IpmsRepair & IpmsBuildingInfo & IpmsCommunityInfo>null;
 
-        const findDetail = async (repair_id: number): Promise<EjyyRepair & EjyyBuildingInfo & EjyyCommunityInfo> => {
+        const findDetail = async (repair_id: number): Promise<IpmsRepair & IpmsBuildingInfo & IpmsCommunityInfo> => {
             return await ctx.model
                 .from('ipms_repair')
                 .leftJoin('ipms_building_info', 'ipms_building_info.id', 'ipms_repair.building_id')
@@ -92,7 +92,7 @@ const MpRepairDetailAction = <Action>{
             mergeDetail = await findDetail(selfDetail.merge_id);
         }
 
-        const realDetail = <EjyyRepair & EjyyBuildingInfo & EjyyCommunityInfo>(
+        const realDetail = <IpmsRepair & IpmsBuildingInfo & IpmsCommunityInfo>(
             (selfDetail.merge_id ? { ...mergeDetail, merge_id: selfDetail.merge_id } : selfDetail)
         );
 

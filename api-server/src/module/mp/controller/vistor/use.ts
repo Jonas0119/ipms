@@ -39,7 +39,6 @@ const MpVistorUseAction = <Action>{
             .leftJoin('ipms_wechat_mp_user', 'ipms_wechat_mp_user.id', 'ipms_vistor.wechat_mp_user_id')
             .select(
                 'ipms_vistor.id',
-                'ipms_vistor.uid',
                 'ipms_vistor.expire',
                 'ipms_vistor.used_at',
                 'ipms_vistor.created_at',

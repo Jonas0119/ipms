@@ -1,0 +1,11 @@
+<!--
+ +----------------------------------------------------------------------
+ | 开源物业管理系统，敬请使用
+ +----------------------------------------------------------------------
+-->
+<view wx:if="{{ title }}" class="cw-cell-group__title">
+    {{ title }}
+</view>
+<view class="custom-class cw-cell-group {{ border ? 'cw-hairline--top-bottom' : '' }}">
+    <slot />
+</view>

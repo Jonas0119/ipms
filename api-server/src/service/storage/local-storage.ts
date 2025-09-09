@@ -19,9 +19,10 @@ export class LocalStorageService implements IStorageService {
         const expire = Date.now() + 60 * 30 * 1000; // 30分钟有效期
 
         return {
-            mode: 'local',
+            mode: 'local' as const,
             baseUrl: this.getBaseUrl(),
             expire,
+            uploadStrategy: 'server' as const,
             uploadUrl: '/pc/upload/local'
         };
     }

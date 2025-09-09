@@ -9,11 +9,11 @@ import { SUCCESS } from '~/constant/code';
 import config from '~/config';
 import { FALSE, TRUE, BINDING_BUILDING } from '~/constant/status';
 import {
-    EjyyBuildingInfo,
-    EjyyPropertyFee,
-    EjyyCommunityInfo,
-    EjyyPropertyFeeOrder,
-    EjyyPropertyFeeOrderItem
+    IpmsBuildingInfo,
+    IpmsPropertyFee,
+    IpmsCommunityInfo,
+    IpmsPropertyFeeOrder,
+    IpmsPropertyFeeOrderItem
 } from '~/types/model';
 
 interface RequestParams {
@@ -41,7 +41,7 @@ const MpPaymentOrderAction = <Action>{
         const list = [];
 
         // 收费信息
-        const fees = <(EjyyPropertyFee & EjyyCommunityInfo)[]>await ctx.model
+        const fees = <(IpmsPropertyFee & IpmsCommunityInfo)[]>await ctx.model
             .from('ipms_property_fee')
             .leftJoin('ipms_community_info', 'ipms_community_info.id', 'ipms_property_fee.community_id')
             .where('community_id', community_id)
@@ -65,7 +65,7 @@ const MpPaymentOrderAction = <Action>{
 
         for (const fee of fees) {
             // 是否存在未支付的订单
-            const unpayOrder = <(EjyyPropertyFeeOrder & EjyyPropertyFeeOrderItem & EjyyBuildingInfo)[]>await ctx.model
+            const unpayOrder = <(IpmsPropertyFeeOrder & IpmsPropertyFeeOrderItem & IpmsBuildingInfo)[]>await ctx.model
                 .from('ipms_property_fee_order')
                 .leftJoin(
                     'ipms_property_fee_order_item',
@@ -93,7 +93,7 @@ const MpPaymentOrderAction = <Action>{
                     'ipms_property_fee_order_item.fee'
                 );
 
-            const uncreateOrder = <EjyyBuildingInfo[]>await ctx.model
+            const uncreateOrder = <IpmsBuildingInfo[]>await ctx.model
                 .from('ipms_user_building')
                 .leftJoin('ipms_building_info', 'ipms_building_info.id', 'ipms_user_building.building_id')
                 .where('ipms_building_info.community_id', community_id)

@@ -561,3 +561,174 @@ console-web/src/config.js  IP需要修改console-web对应的IP
 2）mysql的IP
 3）redis的IP
 4）
+
+
+# IPMS Docker Compose 部署指南
+
+## 🚀 一键启动所有服务
+
+### 方法一：使用启动脚本（推荐）
+```bash
+./start-services.sh
+```
+
+### 方法二：直接使用 Docker Compose
+```bash
+# 启动所有服务
+docker-compose up -d
+
+# 查看服务状态
+docker-compose ps
+
+# 查看日志
+docker-compose logs -f
+```
+
+## 🛑 停止服务
+
+### 方法一：使用停止脚本
+```bash
+./stop-services.sh
+```
+
+### 方法二：直接使用 Docker Compose
+```bash
+# 停止服务
+docker-compose down
+
+# 停止服务并删除数据卷（完全清理）
+docker-compose down -v
+```
+
+## 📋 服务配置
+
+### 容器 IP 地址分配
+- **MySQL (mysql57)**: `172.17.0.2:3306`
+- **Redis (my-redis)**: `172.17.0.3:6379`
+- **MinIO (minio)**: `172.17.0.4:9000/9001`
+- **API Server (api-server1)**: `172.17.0.5:6688`
+- **Nginx (my-nginx1)**: `172.17.0.6:80`
+
+### 服务访问地址
+- **前端控制台**: http://localhost:8080
+- **API 服务**: http://localhost:6688
+- **MySQL**: localhost:3306
+- **Redis**: localhost:6379
+- **MinIO 控制台**: http://localhost:9001
+
+### 数据库连接信息
+- **用户名**: root
+- **密码**: Tjfae@123
+- **端口**: 3306
+
+### MinIO 连接信息
+- **用户名**: admin
+- **密码**: minioadmin
+- **控制台**: http://localhost:9001
+- **API**: http://localhost:9000
+
+## 🔧 常用命令
+
+### 查看服务状态
+```bash
+docker-compose ps
+```
+
+### 查看服务日志
+```bash
+# 查看所有服务日志
+docker-compose logs -f
+
+# 查看特定服务日志
+docker-compose logs -f api-server1
+docker-compose logs -f mysql57
+```
+
+### 重启服务
+```bash
+# 重启所有服务
+docker-compose restart
+
+# 重启特定服务
+docker-compose restart api-server1
+```
+
+### 进入容器
+```bash
+# 进入 API 服务器容器
+docker exec -it api-server1 /bin/bash
+
+# 进入 MySQL 容器
+docker exec -it mysql57 mysql -u root -p
+
+# 进入 Redis 容器
+docker exec -it my-redis redis-cli
+```
+
+### 清理数据
+```bash
+# 停止并删除所有容器和数据卷
+docker-compose down -v
+
+# 删除所有相关镜像（谨慎使用）
+docker-compose down --rmi all
+```
+
+## 🐛 故障排除
+
+### 1. 端口冲突
+如果遇到端口冲突，可以修改 `docker-compose.yml` 中的端口映射：
+```yaml
+ports:
+  - "8080:80"  # 改为其他端口，如 "8081:80"
+```
+
+### 2. 服务启动失败
+```bash
+# 查看详细日志
+docker-compose logs api-server1
+
+# 检查容器状态
+docker-compose ps
+```
+
+### 3. 数据库连接问题
+确保 MySQL 容器完全启动后再启动 API 服务：
+```bash
+# 等待 MySQL 启动
+docker-compose logs -f mysql57
+
+# 手动重启 API 服务
+docker-compose restart api-server1
+```
+
+### 4. 清理并重新开始
+```bash
+# 完全清理
+docker-compose down -v
+
+# 重新启动
+docker-compose up -d
+```
+
+## 📁 文件结构
+```
+ipms/
+├── docker-compose.yml          # Docker Compose 配置文件
+├── start-services.sh           # 启动脚本
+├── stop-services.sh            # 停止脚本
+├── DOCKER-COMPOSE-README.md    # 本文档
+├── api-server/                 # API 服务代码
+├── console-web/                # 前端控制台代码
+└── ...
+```
+
+## 🔄 更新服务
+当代码更新后，需要重新构建和启动：
+```bash
+# 停止服务
+docker-compose down
+
+# 重新构建并启动
+docker-compose up -d --build
+```

@@ -4,7 +4,7 @@
 /*!40101 SET NAMES utf8mb4 */;
 
 
-CREATE TABLE `ejyy_ask_for_leave` (
+CREATE TABLE `ipms_ask_for_leave` (
   `id` bigint(20) NOT NULL,
   `community_id` bigint(20) NOT NULL,
   `created_by` bigint(20) NOT NULL,
@@ -19,7 +19,7 @@ CREATE TABLE `ejyy_ask_for_leave` (
   `created_at` bigint(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_ask_for_leave_flow` (
+CREATE TABLE `ipms_ask_for_leave_flow` (
   `id` bigint(20) NOT NULL,
   `parent_id` bigint(20) NOT NULL,
   `step` int(11) NOT NULL,
@@ -32,7 +32,7 @@ CREATE TABLE `ejyy_ask_for_leave_flow` (
   `finished_at` bigint(13) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_building_info` (
+CREATE TABLE `ipms_building_info` (
   `id` int(11) NOT NULL,
   `community_id` bigint(20) NOT NULL,
   `type` tinyint(4) NOT NULL COMMENT '1 住宅 ；2 车位； 3仓房; 4 商户；5 车库',
@@ -45,7 +45,7 @@ CREATE TABLE `ejyy_building_info` (
   `created_at` bigint(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_community_info` (
+CREATE TABLE `ipms_community_info` (
   `id` bigint(20) NOT NULL,
   `name` varchar(12) NOT NULL,
   `banner` varchar(128) DEFAULT NULL,
@@ -57,7 +57,7 @@ CREATE TABLE `ejyy_community_info` (
   `created_at` bigint(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_community_remote_open_door_log` (
+CREATE TABLE `ipms_community_remote_open_door_log` (
   `id` bigint(20) NOT NULL,
   `door_id` bigint(20) NOT NULL,
   `community_id` bigint(20) NOT NULL,
@@ -66,7 +66,7 @@ CREATE TABLE `ejyy_community_remote_open_door_log` (
   `created_at` bigint(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_community_setting` (
+CREATE TABLE `ipms_community_setting` (
   `id` bigint(20) NOT NULL,
   `community_id` bigint(20) NOT NULL,
   `access_nfc` tinyint(1) NOT NULL DEFAULT 0,
@@ -77,7 +77,7 @@ CREATE TABLE `ejyy_community_setting` (
   `fitment_pledge` tinyint(1) NOT NULL DEFAULT 0 COMMENT '装修保证金'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_complain` (
+CREATE TABLE `ipms_complain` (
   `id` bigint(20) NOT NULL,
   `community_id` bigint(20) NOT NULL,
   `type` tinyint(1) NOT NULL COMMENT '1 投诉 2建议',
@@ -105,7 +105,7 @@ CREATE TABLE `ejyy_complain` (
   `created_at` bigint(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_contract` (
+CREATE TABLE `ipms_contract` (
   `id` bigint(20) NOT NULL,
   `community_id` bigint(20) NOT NULL,
   `title` varchar(56) NOT NULL,
@@ -124,7 +124,7 @@ CREATE TABLE `ejyy_contract` (
   `created_at` bigint(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_contract_category` (
+CREATE TABLE `ipms_contract_category` (
   `id` bigint(20) NOT NULL,
   `name` varchar(32) NOT NULL,
   `description` varchar(128) DEFAULT NULL,
@@ -132,7 +132,7 @@ CREATE TABLE `ejyy_contract_category` (
   `created_at` bigint(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_contract_item` (
+CREATE TABLE `ipms_contract_item` (
   `id` bigint(20) NOT NULL,
   `contract_id` bigint(20) NOT NULL,
   `title` varchar(56) NOT NULL,
@@ -144,7 +144,7 @@ CREATE TABLE `ejyy_contract_item` (
   `created_at` bigint(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_convenient` (
+CREATE TABLE `ipms_convenient` (
   `id` bigint(20) NOT NULL,
   `community_id` bigint(20) NOT NULL,
   `title` varchar(30) NOT NULL,
@@ -154,7 +154,7 @@ CREATE TABLE `ejyy_convenient` (
   `created_at` bigint(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_employee_sign_record` (
+CREATE TABLE `ipms_employee_sign_record` (
   `id` bigint(20) NOT NULL,
   `community_id` bigint(20) NOT NULL,
   `date` bigint(13) NOT NULL,
@@ -169,7 +169,7 @@ CREATE TABLE `ejyy_employee_sign_record` (
   `created_by` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_employee_sign_setting` (
+CREATE TABLE `ipms_employee_sign_setting` (
   `id` bigint(20) NOT NULL,
   `community_id` bigint(20) NOT NULL,
   `lng` double NOT NULL,
@@ -179,7 +179,7 @@ CREATE TABLE `ejyy_employee_sign_setting` (
   `created_at` bigint(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_epidemic` (
+CREATE TABLE `ipms_epidemic` (
   `id` bigint(20) NOT NULL,
   `wechat_mp_user_id` bigint(20) NOT NULL,
   `community_id` bigint(20) NOT NULL,
@@ -194,7 +194,7 @@ CREATE TABLE `ejyy_epidemic` (
   `created_at` bigint(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_feedback` (
+CREATE TABLE `ipms_feedback` (
   `id` bigint(20) NOT NULL,
   `wechat_mp_user_id` bigint(20) NOT NULL,
   `type` tinyint(1) NOT NULL DEFAULT 1,
@@ -206,7 +206,7 @@ CREATE TABLE `ejyy_feedback` (
   `replyed_at` bigint(13) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_fitment` (
+CREATE TABLE `ipms_fitment` (
   `id` bigint(20) NOT NULL,
   `community_id` bigint(20) NOT NULL,
   `building_id` bigint(20) NOT NULL,
@@ -227,7 +227,7 @@ CREATE TABLE `ejyy_fitment` (
   `created_at` bigint(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_inform` (
+CREATE TABLE `ipms_inform` (
   `id` bigint(20) NOT NULL,
   `title` varchar(56) NOT NULL,
   `cover_img` varchar(128) DEFAULT NULL,
@@ -241,7 +241,7 @@ CREATE TABLE `ejyy_inform` (
   `created_at` bigint(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_iot_elevator` (
+CREATE TABLE `ipms_iot_elevator` (
   `id` bigint(20) NOT NULL,
   `community_id` bigint(20) NOT NULL,
   `sign` varchar(32) NOT NULL,
@@ -257,7 +257,7 @@ CREATE TABLE `ejyy_iot_elevator` (
   `created_at` bigint(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_iot_elevator_log` (
+CREATE TABLE `ipms_iot_elevator_log` (
   `id` bigint(20) NOT NULL,
   `wechat_mp_user_id` bigint(20) DEFAULT NULL,
   `vistor_id` bigint(20) DEFAULT NULL,
@@ -266,7 +266,7 @@ CREATE TABLE `ejyy_iot_elevator_log` (
   `created_at` bigint(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_iot_entrance` (
+CREATE TABLE `ipms_iot_entrance` (
   `id` bigint(20) NOT NULL,
   `community_id` bigint(20) NOT NULL,
   `sign` varchar(32) NOT NULL,
@@ -281,7 +281,7 @@ CREATE TABLE `ejyy_iot_entrance` (
   `created_at` bigint(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_iot_entrance_log` (
+CREATE TABLE `ipms_iot_entrance_log` (
   `id` bigint(20) NOT NULL,
   `wechat_mp_user_id` bigint(20) DEFAULT NULL,
   `vistor_id` bigint(20) DEFAULT NULL,
@@ -290,7 +290,7 @@ CREATE TABLE `ejyy_iot_entrance_log` (
   `created_at` bigint(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_iot_lamp` (
+CREATE TABLE `ipms_iot_lamp` (
   `id` bigint(20) NOT NULL,
   `community_id` bigint(20) NOT NULL,
   `name` varchar(56) NOT NULL,
@@ -304,7 +304,7 @@ CREATE TABLE `ejyy_iot_lamp` (
   `created_at` bigint(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_iot_lamp_line` (
+CREATE TABLE `ipms_iot_lamp_line` (
   `id` bigint(20) NOT NULL,
   `name` varchar(56) NOT NULL,
   `port` int(11) NOT NULL,
@@ -314,14 +314,14 @@ CREATE TABLE `ejyy_iot_lamp_line` (
   `created_at` bigint(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_iot_lamp_log` (
+CREATE TABLE `ipms_iot_lamp_log` (
   `id` bigint(20) NOT NULL,
   `lamp_line_id` bigint(20) NOT NULL,
   `off` tinyint(1) DEFAULT 0,
   `created_at` bigint(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_iot_lamp_work_mode` (
+CREATE TABLE `ipms_iot_lamp_work_mode` (
   `id` bigint(20) NOT NULL,
   `lamp_line_id` bigint(20) NOT NULL,
   `start_time` varchar(12) NOT NULL,
@@ -331,7 +331,7 @@ CREATE TABLE `ejyy_iot_lamp_work_mode` (
   `created_at` bigint(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_iot_meter` (
+CREATE TABLE `ipms_iot_meter` (
   `id` bigint(20) NOT NULL,
   `community_id` bigint(20) NOT NULL,
   `building_id` bigint(20) DEFAULT NULL COMMENT '空代表公摊表',
@@ -350,7 +350,7 @@ CREATE TABLE `ejyy_iot_meter` (
   `created_at` bigint(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_iot_meter_read` (
+CREATE TABLE `ipms_iot_meter_read` (
   `id` bigint(20) NOT NULL,
   `meter_id` bigint(20) NOT NULL,
   `from_repeater` tinyint(1) DEFAULT 0,
@@ -360,7 +360,7 @@ CREATE TABLE `ejyy_iot_meter_read` (
   `created_at` bigint(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_iot_meter_repeater` (
+CREATE TABLE `ipms_iot_meter_repeater` (
   `id` bigint(20) NOT NULL,
   `community_id` bigint(20) NOT NULL,
   `name` varchar(56) NOT NULL,
@@ -375,7 +375,7 @@ CREATE TABLE `ejyy_iot_meter_repeater` (
   `created_at` bigint(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_iot_park` (
+CREATE TABLE `ipms_iot_park` (
   `id` bigint(20) NOT NULL,
   `community_id` bigint(20) NOT NULL,
   `name` varchar(32) NOT NULL,
@@ -389,7 +389,7 @@ CREATE TABLE `ejyy_iot_park` (
   `created_at` bigint(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_iot_park_blacklist` (
+CREATE TABLE `ipms_iot_park_blacklist` (
   `id` bigint(20) NOT NULL,
   `park_id` bigint(20) NOT NULL,
   `car_number` varchar(9) NOT NULL,
@@ -397,7 +397,7 @@ CREATE TABLE `ejyy_iot_park_blacklist` (
   `created_at` bigint(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_iot_park_log` (
+CREATE TABLE `ipms_iot_park_log` (
   `id` int(11) NOT NULL,
   `park_id` int(11) NOT NULL,
   `car_number` varchar(8) NOT NULL,
@@ -406,7 +406,7 @@ CREATE TABLE `ejyy_iot_park_log` (
   `created_at` bigint(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_iot_warning` (
+CREATE TABLE `ipms_iot_warning` (
   `id` bigint(20) NOT NULL,
   `community_id` bigint(20) NOT NULL,
   `name` varchar(56) NOT NULL,
@@ -419,7 +419,7 @@ CREATE TABLE `ejyy_iot_warning` (
   `created_at` bigint(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_iot_warning_log` (
+CREATE TABLE `ipms_iot_warning_log` (
   `id` bigint(20) NOT NULL,
   `warning_id` bigint(20) NOT NULL,
   `building_id` bigint(20) NOT NULL,
@@ -427,7 +427,7 @@ CREATE TABLE `ejyy_iot_warning_log` (
   `created_at` bigint(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_material` (
+CREATE TABLE `ipms_material` (
   `id` bigint(20) NOT NULL,
   `community_id` bigint(20) NOT NULL,
   `name` varchar(56) NOT NULL,
@@ -438,7 +438,7 @@ CREATE TABLE `ejyy_material` (
   `created_at` bigint(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_material_category` (
+CREATE TABLE `ipms_material_category` (
   `id` bigint(20) NOT NULL,
   `name` varchar(56) NOT NULL,
   `description` varchar(128) DEFAULT NULL,
@@ -446,7 +446,7 @@ CREATE TABLE `ejyy_material_category` (
   `created_at` bigint(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_material_purchase` (
+CREATE TABLE `ipms_material_purchase` (
   `id` bigint(20) NOT NULL,
   `community_id` bigint(20) NOT NULL,
   `created_by` bigint(20) NOT NULL,
@@ -460,7 +460,7 @@ CREATE TABLE `ejyy_material_purchase` (
   `created_at` bigint(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_material_purchase_flow` (
+CREATE TABLE `ipms_material_purchase_flow` (
   `id` bigint(20) NOT NULL,
   `parent_id` bigint(20) NOT NULL,
   `step` int(11) NOT NULL,
@@ -473,7 +473,7 @@ CREATE TABLE `ejyy_material_purchase_flow` (
   `finished_at` bigint(13) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_material_purchase_item` (
+CREATE TABLE `ipms_material_purchase_item` (
   `id` bigint(20) NOT NULL,
   `material_id` bigint(20) NOT NULL,
   `total` bigint(20) NOT NULL,
@@ -486,7 +486,7 @@ CREATE TABLE `ejyy_material_purchase_item` (
   `created_at` bigint(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_material_supplier` (
+CREATE TABLE `ipms_material_supplier` (
   `id` bigint(20) NOT NULL,
   `title` varchar(128) NOT NULL,
   `linkman` varchar(12) NOT NULL,
@@ -499,7 +499,7 @@ CREATE TABLE `ejyy_material_supplier` (
   `created_at` bigint(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_material_used` (
+CREATE TABLE `ipms_material_used` (
   `id` bigint(20) NOT NULL,
   `material_id` bigint(20) NOT NULL,
   `total` bigint(20) NOT NULL,
@@ -509,7 +509,7 @@ CREATE TABLE `ejyy_material_used` (
   `created_at` bigint(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_meeting` (
+CREATE TABLE `ipms_meeting` (
   `id` bigint(20) NOT NULL,
   `community_id` bigint(20) NOT NULL,
   `meeting_room_id` bigint(20) NOT NULL,
@@ -521,13 +521,13 @@ CREATE TABLE `ejyy_meeting` (
   `created_at` bigint(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_meeting_participant` (
+CREATE TABLE `ipms_meeting_participant` (
   `id` bigint(20) NOT NULL,
   `meeting_id` bigint(20) NOT NULL,
   `user_id` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_meeting_room` (
+CREATE TABLE `ipms_meeting_room` (
   `id` bigint(20) NOT NULL,
   `community_id` bigint(20) NOT NULL,
   `name` varchar(56) NOT NULL,
@@ -539,7 +539,7 @@ CREATE TABLE `ejyy_meeting_room` (
   `created_at` bigint(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_mission` (
+CREATE TABLE `ipms_mission` (
   `id` bigint(20) NOT NULL,
   `community_id` bigint(20) NOT NULL,
   `category_id` bigint(20) NOT NULL,
@@ -555,7 +555,7 @@ CREATE TABLE `ejyy_mission` (
   `created_at` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_mission_category` (
+CREATE TABLE `ipms_mission_category` (
   `id` bigint(20) NOT NULL,
   `name` varchar(56) NOT NULL,
   `description` varchar(128) DEFAULT NULL,
@@ -563,7 +563,7 @@ CREATE TABLE `ejyy_mission_category` (
   `created_at` bigint(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_mission_complete` (
+CREATE TABLE `ipms_mission_complete` (
   `id` bigint(20) NOT NULL,
   `mission_id` bigint(20) NOT NULL,
   `point_id` bigint(20) DEFAULT NULL,
@@ -573,7 +573,7 @@ CREATE TABLE `ejyy_mission_complete` (
   `created_at` bigint(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_mission_complete_node` (
+CREATE TABLE `ipms_mission_complete_node` (
   `id` bigint(20) NOT NULL,
   `complete_id` bigint(20) NOT NULL,
   `point_id` bigint(20) NOT NULL,
@@ -585,7 +585,7 @@ CREATE TABLE `ejyy_mission_complete_node` (
   `created_at` bigint(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_mission_line` (
+CREATE TABLE `ipms_mission_line` (
   `id` bigint(20) NOT NULL,
   `community_id` bigint(20) NOT NULL,
   `name` varchar(56) NOT NULL,
@@ -595,13 +595,13 @@ CREATE TABLE `ejyy_mission_line` (
   `created_at` bigint(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_mission_line_node` (
+CREATE TABLE `ipms_mission_line_node` (
   `id` bigint(20) NOT NULL,
   `line_id` bigint(20) NOT NULL,
   `point_id` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_mission_point` (
+CREATE TABLE `ipms_mission_point` (
   `id` bigint(20) NOT NULL,
   `community_id` bigint(20) NOT NULL,
   `category_id` bigint(20) NOT NULL,
@@ -610,7 +610,7 @@ CREATE TABLE `ejyy_mission_point` (
   `created_at` bigint(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_move_car` (
+CREATE TABLE `ipms_move_car` (
   `id` bigint(20) NOT NULL,
   `community_id` bigint(20) NOT NULL,
   `wechat_mp_user_id` bigint(20) NOT NULL,
@@ -625,7 +625,7 @@ CREATE TABLE `ejyy_move_car` (
   `created_at` bigint(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_notice_to_user` (
+CREATE TABLE `ipms_notice_to_user` (
   `id` bigint(20) NOT NULL,
   `title` varchar(56) NOT NULL,
   `overview` varchar(128) NOT NULL,
@@ -640,20 +640,20 @@ CREATE TABLE `ejyy_notice_to_user` (
   `created_at` bigint(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_notice_to_user_readed` (
+CREATE TABLE `ipms_notice_to_user_readed` (
   `id` bigint(20) NOT NULL,
   `notice_id` bigint(20) NOT NULL,
   `wechat_mp_user_id` bigint(20) NOT NULL,
   `created_at` bigint(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_notice_tpl` (
+CREATE TABLE `ipms_notice_tpl` (
   `id` bigint(20) NOT NULL,
   `tpl` varchar(56) NOT NULL,
   `content` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`content`))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_owner_apply` (
+CREATE TABLE `ipms_owner_apply` (
   `id` bigint(20) NOT NULL,
   `wechat_mp_user_id` bigint(20) NOT NULL,
   `community_name` varchar(56) NOT NULL,
@@ -671,14 +671,14 @@ CREATE TABLE `ejyy_owner_apply` (
   `created_at` bigint(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_owner_detail_log` (
+CREATE TABLE `ipms_owner_detail_log` (
   `id` bigint(20) NOT NULL,
   `wechat_mp_user_id` bigint(20) NOT NULL,
   `property_company_user_id` bigint(20) NOT NULL,
   `created_at` bigint(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_party` (
+CREATE TABLE `ipms_party` (
   `id` bigint(20) NOT NULL,
   `title` varchar(56) NOT NULL,
   `cover_img` varchar(128) DEFAULT NULL,
@@ -692,7 +692,7 @@ CREATE TABLE `ejyy_party` (
   `created_at` bigint(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_pet` (
+CREATE TABLE `ipms_pet` (
   `id` bigint(20) NOT NULL,
   `wechat_mp_user_id` bigint(20) NOT NULL,
   `community_id` bigint(20) NOT NULL,
@@ -710,7 +710,7 @@ CREATE TABLE `ejyy_pet` (
   `created_at` bigint(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_pet_vaccinate` (
+CREATE TABLE `ipms_pet_vaccinate` (
   `id` bigint(20) NOT NULL,
   `pet_id` bigint(20) NOT NULL,
   `vaccinated_at` bigint(13) NOT NULL,
@@ -718,19 +718,19 @@ CREATE TABLE `ejyy_pet_vaccinate` (
   `created_at` bigint(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_property_company_access` (
+CREATE TABLE `ipms_property_company_access` (
   `id` bigint(20) NOT NULL,
   `name` varchar(56) NOT NULL,
   `content` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`content`))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_property_company_auth` (
+CREATE TABLE `ipms_property_company_auth` (
   `id` bigint(20) NOT NULL,
   `property_company_user_id` bigint(20) NOT NULL,
   `token` varchar(32) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_property_company_building_registered` (
+CREATE TABLE `ipms_property_company_building_registered` (
   `id` bigint(20) NOT NULL,
   `building_id` bigint(20) NOT NULL,
   `name` varchar(12) NOT NULL,
@@ -741,18 +741,18 @@ CREATE TABLE `ejyy_property_company_building_registered` (
   `created_at` bigint(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_property_company_department` (
+CREATE TABLE `ipms_property_company_department` (
   `id` bigint(20) NOT NULL,
   `name` varchar(12) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_property_company_job` (
+CREATE TABLE `ipms_property_company_job` (
   `id` bigint(20) NOT NULL,
   `parent_id` bigint(20) DEFAULT NULL,
   `name` varchar(12) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_property_company_user` (
+CREATE TABLE `ipms_property_company_user` (
   `id` int(11) NOT NULL,
   `account` varchar(32) DEFAULT NULL,
   `password` varchar(32) DEFAULT NULL,
@@ -773,19 +773,19 @@ CREATE TABLE `ejyy_property_company_user` (
   `created_at` bigint(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_property_company_user_access_community` (
+CREATE TABLE `ipms_property_company_user_access_community` (
   `id` bigint(20) NOT NULL,
   `property_company_user_id` bigint(20) NOT NULL,
   `community_id` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_property_company_user_default_community` (
+CREATE TABLE `ipms_property_company_user_default_community` (
   `id` bigint(20) NOT NULL,
   `property_company_user_id` bigint(20) NOT NULL,
   `community_id` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_property_company_user_join_record` (
+CREATE TABLE `ipms_property_company_user_join_record` (
   `id` bigint(20) NOT NULL,
   `property_company_user_id` bigint(20) NOT NULL,
   `status` tinyint(1) NOT NULL,
@@ -793,7 +793,7 @@ CREATE TABLE `ejyy_property_company_user_join_record` (
   `created_at` bigint(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_property_company_user_login` (
+CREATE TABLE `ipms_property_company_user_login` (
   `id` int(11) NOT NULL,
   `property_company_user_id` bigint(20) NOT NULL,
   `ip` varchar(64) NOT NULL,
@@ -801,7 +801,7 @@ CREATE TABLE `ejyy_property_company_user_login` (
   `login_at` bigint(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_property_fee` (
+CREATE TABLE `ipms_property_fee` (
   `id` bigint(20) NOT NULL,
   `start_year` int(4) NOT NULL,
   `end_year` int(4) NOT NULL,
@@ -822,7 +822,7 @@ CREATE TABLE `ejyy_property_fee` (
   `created_at` bigint(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_property_fee_order` (
+CREATE TABLE `ipms_property_fee_order` (
   `id` bigint(20) NOT NULL,
   `property_fee_id` bigint(20) NOT NULL,
   `wechat_mp_user_id` bigint(20) DEFAULT NULL,
@@ -840,7 +840,7 @@ CREATE TABLE `ejyy_property_fee_order` (
   `created_at` bigint(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_property_fee_order_item` (
+CREATE TABLE `ipms_property_fee_order_item` (
   `id` bigint(20) NOT NULL,
   `property_fee_order_id` bigint(20) NOT NULL,
   `building_id` bigint(20) NOT NULL,
@@ -857,14 +857,14 @@ CREATE TABLE `ejyy_property_fee_order_item` (
   `refund_recv_accout` varchar(64) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_question` (
+CREATE TABLE `ipms_question` (
   `id` bigint(20) NOT NULL,
   `questionnaire_id` bigint(20) NOT NULL,
   `title` varchar(128) NOT NULL,
   `type` tinyint(1) NOT NULL COMMENT '1 单选 2 多选'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_questionnaire` (
+CREATE TABLE `ipms_questionnaire` (
   `id` bigint(20) NOT NULL,
   `community_id` bigint(20) NOT NULL,
   `title` varchar(56) NOT NULL,
@@ -875,33 +875,33 @@ CREATE TABLE `ejyy_questionnaire` (
   `created_at` bigint(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_questionnaire_answer` (
+CREATE TABLE `ipms_questionnaire_answer` (
   `id` bigint(20) NOT NULL,
   `questionnaire_id` bigint(20) NOT NULL,
   `wechat_mp_user_id` bigint(20) NOT NULL,
   `created_at` bigint(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_questionnaire_answer_result` (
+CREATE TABLE `ipms_questionnaire_answer_result` (
   `id` bigint(20) NOT NULL,
   `answer_id` bigint(20) NOT NULL,
   `question_id` bigint(20) NOT NULL,
   `option_id` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_questionnaire_statistics` (
+CREATE TABLE `ipms_questionnaire_statistics` (
   `id` bigint(20) NOT NULL,
   `questionnaire_id` bigint(20) NOT NULL,
   `content` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`content`))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_question_option` (
+CREATE TABLE `ipms_question_option` (
   `id` bigint(20) NOT NULL,
   `question_id` bigint(20) NOT NULL,
   `option_val` varchar(128) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_refound` (
+CREATE TABLE `ipms_refound` (
   `id` bigint(20) NOT NULL,
   `community_id` bigint(20) NOT NULL,
   `created_by` bigint(20) NOT NULL,
@@ -917,7 +917,7 @@ CREATE TABLE `ejyy_refound` (
   `created_at` bigint(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_refound_flow` (
+CREATE TABLE `ipms_refound_flow` (
   `id` bigint(20) NOT NULL,
   `parent_id` bigint(20) NOT NULL,
   `step` int(11) NOT NULL,
@@ -930,7 +930,7 @@ CREATE TABLE `ejyy_refound_flow` (
   `finished_at` bigint(13) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_refound_item` (
+CREATE TABLE `ipms_refound_item` (
   `id` bigint(20) NOT NULL,
   `refound_id` bigint(20) NOT NULL,
   `reason` varchar(56) NOT NULL,
@@ -941,7 +941,7 @@ CREATE TABLE `ejyy_refound_item` (
   `fee` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_repair` (
+CREATE TABLE `ipms_repair` (
   `id` bigint(20) NOT NULL,
   `wechat_mp_user_id` bigint(20) DEFAULT NULL,
   `property_company_user_id` bigint(20) DEFAULT NULL,
@@ -969,7 +969,7 @@ CREATE TABLE `ejyy_repair` (
   `created_at` bigint(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_repair_urge` (
+CREATE TABLE `ipms_repair_urge` (
   `id` bigint(20) NOT NULL,
   `repair_id` bigint(20) NOT NULL,
   `step` tinyint(1) NOT NULL,
@@ -977,19 +977,19 @@ CREATE TABLE `ejyy_repair_urge` (
   `created_at` bigint(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_schedule` (
+CREATE TABLE `ipms_schedule` (
   `id` bigint(20) NOT NULL,
   `job` varchar(17) NOT NULL,
   `created_at` bigint(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_session_store` (
+CREATE TABLE `ipms_session_store` (
   `id` varchar(255) NOT NULL,
   `expire` bigint(20) DEFAULT NULL,
   `data` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_storehouse` (
+CREATE TABLE `ipms_storehouse` (
   `id` bigint(20) NOT NULL,
   `community_id` bigint(20) NOT NULL,
   `name` varchar(16) NOT NULL,
@@ -998,7 +998,7 @@ CREATE TABLE `ejyy_storehouse` (
   `created_at` bigint(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_topic` (
+CREATE TABLE `ipms_topic` (
   `id` bigint(20) NOT NULL,
   `community_id` bigint(20) NOT NULL,
   `banner_img` varchar(128) NOT NULL,
@@ -1009,7 +1009,7 @@ CREATE TABLE `ejyy_topic` (
   `created_at` bigint(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_user_building` (
+CREATE TABLE `ipms_user_building` (
   `id` bigint(20) NOT NULL,
   `building_id` bigint(20) NOT NULL,
   `wechat_mp_user_id` bigint(20) NOT NULL,
@@ -1020,7 +1020,7 @@ CREATE TABLE `ejyy_user_building` (
   `created_at` bigint(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_user_building_operate_log` (
+CREATE TABLE `ipms_user_building_operate_log` (
   `id` bigint(20) NOT NULL,
   `user_building_id` bigint(20) NOT NULL,
   `wechat_mp_user_id` bigint(20) DEFAULT NULL,
@@ -1030,7 +1030,7 @@ CREATE TABLE `ejyy_user_building_operate_log` (
   `created_at` bigint(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_user_car` (
+CREATE TABLE `ipms_user_car` (
   `id` bigint(20) NOT NULL,
   `wechat_mp_user_id` bigint(20) NOT NULL,
   `building_id` bigint(20) NOT NULL,
@@ -1042,7 +1042,7 @@ CREATE TABLE `ejyy_user_car` (
   `created_at` bigint(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_user_car_operate_log` (
+CREATE TABLE `ipms_user_car_operate_log` (
   `id` bigint(20) NOT NULL,
   `user_car_id` bigint(20) NOT NULL,
   `wechat_mp_user_id` bigint(20) DEFAULT NULL,
@@ -1052,26 +1052,26 @@ CREATE TABLE `ejyy_user_car_operate_log` (
   `created_at` bigint(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_user_car_sync` (
+CREATE TABLE `ipms_user_car_sync` (
   `id` bigint(20) NOT NULL,
   `user_car_id` bigint(20) NOT NULL,
   `is_remove` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_user_default_community` (
+CREATE TABLE `ipms_user_default_community` (
   `id` bigint(20) NOT NULL,
   `wechat_mp_user_id` bigint(20) NOT NULL,
   `community_id` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_virus` (
+CREATE TABLE `ipms_virus` (
   `id` bigint(20) NOT NULL,
   `content` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
   `success` tinyint(1) NOT NULL DEFAULT 1,
   `created_at` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_vistor` (
+CREATE TABLE `ipms_vistor` (
   `id` bigint(20) NOT NULL,
   `community_id` bigint(20) NOT NULL,
   `building_id` bigint(20) NOT NULL,
@@ -1087,13 +1087,13 @@ CREATE TABLE `ejyy_vistor` (
   `created_at` bigint(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_wechat_mp_auth` (
+CREATE TABLE `ipms_wechat_mp_auth` (
   `id` bigint(20) NOT NULL,
   `wechat_mp_user_id` bigint(20) NOT NULL,
   `token` varchar(32) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_wechat_mp_user` (
+CREATE TABLE `ipms_wechat_mp_user` (
   `id` bigint(20) NOT NULL,
   `open_id` varchar(28) NOT NULL,
   `union_id` varchar(28) NOT NULL,
@@ -1108,7 +1108,7 @@ CREATE TABLE `ejyy_wechat_mp_user` (
   `created_at` bigint(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_wechat_mp_user_login` (
+CREATE TABLE `ipms_wechat_mp_user_login` (
   `id` int(11) NOT NULL,
   `wechat_mp_user_id` bigint(20) NOT NULL,
   `ip` varchar(64) NOT NULL,
@@ -1119,7 +1119,7 @@ CREATE TABLE `ejyy_wechat_mp_user_login` (
   `login_at` bigint(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_wechat_official_accounts_user` (
+CREATE TABLE `ipms_wechat_official_accounts_user` (
   `id` bigint(20) NOT NULL,
   `union_id` varchar(56) NOT NULL,
   `open_id` varchar(56) NOT NULL,
@@ -1127,7 +1127,7 @@ CREATE TABLE `ejyy_wechat_official_accounts_user` (
   `created_at` bigint(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_workflow` (
+CREATE TABLE `ipms_workflow` (
   `id` bigint(20) NOT NULL,
   `community_id` bigint(20) NOT NULL,
   `type` tinyint(4) NOT NULL,
@@ -1135,7 +1135,7 @@ CREATE TABLE `ejyy_workflow` (
   `created_at` bigint(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `ejyy_workflow_node` (
+CREATE TABLE `ipms_workflow_node` (
   `id` bigint(20) NOT NULL,
   `workflow_id` bigint(20) NOT NULL,
   `type` tinyint(4) NOT NULL,
@@ -1154,34 +1154,34 @@ CREATE TABLE `ejyy_workflow_node` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-ALTER TABLE `ejyy_ask_for_leave`
+ALTER TABLE `ipms_ask_for_leave`
   ADD PRIMARY KEY (`id`),
   ADD KEY `community_id` (`community_id`),
   ADD KEY `created_by` (`created_by`);
 
-ALTER TABLE `ejyy_ask_for_leave_flow`
+ALTER TABLE `ipms_ask_for_leave_flow`
   ADD PRIMARY KEY (`id`),
   ADD KEY `parent_id` (`parent_id`),
   ADD KEY `step` (`step`);
 
-ALTER TABLE `ejyy_building_info`
+ALTER TABLE `ipms_building_info`
   ADD PRIMARY KEY (`id`),
   ADD KEY `community_id` (`community_id`);
 
-ALTER TABLE `ejyy_community_info`
+ALTER TABLE `ipms_community_info`
   ADD PRIMARY KEY (`id`);
 
-ALTER TABLE `ejyy_community_remote_open_door_log`
+ALTER TABLE `ipms_community_remote_open_door_log`
   ADD PRIMARY KEY (`id`),
   ADD KEY `door_id` (`door_id`),
   ADD KEY `community_id` (`community_id`),
   ADD KEY `wechat_mp_user_id` (`wechat_mp_user_id`);
 
-ALTER TABLE `ejyy_community_setting`
+ALTER TABLE `ipms_community_setting`
   ADD PRIMARY KEY (`id`),
   ADD KEY `community_id` (`community_id`);
 
-ALTER TABLE `ejyy_complain`
+ALTER TABLE `ipms_complain`
   ADD PRIMARY KEY (`id`),
   ADD KEY `type` (`type`),
   ADD KEY `wechat_mp_user_id` (`wechat_mp_user_id`),
@@ -1191,320 +1191,320 @@ ALTER TABLE `ejyy_complain`
   ADD KEY `allot_user_id` (`allot_user_id`),
   ADD KEY `merge_id` (`merge_id`);
 
-ALTER TABLE `ejyy_contract`
+ALTER TABLE `ipms_contract`
   ADD PRIMARY KEY (`id`),
   ADD KEY `community_id` (`community_id`),
   ADD KEY `category_id` (`category_id`);
 
-ALTER TABLE `ejyy_contract_category`
+ALTER TABLE `ipms_contract_category`
   ADD PRIMARY KEY (`id`);
 
-ALTER TABLE `ejyy_contract_item`
+ALTER TABLE `ipms_contract_item`
   ADD PRIMARY KEY (`id`),
   ADD KEY `contract_id` (`contract_id`);
 
-ALTER TABLE `ejyy_convenient`
+ALTER TABLE `ipms_convenient`
   ADD PRIMARY KEY (`id`),
   ADD KEY `community_id` (`community_id`);
 
-ALTER TABLE `ejyy_employee_sign_record`
+ALTER TABLE `ipms_employee_sign_record`
   ADD PRIMARY KEY (`id`),
   ADD KEY `community_id` (`community_id`);
 
-ALTER TABLE `ejyy_employee_sign_setting`
+ALTER TABLE `ipms_employee_sign_setting`
   ADD PRIMARY KEY (`id`),
   ADD KEY `community_id` (`community_id`);
 
-ALTER TABLE `ejyy_epidemic`
+ALTER TABLE `ipms_epidemic`
   ADD PRIMARY KEY (`id`),
   ADD KEY `wechat_mp_user_id` (`wechat_mp_user_id`),
   ADD KEY `community_id` (`community_id`);
 
-ALTER TABLE `ejyy_feedback`
+ALTER TABLE `ipms_feedback`
   ADD PRIMARY KEY (`id`),
   ADD KEY `problem` (`content`),
   ADD KEY `reply` (`reply`);
 
-ALTER TABLE `ejyy_fitment`
+ALTER TABLE `ipms_fitment`
   ADD PRIMARY KEY (`id`),
   ADD KEY `wechat_mp_user_id` (`wechat_mp_user_id`),
   ADD KEY `community_id` (`community_id`),
   ADD KEY `building_id` (`building_id`);
 
-ALTER TABLE `ejyy_inform`
+ALTER TABLE `ipms_inform`
   ADD PRIMARY KEY (`id`),
   ADD KEY `community_id` (`community_id`);
 
-ALTER TABLE `ejyy_iot_elevator`
+ALTER TABLE `ipms_iot_elevator`
   ADD PRIMARY KEY (`id`),
   ADD KEY `community_id` (`community_id`);
 
-ALTER TABLE `ejyy_iot_elevator_log`
+ALTER TABLE `ipms_iot_elevator_log`
   ADD PRIMARY KEY (`id`),
   ADD KEY `elevator_id` (`elevator_id`);
 
-ALTER TABLE `ejyy_iot_entrance`
+ALTER TABLE `ipms_iot_entrance`
   ADD PRIMARY KEY (`id`),
   ADD KEY `community_id` (`community_id`);
 
-ALTER TABLE `ejyy_iot_entrance_log`
+ALTER TABLE `ipms_iot_entrance_log`
   ADD PRIMARY KEY (`id`),
   ADD KEY `entrance_id` (`entrance_id`);
 
-ALTER TABLE `ejyy_iot_lamp`
+ALTER TABLE `ipms_iot_lamp`
   ADD PRIMARY KEY (`id`),
   ADD KEY `community_id` (`community_id`);
 
-ALTER TABLE `ejyy_iot_lamp_line`
+ALTER TABLE `ipms_iot_lamp_line`
   ADD PRIMARY KEY (`id`),
   ADD KEY `lamp_id` (`lamp_id`);
 
-ALTER TABLE `ejyy_iot_lamp_log`
+ALTER TABLE `ipms_iot_lamp_log`
   ADD PRIMARY KEY (`id`),
   ADD KEY `lamp_line_id` (`lamp_line_id`);
 
-ALTER TABLE `ejyy_iot_lamp_work_mode`
+ALTER TABLE `ipms_iot_lamp_work_mode`
   ADD PRIMARY KEY (`id`),
   ADD KEY `lamp_line_id` (`lamp_line_id`);
 
-ALTER TABLE `ejyy_iot_meter`
+ALTER TABLE `ipms_iot_meter`
   ADD PRIMARY KEY (`id`),
   ADD KEY `building_id` (`building_id`),
   ADD KEY `building_id_2` (`building_id`);
 
-ALTER TABLE `ejyy_iot_meter_read`
+ALTER TABLE `ipms_iot_meter_read`
   ADD PRIMARY KEY (`id`),
   ADD KEY `meter_id` (`meter_id`);
 
-ALTER TABLE `ejyy_iot_meter_repeater`
+ALTER TABLE `ipms_iot_meter_repeater`
   ADD PRIMARY KEY (`id`),
   ADD KEY `community_id` (`community_id`);
 
-ALTER TABLE `ejyy_iot_park`
+ALTER TABLE `ipms_iot_park`
   ADD PRIMARY KEY (`id`),
   ADD KEY `community_id` (`community_id`);
 
-ALTER TABLE `ejyy_iot_park_blacklist`
+ALTER TABLE `ipms_iot_park_blacklist`
   ADD PRIMARY KEY (`id`),
   ADD KEY `park_id` (`park_id`);
 
-ALTER TABLE `ejyy_iot_park_log`
+ALTER TABLE `ipms_iot_park_log`
   ADD PRIMARY KEY (`id`),
   ADD KEY `park_id` (`park_id`);
 
-ALTER TABLE `ejyy_iot_warning`
+ALTER TABLE `ipms_iot_warning`
   ADD PRIMARY KEY (`id`),
   ADD KEY `community_id` (`community_id`);
 
-ALTER TABLE `ejyy_iot_warning_log`
+ALTER TABLE `ipms_iot_warning_log`
   ADD PRIMARY KEY (`id`),
   ADD KEY `warning_id` (`warning_id`);
 
-ALTER TABLE `ejyy_material`
+ALTER TABLE `ipms_material`
   ADD PRIMARY KEY (`id`),
   ADD KEY `community_id` (`community_id`);
 
-ALTER TABLE `ejyy_material_category`
+ALTER TABLE `ipms_material_category`
   ADD PRIMARY KEY (`id`);
 
-ALTER TABLE `ejyy_material_purchase`
+ALTER TABLE `ipms_material_purchase`
   ADD PRIMARY KEY (`id`),
   ADD KEY `community_id` (`community_id`),
   ADD KEY `created_by` (`created_by`);
 
-ALTER TABLE `ejyy_material_purchase_flow`
+ALTER TABLE `ipms_material_purchase_flow`
   ADD PRIMARY KEY (`id`),
   ADD KEY `parent_id` (`parent_id`),
   ADD KEY `step` (`step`);
 
-ALTER TABLE `ejyy_material_purchase_item`
+ALTER TABLE `ipms_material_purchase_item`
   ADD PRIMARY KEY (`id`),
   ADD KEY `material_id` (`material_id`);
 
-ALTER TABLE `ejyy_material_supplier`
+ALTER TABLE `ipms_material_supplier`
   ADD PRIMARY KEY (`id`);
 
-ALTER TABLE `ejyy_material_used`
+ALTER TABLE `ipms_material_used`
   ADD PRIMARY KEY (`id`),
   ADD KEY `material_id` (`material_id`);
 
-ALTER TABLE `ejyy_meeting`
+ALTER TABLE `ipms_meeting`
   ADD PRIMARY KEY (`id`),
   ADD KEY `community_id` (`community_id`),
   ADD KEY `meeting_room_id` (`meeting_room_id`);
 
-ALTER TABLE `ejyy_meeting_participant`
+ALTER TABLE `ipms_meeting_participant`
   ADD PRIMARY KEY (`id`),
   ADD KEY `meeting_id` (`meeting_id`),
   ADD KEY `user_id` (`user_id`);
 
-ALTER TABLE `ejyy_meeting_room`
+ALTER TABLE `ipms_meeting_room`
   ADD PRIMARY KEY (`id`),
   ADD KEY `community_id` (`community_id`);
 
-ALTER TABLE `ejyy_mission`
+ALTER TABLE `ipms_mission`
   ADD PRIMARY KEY (`id`),
   ADD KEY `community_id` (`community_id`);
 
-ALTER TABLE `ejyy_mission_category`
+ALTER TABLE `ipms_mission_category`
   ADD PRIMARY KEY (`id`);
 
-ALTER TABLE `ejyy_mission_complete`
+ALTER TABLE `ipms_mission_complete`
   ADD PRIMARY KEY (`id`),
   ADD KEY `mission_id` (`mission_id`);
 
-ALTER TABLE `ejyy_mission_complete_node`
+ALTER TABLE `ipms_mission_complete_node`
   ADD PRIMARY KEY (`id`),
   ADD KEY `complete_id` (`complete_id`);
 
-ALTER TABLE `ejyy_mission_line`
+ALTER TABLE `ipms_mission_line`
   ADD PRIMARY KEY (`id`),
   ADD KEY `community_id` (`community_id`);
 
-ALTER TABLE `ejyy_mission_line_node`
+ALTER TABLE `ipms_mission_line_node`
   ADD PRIMARY KEY (`id`),
   ADD KEY `line_id` (`line_id`);
 
-ALTER TABLE `ejyy_mission_point`
+ALTER TABLE `ipms_mission_point`
   ADD PRIMARY KEY (`id`),
   ADD KEY `community_id` (`community_id`);
 
-ALTER TABLE `ejyy_move_car`
+ALTER TABLE `ipms_move_car`
   ADD PRIMARY KEY (`id`),
   ADD KEY `community_id` (`community_id`),
   ADD KEY `wechat_mp_user_id` (`wechat_mp_user_id`);
 
-ALTER TABLE `ejyy_notice_to_user`
+ALTER TABLE `ipms_notice_to_user`
   ADD PRIMARY KEY (`id`),
   ADD KEY `community_id` (`community_id`);
 
-ALTER TABLE `ejyy_notice_to_user_readed`
+ALTER TABLE `ipms_notice_to_user_readed`
   ADD PRIMARY KEY (`id`),
   ADD KEY `notice_id` (`notice_id`),
   ADD KEY `wechat_mp_user_id` (`wechat_mp_user_id`);
 
-ALTER TABLE `ejyy_notice_tpl`
+ALTER TABLE `ipms_notice_tpl`
   ADD PRIMARY KEY (`id`);
 
-ALTER TABLE `ejyy_owner_apply`
+ALTER TABLE `ipms_owner_apply`
   ADD PRIMARY KEY (`id`),
   ADD KEY `wechat_mp_user_id` (`wechat_mp_user_id`),
   ADD KEY `community_id` (`community_id`);
 
-ALTER TABLE `ejyy_owner_detail_log`
+ALTER TABLE `ipms_owner_detail_log`
   ADD PRIMARY KEY (`id`),
   ADD KEY `wechat_mp_user_id` (`wechat_mp_user_id`),
   ADD KEY `property_company_user_id` (`property_company_user_id`);
 
-ALTER TABLE `ejyy_party`
+ALTER TABLE `ipms_party`
   ADD PRIMARY KEY (`id`),
   ADD KEY `community_id` (`community_id`);
 
-ALTER TABLE `ejyy_pet`
+ALTER TABLE `ipms_pet`
   ADD PRIMARY KEY (`id`),
   ADD KEY `wechat_mp_user_id` (`wechat_mp_user_id`),
   ADD KEY `community_id` (`community_id`);
 
-ALTER TABLE `ejyy_pet_vaccinate`
+ALTER TABLE `ipms_pet_vaccinate`
   ADD PRIMARY KEY (`id`),
   ADD KEY `pet_id` (`pet_id`);
 
-ALTER TABLE `ejyy_property_company_access`
+ALTER TABLE `ipms_property_company_access`
   ADD PRIMARY KEY (`id`);
 
-ALTER TABLE `ejyy_property_company_auth`
+ALTER TABLE `ipms_property_company_auth`
   ADD PRIMARY KEY (`id`),
   ADD KEY `property_company_user_id` (`property_company_user_id`);
 
-ALTER TABLE `ejyy_property_company_building_registered`
+ALTER TABLE `ipms_property_company_building_registered`
   ADD PRIMARY KEY (`id`),
   ADD KEY `building_id` (`building_id`),
   ADD KEY `phone` (`phone`);
 
-ALTER TABLE `ejyy_property_company_department`
+ALTER TABLE `ipms_property_company_department`
   ADD PRIMARY KEY (`id`);
 
-ALTER TABLE `ejyy_property_company_job`
+ALTER TABLE `ipms_property_company_job`
   ADD PRIMARY KEY (`id`);
 
-ALTER TABLE `ejyy_property_company_user`
+ALTER TABLE `ipms_property_company_user`
   ADD PRIMARY KEY (`id`),
   ADD KEY `phone` (`phone`),
   ADD KEY `account` (`account`),
   ADD KEY `open_id` (`open_id`);
 
-ALTER TABLE `ejyy_property_company_user_access_community`
+ALTER TABLE `ipms_property_company_user_access_community`
   ADD PRIMARY KEY (`id`),
   ADD KEY `property_company_user_id` (`property_company_user_id`);
 
-ALTER TABLE `ejyy_property_company_user_default_community`
+ALTER TABLE `ipms_property_company_user_default_community`
   ADD PRIMARY KEY (`id`),
   ADD KEY `property_company_user_id` (`property_company_user_id`);
 
-ALTER TABLE `ejyy_property_company_user_join_record`
+ALTER TABLE `ipms_property_company_user_join_record`
   ADD PRIMARY KEY (`id`),
   ADD KEY `property_company_user_id` (`property_company_user_id`);
 
-ALTER TABLE `ejyy_property_company_user_login`
+ALTER TABLE `ipms_property_company_user_login`
   ADD PRIMARY KEY (`id`),
   ADD KEY `property_company_user_id` (`property_company_user_id`);
 
-ALTER TABLE `ejyy_property_fee`
+ALTER TABLE `ipms_property_fee`
   ADD PRIMARY KEY (`id`),
   ADD KEY `community_id` (`community_id`);
 
-ALTER TABLE `ejyy_property_fee_order`
+ALTER TABLE `ipms_property_fee_order`
   ADD PRIMARY KEY (`id`),
   ADD KEY `property_fee_id` (`property_fee_id`),
   ADD KEY `wechat_mp_user_id` (`wechat_mp_user_id`);
 
-ALTER TABLE `ejyy_property_fee_order_item`
+ALTER TABLE `ipms_property_fee_order_item`
   ADD PRIMARY KEY (`id`),
   ADD KEY `property_fee_order_id` (`property_fee_order_id`),
   ADD KEY `building_id` (`building_id`);
 
-ALTER TABLE `ejyy_question`
+ALTER TABLE `ipms_question`
   ADD PRIMARY KEY (`id`),
   ADD KEY `questionnaire_id` (`questionnaire_id`);
 
-ALTER TABLE `ejyy_questionnaire`
+ALTER TABLE `ipms_questionnaire`
   ADD PRIMARY KEY (`id`),
   ADD KEY `community_id` (`community_id`),
   ADD KEY `created_by` (`created_by`);
 
-ALTER TABLE `ejyy_questionnaire_answer`
+ALTER TABLE `ipms_questionnaire_answer`
   ADD PRIMARY KEY (`id`),
   ADD KEY `questionnaire_id` (`questionnaire_id`),
   ADD KEY `wechat_mp_user_id` (`wechat_mp_user_id`);
 
-ALTER TABLE `ejyy_questionnaire_answer_result`
+ALTER TABLE `ipms_questionnaire_answer_result`
   ADD PRIMARY KEY (`id`),
   ADD KEY `answer_id` (`answer_id`),
   ADD KEY `question_id` (`question_id`);
 
-ALTER TABLE `ejyy_questionnaire_statistics`
+ALTER TABLE `ipms_questionnaire_statistics`
   ADD PRIMARY KEY (`id`),
   ADD KEY `questionnaire_id` (`questionnaire_id`);
 
-ALTER TABLE `ejyy_question_option`
+ALTER TABLE `ipms_question_option`
   ADD PRIMARY KEY (`id`),
   ADD KEY `question_id` (`question_id`);
 
-ALTER TABLE `ejyy_refound`
+ALTER TABLE `ipms_refound`
   ADD PRIMARY KEY (`id`),
   ADD KEY `community_id` (`community_id`),
   ADD KEY `created_by` (`created_by`);
 
-ALTER TABLE `ejyy_refound_flow`
+ALTER TABLE `ipms_refound_flow`
   ADD PRIMARY KEY (`id`),
   ADD KEY `parent_id` (`parent_id`),
   ADD KEY `step` (`step`);
 
-ALTER TABLE `ejyy_refound_item`
+ALTER TABLE `ipms_refound_item`
   ADD PRIMARY KEY (`id`),
   ADD KEY `refound_id` (`refound_id`);
 
-ALTER TABLE `ejyy_repair`
+ALTER TABLE `ipms_repair`
   ADD PRIMARY KEY (`id`),
   ADD KEY `allot_user_id` (`allot_user_id`),
   ADD KEY `wechat_mp_user_id` (`wechat_mp_user_id`),
@@ -1513,28 +1513,28 @@ ALTER TABLE `ejyy_repair`
   ADD KEY `community_id` (`community_id`),
   ADD KEY `property_company_user_id` (`property_company_user_id`);
 
-ALTER TABLE `ejyy_repair_urge`
+ALTER TABLE `ipms_repair_urge`
   ADD PRIMARY KEY (`id`),
   ADD KEY `repair_id` (`repair_id`);
 
-ALTER TABLE `ejyy_schedule`
+ALTER TABLE `ipms_schedule`
   ADD PRIMARY KEY (`id`),
   ADD KEY `job` (`job`),
   ADD KEY `created_at` (`created_at`);
 
-ALTER TABLE `ejyy_session_store`
+ALTER TABLE `ipms_session_store`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `ejyy_session_store__expires` (`expire`);
+  ADD KEY `ipms_session_store__expires` (`expire`);
 
-ALTER TABLE `ejyy_storehouse`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `community_id` (`community_id`);
-
-ALTER TABLE `ejyy_topic`
+ALTER TABLE `ipms_storehouse`
   ADD PRIMARY KEY (`id`),
   ADD KEY `community_id` (`community_id`);
 
-ALTER TABLE `ejyy_user_building`
+ALTER TABLE `ipms_topic`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `community_id` (`community_id`);
+
+ALTER TABLE `ipms_user_building`
   ADD PRIMARY KEY (`id`),
   ADD KEY `building_id` (`building_id`),
   ADD KEY `wechat_mp_user_id` (`wechat_mp_user_id`),
@@ -1542,38 +1542,38 @@ ALTER TABLE `ejyy_user_building`
   ADD KEY `authenticated_user_id` (`authenticated_user_id`),
   ADD KEY `status` (`status`);
 
-ALTER TABLE `ejyy_user_building_operate_log`
+ALTER TABLE `ipms_user_building_operate_log`
   ADD PRIMARY KEY (`id`),
   ADD KEY `user_building_id` (`user_building_id`),
   ADD KEY `property_company_user_id` (`property_company_user_id`),
   ADD KEY `wechat_mp_user_id` (`wechat_mp_user_id`);
 
-ALTER TABLE `ejyy_user_car`
+ALTER TABLE `ipms_user_car`
   ADD PRIMARY KEY (`id`),
   ADD KEY `wechat_mp_user_id` (`wechat_mp_user_id`),
   ADD KEY `building_id` (`building_id`),
   ADD KEY `car_number` (`car_number`);
 
-ALTER TABLE `ejyy_user_car_operate_log`
+ALTER TABLE `ipms_user_car_operate_log`
   ADD PRIMARY KEY (`id`),
   ADD KEY `user_car_id` (`user_car_id`),
   ADD KEY `property_company_user_id` (`property_company_user_id`),
   ADD KEY `wechat_mp_user_id` (`wechat_mp_user_id`);
 
-ALTER TABLE `ejyy_user_car_sync`
+ALTER TABLE `ipms_user_car_sync`
   ADD PRIMARY KEY (`id`),
   ADD KEY `user_car_id` (`user_car_id`);
 
-ALTER TABLE `ejyy_user_default_community`
+ALTER TABLE `ipms_user_default_community`
   ADD PRIMARY KEY (`id`),
   ADD KEY `wechat_mp_user_id` (`wechat_mp_user_id`),
   ADD KEY `community_id` (`community_id`);
 
-ALTER TABLE `ejyy_virus`
+ALTER TABLE `ipms_virus`
   ADD PRIMARY KEY (`id`),
   ADD KEY `success` (`success`);
 
-ALTER TABLE `ejyy_vistor`
+ALTER TABLE `ipms_vistor`
   ADD PRIMARY KEY (`id`),
   ADD KEY `community_id` (`community_id`),
   ADD KEY `building_id` (`building_id`),
@@ -1581,332 +1581,332 @@ ALTER TABLE `ejyy_vistor`
   ADD KEY `scan_by` (`scan_by`),
   ADD KEY `property_company_user_id` (`property_company_user_id`);
 
-ALTER TABLE `ejyy_wechat_mp_auth`
+ALTER TABLE `ipms_wechat_mp_auth`
   ADD PRIMARY KEY (`id`),
   ADD KEY `wechat_mp_user_id` (`wechat_mp_user_id`),
   ADD KEY `token` (`token`);
 
-ALTER TABLE `ejyy_wechat_mp_user`
+ALTER TABLE `ipms_wechat_mp_user`
   ADD PRIMARY KEY (`id`),
   ADD KEY `mobile` (`phone`),
   ADD KEY `open_id` (`open_id`);
 
-ALTER TABLE `ejyy_wechat_mp_user_login`
+ALTER TABLE `ipms_wechat_mp_user_login`
   ADD PRIMARY KEY (`id`),
   ADD KEY `wechat_mp_user_id` (`wechat_mp_user_id`);
 
-ALTER TABLE `ejyy_wechat_official_accounts_user`
+ALTER TABLE `ipms_wechat_official_accounts_user`
   ADD PRIMARY KEY (`id`),
   ADD KEY `open_id` (`union_id`);
 
-ALTER TABLE `ejyy_workflow`
+ALTER TABLE `ipms_workflow`
   ADD PRIMARY KEY (`id`),
   ADD KEY `community_id` (`community_id`),
   ADD KEY `type` (`type`);
 
-ALTER TABLE `ejyy_workflow_node`
+ALTER TABLE `ipms_workflow_node`
   ADD PRIMARY KEY (`id`),
   ADD KEY `workflow_id` (`workflow_id`);
 
 
-ALTER TABLE `ejyy_ask_for_leave`
+ALTER TABLE `ipms_ask_for_leave`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_ask_for_leave_flow`
+ALTER TABLE `ipms_ask_for_leave_flow`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_building_info`
+ALTER TABLE `ipms_building_info`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_community_info`
+ALTER TABLE `ipms_community_info`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_community_remote_open_door_log`
+ALTER TABLE `ipms_community_remote_open_door_log`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_community_setting`
+ALTER TABLE `ipms_community_setting`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_complain`
+ALTER TABLE `ipms_complain`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_contract`
+ALTER TABLE `ipms_contract`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_contract_category`
+ALTER TABLE `ipms_contract_category`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_contract_item`
+ALTER TABLE `ipms_contract_item`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_convenient`
+ALTER TABLE `ipms_convenient`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_employee_sign_record`
+ALTER TABLE `ipms_employee_sign_record`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_employee_sign_setting`
+ALTER TABLE `ipms_employee_sign_setting`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_epidemic`
+ALTER TABLE `ipms_epidemic`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_feedback`
+ALTER TABLE `ipms_feedback`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_fitment`
+ALTER TABLE `ipms_fitment`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_inform`
+ALTER TABLE `ipms_inform`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_iot_elevator`
+ALTER TABLE `ipms_iot_elevator`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_iot_elevator_log`
+ALTER TABLE `ipms_iot_elevator_log`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_iot_entrance`
+ALTER TABLE `ipms_iot_entrance`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_iot_entrance_log`
+ALTER TABLE `ipms_iot_entrance_log`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_iot_lamp`
+ALTER TABLE `ipms_iot_lamp`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_iot_lamp_line`
+ALTER TABLE `ipms_iot_lamp_line`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_iot_lamp_log`
+ALTER TABLE `ipms_iot_lamp_log`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_iot_lamp_work_mode`
+ALTER TABLE `ipms_iot_lamp_work_mode`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_iot_meter`
+ALTER TABLE `ipms_iot_meter`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_iot_meter_read`
+ALTER TABLE `ipms_iot_meter_read`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_iot_meter_repeater`
+ALTER TABLE `ipms_iot_meter_repeater`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_iot_park`
+ALTER TABLE `ipms_iot_park`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_iot_park_blacklist`
+ALTER TABLE `ipms_iot_park_blacklist`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_iot_park_log`
+ALTER TABLE `ipms_iot_park_log`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_iot_warning`
+ALTER TABLE `ipms_iot_warning`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_iot_warning_log`
+ALTER TABLE `ipms_iot_warning_log`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_material`
+ALTER TABLE `ipms_material`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_material_category`
+ALTER TABLE `ipms_material_category`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_material_purchase`
+ALTER TABLE `ipms_material_purchase`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_material_purchase_flow`
+ALTER TABLE `ipms_material_purchase_flow`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_material_purchase_item`
+ALTER TABLE `ipms_material_purchase_item`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_material_supplier`
+ALTER TABLE `ipms_material_supplier`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_material_used`
+ALTER TABLE `ipms_material_used`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_meeting`
+ALTER TABLE `ipms_meeting`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_meeting_participant`
+ALTER TABLE `ipms_meeting_participant`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_meeting_room`
+ALTER TABLE `ipms_meeting_room`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_mission`
+ALTER TABLE `ipms_mission`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_mission_category`
+ALTER TABLE `ipms_mission_category`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_mission_complete`
+ALTER TABLE `ipms_mission_complete`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_mission_complete_node`
+ALTER TABLE `ipms_mission_complete_node`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_mission_line`
+ALTER TABLE `ipms_mission_line`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_mission_line_node`
+ALTER TABLE `ipms_mission_line_node`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_mission_point`
+ALTER TABLE `ipms_mission_point`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_move_car`
+ALTER TABLE `ipms_move_car`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_notice_to_user`
+ALTER TABLE `ipms_notice_to_user`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_notice_to_user_readed`
+ALTER TABLE `ipms_notice_to_user_readed`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_notice_tpl`
+ALTER TABLE `ipms_notice_tpl`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_owner_apply`
+ALTER TABLE `ipms_owner_apply`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_owner_detail_log`
+ALTER TABLE `ipms_owner_detail_log`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_party`
+ALTER TABLE `ipms_party`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_pet`
+ALTER TABLE `ipms_pet`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_pet_vaccinate`
+ALTER TABLE `ipms_pet_vaccinate`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_property_company_access`
+ALTER TABLE `ipms_property_company_access`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_property_company_auth`
+ALTER TABLE `ipms_property_company_auth`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_property_company_building_registered`
+ALTER TABLE `ipms_property_company_building_registered`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_property_company_department`
+ALTER TABLE `ipms_property_company_department`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_property_company_job`
+ALTER TABLE `ipms_property_company_job`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_property_company_user`
+ALTER TABLE `ipms_property_company_user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_property_company_user_access_community`
+ALTER TABLE `ipms_property_company_user_access_community`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_property_company_user_default_community`
+ALTER TABLE `ipms_property_company_user_default_community`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_property_company_user_join_record`
+ALTER TABLE `ipms_property_company_user_join_record`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_property_company_user_login`
+ALTER TABLE `ipms_property_company_user_login`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_property_fee`
+ALTER TABLE `ipms_property_fee`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_property_fee_order`
+ALTER TABLE `ipms_property_fee_order`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_property_fee_order_item`
+ALTER TABLE `ipms_property_fee_order_item`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_question`
+ALTER TABLE `ipms_question`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_questionnaire`
+ALTER TABLE `ipms_questionnaire`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_questionnaire_answer`
+ALTER TABLE `ipms_questionnaire_answer`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_questionnaire_answer_result`
+ALTER TABLE `ipms_questionnaire_answer_result`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_questionnaire_statistics`
+ALTER TABLE `ipms_questionnaire_statistics`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_question_option`
+ALTER TABLE `ipms_question_option`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_refound`
+ALTER TABLE `ipms_refound`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_refound_flow`
+ALTER TABLE `ipms_refound_flow`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_refound_item`
+ALTER TABLE `ipms_refound_item`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_repair`
+ALTER TABLE `ipms_repair`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_repair_urge`
+ALTER TABLE `ipms_repair_urge`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_schedule`
+ALTER TABLE `ipms_schedule`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_storehouse`
+ALTER TABLE `ipms_storehouse`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_topic`
+ALTER TABLE `ipms_topic`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_user_building`
+ALTER TABLE `ipms_user_building`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_user_building_operate_log`
+ALTER TABLE `ipms_user_building_operate_log`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_user_car`
+ALTER TABLE `ipms_user_car`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_user_car_operate_log`
+ALTER TABLE `ipms_user_car_operate_log`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_user_car_sync`
+ALTER TABLE `ipms_user_car_sync`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_user_default_community`
+ALTER TABLE `ipms_user_default_community`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_virus`
+ALTER TABLE `ipms_virus`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_vistor`
+ALTER TABLE `ipms_vistor`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_wechat_mp_auth`
+ALTER TABLE `ipms_wechat_mp_auth`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_wechat_mp_user`
+ALTER TABLE `ipms_wechat_mp_user`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_wechat_mp_user_login`
+ALTER TABLE `ipms_wechat_mp_user_login`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_wechat_official_accounts_user`
+ALTER TABLE `ipms_wechat_official_accounts_user`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_workflow`
+ALTER TABLE `ipms_workflow`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ejyy_workflow_node`
+ALTER TABLE `ipms_workflow_node`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 COMMIT;
 

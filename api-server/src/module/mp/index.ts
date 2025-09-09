@@ -11,6 +11,7 @@ import { Context } from 'koa';
 import { Action } from '~/types/action';
 import KoaRouter from 'koa-router';
 import * as MpModuleRouter from './router';
+// storage controllers will be exported via router barrel
 import config from '~/config';
 import validatorService from '~/service/validator';
 import { PARAMS_ERROR, USER_INFO_UNINTACT } from '~/constant/code';

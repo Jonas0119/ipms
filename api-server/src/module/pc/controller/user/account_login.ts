@@ -123,6 +123,8 @@ const PcUserAccountLoginAction = <Action>{
         // 生成登录token：使用openid和当前时间戳生成唯一token
         // 这样可以确保每次登录都有不同的token，提高安全性
         const token = utils.crypto.md5(`${pcUserInfo.openid}${Date.now()}`);
+        console.log('🔑 [LOGIN-DEBUG] Generated token:', token);
+        console.log('🔑 [LOGIN-DEBUG] Token input:', `${pcUserInfo.openid}${Date.now()}`);
 
         // 数据脱敏：隐藏手机号中间部分，保护用户隐私
         pcUserInfo.phone = utils.phone.hide(pcUserInfo.phone);
@@ -139,12 +141,17 @@ const PcUserAccountLoginAction = <Action>{
 
         // 更新用户的登录token：将新token保存到认证表中
         // 这样下次请求时可以通过token验证用户身份
+        console.log('🔑 [LOGIN-DEBUG] Saving token to database for user:', pcUserInfo.id);
+        console.log('🔑 [LOGIN-DEBUG] Token to save:', token);
+        
         await ctx.model
             .from('ipms_property_company_auth')
             .where({ property_company_user_id: pcUserInfo.id })
             .update({
                 token
             });
+            
+        console.log('🔑 [LOGIN-DEBUG] Token saved to database successfully');
 
         // 记录登录日志：用于安全审计和异常检测
         // 记录用户ID、IP地址、User-Agent和登录时间
@@ -160,6 +167,16 @@ const PcUserAccountLoginAction = <Action>{
         const postInfo = await propertyCompanyService.postInfo(ctx.model, pcUserInfo.id);
 
         // 返回登录成功结果：包含token、用户信息和岗位信息
+        console.log('🔑 [LOGIN-DEBUG] Preparing response with token:', token);
+        console.log('🔑 [LOGIN-DEBUG] Response structure:', {
+            code: SUCCESS,
+            data: {
+                token: token ? token.substring(0, 10) + '...' : 'undefined',
+                userInfo: pcUserInfo ? 'exists' : 'missing',
+                postInfo: postInfo ? 'exists' : 'missing'
+            }
+        });
+        
         ctx.body = {
             code: SUCCESS,
             data: {
@@ -168,6 +185,8 @@ const PcUserAccountLoginAction = <Action>{
                 postInfo        // 用户岗位信息
             }
         };
+        
+        console.log('🔑 [LOGIN-DEBUG] Response sent successfully');
     }
 };
 

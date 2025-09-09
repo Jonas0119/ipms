@@ -5,7 +5,7 @@
  */
 
 import { Action } from '~/types/action';
-import { EjyyUserBuilding } from '~/types/model';
+import { IpmsUserBuilding } from '~/types/model';
 import { SUCCESS, QRCODE_ILLEGAL, QRCODE_EXPIRED, NOT_FOUND_BINDING_BUILDING } from '~/constant/code';
 import { AUTHENTICTED_BY_PROPERTY_COMPANY } from '~/constant/authenticated_type';
 import utils from '~/utils';
@@ -63,7 +63,7 @@ const MpCommunityBindingByPropertyAction = <Action>{
             });
         }
 
-        const bindingData: EjyyUserBuilding[] = [];
+        const bindingData: IpmsUserBuilding[] = [];
 
         for (const buildindInfo of buildingsInfo) {
             bindingData.push({

@@ -57,8 +57,8 @@ const PcHrCreateAction = <Action>{
             {
                 name: 'avatar_url',
                 required: true,
-                max: 128,
-                validator: val => /^\/avatar\/[a-z0-9]{32}\.(jpg|jpeg|png)$/.test(val)
+                max: 256
+                // validator: val => /^\/avatar\/[a-z0-9]{32}\.(jpg|jpeg|png)$/.test(val)
             },
             {
                 name: 'phone',

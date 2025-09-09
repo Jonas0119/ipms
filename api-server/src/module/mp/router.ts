@@ -37,6 +37,8 @@ export { default as MpFeedbackFeatureAction } from './controller/feedback/featur
 
 export { default as MpUploadSignAction } from './controller/upload/sign';
 export { default as MpUploadLocalAction } from './controller/upload/local';
+export { default as MpStorageConfigAction } from './controller/storage/config';
+export { default as MpStorageUploadAction } from './controller/storage/upload';
 
 export { default as MpAccessListAction } from './controller/access/list';
 export { default as MpAccessDoorAction } from './controller/access/door';

@@ -13,11 +13,11 @@ interface RequestParams {
 }
 
 import {
-    EjyyComplain,
-    EjyyPropertyCompanyUser,
-    EjyyCommunityInfo,
-    EjyyPropertyCompanyDepartment,
-    EjyyPropertyCompanyJob
+    IpmsComplain,
+    IpmsPropertyCompanyUser,
+    IpmsCommunityInfo,
+    IpmsPropertyCompanyDepartment,
+    IpmsPropertyCompanyJob
 } from '~/types/model';
 
 const MpComplainDetailAction = <Action>{
@@ -38,11 +38,11 @@ const MpComplainDetailAction = <Action>{
     },
     response: async ctx => {
         const { id } = <RequestParams>ctx.params;
-        let allotInfo = <EjyyPropertyCompanyUser & EjyyPropertyCompanyDepartment & EjyyPropertyCompanyJob>null;
-        let disposedInfo = <EjyyPropertyCompanyUser & EjyyPropertyCompanyDepartment & EjyyPropertyCompanyJob>null;
-        let mergeDetail = <EjyyComplain & EjyyCommunityInfo>null;
+        let allotInfo = <IpmsPropertyCompanyUser & IpmsPropertyCompanyDepartment & IpmsPropertyCompanyJob>null;
+        let disposedInfo = <IpmsPropertyCompanyUser & IpmsPropertyCompanyDepartment & IpmsPropertyCompanyJob>null;
+        let mergeDetail = <IpmsComplain & IpmsCommunityInfo>null;
 
-        const findDetail = async (compain_id: number): Promise<EjyyComplain & EjyyCommunityInfo> => {
+        const findDetail = async (compain_id: number): Promise<IpmsComplain & IpmsCommunityInfo> => {
             return await ctx.model
                 .from('ipms_complain')
                 .leftJoin('ipms_community_info', 'ipms_community_info.id', 'ipms_complain.community_id')
@@ -86,7 +86,7 @@ const MpComplainDetailAction = <Action>{
             mergeDetail = await findDetail(selfDetail.merge_id);
         }
 
-        const realDetail = <EjyyComplain & EjyyCommunityInfo>(
+        const realDetail = <IpmsComplain & IpmsCommunityInfo>(
             (selfDetail.merge_id ? { ...mergeDetail, merge_id: selfDetail.merge_id } : selfDetail)
         );
 

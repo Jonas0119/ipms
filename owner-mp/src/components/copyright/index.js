@@ -1,0 +1,19 @@
+/**
+ * +----------------------------------------------------------------------
+ * | 开源物业管理系统，敬请使用
+ * +----------------------------------------------------------------------
+ */
+
+import { CwComponent } from '../common/component';
+import * as config from '../../config';
+
+CwComponent({
+    data: {
+        version: config.VERSION
+    },
+    props: {
+        fixed: Number,
+        dark: Boolean,
+        inTabPage: Boolean
+    }
+});

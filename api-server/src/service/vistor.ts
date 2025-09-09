@@ -5,13 +5,13 @@
  */
 
 import Knex from 'knex';
-import { EjyyWechatMpUser } from '~/types/model';
+import { IpmsWechatMpUser } from '~/types/model';
 import * as wechatService from '~/service/wechat';
 import { OA_NOTICE_TO_VISTOR } from '~/constant/tpl';
 import moment from 'moment';
 import config from '~/config';
 
-export async function pushAccessToVistor(model: Knex, vistorInfo: EjyyWechatMpUser, id: number, expire: number) {
+export async function pushAccessToVistor(model: Knex, vistorInfo: IpmsWechatMpUser, id: number, expire: number) {
     const record = await model
         .from('ipms_wechat_official_accounts_user')
         .where('union_id', vistorInfo.union_id)

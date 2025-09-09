@@ -45,9 +45,13 @@ function PcModule(appRouter: KoaRouter) {
                 // 从请求头获取PC端专用的认证token
                 // 使用专用的header名称避免与其他端（如MP端）的token冲突
                 const token = ctx.request.header['ipms-pc-token'] as string;
+                console.log('🔐 [AUTH-MIDDLEWARE-DEBUG] Auth required for:', ctx.request.url);
+                console.log('🔐 [AUTH-MIDDLEWARE-DEBUG] Looking for token in header: ipms-pc-token');
+                console.log('🔐 [AUTH-MIDDLEWARE-DEBUG] Token received:', token ? token.substring(0, 10) + '...' : 'undefined');
 
                 // token不存在直接返回401未授权状态
                 if (!token) {
+                    console.log('🔐 [AUTH-MIDDLEWARE-DEBUG] No token found, returning 401');
                     return (ctx.status = 401);
                 }
 
