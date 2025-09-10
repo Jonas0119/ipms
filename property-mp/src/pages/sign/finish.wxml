@@ -12,7 +12,7 @@
         </view>
     </view>
 
-    <cw-skeleton row="{{4}}" wx:if="{{fetching}}" />
+    <ipms-skeleton row="{{4}}" wx:if="{{fetching}}" />
     <view class="records" wx:else>
         <view wx:for="{{list}}" wx:key="index" class="record-item">
             <view class="record finish" wx:if="{{item.finish}}">
@@ -34,7 +34,7 @@
         <view class="text">打卡</view>
     </view>
 
-    <cw-toast id="cw-toast" />
-    <cw-notify id="cw-notify" />
-    <cw-copyright />
+    <ipms-toast id="ipms-toast" />
+    <ipms-notify id="ipms-notify" />
+    <ipms-copyright />
 </view>

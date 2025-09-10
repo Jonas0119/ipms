@@ -1,11 +1,11 @@
 <wxs src="../wxs/utils.wxs" module="utils" />
 
-<cw-popup
+<ipms-popup
     show="{{ show }}"
     z-index="{{ zIndex }}"
     overlay="{{ overlay }}"
     transition="{{ transition }}"
-    custom-class="cw-dialog cw-dialog--{{ theme }} {{ className }}"
+    custom-class="ipms-dialog ipms-dialog--{{ theme }} {{ className }}"
     custom-style="width: {{ utils.addUnit(width) }};{{ customStyle }}"
     overlay-style="{{ overlayStyle }}"
     close-on-click-overlay="{{ closeOnClickOverlay }}"
@@ -24,27 +24,27 @@
         wx:elif="{{ message }}"
         class="{{ utils.bem('dialog__message', [theme, messageAlign, { hasTitle: title }]) }}"
     >
-        <text class="cw-dialog__message-text">{{ message }}</text>
+        <text class="ipms-dialog__message-text">{{ message }}</text>
     </view>
 
-    <view class="cw-hairline--top cw-dialog__footer">
-        <cw-button
+    <view class="ipms-hairline--top ipms-dialog__footer">
+        <ipms-button
             wx:if="{{ showCancelButton }}"
             size="large"
             loading="{{ loading.cancel }}"
-            class="cw-dialog__button cw-hairline--right"
-            custom-class="cw-dialog__cancel"
+            class="ipms-dialog__button ipms-hairline--right"
+            custom-class="ipms-dialog__cancel"
             custom-style="color: {{ cancelButtonColor }}"
             bind:click="onCancel"
         >
             {{ cancelButtonText }}
-        </cw-button>
-        <cw-button
+        </ipms-button>
+        <ipms-button
             wx:if="{{ showConfirmButton }}"
             size="large"
-            class="cw-dialog__button"
+            class="ipms-dialog__button"
             loading="{{ loading.confirm }}"
-            custom-class="cw-dialog__confirm"
+            custom-class="ipms-dialog__confirm"
             custom-style="color: {{ confirmButtonColor }}"
             open-type="{{ confirmButtonOpenType }}"
             lang="{{ lang }}"
@@ -64,6 +64,6 @@
             bindopensetting="bindOpenSetting"
         >
             {{ confirmButtonText }}
-        </cw-button>
+        </ipms-button>
     </view>
-</cw-popup>
+</ipms-popup>

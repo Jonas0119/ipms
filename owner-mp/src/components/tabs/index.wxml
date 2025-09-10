@@ -7,7 +7,7 @@
 <wxs src="./index.wxs" module="computed" />
 
 <view class="custom-class {{ utils.bem('tabs', [type]) }}">
-    <cw-sticky
+    <ipms-sticky
         disabled="{{ !sticky }}"
         z-index="{{ zIndex }}"
         offset-top="{{ offsetTop }}"
@@ -15,7 +15,7 @@
         bind:scroll="onTouchScroll"
     >
         <view
-            class="{{ utils.bem('tabs__wrap', { scrollable }) }} {{ type === 'line' && border ? 'cw-hairline--top-bottom' : '' }}"
+            class="{{ utils.bem('tabs__wrap', { scrollable }) }} {{ type === 'line' && border ? 'ipms-hairline--top-bottom' : '' }}"
         >
             <slot name="nav-left" />
 
@@ -32,7 +32,7 @@
                 >
                     <view
                         wx:if="{{ type === 'line' }}"
-                        class="cw-tabs__line"
+                        class="ipms-tabs__line"
                         style="{{ computed.lineStyle({ color, lineOffsetLeft, lineHeight, skipTransition, duration, lineWidth }) }}"
                     />
                     <view
@@ -43,13 +43,13 @@
                         style="{{ computed.tabStyle({ active: index === currentIndex, ellipsis, color, type, disabled: item.disabled, titleActiveColor, titleInactiveColor, swipeThreshold, scrollable }) }}"
                         bind:tap="onTap"
                     >
-                        <view class="{{ ellipsis ? 'cw-ellipsis' : '' }}" style="{{ item.titleStyle }}">
+                        <view class="{{ ellipsis ? 'ipms-ellipsis' : '' }}" style="{{ item.titleStyle }}">
                             {{ item.title }}
-                            <cw-info
+                            <ipms-info
                                 wx:if="{{ item.info !== null || item.dot }}"
                                 info="{{ item.info }}"
                                 dot="{{ item.dot }}"
-                                custom-class="cw-tab__title__info"
+                                custom-class="ipms-tab__title__info"
                             />
                         </view>
                     </view>
@@ -58,17 +58,17 @@
 
             <slot name="nav-right" />
         </view>
-    </cw-sticky>
+    </ipms-sticky>
 
     <view
-        class="cw-tabs__content"
+        class="ipms-tabs__content"
         bind:touchstart="onTouchStart"
         bind:touchmove="onTouchMove"
         bind:touchend="onTouchEnd"
         bind:touchcancel="onTouchEnd"
     >
         <view
-            class="{{ utils.bem('tabs__track', [{ animated }]) }} cw-tabs__track"
+            class="{{ utils.bem('tabs__track', [{ animated }]) }} ipms-tabs__track"
             style="{{ computed.trackStyle({ duration, currentIndex, animated }) }}"
         >
             <slot />

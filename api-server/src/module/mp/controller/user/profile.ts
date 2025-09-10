@@ -35,7 +35,13 @@ const MpUserProfileAction = <Action>{
             {
                 name: 'avatar_url',
                 required: true,
-                validator: val => /^\/avatar\/[a-z0-9]{32}|default\.(jpg|jpeg|png)$/.test(val)
+                validator: val => {
+                    // 支持完整URL格式：http://domain.com/path/file.jpg
+                    const urlPattern = /^https?:\/\/.+\.(jpg|jpeg|png)$/;
+                    // 支持相对路径格式：/avatar/hash.ext 或 /avatar/default.ext
+                    const pathPattern = /^\/avatar\/[a-z0-9]{32}|default\.(jpg|jpeg|png)$/;
+                    return urlPattern.test(val) || pathPattern.test(val);
+                }
             }
         ]
     },

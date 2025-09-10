@@ -45,7 +45,7 @@ export class MinioStorageService implements IStorageService {
         });
     }
 
-    async getUploadConfig(filename?: string, mimetype?: string, directory?: string): Promise<StorageConfig> {
+    async getUploadConfig(filename?: string, mimetype?: string, directory?: string, isMiniProgram?: boolean): Promise<StorageConfig> {
         const { bucket } = config.storage.minio!;
         const expire = Date.now() + 60 * 30 * 1000; // 30分钟有效期
 
@@ -57,7 +57,8 @@ export class MinioStorageService implements IStorageService {
             bucket,
             expire: new Date(expire).toISOString(),
             endpoint: config.storage.minio!.endpoint,
-            useSSL: config.storage.minio!.useSSL
+            useSSL: config.storage.minio!.useSSL,
+            isMiniProgram
         });
 
         try {
@@ -123,87 +124,163 @@ export class MinioStorageService implements IStorageService {
             const key = `${dir}/${timestamp}_${random}${ext}`;
             console.log('[MinioStorage] 生成文件key:', { dir, key, ext, timestamp, random });
 
-            // 使用 presignedPostPolicy 支持 POST 方法上传（兼容微信小程序）
-            console.log('[MinioStorage] 开始生成MinIO POST Policy用于直传...');
-            
-            // 创建 MinIO PostPolicy 对象
-            const postPolicy = this.minioClient.newPostPolicy();
-            console.log('[MinioStorage] PostPolicy对象创建成功');
-            
-            // 设置过期时间
-            postPolicy.setExpires(new Date(expire));
-            console.log('[MinioStorage] 设置过期时间:', new Date(expire).toISOString());
-            
-            // 设置存储桶和文件键
-            postPolicy.setBucket(bucket);
-            postPolicy.setKey(key);
-            console.log('[MinioStorage] 设置存储桶和文件键:', { bucket, key });
-            
-            // 设置文件大小限制 (50MB)
-            postPolicy.setContentLengthRange(0, 50 * 1024 * 1024);
-            console.log('[MinioStorage] 设置文件大小限制: 0-50MB');
-            
-            // 添加 MIME 类型限制（如果提供）
-            if (mimetype) {
-                postPolicy.setContentType(mimetype);
-                console.log('[MinioStorage] 设置MIME类型限制:', mimetype);
-            }
-
-            console.log('[MinioStorage] POST Policy配置完成，开始生成签名...');
-
-            const result = await this.minioClient.presignedPostPolicy(postPolicy);
-            console.log('[MinioStorage] MinIO POST Policy生成成功:', {
-                postURL: result.postURL,
-                formDataKeys: Object.keys(result.formData),
-                formDataCount: Object.keys(result.formData).length
-            });
-
-            // 构建最终的 formData，包含文件 key
-            // MinIO的formData包含policy、signature等字段
-            const formData: { [key: string]: any } = {
-                ...result.formData,
-                key: key
-            };
-
-            console.log('[MinioStorage] 最终formData构建完成:', {
-                key,
-                formDataKeys: Object.keys(formData),
-                hasPolicy: !!formData.policy,
-                hasSignature: !!formData.signature
-            });
-
-            // 修复 postURL，确保使用配置的 customDomain 或 baseUrl
+            // 根据请求类型选择不同的上传方式
             const baseUrl = this.getBaseUrl();
-            const fixedPostURL = `${baseUrl}/${bucket}`;
             
-            console.log('🔗 [MinioStorage-DEBUG] 原始 postURL:', result.postURL);
-            console.log('🔗 [MinioStorage-DEBUG] 修复后 postURL:', fixedPostURL);
+            if (isMiniProgram) {
+                // 小程序请求：使用 POST Policy 方式（兼容微信小程序）
+                console.log('[MinioStorage] 小程序请求 - 开始生成MinIO POST Policy用于直传...');
+                
+                // 创建 MinIO PostPolicy 对象
+                const postPolicy = this.minioClient.newPostPolicy();
+                console.log('[MinioStorage] PostPolicy对象创建成功');
+                
+                // 设置过期时间
+                postPolicy.setExpires(new Date(expire));
+                console.log('[MinioStorage] 设置过期时间:', new Date(expire).toISOString());
+                
+                // 设置存储桶和文件键
+                postPolicy.setBucket(bucket);
+                postPolicy.setKey(key);
+                console.log('[MinioStorage] 设置存储桶和文件键:', { bucket, key });
+                
+                // 设置文件大小限制 (50MB)
+                postPolicy.setContentLengthRange(0, 50 * 1024 * 1024);
+                console.log('[MinioStorage] 设置文件大小限制: 0-50MB');
+                
+                // 添加 MIME 类型限制（如果提供）
+                if (mimetype) {
+                    postPolicy.setContentType(mimetype);
+                    console.log('[MinioStorage] 设置MIME类型限制:', mimetype);
+                }
 
-            const finalConfig: StorageConfig = {
-                mode: 'minio' as const,
-                baseUrl: baseUrl,
-                expire,
-                uploadStrategy: 'direct' as const,
-                postURL: fixedPostURL,
-                formData: formData,
-                bucket,
-                key
-            };
-            
-            console.log('✅ [MinioStorage-DEBUG] MinIO POST 直传配置生成成功!');
-            console.log('📋 [MinioStorage-DEBUG] 配置摘要:', {
-                mode: finalConfig.mode,
-                uploadStrategy: finalConfig.uploadStrategy,
-                baseUrl: finalConfig.baseUrl,
-                postURL: finalConfig.postURL,
-                bucket: finalConfig.bucket,
-                key: finalConfig.key,
-                formDataKeys: Object.keys(finalConfig.formData),
-                expire: new Date(finalConfig.expire).toISOString()
-            });
-            console.log('📤 [MinioStorage-DEBUG] 完整配置:', JSON.stringify(finalConfig, null, 2));
+                console.log('[MinioStorage] POST Policy配置完成，开始生成签名...');
 
-            return finalConfig;
+                const result = await this.minioClient.presignedPostPolicy(postPolicy);
+                console.log('[MinioStorage] MinIO POST Policy生成成功:', {
+                    postURL: result.postURL,
+                    formDataKeys: Object.keys(result.formData),
+                    formDataCount: Object.keys(result.formData).length,
+                    hasPolicy: !!result.formData.policy,
+                    hasSignature: !!result.formData.signature,
+                    hasKey: !!result.formData.key
+                });
+                console.log('[MinioStorage] POST Policy formData详情:', result.formData);
+
+                // 构建最终的 formData，包含文件 key
+                const formData: { [key: string]: any } = {
+                    ...result.formData,
+                    key: key
+                };
+
+                console.log('[MinioStorage] 最终formData构建完成:', {
+                    key,
+                    formDataKeys: Object.keys(formData),
+                    hasPolicy: !!formData.policy,
+                    hasSignature: !!formData.signature
+                });
+
+                // 修复 postURL，确保使用配置的 customDomain 或 baseUrl
+                const { customDomain } = config.storage.minio!;
+                const fixedPostURL = customDomain ? `${customDomain}/${bucket}` : `${baseUrl}/${bucket}`;
+                
+                console.log('🔗 [MinioStorage-DEBUG] 原始 postURL:', result.postURL);
+                console.log('🔗 [MinioStorage-DEBUG] 修复后 postURL:', fixedPostURL);
+                console.log('🔗 [MinioStorage-DEBUG] 使用的域名:', customDomain || baseUrl);
+
+                const finalConfig: StorageConfig = {
+                    mode: 'minio' as const,
+                    baseUrl: baseUrl,
+                    expire,
+                    uploadStrategy: 'direct' as const,
+                    postURL: fixedPostURL,
+                    formData: formData,
+                    bucket,
+                    key
+                };
+                
+                console.log('✅ [MinioStorage-DEBUG] MinIO POST 直传配置生成成功!');
+                console.log('📋 [MinioStorage-DEBUG] 配置摘要:', {
+                    mode: finalConfig.mode,
+                    uploadStrategy: finalConfig.uploadStrategy,
+                    baseUrl: finalConfig.baseUrl,
+                    postURL: finalConfig.postURL,
+                    bucket: finalConfig.bucket,
+                    key: finalConfig.key,
+                    formDataKeys: Object.keys(finalConfig.formData),
+                    expire: new Date(finalConfig.expire).toISOString()
+                });
+                console.log('📤 [MinioStorage-DEBUG] 完整配置:', JSON.stringify(finalConfig, null, 2));
+
+                return finalConfig;
+            } else {
+                // PC端请求：使用 PUT 预签名URL 方式
+                console.log('[MinioStorage] PC端请求 - 开始生成MinIO PUT预签名URL...');
+                console.log('[MinioStorage] 生成预签名URL参数:', { 
+                    bucket, 
+                    key, 
+                    expire: new Date(expire).toISOString(),
+                    expireSeconds: 30 * 60
+                });
+                
+                // 生成PUT预签名URL，有效期30分钟
+                console.log('[MinioStorage] 调用 presignedPutObject 方法...');
+                const presignedUrl = await this.minioClient.presignedPutObject(bucket, key, 30 * 60);
+                console.log('[MinioStorage] MinIO PUT预签名URL生成成功:', {
+                    presignedUrl: presignedUrl.substring(0, 100) + '...',
+                    presignedUrlLength: presignedUrl.length,
+                    bucket,
+                    key,
+                    isValidUrl: presignedUrl.startsWith('http')
+                });
+                
+                // 修复预签名URL，使用customDomain替换内部IP
+                const { customDomain } = config.storage.minio!;
+                let finalPresignedUrl = presignedUrl;
+                if (customDomain) {
+                    try {
+                        // 使用AWS签名工具重新生成带有新域名的预签名URL
+                        const { regeneratePresignedUrl } = await import('~/utils/aws-signature');
+                        const { accessKey, secretKey } = config.storage.minio!;
+                        finalPresignedUrl = regeneratePresignedUrl(presignedUrl, customDomain, accessKey, secretKey);
+                        console.log('[MinioStorage] 重新生成预签名URL:', {
+                            original: presignedUrl.substring(0, 100) + '...',
+                            fixed: finalPresignedUrl.substring(0, 100) + '...',
+                            customDomain
+                        });
+                    } catch (error) {
+                        console.warn('[MinioStorage] 重新生成预签名URL失败，使用原始URL:', error.message);
+                        // 如果重新生成失败，至少替换域名部分
+                        const originalUrl = new URL(presignedUrl);
+                        const customUrl = new URL(originalUrl.pathname + originalUrl.search, customDomain);
+                        finalPresignedUrl = customUrl.toString();
+                    }
+                }
+
+                const finalConfig: StorageConfig = {
+                    mode: 'minio' as const,
+                    baseUrl: baseUrl,
+                    expire,
+                    uploadStrategy: 'presigned' as const,
+                    presignedUrl: finalPresignedUrl,
+                    bucket,
+                    key
+                };
+                
+                console.log('✅ [MinioStorage-DEBUG] MinIO PUT预签名URL配置生成成功!');
+                console.log('📋 [MinioStorage-DEBUG] 配置摘要:', {
+                    mode: finalConfig.mode,
+                    uploadStrategy: finalConfig.uploadStrategy,
+                    baseUrl: finalConfig.baseUrl,
+                    bucket: finalConfig.bucket,
+                    key: finalConfig.key,
+                    hasPresignedUrl: !!finalConfig.presignedUrl,
+                    expire: new Date(finalConfig.expire).toISOString()
+                });
+                console.log('📤 [MinioStorage-DEBUG] 完整配置:', JSON.stringify(finalConfig, null, 2));
+
+                return finalConfig;
+            }
         } catch (error) {
             console.warn('MinIO POST Policy 生成失败，回退到服务端上传:', error.message);
             console.error('Error details:', error);

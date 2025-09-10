@@ -7,8 +7,8 @@
  * +----------------------------------------------------------------------
  */
 
-import { CwComponent } from '../common/component';
-CwComponent({
+import { IpmsComponent } from '../common/component';
+IpmsComponent({
     field: true,
     classes: ['node-class'],
     props: {

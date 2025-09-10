@@ -1,11 +1,11 @@
-.cw-timeline {
+.ipms-timeline {
     background: #fff;
     padding: 14px 16px;
     position: relative;
     display: flex;
 }
 
-.cw-timeline-point {
+.ipms-timeline-point {
     width: 10px;
     height: 10px;
     border-radius: 100%;
@@ -18,7 +18,7 @@
     flex: none;
 }
 
-.cw-timeline:before {
+.ipms-timeline:before {
     content: '';
     position: absolute;
     left: 21px;
@@ -28,21 +28,21 @@
     border-left: 1px solid #e8eaec;
 }
 
-.cw-timeline.first:before {
+.ipms-timeline.first:before {
     top: 19px;
 }
 
-.cw-timeline.last:before {
+.ipms-timeline.last:before {
     bottom: unset;
     height: 19px;
 }
 
-.cw-timeline-content {
+.ipms-timeline-content {
     overflow: hidden;
     flex: auto;
 }
 
-.cw-timeline-title {
+.ipms-timeline-title {
     font-size: 14px;
     line-height: 20px;
     font-weight: 500;
@@ -50,7 +50,7 @@
     color: #333;
 }
 
-.cw-timeline-inner {
+.ipms-timeline-inner {
     font-size: 12px;
     color: #444;
     line-height: 20px;

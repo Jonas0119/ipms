@@ -1,6 +1,6 @@
 {
     "component": true,
     "usingComponents": {
-        "cw-info": "../info/index"
+        "ipms-info": "../info/index"
     }
 }

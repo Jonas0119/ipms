@@ -1,7 +1,7 @@
 <view class="container">
     <view class="section">
         <view class="section-title">原有上传方式（完全兼容）</view>
-        <cw-uploader 
+        <ipms-uploader 
             file-list="{{ originalFileList }}"
             bind:after-read="onOriginalUpload"
             max-count="3"
@@ -11,7 +11,7 @@
 
     <view class="section">
         <view class="section-title">统一存储上传方式（新功能）</view>
-        <cw-uploader 
+        <ipms-uploader 
             file-list="{{ unifiedFileList }}"
             use-unified-storage="{{ true }}"
             upload-dir="{{ uploadDir }}"
@@ -25,24 +25,24 @@
 
     <view class="section">
         <view class="section-title">直接调用测试</view>
-        <cw-button 
+        <ipms-button 
             type="primary" 
             bind:click="testDirectUpload"
             block
         >
             直接调用统一存储服务
-        </cw-button>
+        </ipms-button>
     </view>
 
     <view class="section">
         <view class="section-title">工具函数</view>
-        <cw-button 
+        <ipms-button 
             type="warning" 
             bind:click="clearStorageCache"
             block
         >
             清除存储配置缓存
-        </cw-button>
+        </ipms-button>
     </view>
 
     <view class="section">

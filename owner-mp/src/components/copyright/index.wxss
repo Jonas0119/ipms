@@ -3,7 +3,7 @@
  * | 开源物业管理系统，敬请使用
  * +----------------------------------------------------------------------
  */
-.cw-copyright {
+.ipms-copyright {
     padding: 34px 0;
     display: flex;
     flex-direction: row;
@@ -14,11 +14,11 @@
     color: #d4d5d6;
 }
 
-.cw-copyright.dark {
+.ipms-copyright.dark {
     color: #999;
 }
 
-.cw-copyright.fixed {
+.ipms-copyright.fixed {
     position: fixed;
     left: 0;
     right: 0;
@@ -26,20 +26,20 @@
     bottom: env(safe-area-inset-bottom);
 }
 
-.cw-copyright.in-tab-page {
+.ipms-copyright.in-tab-page {
     position: absolute;
 }
 
-.cw-copyright .chowa {
+.ipms-copyright .ipms {
     font-size: 42px;
     flex: none;
 }
 
-.cw-copyright .chowa {
+.ipms-copyright .ipms {
     margin-right: 8px;
 }
 
-.cw-copyright .cw-company {
+.ipms-copyright .ipms-company {
     margin-left: 16px;
     flex: none;
     display: flex;

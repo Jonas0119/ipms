@@ -45,7 +45,7 @@ function WatcherMiddleware(): Middleware<DefaultState, DefaultContext> {
                 config.debug ||
                 ctx.host.includes('localhost') ||
                 ctx.host.includes('127.0.0.1') ||
-                ctx.host.includes('172.17.0.5') ||
+                ctx.host.includes('172.18.0.5') ||
                 /^\d+\.\d+\.\d+\.\d+/.test(ctx.host);
 
             if (isLocalDev) {

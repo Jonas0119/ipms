@@ -5,13 +5,13 @@
  */
 @import '../common/index.wxss';
 
-.cw-slider {
+.ipms-slider {
     position: relative;
     border-radius: 999px;
     background-color: #ebedf0;
 }
 
-.cw-slider:before {
+.ipms-slider:before {
     position: absolute;
     right: 0;
     left: 0;
@@ -20,14 +20,14 @@
     bottom: -8px;
 }
 
-.cw-slider__bar {
+.ipms-slider__bar {
     position: relative;
     border-radius: inherit;
     transition: width 0.2s;
     background-color: #1989fa;
 }
 
-.cw-slider__button {
+.ipms-slider__button {
     width: 24px;
     height: 24px;
     border-radius: 50%;
@@ -35,13 +35,13 @@
     background-color: #fff;
 }
 
-.cw-slider__button-wrapper {
+.ipms-slider__button-wrapper {
     position: absolute;
     top: 50%;
     right: 0;
     transform: translate3d(50%, -50%, 0);
 }
 
-.cw-slider--disabled {
+.ipms-slider--disabled {
     opacity: 0.5;
 }

@@ -4,7 +4,7 @@
  * +----------------------------------------------------------------------
  */
 
-import { CwPage } from '../common/page';
+import { IpmsPage } from '../common/page';
 import $dialog from '../../components/dialog/dialog';
 import $toast from '../../components/toast/toast';
 import $notify from '../../components/notify/notify';
@@ -12,7 +12,7 @@ import request from '../../utils/request';
 import utils from '../../utils/index';
 import location from './location';
 
-CwPage({
+IpmsPage({
     data: {
         // form data start
         company_name: '',

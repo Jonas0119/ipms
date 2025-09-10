@@ -21,7 +21,7 @@
                     <Radio label="colleague">公司派遣</Radio>
                 </RadioGroup>
                 <FindOwer v-if="refer === 'owner'" class="mt-16" @on-find-owner="onFindOwer" />
-                <div class="cw-form-actions" v-else>
+                <div class="ipms-form-actions" v-else>
                     <Button type="primary" @click="nextStep">下一步</Button>
                 </div>
             </div>
@@ -70,7 +70,7 @@
                     <MultipleImageUpload v-model="form.complain_imgs" dir="repair" />
                 </FormField>
 
-                <div class="cw-form-actions">
+                <div class="ipms-form-actions">
                     <Button @click="preStep">上一步</Button>
                     <Button type="primary" :loading="submiting" @click="submit">下一步</Button>
                 </div>

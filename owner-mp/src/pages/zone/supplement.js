@@ -4,7 +4,7 @@
  * +----------------------------------------------------------------------
  */
 
-import { CwPage } from '../common/page';
+import { IpmsPage } from '../common/page';
 import utils from '../../utils/index';
 import $toast from '../../components/toast/toast';
 import $notify from '../../components/notify/notify';
@@ -12,7 +12,7 @@ import { ASSETS_HOST } from '../../config';
 
 let timer = null;
 
-CwPage({
+IpmsPage({
     data: {
         ASSETS_HOST,
         // form data start
@@ -151,7 +151,7 @@ CwPage({
                             );
 
                             this.setData({
-                                avatar_url: result.key
+                                avatar_url: result.url
                             });
                             $toast.clear();
                         } catch (error) {

@@ -6,9 +6,9 @@
 
 <template>
     <section :class="wrapperClasses">
-        <div class="cw-layout-topbar-left">
+        <div class="ipms-layout-topbar-left">
             <router-link to="/" v-if="mediaQuery === 'xs'">
-                <img src="../../../assets/logo.svg" class="cw-layout-topbar-logo" />
+                <img src="../../../assets/logo.svg" class="ipms-layout-topbar-logo" />
             </router-link>
 
             <button @click="updateCollapse">
@@ -29,7 +29,7 @@
             </button>
 
             <!-- 模块导航：根据 routes 元信息与权限计算可见模块，宽度不足时收起为下拉 -->
-            <ul class="cw-layout-topbar-menu" ref="menu" v-show="showMenu">
+            <ul class="ipms-layout-topbar-menu" ref="menu" v-show="showMenu">
                 <template v-for="(item, key) in moduleRoutes">
                     <li
                         :key="key"
@@ -72,14 +72,14 @@
             </Breadcrumb>
         </div>
 
-        <div class="cw-layout-topbar-right">
-            <button @click="fullScreen" class="cw-layout-topbar-full-screen" v-if="mediaQuery !== 'xs'">
+        <div class="ipms-layout-topbar-right">
+            <button @click="fullScreen" class="ipms-layout-topbar-full-screen" v-if="mediaQuery !== 'xs'">
                 <Icon :type="inFullScreen ? 'exit-full-screen' : 'full-screen'" />
             </button>
 
             <!-- 默认社区切换：改变 postInfo.default_community_id 并触发后端更新 -->
             <Dropdown placement="bottom-start" transfer>
-                <button class="cw-layout-topbar-avatar">
+                <button class="ipms-layout-topbar-avatar">
                     <Icon type="address" />
                     {{ defaultCommunityName }}小区
                 </button>
@@ -97,7 +97,7 @@
 
             <!-- 用户下拉：个人中心与退出登录入口 -->
             <Dropdown placement="bottom-start" transfer>
-                <button class="cw-layout-topbar-avatar">
+                <button class="ipms-layout-topbar-avatar">
                     <Avatar
                         icon="ios-person"
                         size="small"
@@ -105,7 +105,7 @@
                     />
                     <span>{{ userInfo.real_name }}</span>
                 </button>
-                <DropdownMenu slot="list" class="cw-layout-topbar-user-drop">
+                <DropdownMenu slot="list" class="ipms-layout-topbar-user-drop">
                     <DropdownItem @click.native="goZone">
                         <Icon type="md-contact" />
                         个人中心
@@ -318,8 +318,8 @@ export default {
     computed: {
         wrapperClasses() {
             return {
-                'cw-layout-topbar': true,
-                [`cw-layout-topbar-${this.theme}`]: true
+                'ipms-layout-topbar': true,
+                [`ipms-layout-topbar-${this.theme}`]: true
             };
         },
         breadcrumbs() {
@@ -373,7 +373,7 @@ export default {
 </script>
 
 <style lang="less">
-.cw-layout-topbar {
+.ipms-layout-topbar {
     height: 100%;
     display: flex;
     flex-direction: row;
@@ -621,7 +621,7 @@ export default {
             }
         }
 
-        .cw-layout-topbar-menu li {
+        .ipms-layout-topbar-menu li {
             color: #2b2b2b;
 
             a {
@@ -667,7 +667,7 @@ export default {
             }
         }
 
-        .cw-layout-topbar-menu li {
+        .ipms-layout-topbar-menu li {
             color: #ddd;
 
             a {
@@ -695,7 +695,7 @@ export default {
 }
 
 @media screen and (max-width: 586px) {
-    .cw-layout-topbar {
+    .ipms-layout-topbar {
         &-full-screen {
             display: none;
         }

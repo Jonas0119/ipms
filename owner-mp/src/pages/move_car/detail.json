@@ -2,11 +2,11 @@
     "navigationBarTitleText": "挪车详情",
     "enablePullDownRefresh": true,
     "usingComponents": {
-        "cw-panel": "../../components/panel",
-        "cw-cell": "../../components/cell",
-        "cw-cell-group": "../../components/cell-group",
-        "cw-copyright": "../../components/copyright",
-        "cw-employee": "../../components/employee",
-        "cw-skeleton": "../../components/skeleton"
+        "ipms-panel": "../../components/panel",
+        "ipms-cell": "../../components/cell",
+        "ipms-cell-group": "../../components/cell-group",
+        "ipms-copyright": "../../components/copyright",
+        "ipms-employee": "../../components/employee",
+        "ipms-skeleton": "../../components/skeleton"
     }
 }

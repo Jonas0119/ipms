@@ -4,18 +4,18 @@
     "navigationBarTextStyle": "white",
     "navigationBarBackgroundColor": "#1989fa",
     "usingComponents": {
-        "cw-image": "../../components/image",
-        "cw-notify": "../../components/notify",
-        "cw-toast": "../../components/toast",
-        "cw-cell": "../../components/cell",
-        "cw-cell-group": "../../components/cell-group",
-        "cw-button": "../../components/button",
-        "cw-dialog": "../../components/dialog",
-        "cw-collapse": "../../components/collapse",
-        "cw-collapse-item": "../../components/collapse-item",
-        "cw-skeleton": "../../components/skeleton",
-        "cw-tag": "../../components/tag",
-        "cw-workflow": "../../components/workflow",
-        "cw-copyright": "../../components/copyright"
+        "ipms-image": "../../components/image",
+        "ipms-notify": "../../components/notify",
+        "ipms-toast": "../../components/toast",
+        "ipms-cell": "../../components/cell",
+        "ipms-cell-group": "../../components/cell-group",
+        "ipms-button": "../../components/button",
+        "ipms-dialog": "../../components/dialog",
+        "ipms-collapse": "../../components/collapse",
+        "ipms-collapse-item": "../../components/collapse-item",
+        "ipms-skeleton": "../../components/skeleton",
+        "ipms-tag": "../../components/tag",
+        "ipms-workflow": "../../components/workflow",
+        "ipms-copyright": "../../components/copyright"
     }
 }

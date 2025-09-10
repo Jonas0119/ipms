@@ -15,7 +15,7 @@
             </p>
         </Alert>
         <Input placeholder="请输入业主手机号" v-model="phone" prefix="ios-contact" @on-enter="find" />
-        <div class="cw-form-actions">
+        <div class="ipms-form-actions">
             <Button type="primary" :loading="fetching" @click="find">下一步</Button>
         </div>
 

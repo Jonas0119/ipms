@@ -4,11 +4,11 @@
  * +----------------------------------------------------------------------
  */
 
-import { CwPage } from '../common/page';
+import { IpmsPage } from '../common/page';
 import $notify from '../../components/notify/notify';
 import utils from '../../utils/index';
 
-CwPage({
+IpmsPage({
     data: {
         loading: false,
         agree: true,

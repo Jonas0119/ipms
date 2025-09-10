@@ -13,17 +13,17 @@
             </view>
         </view>
 
-        <cw-cell-group title="基本信息">
-            <cw-cell title="宠物名：" value="{{detail.info.name}}" is-detail />
-            <cw-cell title="种类：" value="{{detail.info.pet_type === 1 ? '犬' : '未知'}}" is-detail />
-            <cw-cell title="性别：" value="{{detail.info.sex === 0 ? '雌' : '雄'}}" is-detail />
-            <cw-cell title="品种：" value="{{detail.info.breed}}" is-detail />
-            <cw-cell title="毛色：" value="{{detail.info.coat_color}}" is-detail />
-            <cw-cell title="所在小区：" value="{{detail.info.community_name}}" is-detail border="{{false}}" />
-        </cw-cell-group>
+        <ipms-cell-group title="基本信息">
+            <ipms-cell title="宠物名：" value="{{detail.info.name}}" is-detail />
+            <ipms-cell title="种类：" value="{{detail.info.pet_type === 1 ? '犬' : '未知'}}" is-detail />
+            <ipms-cell title="性别：" value="{{detail.info.sex === 0 ? '雌' : '雄'}}" is-detail />
+            <ipms-cell title="品种：" value="{{detail.info.breed}}" is-detail />
+            <ipms-cell title="毛色：" value="{{detail.info.coat_color}}" is-detail />
+            <ipms-cell title="所在小区：" value="{{detail.info.community_name}}" is-detail border="{{false}}" />
+        </ipms-cell-group>
 
-        <cw-cell-group title="宠物登记信息" wx:if="{{!fillPetLicense}}">
-            <cw-panel use-footer-slot wx:if="{{!detail.info.pet_license}}">
+        <ipms-cell-group title="宠物登记信息" wx:if="{{!fillPetLicense}}">
+            <ipms-panel use-footer-slot wx:if="{{!detail.info.pet_license}}">
                 <view class="panel-container">
                     <view class="nodata">尚未办理宠物登记</view>
                     <view class="notice">
@@ -31,30 +31,30 @@
                     </view>
                 </view>
                 <view slot="footer" class="footer">
-                    <cw-button size="small" round type="info" bind:click="showPetLicense">
+                    <ipms-button size="small" round type="info" bind:click="showPetLicense">
                         添加宠物登记信息
-                    </cw-button>
+                    </ipms-button>
                 </view>
-            </cw-panel>
+            </ipms-panel>
             <view wx:else>
-                <cw-cell title="证书编号：" value="{{detail.info.pet_license}}" is-detail border="{{false}}" />
-                <cw-cell
+                <ipms-cell title="证书编号：" value="{{detail.info.pet_license}}" is-detail border="{{false}}" />
+                <ipms-cell
                     title="发证时间："
                     value="{{common.date(detail.info.pet_license_award_at, false)}}"
                     is-detail
                     border="{{false}}"
                 />
             </view>
-        </cw-cell-group>
-        <cw-panel use-footer-slot wx:else custom-class="section" title="上传宠物登记信息">
-            <cw-field
+        </ipms-cell-group>
+        <ipms-panel use-footer-slot wx:else custom-class="section" title="上传宠物登记信息">
+            <ipms-field
                 label="证书编号"
                 maxlength="{{ 40 }}"
                 show-word-limit
                 model:value="{{ pet_license }}"
                 placeholder="请输入证书编号"
             />
-            <cw-cell
+            <ipms-cell
                 title="发证时间"
                 value="{{!pet_license_award_at ? '请选择发证时间' : common.date(pet_license_award_at, false)}}"
                 is-link
@@ -63,37 +63,37 @@
                 bind:click="showlicenseCalendar"
             />
             <view slot="footer" class="footer">
-                <cw-button size="small" round bind:click="hidePetLicense">
+                <ipms-button size="small" round bind:click="hidePetLicense">
                     取消
-                </cw-button>
-                <cw-button size="small" round type="info" loading="{{licenseSubmiting}}" bind:click="updatePetLicense">
+                </ipms-button>
+                <ipms-button size="small" round type="info" loading="{{licenseSubmiting}}" bind:click="updatePetLicense">
                     确认
-                </cw-button>
+                </ipms-button>
             </view>
-        </cw-panel>
+        </ipms-panel>
 
-        <cw-cell-group title="接种信息">
-            <cw-panel wx:if="{{!detail.vaccinates.length}}">
+        <ipms-cell-group title="接种信息">
+            <ipms-panel wx:if="{{!detail.vaccinates.length}}">
                 <view class="panel-container">
                     <view class="nodata">暂无接种信息</view>
                 </view>
-            </cw-panel>
-            <cw-cell
+            </ipms-panel>
+            <ipms-cell
                 is-link
                 wx:if="{{!fillVaccinate}}"
                 bind:click="showVaccinate"
                 border="{{detail.vaccinates.length === 0 ? false : true}}"
                 title="添加接种信息"
             />
-            <cw-panel use-footer-slot wx:else title="上传宠物接种信息">
-                <cw-cell
+            <ipms-panel use-footer-slot wx:else title="上传宠物接种信息">
+                <ipms-cell
                     title="最近一次接种疫苗时间"
                     value="{{!vaccinated_at ? '请选择接种时间' : common.date(vaccinated_at, false)}}"
                     is-link
                     clickable
                     bind:click="showVaccinateCalendar"
                 />
-                <cw-field
+                <ipms-field
                     label="疫苗类型"
                     maxlength="{{ 32 }}"
                     show-word-limit
@@ -102,10 +102,10 @@
                     border="{{false}}"
                 />
                 <view slot="footer" class="footer">
-                    <cw-button size="small" round bind:click="hideVaccinate">
+                    <ipms-button size="small" round bind:click="hideVaccinate">
                         取消
-                    </cw-button>
-                    <cw-button
+                    </ipms-button>
+                    <ipms-button
                         size="small"
                         round
                         type="info"
@@ -113,10 +113,10 @@
                         bind:click="updateVaccinate"
                     >
                         确认
-                    </cw-button>
+                    </ipms-button>
                 </view>
-            </cw-panel>
-            <cw-cell
+            </ipms-panel>
+            <ipms-cell
                 wx:for="{{detail.vaccinates}}"
                 wx:key="index"
                 border="{{false}}"
@@ -124,10 +124,10 @@
                 border="{{index !== detail.vaccinates.length - 1}}"
                 label="{{item.vaccine_type}}"
             />
-        </cw-cell-group>
+        </ipms-cell-group>
 
         <view class="remove-btn-wrapper">
-            <cw-button block type="danger" bind:click="showRemoveAction">注销宠物</cw-button>
+            <ipms-button block type="danger" bind:click="showRemoveAction">注销宠物</ipms-button>
         </view>
     </view>
     <view wx:else>
@@ -135,39 +135,39 @@
             <view class="photo" />
         </view>
 
-        <cw-cell-group title="基本信息" wx:if="{{fetching}}">
-            <cw-cell is-detail title="宠物名：" border="{{false}}">
-                <cw-skeleton in-cell row="2" />
-            </cw-cell>
-            <cw-cell is-detail title="种类：" border="{{false}}">
-                <cw-skeleton in-cell row="1" />
-            </cw-cell>
-            <cw-cell is-detail title="性别：" border="{{false}}">
-                <cw-skeleton in-cell row="1" />
-            </cw-cell>
-            <cw-cell is-detail title="品种：" border="{{false}}">
-                <cw-skeleton in-cell row="1" />
-            </cw-cell>
-            <cw-cell is-detail title="毛色：" border="{{false}}">
-                <cw-skeleton in-cell row="1" />
-            </cw-cell>
-        </cw-cell-group>
+        <ipms-cell-group title="基本信息" wx:if="{{fetching}}">
+            <ipms-cell is-detail title="宠物名：" border="{{false}}">
+                <ipms-skeleton in-cell row="2" />
+            </ipms-cell>
+            <ipms-cell is-detail title="种类：" border="{{false}}">
+                <ipms-skeleton in-cell row="1" />
+            </ipms-cell>
+            <ipms-cell is-detail title="性别：" border="{{false}}">
+                <ipms-skeleton in-cell row="1" />
+            </ipms-cell>
+            <ipms-cell is-detail title="品种：" border="{{false}}">
+                <ipms-skeleton in-cell row="1" />
+            </ipms-cell>
+            <ipms-cell is-detail title="毛色：" border="{{false}}">
+                <ipms-skeleton in-cell row="1" />
+            </ipms-cell>
+        </ipms-cell-group>
 
-        <cw-cell-group title="宠物登记信息" wx:if="{{fetching}}">
-            <cw-cell is-detail title="证书编号：" border="{{false}}">
-                <cw-skeleton in-cell row="1" />
-            </cw-cell>
-            <cw-cell is-detail title="发证时间：" border="{{false}}">
-                <cw-skeleton in-cell row="1" />
-            </cw-cell>
-        </cw-cell-group>
+        <ipms-cell-group title="宠物登记信息" wx:if="{{fetching}}">
+            <ipms-cell is-detail title="证书编号：" border="{{false}}">
+                <ipms-skeleton in-cell row="1" />
+            </ipms-cell>
+            <ipms-cell is-detail title="发证时间：" border="{{false}}">
+                <ipms-skeleton in-cell row="1" />
+            </ipms-cell>
+        </ipms-cell-group>
     </view>
 
-    <cw-copyright />
-    <cw-toast id="cw-toast" />
-    <cw-notify id="cw-notify" />
+    <ipms-copyright />
+    <ipms-toast id="ipms-toast" />
+    <ipms-notify id="ipms-notify" />
 
-    <cw-action-sheet
+    <ipms-action-sheet
         title="注销原因"
         close-on-click-overlay="{{true}}"
         show="{{removeActionVisible}}"
@@ -176,14 +176,14 @@
         actions="{{removeActions}}"
     />
 
-    <cw-calendar
+    <ipms-calendar
         show="{{licenseCalendarVisible}}"
         max-date="{{stamp}}"
         min-date="{{stamp - 1000 * 60 * 60 * 24 * 365}}"
         bind:close="hidelicenseCalendar"
         bind:confirm="onLicenseDateChange"
     />
-    <cw-calendar
+    <ipms-calendar
         show="{{accinateCalendarVisible}}"
         max-date="{{stamp}}"
         min-date="{{stamp - 1000 * 60 * 60 * 24 * 365}}"

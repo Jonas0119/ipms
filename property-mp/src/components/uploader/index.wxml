@@ -1,14 +1,14 @@
 <wxs src="../wxs/utils.wxs" module="utils" />
 <wxs src="./index.wxs" module="computed" />
 
-<view class="cw-uploader">
-    <view class="cw-uploader__wrapper">
+<view class="ipms-uploader">
+    <view class="ipms-uploader__wrapper">
         <!-- 预览样式 -->
         <view
             wx:if="{{ previewImage }}"
             wx:for="{{ lists }}"
             wx:key="index"
-            class="cw-uploader__preview"
+            class="ipms-uploader__preview"
             data-index="{{ index }}"
             bindtap="onClickPreview"
         >
@@ -17,7 +17,7 @@
                 mode="{{ imageFit }}"
                 src="{{ item.thumb || item.url }}"
                 alt="{{ item.name || ('图片' + index) }}"
-                class="cw-uploader__preview-image"
+                class="ipms-uploader__preview-image"
                 style="{{ computed.sizeStyle({ previewSize }) }}"
                 data-index="{{ index }}"
                 bindtap="onPreviewImage"
@@ -28,51 +28,51 @@
                 title="{{ item.name || ('视频' + index) }}"
                 poster="{{ item.thumb }}"
                 autoplay="{{ item.autoplay }}"
-                class="cw-uploader__preview-image"
+                class="ipms-uploader__preview-image"
                 style="{{ computed.sizeStyle({ previewSize }) }}"
                 data-index="{{ index }}"
                 bindtap="onPreviewVideo"
             ></video>
             <view
                 wx:else
-                class="cw-uploader__file"
+                class="ipms-uploader__file"
                 style="{{ computed.sizeStyle({ previewSize }) }}"
                 data-index="{{ index }}"
                 bindtap="onPreviewFile"
             >
-                <cw-icon name="description" class="cw-uploader__file-icon" />
-                <view class="cw-uploader__file-name cw-ellipsis">{{ item.name || item.url }}</view>
+                <ipms-icon name="description" class="ipms-uploader__file-icon" />
+                <view class="ipms-uploader__file-name ipms-ellipsis">{{ item.name || item.url }}</view>
             </view>
-            <view wx:if="{{ item.status === 'uploading' || item.status === 'failed' }}" class="cw-uploader__mask">
-                <cw-icon wx:if="{{ item.status === 'failed' }}" name="close" class="cw-uploader__mask-icon" />
-                <cw-loading wx:else custom-class="cw-uploader__loading" />
-                <text wx:if="{{ item.message }}" class="cw-uploader__mask-message">{{ item.message }}</text>
+            <view wx:if="{{ item.status === 'uploading' || item.status === 'failed' }}" class="ipms-uploader__mask">
+                <ipms-icon wx:if="{{ item.status === 'failed' }}" name="close" class="ipms-uploader__mask-icon" />
+                <ipms-loading wx:else custom-class="ipms-uploader__loading" />
+                <text wx:if="{{ item.message }}" class="ipms-uploader__mask-message">{{ item.message }}</text>
             </view>
             <view
                 wx:if="{{ deletable && item.deletable }}"
                 data-index="{{ index }}"
-                class="cw-uploader__preview-delete"
+                class="ipms-uploader__preview-delete"
                 catch:tap="deleteItem"
             >
-                <cw-icon name="cross" class="cw-uploader__preview-delete-icon" />
+                <ipms-icon name="cross" class="ipms-uploader__preview-delete-icon" />
             </view>
         </view>
 
         <!-- 上传样式 -->
         <block wx:if="{{ isInCount }}">
-            <view class="cw-uploader__slot" bindtap="startUpload" wx:if="{{!showUpload}}">
+            <view class="ipms-uploader__slot" bindtap="startUpload" wx:if="{{!showUpload}}">
                 <slot />
             </view>
 
             <!-- 默认上传样式 -->
             <view
                 wx:if="{{ showUpload }}"
-                class="cw-uploader__upload {{ disabled ? 'cw-uploader__upload--disabled': ''}}"
+                class="ipms-uploader__upload {{ disabled ? 'ipms-uploader__upload--disabled': ''}}"
                 style="{{ computed.sizeStyle({ previewSize }) }}"
                 bindtap="startUpload"
             >
-                <cw-icon name="{{ uploadIcon }}" class="cw-uploader__upload-icon" />
-                <text wx:if="{{ uploadText }}" class="cw-uploader__upload-text">{{ uploadText }}</text>
+                <ipms-icon name="{{ uploadIcon }}" class="ipms-uploader__upload-icon" />
+                <text wx:if="{{ uploadText }}" class="ipms-uploader__upload-text">{{ uploadText }}</text>
             </view>
         </block>
     </view>

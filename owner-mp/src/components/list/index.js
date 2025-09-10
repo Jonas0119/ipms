@@ -4,9 +4,9 @@
  * +----------------------------------------------------------------------
  */
 
-import { CwComponent } from '../common/component';
+import { IpmsComponent } from '../common/component';
 
-CwComponent({
+IpmsComponent({
     props: {
         fetching: Boolean,
         page_num: Number,

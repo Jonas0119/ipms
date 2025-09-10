@@ -5,8 +5,8 @@
  */
 
 <template>
-    <div class="cw-colleague-selector-wrapper">
-        <div class="cw-colleague-selector">
+    <div class="ipms-colleague-selector-wrapper">
+        <div class="ipms-colleague-selector">
             <Input
                 placeholder="搜索员工"
                 prefix="ios-search"
@@ -16,11 +16,11 @@
                 @on-clear="unSearch"
             />
 
-            <div class="cw-colleague-selector-scroll">
-                <div class="cw-colleague-selector-department" v-if="!isSearch">
+            <div class="ipms-colleague-selector-scroll">
+                <div class="ipms-colleague-selector-department" v-if="!isSearch">
                     <template v-for="item in deparments">
-                        <div class="cw-colleague-selector-department-wrapper" :key="item.id">
-                            <div class="cw-colleague-selector-department-item" @click="autoOpenDeparment(item.id)">
+                        <div class="ipms-colleague-selector-department-wrapper" :key="item.id">
+                            <div class="ipms-colleague-selector-department-item" @click="autoOpenDeparment(item.id)">
                                 <Checkbox
                                     size="small"
                                     :value="deparment_ids.includes(item.id)"
@@ -32,7 +32,7 @@
                                 <Icon type="ios-folder-open" v-else />
                                 <span>{{ item.name }}</span>
                             </div>
-                            <ul class="cw-colleague-selector-user" v-if="openedDeparments.includes(item.id)">
+                            <ul class="ipms-colleague-selector-user" v-if="openedDeparments.includes(item.id)">
                                 <template v-for="row in list">
                                     <li :key="row.id" v-if="row.department_id === item.id" @click="selectUser(row.id)">
                                         <Checkbox size="small" :value="result.includes(row.id)" disabled />
@@ -46,7 +46,7 @@
                     </template>
                 </div>
                 <div v-else>
-                    <ul class="cw-colleague-selector-user">
+                    <ul class="ipms-colleague-selector-user">
                         <template v-for="row in list">
                             <li :key="row.id" v-if="row.real_name.indexOf(searchVal) > -1" @click="selectUser(row.id)">
                                 <Checkbox size="small" :value="result.includes(row.id)" disabled />
@@ -264,7 +264,7 @@ export default {
 </script>
 
 <style lang="less">
-.cw-colleague-selector {
+.ipms-colleague-selector {
     border: 1px solid #f5f5f5;
     padding: 10px 12px;
     max-width: 320px;
@@ -309,7 +309,7 @@ export default {
             }
         }
 
-        .cw-colleague-selector-user {
+        .ipms-colleague-selector-user {
             padding-left: 22px;
         }
     }

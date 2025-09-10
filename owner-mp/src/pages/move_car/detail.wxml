@@ -13,68 +13,68 @@
             </view>
         </view>
 
-        <cw-cell-group title="处理结果">
-            <cw-panel wx:if="{{!detail.responsed_at}}">
+        <ipms-cell-group title="处理结果">
+            <ipms-panel wx:if="{{!detail.responsed_at}}">
                 <view class="panel-container">
                     <view class="nodata">处理中，暂未答复</view>
                 </view>
-            </cw-panel>
+            </ipms-panel>
             <view wx:else>
-                <cw-cell title="处理人：" is-detail>
-                    <cw-employee info="{{detail.resInfo}}" />
-                </cw-cell>
-                <cw-cell title="答复内容：" value="{{detail.response_content}}" is-detail />
-                <cw-cell title="答复时间：" value="{{common.date(detail.responsed_at)}}" is-detail border="{{false}}" />
+                <ipms-cell title="处理人：" is-detail>
+                    <ipms-employee info="{{detail.resInfo}}" />
+                </ipms-cell>
+                <ipms-cell title="答复内容：" value="{{detail.response_content}}" is-detail />
+                <ipms-cell title="答复时间：" value="{{common.date(detail.responsed_at)}}" is-detail border="{{false}}" />
             </view>
-        </cw-cell-group>
+        </ipms-cell-group>
 
-        <cw-cell-group title="挪车信息">
-            <cw-cell title="车牌号码：" value="{{detail.car_number}}" is-detail />
-            <cw-cell title="挪车原因：" is-detail>
+        <ipms-cell-group title="挪车信息">
+            <ipms-cell title="车牌号码：" value="{{detail.car_number}}" is-detail />
+            <ipms-cell title="挪车原因：" is-detail>
                 <block wx:if="{{detail.move_reason === 1}}">阻碍通行</block>
                 <block wx:elif="{{detail.move_reason === 2}}">占用消防通道</block>
                 <block wx:elif="{{detail.move_reason === 3}}">阻挡出入口</block>
                 <block wx:elif="{{detail.move_reason === 4}}">影响施工</block>
                 <block wx:elif="{{detail.move_reason === 5}}">占用车位</block>
-            </cw-cell>
-            <cw-cell title="所在小区：" value="{{detail.community_name}}" is-detail />
-            <cw-cell title="小区车辆：" value="{{detail.have_concat_info ? '是' : '否'}}" is-detail />
-            <cw-cell title="提交时间：" value="{{common.date(detail.created_at)}}" is-detail border="{{false}}" />
-        </cw-cell-group>
+            </ipms-cell>
+            <ipms-cell title="所在小区：" value="{{detail.community_name}}" is-detail />
+            <ipms-cell title="小区车辆：" value="{{detail.have_concat_info ? '是' : '否'}}" is-detail />
+            <ipms-cell title="提交时间：" value="{{common.date(detail.created_at)}}" is-detail border="{{false}}" />
+        </ipms-cell-group>
     </view>
     <view wx:else>
         <view>
             <view class="photo" />
         </view>
-        <cw-cell-group title="处理人：" wx:if="{{fetching}}">
-            <cw-cell is-detail title="车牌号码：">
-                <cw-skeleton in-cell row="2" />
-            </cw-cell>
-            <cw-cell is-detail title="答复内容：">
-                <cw-skeleton in-cell row="1" />
-            </cw-cell>
-            <cw-cell is-detail title="答复时间：" border="{{false}}">
-                <cw-skeleton in-cell row="1" />
-            </cw-cell>
-        </cw-cell-group>
-        <cw-cell-group title="挪车信息" wx:if="{{fetching}}">
-            <cw-cell is-detail title="车牌号码：">
-                <cw-skeleton in-cell row="1" />
-            </cw-cell>
-            <cw-cell is-detail title="挪车原因：">
-                <cw-skeleton in-cell row="1" />
-            </cw-cell>
-            <cw-cell is-detail title="所在小区：">
-                <cw-skeleton in-cell row="1" />
-            </cw-cell>
-            <cw-cell is-detail title="小区车辆：">
-                <cw-skeleton in-cell row="1" />
-            </cw-cell>
-            <cw-cell is-detail title="提交时间：" border="{{false}}">
-                <cw-skeleton in-cell row="1" />
-            </cw-cell>
-        </cw-cell-group>
+        <ipms-cell-group title="处理人：" wx:if="{{fetching}}">
+            <ipms-cell is-detail title="车牌号码：">
+                <ipms-skeleton in-cell row="2" />
+            </ipms-cell>
+            <ipms-cell is-detail title="答复内容：">
+                <ipms-skeleton in-cell row="1" />
+            </ipms-cell>
+            <ipms-cell is-detail title="答复时间：" border="{{false}}">
+                <ipms-skeleton in-cell row="1" />
+            </ipms-cell>
+        </ipms-cell-group>
+        <ipms-cell-group title="挪车信息" wx:if="{{fetching}}">
+            <ipms-cell is-detail title="车牌号码：">
+                <ipms-skeleton in-cell row="1" />
+            </ipms-cell>
+            <ipms-cell is-detail title="挪车原因：">
+                <ipms-skeleton in-cell row="1" />
+            </ipms-cell>
+            <ipms-cell is-detail title="所在小区：">
+                <ipms-skeleton in-cell row="1" />
+            </ipms-cell>
+            <ipms-cell is-detail title="小区车辆：">
+                <ipms-skeleton in-cell row="1" />
+            </ipms-cell>
+            <ipms-cell is-detail title="提交时间：" border="{{false}}">
+                <ipms-skeleton in-cell row="1" />
+            </ipms-cell>
+        </ipms-cell-group>
     </view>
 
-    <cw-copyright />
+    <ipms-copyright />
 </view>

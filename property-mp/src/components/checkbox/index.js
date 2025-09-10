@@ -8,12 +8,12 @@
  */
 
 import { useParent } from '../common/relation';
-import { CwComponent } from '../common/component';
+import { IpmsComponent } from '../common/component';
 function emit(target, value) {
     target.$emit('input', value);
     target.$emit('change', value);
 }
-CwComponent({
+IpmsComponent({
     field: true,
     relation: useParent('checkbox-group'),
     classes: ['icon-class', 'label-class'],

@@ -8,33 +8,33 @@
 
 <view class="container">
     <view wx:if="{{ fetching }}">
-        <cw-panel>
+        <ipms-panel>
             <view class="loading-wrapper">
-                <cw-skeleton row="{{ 3 }}" title />
+                <ipms-skeleton row="{{ 3 }}" title />
             </view>
-        </cw-panel>
-        <cw-panel custom-class="section">
+        </ipms-panel>
+        <ipms-panel custom-class="section">
             <view class="loading-wrapper">
-                <cw-skeleton row="{{ 3 }}" title />
+                <ipms-skeleton row="{{ 3 }}" title />
             </view>
-        </cw-panel>
-        <cw-panel custom-class="section">
+        </ipms-panel>
+        <ipms-panel custom-class="section">
             <view class="loading-wrapper">
-                <cw-skeleton row="{{ 3 }}" title />
+                <ipms-skeleton row="{{ 3 }}" title />
             </view>
-        </cw-panel>
+        </ipms-panel>
     </view>
 
     <view wx:else>
-        <cw-empty
+        <ipms-empty
             description="暂无{{communityInfo.current.name}}小区车位信息"
             icon="park"
             wx:if="{{ !fetching && list.length === 0}}"
             with-copyright
         >
             <navigator url="/pages/community/index" class="link">切换默认小区？</navigator>
-        </cw-empty>
-        <cw-panel
+        </ipms-empty>
+        <ipms-panel
             wx:for="{{ list }}"
             wx:key="index"
             use-footer-slot
@@ -73,21 +73,21 @@
                             data-car-index="{{cindex}}"
                             bindtap="unbindingCar"
                         >
-                            <cw-icon name="edit-remove" />
+                            <ipms-icon name="edit-remove" />
                         </view>
                     </view>
                 </view>
             </view>
 
             <view slot="footer" class="footer">
-                <cw-button size="small" round type="info" data-id="{{ item.building_id }}" bind:click="bindingCar">
+                <ipms-button size="small" round type="info" data-id="{{ item.building_id }}" bind:click="bindingCar">
                     添加车辆
-                </cw-button>
+                </ipms-button>
             </view>
-        </cw-panel>
+        </ipms-panel>
     </view>
 
-    <cw-notify id="cw-notify" />
-    <cw-dialog id="cw-dialog" />
-    <cw-copyright fixed="{{ !fetching && list.length === 0 }}" />
+    <ipms-notify id="ipms-notify" />
+    <ipms-dialog id="ipms-dialog" />
+    <ipms-copyright fixed="{{ !fetching && list.length === 0 }}" />
 </view>

@@ -7,9 +7,9 @@
  * +----------------------------------------------------------------------
  */
 
-import { CwComponent } from '../common/component';
+import { IpmsComponent } from '../common/component';
 
-CwComponent({
+IpmsComponent({
     props: {
         label: String
     }

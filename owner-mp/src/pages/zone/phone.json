@@ -1,11 +1,11 @@
 {
     "navigationBarTitleText": "手机认证",
     "usingComponents": {
-        "cw-icon": "../../components/icon",
-        "cw-tag": "../../components/tag",
-        "cw-copyright": "../../components/copyright",
-        "cw-toast": "../../components/toast",
-        "cw-notify": "../../components/notify",
-        "cw-button": "../../components/button"
+        "ipms-icon": "../../components/icon",
+        "ipms-tag": "../../components/tag",
+        "ipms-copyright": "../../components/copyright",
+        "ipms-toast": "../../components/toast",
+        "ipms-notify": "../../components/notify",
+        "ipms-button": "../../components/button"
     }
 }

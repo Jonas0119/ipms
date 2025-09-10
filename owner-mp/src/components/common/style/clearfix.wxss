@@ -3,7 +3,7 @@
  * | 开源物业管理系统，敬请使用
  * +----------------------------------------------------------------------
  */
-.cw-clearfix:after {
+.ipms-clearfix:after {
     display: table;
     clear: both;
     content: '';

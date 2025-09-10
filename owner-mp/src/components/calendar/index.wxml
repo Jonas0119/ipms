@@ -8,10 +8,10 @@
 
 <import src="./calendar.wxml" />
 
-<cw-popup
+<ipms-popup
     wx:if="{{ poppable }}"
-    custom-class="cw-calendar__popup--{{ position }}"
-    close-icon-class="cw-calendar__close-icon"
+    custom-class="ipms-calendar__popup--{{ position }}"
+    close-icon-class="ipms-calendar__close-icon"
     show="{{ show }}"
     round="{{ round }}"
     position="{{ position }}"
@@ -23,8 +23,8 @@
     bind:after-leave="onClosed"
 >
     <include src="calendar.wxml" />
-</cw-popup>
+</ipms-popup>
 
 <include wx:else src="calendar.wxml" />
 
-<cw-toast id="cw-toast" />
+<ipms-toast id="ipms-toast" />

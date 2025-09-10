@@ -4,8 +4,8 @@
     "enablePullDownRefresh": true,
     "backgroundTextStyle": "dark",
     "usingComponents": {
-        "cw-tabs": "../../components/tabs",
-        "cw-tab": "../../components/tab",
-        "cw-list": "../../components/list"
+        "ipms-tabs": "../../components/tabs",
+        "ipms-tab": "../../components/tab",
+        "ipms-list": "../../components/list"
     }
 }

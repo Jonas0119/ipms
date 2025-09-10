@@ -6,7 +6,7 @@
 <wxs src="../common/common.wxs" module="common" />
 
 <view class="container">
-    <cw-list
+    <ipms-list
         fetching="{{fetching}}"
         page_num="{{page_num}}"
         page_amount="{{page_amount}}"
@@ -14,7 +14,7 @@
         empty="暂无宠物"
         icon="pet"
     >
-        <cw-list-item
+        <ipms-list-item
             wx:for="{{list}}"
             title="{{common.number('P', item.created_at, item.id)}}"
             status="{{item.community_name}}小区"
@@ -37,6 +37,6 @@
                     {{ item.pet_license ? '已办理登记证' : '未办理登记证'}}
                 </view>
             </view>
-        </cw-list-item>
-    </cw-list>
+        </ipms-list-item>
+    </ipms-list>
 </view>

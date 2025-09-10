@@ -5,14 +5,14 @@
  */
 @import '../common/index.wxss';
 
-.cw-progress {
+.ipms-progress {
     position: relative;
     height: 4px;
     border-radius: 4px;
     background: #ebedf0;
 }
 
-.cw-progress__portion {
+.ipms-progress__portion {
     position: absolute;
     left: 0;
     height: 100%;
@@ -20,7 +20,7 @@
     background: #1989fa;
 }
 
-.cw-progress__pivot {
+.ipms-progress__pivot {
     position: absolute;
     top: 50%;
     box-sizing: border-box;

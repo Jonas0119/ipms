@@ -7,34 +7,34 @@
 <wxs src="./index.wxs" module="payment" />
 
 <view class="container">
-    <cw-empty
+    <ipms-empty
         icon="pay"
         description="{{communityInfo.current.name}}小区物业费用已缴清"
         wx:if="{{!fetching && list.length === 0}}"
         with-copyright
     >
         <navigator url="/pages/community/index" class="link">切换默认小区？</navigator>
-    </cw-empty>
+    </ipms-empty>
 
     <view wx:if="{{fetching}}">
         <view wx:for="{{3}}" wx:key="index">
-            <cw-panel custom-class="{{index === 0 ? '' : 'section'}}" use-footer-slot>
+            <ipms-panel custom-class="{{index === 0 ? '' : 'section'}}" use-footer-slot>
                 <view class="header">
-                    <cw-skeleton row="{{ 1 }}" solt="title" row-width="40%" />
+                    <ipms-skeleton row="{{ 1 }}" solt="title" row-width="40%" />
                 </view>
-                <cw-skeleton row="{{ 5 }}" />
-            </cw-panel>
+                <ipms-skeleton row="{{ 5 }}" />
+            </ipms-panel>
         </view>
     </view>
     <view wx:else>
         <view wx:for="{{list}}" wx:key="index">
-            <cw-panel
+            <ipms-panel
                 title="{{item.fee.start_year}}至{{item.fee.end_year}}年{{item.fee.community_name}}物业费"
                 wx:if="{{item.unpayOrder.length > 0}}"
                 custom-class="{{index === 0 ? '' : 'section'}}"
                 use-footer-slot
             >
-                <cw-cell
+                <ipms-cell
                     wx:for="{{item.unpayOrder}}"
                     wx:for-item="detail"
                     wx:for-index="key"
@@ -49,7 +49,7 @@
                         <view class="total">{{ payment.total(item.unpayOrder, item.fee) }}</view>
                         元
                     </view>
-                    <cw-button
+                    <ipms-button
                         size="small"
                         round
                         type="danger"
@@ -57,18 +57,18 @@
                         bind:click="goPayment"
                     >
                         立即支付
-                    </cw-button>
+                    </ipms-button>
                 </view>
-            </cw-panel>
+            </ipms-panel>
 
-            <cw-panel
+            <ipms-panel
                 title="{{item.fee.start_year}}至{{item.fee.end_year}}年{{item.fee.community_name}}物业费"
                 wx:if="{{item.uncreateOrder.length > 0}}"
                 custom-class="section"
                 custom-class="{{index === 0 && item.unpayOrder.length === 0 ? '' : 'section'}}"
                 use-footer-slot
             >
-                <cw-cell
+                <ipms-cell
                     wx:for="{{item.uncreateOrder}}"
                     wx:for-item="detail"
                     wx:for-index="key"
@@ -83,7 +83,7 @@
                         <view class="total">{{ payment.total(item.uncreateOrder, item.fee) }}</view>
                         元
                     </view>
-                    <cw-button
+                    <ipms-button
                         size="small"
                         type="danger"
                         round
@@ -92,13 +92,13 @@
                         bind:click="doCreate"
                     >
                         确认并支付
-                    </cw-button>
+                    </ipms-button>
                 </view>
-            </cw-panel>
+            </ipms-panel>
         </view>
     </view>
 
-    <cw-toast id="cw-toast" />
-    <cw-notify id="cw-notify" />
-    <cw-copyright fixed="{{!fetching && list.length === 0}}" />
+    <ipms-toast id="ipms-toast" />
+    <ipms-notify id="ipms-notify" />
+    <ipms-copyright fixed="{{!fetching && list.length === 0}}" />
 </view>

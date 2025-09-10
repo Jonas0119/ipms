@@ -3,13 +3,13 @@
     "enablePullDownRefresh": true,
     "backgroundTextStyle": "dark",
     "usingComponents": {
-        "cw-panel": "../../components/panel",
-        "cw-icon": "../../components/icon",
-        "cw-notify": "../../components/notify",
-        "cw-dialog": "../../components/dialog",
-        "cw-skeleton": "../../components/skeleton",
-        "cw-empty": "../../components/empty",
-        "cw-button": "../../components/button",
-        "cw-copyright": "../../components/copyright"
+        "ipms-panel": "../../components/panel",
+        "ipms-icon": "../../components/icon",
+        "ipms-notify": "../../components/notify",
+        "ipms-dialog": "../../components/dialog",
+        "ipms-skeleton": "../../components/skeleton",
+        "ipms-empty": "../../components/empty",
+        "ipms-button": "../../components/button",
+        "ipms-copyright": "../../components/copyright"
     }
 }

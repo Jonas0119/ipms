@@ -7,7 +7,7 @@
 <wxs src="../common/common.wxs" module="common" />
 
 <view class="container">
-    <cw-nav-bar
+    <ipms-nav-bar
         title="IPMS"
         fixed
         border="{{ false }}"
@@ -23,7 +23,7 @@
         style="top: {{systemInfo.navBarHeight + systemInfo.statusBarHeight}}px;"
     >
         <view class="close" bind:tap="hideRecommand">
-            <cw-icon name="cross" />
+            <ipms-icon name="cross" />
         </view>
         <view class="text">
             <view class="num">1</view>
@@ -57,13 +57,13 @@
         <view class="operate">
             <view class="quick">
                 <navigator url="/pages/community/index">
-                    <cw-icon name="menu" />
+                    <ipms-icon name="menu" />
                 </navigator>
                 <navigator url="/pages/notification/index">
-                    <cw-icon name="notice" info="{{ unread_amount === 0 ? '' : unread_amount }}" />
+                    <ipms-icon name="notice" info="{{ unread_amount === 0 ? '' : unread_amount }}" />
                 </navigator>
                 <navigator url="/pages/home/convenient">
-                    <cw-icon name="convenient" />
+                    <ipms-icon name="convenient" />
                 </navigator>
             </view>
 
@@ -80,7 +80,7 @@
                 <view>
                     <view class="name">
                         <text>{{ userInfo.nick_name }}</text>
-                        <cw-icon name="identity" custom-class="identity" wx:if="{{ userInfo.phone }}" />
+                        <ipms-icon name="identity" custom-class="identity" wx:if="{{ userInfo.phone }}" />
                     </view>
                     <view class="signature">{{ userInfo.signature }}</view>
                 </view>
@@ -92,100 +92,100 @@
     <view class="tools-wrapper">
         <view class="tools">
             <view class="house">
-                <cw-icon name="home" custom-class="home"></cw-icon>
-                <cw-icon name="approve" custom-class="approve" wx:if="{{ community.approve(communityInfo) }}"></cw-icon>
+                <ipms-icon name="home" custom-class="home"></ipms-icon>
+                <ipms-icon name="approve" custom-class="approve" wx:if="{{ community.approve(communityInfo) }}"></ipms-icon>
                 <text>{{ community.title(communityInfo) }}</text>
             </view>
 
             <view class="tools-list">
-                <cw-row>
-                    <cw-col span="6">
+                <ipms-row>
+                    <ipms-col span="6">
                         <view class="tool-item" bindtap="connectService">
-                            <cw-icon name="phone" custom-class="phone"></cw-icon>
+                            <ipms-icon name="phone" custom-class="phone"></ipms-icon>
                             <view>联系客服</view>
                         </view>
-                    </cw-col>
+                    </ipms-col>
 
-                    <cw-col span="6">
+                    <ipms-col span="6">
                         <navigator class="tool-item" url="/pages/access/index">
-                            <cw-icon name="access" custom-class="access"></cw-icon>
+                            <ipms-icon name="access" custom-class="access"></ipms-icon>
                             <view>门禁出入</view>
                         </navigator>
-                    </cw-col>
+                    </ipms-col>
 
-                    <cw-col span="6">
+                    <ipms-col span="6">
                         <navigator class="tool-item" url="/pages/repair/create">
-                            <cw-icon name="maintain" custom-class="maintain"></cw-icon>
+                            <ipms-icon name="maintain" custom-class="maintain"></ipms-icon>
                             <view>维修上报</view>
                         </navigator>
-                    </cw-col>
+                    </ipms-col>
 
-                    <cw-col span="6">
+                    <ipms-col span="6">
                         <navigator class="tool-item" url="/pages/complain/create">
-                            <cw-icon name="report" custom-class="report"></cw-icon>
+                            <ipms-icon name="report" custom-class="report"></ipms-icon>
                             <view>投诉建议</view>
                         </navigator>
-                    </cw-col>
-                </cw-row>
-                <cw-row>
-                    <cw-col span="6">
+                    </ipms-col>
+                </ipms-row>
+                <ipms-row>
+                    <ipms-col span="6">
                         <navigator class="tool-item" url="/pages/payment/order">
-                            <cw-icon name="pay" custom-class="pay"></cw-icon>
+                            <ipms-icon name="pay" custom-class="pay"></ipms-icon>
                             <view>物业缴费</view>
                         </navigator>
-                    </cw-col>
+                    </ipms-col>
 
-                    <cw-col span="6">
+                    <ipms-col span="6">
                         <navigator class="tool-item" url="/pages/car/index">
-                            <cw-icon name="park" custom-class="park"></cw-icon>
+                            <ipms-icon name="park" custom-class="park"></ipms-icon>
                             <view>车位车辆</view>
                         </navigator>
-                    </cw-col>
+                    </ipms-col>
 
-                    <cw-col span="6">
+                    <ipms-col span="6">
                         <navigator class="tool-item" url="/pages/pet/create">
-                            <cw-icon name="pet" custom-class="pet"></cw-icon>
+                            <ipms-icon name="pet" custom-class="pet"></ipms-icon>
                             <view>宠物登记</view>
                         </navigator>
-                    </cw-col>
+                    </ipms-col>
 
-                    <cw-col span="6">
+                    <ipms-col span="6">
                         <navigator class="tool-item" url="/pages/fitment/create">
-                            <cw-icon name="fitment" custom-class="fitment"></cw-icon>
+                            <ipms-icon name="fitment" custom-class="fitment"></ipms-icon>
                             <view>装修报备</view>
                         </navigator>
-                    </cw-col>
-                </cw-row>
+                    </ipms-col>
+                </ipms-row>
 
-                <cw-row>
-                    <cw-col span="6">
+                <ipms-row>
+                    <ipms-col span="6">
                         <navigator class="tool-item" url="/pages/move_car/create">
-                            <cw-icon name="movecar" custom-class="movecar"></cw-icon>
+                            <ipms-icon name="movecar" custom-class="movecar"></ipms-icon>
                             <view>小区挪车</view>
                         </navigator>
-                    </cw-col>
+                    </ipms-col>
 
-                    <cw-col span="6">
+                    <ipms-col span="6">
                         <navigator class="tool-item" url="/pages/vistor/create">
-                            <cw-icon name="footprint" custom-class="footprint"></cw-icon>
+                            <ipms-icon name="footprint" custom-class="footprint"></ipms-icon>
                             <view>访客登记</view>
                         </navigator>
-                    </cw-col>
+                    </ipms-col>
 
-                    <cw-col span="6">
+                    <ipms-col span="6">
                         <navigator class="tool-item" url="/pages/vistor/self">
-                            <cw-icon name="vistor" custom-class="vistor"></cw-icon>
+                            <ipms-icon name="vistor" custom-class="vistor"></ipms-icon>
                             <view>访客通行</view>
                         </navigator>
-                    </cw-col>
+                    </ipms-col>
 
-                    <cw-col span="6">
+                    <ipms-col span="6">
                         <navigator class="tool-item" url="/pages/questionnaire/index">
-                            <cw-icon name="question" custom-class="question"></cw-icon>
+                            <ipms-icon name="question" custom-class="question"></ipms-icon>
                             <view>问卷调查</view>
                         </navigator>
-                    </cw-col>
-                </cw-row>
+                    </ipms-col>
+                </ipms-row>
             </view>
         </view>
     </view>
@@ -196,11 +196,11 @@
     </view>
 
     <!-- 小区通知 -->
-    <cw-panel title="小区通知" custom-class="section">
+    <ipms-panel title="小区通知" custom-class="section">
         <view class="notice-wrapper">
             <block wx:if="{{fetching}}">
                 <view class="notice-item" wx:for="{{3}}" wx:key="index">
-                    <cw-skeleton custom-class="notice-loading" title row="1" />
+                    <ipms-skeleton custom-class="notice-loading" title row="1" />
                 </view>
             </block>
             <block wx:else>
@@ -221,7 +221,7 @@
                 </block>
             </block>
         </view>
-    </cw-panel>
+    </ipms-panel>
 
     <!-- 肺炎 -->
 
@@ -244,14 +244,14 @@
     </swiper>
 
     <!-- 热聊 -->
-    <!-- <cw-panel title="小区热议" custom-class="section">
+    <!-- <ipms-panel title="小区热议" custom-class="section">
         <block wx:for="{{[1,2,3]}}" wx:key="item">
             <view class="bbs-item">
                 <view class="bbs-inner">
                     <view class="title">小区绿化越来越差劲了，满地的树叶{{item}}</view>
                     <view class="tags">
-                        <cw-tag type="primary">环境</cw-tag>
-                        <cw-tag type="success">绿化</cw-tag>
+                        <ipms-tag type="primary">环境</ipms-tag>
+                        <ipms-tag type="success">绿化</ipms-tag>
                     </view>
                     <view class="paragraph">
                         小区绿化越来越差劲了，满地的树叶小区绿化越来越差劲了，满地的树叶小区绿化越来越差劲了，满地的树叶小区绿化越来越差劲了，满地的树叶
@@ -270,15 +270,15 @@
                         </view>
                         <view class="interact">
                             <view>
-                                <cw-icon name="view"></cw-icon>
+                                <ipms-icon name="view"></ipms-icon>
                                 <text>100</text>
                             </view>
                             <view>
-                                <cw-icon name="comment"></cw-icon>
+                                <ipms-icon name="comment"></ipms-icon>
                                 <text>66</text>
                             </view>
                             <view>
-                                <cw-icon name="like"></cw-icon>
+                                <ipms-icon name="like"></ipms-icon>
                                 <text>3</text>
                             </view>
                         </view>
@@ -286,10 +286,10 @@
                 </view>
             </view>
         </block>
-    </cw-panel> -->
+    </ipms-panel> -->
 
-    <cw-divider contentPosition="center">更多内容敬请期待</cw-divider>
+    <ipms-divider contentPosition="center">更多内容敬请期待</ipms-divider>
 
     <!-- 全局提示 -->
-    <cw-toast id="cw-toast"></cw-toast>
+    <ipms-toast id="ipms-toast"></ipms-toast>
 </view>

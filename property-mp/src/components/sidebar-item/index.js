@@ -7,9 +7,9 @@
  * +----------------------------------------------------------------------
  */
 
-import { CwComponent } from '../common/component';
+import { IpmsComponent } from '../common/component';
 import { useParent } from '../common/relation';
-CwComponent({
+IpmsComponent({
     classes: ['active-class', 'disabled-class'],
     relation: useParent('sidebar'),
     props: {

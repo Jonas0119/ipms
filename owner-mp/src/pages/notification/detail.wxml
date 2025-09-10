@@ -6,7 +6,7 @@
 <wxs src="../common/common.wxs" module="common" />
 
 <view class="container">
-    <cw-nav-bar
+    <ipms-nav-bar
         title="消息详情"
         fixed
         left-arrow="{{!backHome}}"
@@ -18,9 +18,9 @@
         custom-style="height:{{ systemInfo.navBarHeight + systemInfo.statusBarHeight }}px;padding-top:{{ systemInfo.statusBarHeight }}px"
     >
         <view slot="left" wx:if="{{backHome}}" class="home-btn">
-            <cw-icon name="home" />
+            <ipms-icon name="home" />
         </view>
-    </cw-nav-bar>
+    </ipms-nav-bar>
 
     <image class="bg-pic" src="../../assets/notification/header.jpg" lazy-load mode="widthFix"></image>
 
@@ -36,14 +36,14 @@
             <view class="sub-info">时间：{{ common.date(detail.created_at) }}</view>
 
             <view class="main-body">
-                <cw-rich-text detail="{{detail.content}}" />
+                <ipms-rich-text detail="{{detail.content}}" />
             </view>
         </view>
         <view class="loading" wx:else>
-            <cw-skeleton title row="{{ 3 }}" row-width="60%" />
-            <cw-skeleton row="{{ 7 }}" custom-class="loading-gutter" />
+            <ipms-skeleton title row="{{ 3 }}" row-width="60%" />
+            <ipms-skeleton row="{{ 7 }}" custom-class="loading-gutter" />
         </view>
     </view>
 
-    <cw-copyright />
+    <ipms-copyright />
 </view>

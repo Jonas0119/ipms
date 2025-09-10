@@ -3,15 +3,15 @@
  | 开源物业管理系统，敬请使用
  +----------------------------------------------------------------------
 -->
-<cw-overlay
+<ipms-overlay
     wx:if="{{ mask || forbidClick }}"
     show="{{ show }}"
     z-index="{{ zIndex }}"
     custom-style="{{ mask ? '' : 'background-color: transparent;' }}"
 />
-<cw-transition show="{{ show }}" custom-style="z-index: {{ zIndex }}" custom-class="cw-toast__container">
+<ipms-transition show="{{ show }}" custom-style="z-index: {{ zIndex }}" custom-class="ipms-toast__container">
     <view
-        class="cw-toast cw-toast--{{ type === 'text' ? 'text' : 'icon' }} cw-toast--{{ position }}"
+        class="ipms-toast ipms-toast--{{ type === 'text' ? 'text' : 'icon' }} ipms-toast--{{ position }}"
         catch:touchmove="noop"
     >
         <!-- text only -->
@@ -19,16 +19,16 @@
 
         <!-- with icon -->
         <block wx:else>
-            <cw-loading
+            <ipms-loading
                 wx:if="{{ type === 'loading' }}"
                 color="white"
                 type="{{ loadingType }}"
-                custom-class="cw-toast__loading"
+                custom-class="ipms-toast__loading"
             />
-            <cw-icon wx:else class="cw-toast__icon" name="{{ type }}" />
-            <text wx:if="{{ message }}" class="cw-toast__text">{{ message }}</text>
+            <ipms-icon wx:else class="ipms-toast__icon" name="{{ type }}" />
+            <text wx:if="{{ message }}" class="ipms-toast__text">{{ message }}</text>
         </block>
 
         <slot />
     </view>
-</cw-transition>
+</ipms-transition>

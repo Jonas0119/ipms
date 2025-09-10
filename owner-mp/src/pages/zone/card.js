@@ -4,13 +4,13 @@
  * +----------------------------------------------------------------------
  */
 
-import { CwPage } from '../common/page';
+import { IpmsPage } from '../common/page';
 import utils from '../../utils/index';
 import { ASSETS_HOST } from '../../config';
 import QRCode from '../../libs/qrcode';
 import $toast from '../../components/toast/toast';
 
-CwPage({
+IpmsPage({
     data: {
         ASSETS_HOST
     },

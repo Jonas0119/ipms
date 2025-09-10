@@ -4,10 +4,10 @@
  * +----------------------------------------------------------------------
  */
 
-import { CwComponent } from '../common/component';
+import { IpmsComponent } from '../common/component';
 import { button } from '../mixins/button';
 import { openType } from '../mixins/open-type';
-CwComponent({
+IpmsComponent({
     mixins: [button, openType],
     props: {
         show: Boolean,

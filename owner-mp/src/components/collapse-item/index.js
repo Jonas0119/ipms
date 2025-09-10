@@ -4,10 +4,10 @@
  * +----------------------------------------------------------------------
  */
 
-import { CwComponent } from '../common/component';
+import { IpmsComponent } from '../common/component';
 import { useParent } from '../common/relation';
 import { setContentAnimate } from './animate';
-CwComponent({
+IpmsComponent({
     classes: ['title-class', 'content-class'],
     relation: useParent('collapse'),
     props: {

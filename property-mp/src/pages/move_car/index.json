@@ -3,14 +3,14 @@
     "navigationBarTextStyle": "white",
     "navigationBarBackgroundColor": "#1989fa",
     "usingComponents": {
-        "cw-notify": "../../components/notify",
-        "cw-toast": "../../components/toast",
-        "cw-button": "../../components/button",
-        "cw-copyright": "../../components/copyright",
-        "cw-radio-group": "../../components/radio-group",
-        "cw-radio": "../../components/radio",
-        "cw-cell-group": "../../components/cell-group",
-        "cw-cell": "../../components/cell",
-        "cw-car-number": "../../components/car-number"
+        "ipms-notify": "../../components/notify",
+        "ipms-toast": "../../components/toast",
+        "ipms-button": "../../components/button",
+        "ipms-copyright": "../../components/copyright",
+        "ipms-radio-group": "../../components/radio-group",
+        "ipms-radio": "../../components/radio",
+        "ipms-cell-group": "../../components/cell-group",
+        "ipms-cell": "../../components/cell",
+        "ipms-car-number": "../../components/car-number"
     }
 }

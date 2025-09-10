@@ -4,9 +4,9 @@
  * +----------------------------------------------------------------------
  */
 
-import { CwComponent } from '../common/component';
+import { IpmsComponent } from '../common/component';
 
-CwComponent({
+IpmsComponent({
     props: {
         isNewEnergy: Boolean
     },
@@ -71,7 +71,7 @@ CwComponent({
         openKeyboard() {
             const query = this.createSelectorQuery();
 
-            query.select('.cw-car-number-items').boundingClientRect();
+            query.select('.ipms-car-number-items').boundingClientRect();
             query.exec(res => {
                 wx.pageScrollTo({
                     scrollTop: res[0].top,

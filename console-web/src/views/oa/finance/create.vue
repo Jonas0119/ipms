@@ -106,7 +106,7 @@
                     </OSwitch>
                 </FormField>
 
-                <div class="cw-form-actions">
+                <div class="ipms-form-actions">
                     <Button type="primary" :loading="submiting" @click="submit">
                         发起收费
                     </Button>

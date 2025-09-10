@@ -6,13 +6,13 @@
 
 <template>
     <section>
-        <div class="cw-workflow-condition-wrapper" v-if="node.type === 5">
-            <div class="cw-workflow-condition">
-                <button type="button" class="cw-workflow-condition-add" @click="addCondition">添加条件</button>
+        <div class="ipms-workflow-condition-wrapper" v-if="node.type === 5">
+            <div class="ipms-workflow-condition">
+                <button type="button" class="ipms-workflow-condition-add" @click="addCondition">添加条件</button>
 
-                <div class="cw-workflow-condition-case" v-for="(item, key) in node.condition_list" :key="key">
-                    <div class="cw-workflow-condition-item-wrapper">
-                        <div :class="['cw-workflow-condition-item', item.error ? 'error' : '']">
+                <div class="ipms-workflow-condition-case" v-for="(item, key) in node.condition_list" :key="key">
+                    <div class="ipms-workflow-condition-item-wrapper">
+                        <div :class="['ipms-workflow-condition-item', item.error ? 'error' : '']">
                             <ConditionNode
                                 :options="options"
                                 :node="item"
@@ -22,11 +22,11 @@
                                 @sort="sortConditition(key, $event)"
                             />
 
-                            <div class="cw-workflow-error" v-if="item.error">
+                            <div class="ipms-workflow-error" v-if="item.error">
                                 <Icon type="ios-alert" />
                             </div>
 
-                            <div class="cw-workflow-condition-item-remove" @click.stop="removeCondition(key)">
+                            <div class="ipms-workflow-condition-item-remove" @click.stop="removeCondition(key)">
                                 <Icon type="ios-close" />
                             </div>
                         </div>
@@ -44,13 +44,13 @@
 
             <WorkflowAppend :node.sync="node.next" />
         </div>
-        <div class="cw-workflow-node-wrapper" v-else-if="node.type > 0 && node.type < 5">
+        <div class="ipms-workflow-node-wrapper" v-else-if="node.type > 0 && node.type < 5">
             <div :class="nodeClasses">
-                <div class="cw-workflow-node-remove" v-if="node.type !== 1" @click="removeNode">
+                <div class="ipms-workflow-node-remove" v-if="node.type !== 1" @click="removeNode">
                     <Icon type="ios-close" />
                 </div>
 
-                <div class="cw-workflow-error" v-if="node.error">
+                <div class="ipms-workflow-error" v-if="node.error">
                     <Icon type="ios-alert" />
                 </div>
 
@@ -160,17 +160,17 @@ export default {
             }
         },
         titleClasses() {
-            return ['cw-workflow-node-title', this.type];
+            return ['ipms-workflow-node-title', this.type];
         },
         nodeClasses() {
-            return ['cw-workflow-node', this.node.type === 1 ? 'start' : '', this.node.error ? 'error' : ''];
+            return ['ipms-workflow-node', this.node.type === 1 ? 'start' : '', this.node.error ? 'error' : ''];
         }
     }
 };
 </script>
 
 <style lang="less">
-.cw-workflow {
+.ipms-workflow {
     &-node {
         display: inline-flex;
         flex-direction: column;
@@ -248,7 +248,7 @@ export default {
                 }
             }
 
-            .cw-workflow-node-remove {
+            .ipms-workflow-node-remove {
                 display: block;
             }
         }
@@ -263,7 +263,7 @@ export default {
             font-size: 14px;
         }
 
-        .cw-workflow-node-content {
+        .ipms-workflow-node-content {
             padding-right: 30px;
 
             .text {
@@ -409,7 +409,7 @@ export default {
                 right: -1px;
             }
 
-            .cw-workflow-node-wrapper {
+            .ipms-workflow-node-wrapper {
                 &:before,
                 &:after {
                     content: '';
@@ -571,16 +571,16 @@ export default {
                     }
                 }
 
-                .cw-workflow-condition-item-remove {
+                .ipms-workflow-condition-item-remove {
                     display: block;
                 }
 
-                .cw-workflow-condition-item-header-name {
+                .ipms-workflow-condition-item-header-name {
                     border-color: #15bc83;
                 }
 
-                .cw-workflow-condition-item-sort-left,
-                .cw-workflow-condition-item-sort-right {
+                .ipms-workflow-condition-item-sort-left,
+                .ipms-workflow-condition-item-sort-right {
                     display: flex;
                 }
             }

@@ -5,8 +5,8 @@
  */
 
 import { link } from '../mixins/link';
-import { CwComponent } from '../common/component';
-CwComponent({
+import { IpmsComponent } from '../common/component';
+IpmsComponent({
     classes: ['num-class', 'desc-class', 'thumb-class', 'title-class', 'price-class', 'origin-price-class'],
     mixins: [link],
     props: {

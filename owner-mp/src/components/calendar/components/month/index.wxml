@@ -6,13 +6,13 @@
 <wxs src="./index.wxs" module="computed"></wxs>
 <wxs src="../../../wxs/utils.wxs" module="utils" />
 
-<view class="cw-calendar__month" style="{{ computed.getMonthStyle(visible, date, rowHeight) }}">
-    <view wx:if="{{ showMonthTitle }}" class="cw-calendar__month-title">
+<view class="ipms-calendar__month" style="{{ computed.getMonthStyle(visible, date, rowHeight) }}">
+    <view wx:if="{{ showMonthTitle }}" class="ipms-calendar__month-title">
         {{ computed.formatMonthTitle(date) }}
     </view>
 
-    <view wx:if="{{ visible }}" class="cw-calendar__days">
-        <view wx:if="{{ showMark }}" class="cw-calendar__month-mark">
+    <view wx:if="{{ visible }}" class="ipms-calendar__days">
+        <view wx:if="{{ showMark }}" class="ipms-calendar__month-mark">
             {{ computed.getMark(date) }}
         </view>
 
@@ -26,20 +26,20 @@
         >
             <view
                 wx:if="{{ item.type === 'selected' }}"
-                class="cw-calendar__selected-day"
+                class="ipms-calendar__selected-day"
                 style="background: {{ color }}"
             >
-                <view wx:if="{{ item.topInfo }}" class="cw-calendar__top-info">{{ item.topInfo }}</view>
+                <view wx:if="{{ item.topInfo }}" class="ipms-calendar__top-info">{{ item.topInfo }}</view>
                 {{ item.text }}
-                <view wx:if="{{ item.bottomInfo }}" class="cw-calendar__bottom-info">
+                <view wx:if="{{ item.bottomInfo }}" class="ipms-calendar__bottom-info">
                     {{ item.bottomInfo }}
                 </view>
             </view>
 
             <view wx:else>
-                <view wx:if="{{ item.topInfo }}" class="cw-calendar__top-info">{{ item.topInfo }}</view>
+                <view wx:if="{{ item.topInfo }}" class="ipms-calendar__top-info">{{ item.topInfo }}</view>
                 {{ item.text }}
-                <view wx:if="{{ item.bottomInfo }}" class="cw-calendar__bottom-info">
+                <view wx:if="{{ item.bottomInfo }}" class="ipms-calendar__bottom-info">
                     {{ item.bottomInfo }}
                 </view>
             </view>

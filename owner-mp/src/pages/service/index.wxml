@@ -6,12 +6,12 @@
 <wxs src="../common/common.wxs" module="common" />
 
 <view class="container">
-    <cw-dropdown-menu>
-        <cw-dropdown-item bind:change="onCategoryChange" value="{{ category }}" options="{{ categoryOptions }}" />
-        <cw-dropdown-item bind:change="onRadiuChange" value="{{ radius }}" options="{{ radiusOptions }}" />
-    </cw-dropdown-menu>
+    <ipms-dropdown-menu>
+        <ipms-dropdown-item bind:change="onCategoryChange" value="{{ category }}" options="{{ categoryOptions }}" />
+        <ipms-dropdown-item bind:change="onRadiuChange" value="{{ radius }}" options="{{ radiusOptions }}" />
+    </ipms-dropdown-menu>
 
-    <cw-list
+    <ipms-list
         fetching="{{fetching}}"
         page_num="{{page_num}}"
         page_amount="{{page_amount}}"
@@ -21,25 +21,25 @@
         withFilter
         inTabPage
     >
-        <cw-list-item
+        <ipms-list-item
             wx:for="{{list}}"
             title="{{item.title}}"
             status="{{communityInfo.current.name}}小区"
             wx:key="index"
             useFooterSlot
         >
-            <cw-list-item-info label="详细地址">
+            <ipms-list-item-info label="详细地址">
                 {{ item.address }}
-            </cw-list-item-info>
-            <cw-list-item-info label="距离小区">
+            </ipms-list-item-info>
+            <ipms-list-item-info label="距离小区">
                 {{ item._distance }}米
-            </cw-list-item-info>
-            <cw-list-item-info label="联系电话" wx:if="{{item.tel}}">
+            </ipms-list-item-info>
+            <ipms-list-item-info label="联系电话" wx:if="{{item.tel}}">
                 {{ item.tel }}
-            </cw-list-item-info>
+            </ipms-list-item-info>
 
             <view slot="footer">
-                <cw-button
+                <ipms-button
                     size="small"
                     round
                     type="default"
@@ -48,8 +48,8 @@
                     bind:click="openMap"
                 >
                     打开地图
-                </cw-button>
-                <cw-button
+                </ipms-button>
+                <ipms-button
                     size="small"
                     round
                     type="info"
@@ -59,11 +59,11 @@
                     bind:click="makeCall"
                 >
                     拨打电话
-                </cw-button>
+                </ipms-button>
             </view>
-        </cw-list-item>
-    </cw-list>
+        </ipms-list-item>
+    </ipms-list>
 
     <!-- 全局提示 -->
-    <cw-notify id="cw-notify" />
+    <ipms-notify id="ipms-notify" />
 </view>

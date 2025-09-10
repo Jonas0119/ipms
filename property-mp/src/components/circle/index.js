@@ -8,7 +8,7 @@
  */
 
 import { BLUE, WHITE } from '../common/color';
-import { CwComponent } from '../common/component';
+import { IpmsComponent } from '../common/component';
 import { getSystemInfoSync } from '../common/utils';
 import { isObj } from '../common/validator';
 import { canIUseCanvas2d } from '../common/version';
@@ -19,7 +19,7 @@ function format(rate) {
 const PERIMETER = 2 * Math.PI;
 const BEGIN_ANGLE = -Math.PI / 2;
 const STEP = 1;
-CwComponent({
+IpmsComponent({
     props: {
         text: String,
         lineCap: {
@@ -76,14 +76,14 @@ CwComponent({
         getContext() {
             const { type, size } = this.data;
             if (type === '' || !canIUseCanvas2d()) {
-                const ctx = wx.createCanvasContext('cw-circle', this);
+                const ctx = wx.createCanvasContext('ipms-circle', this);
                 return Promise.resolve(ctx);
             }
             const dpr = getSystemInfoSync().pixelRatio;
             return new Promise(resolve => {
                 wx.createSelectorQuery()
                     .in(this)
-                    .select('#cw-circle')
+                    .select('#ipms-circle')
                     .node()
                     .exec(res => {
                         const canvas = res[0].node;

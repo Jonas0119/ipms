@@ -3,11 +3,11 @@
     "enablePullDownRefresh": true,
     "backgroundTextStyle": "dark",
     "usingComponents": {
-        "cw-notify": "../../components/notify",
-        "cw-dialog": "../../components/dialog",
-        "cw-copyright": "../../components/copyright",
-        "cw-skeleton": "../../components/skeleton",
-        "cw-icon": "../../components/icon",
-        "cw-empty": "../../components/empty"
+        "ipms-notify": "../../components/notify",
+        "ipms-dialog": "../../components/dialog",
+        "ipms-copyright": "../../components/copyright",
+        "ipms-skeleton": "../../components/skeleton",
+        "ipms-icon": "../../components/icon",
+        "ipms-empty": "../../components/empty"
     }
 }

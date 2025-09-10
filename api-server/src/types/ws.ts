@@ -7,7 +7,7 @@
 import WebSocket from 'ws';
 import { Role } from '~/constant/role_access';
 
-export interface CwWebSocket extends WebSocket {
+export interface IpmsWebSocket extends WebSocket {
     access?: Role[];
     user_id?: number;
     // 远程门禁服务的

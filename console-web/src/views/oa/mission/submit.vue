@@ -57,7 +57,7 @@
                 </FormField>
             </Form>
 
-            <div class="cw-form-actions">
+            <div class="ipms-form-actions">
                 <Button type="primary" :loading="submiting" @click="submit">
                     提交巡检结果
                 </Button>

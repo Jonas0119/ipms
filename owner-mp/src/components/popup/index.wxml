@@ -6,7 +6,7 @@
 <wxs src="../wxs/utils.wxs" module="utils" />
 <wxs src="./index.wxs" module="computed" />
 
-<cw-overlay
+<ipms-overlay
     wx:if="{{ overlay }}"
     show="{{ show }}"
     z-index="{{ zIndex }}"
@@ -21,10 +21,10 @@
     bind:transitionend="onTransitionEnd"
 >
     <slot />
-    <cw-icon
+    <ipms-icon
         wx:if="{{ closeable }}"
         name="{{ closeIcon }}"
-        class="close-icon-class cw-popup__close-icon cw-popup__close-icon--{{ closeIconPosition }}"
+        class="close-icon-class ipms-popup__close-icon ipms-popup__close-icon--{{ closeIconPosition }}"
         bind:tap="onClickCloseIcon"
     />
 </view>

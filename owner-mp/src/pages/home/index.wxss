@@ -188,7 +188,7 @@
     padding: 12px 0;
 }
 
-.tools .tools-list .tool-item cw-icon {
+.tools .tools-list .tool-item ipms-icon {
     font-size: 28px;
     margin-bottom: 6px;
 }

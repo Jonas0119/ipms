@@ -1,12 +1,12 @@
 {
     "navigationBarTitleText": "我的住宅",
     "usingComponents": {
-        "cw-copyright": "../../components/copyright",
-        "cw-checkbox": "../../components/checkbox",
-        "cw-icon": "../../components/icon",
-        "cw-button": "../../components/button",
-        "cw-dialog": "../../components/dialog",
-        "cw-toast": "../../components/toast",
-        "cw-skeleton": "../../components/skeleton"
+        "ipms-copyright": "../../components/copyright",
+        "ipms-checkbox": "../../components/checkbox",
+        "ipms-icon": "../../components/icon",
+        "ipms-button": "../../components/button",
+        "ipms-dialog": "../../components/dialog",
+        "ipms-toast": "../../components/toast",
+        "ipms-skeleton": "../../components/skeleton"
     }
 }

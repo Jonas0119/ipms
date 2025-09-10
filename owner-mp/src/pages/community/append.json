@@ -2,12 +2,12 @@
     "navigationBarTitleText": "自行填写住宅信息",
     "backgroundTextStyle": "dark",
     "usingComponents": {
-        "cw-toast": "../../components/toast",
-        "cw-notify": "../../components/notify",
-        "cw-dialog": "../../components/dialog",
-        "cw-copyright": "../../components/copyright",
-        "cw-field": "../../components/field",
-        "cw-button": "../../components/button",
-        "cw-cell-group": "../../components/cell-group"
+        "ipms-toast": "../../components/toast",
+        "ipms-notify": "../../components/notify",
+        "ipms-dialog": "../../components/dialog",
+        "ipms-copyright": "../../components/copyright",
+        "ipms-field": "../../components/field",
+        "ipms-button": "../../components/button",
+        "ipms-cell-group": "../../components/cell-group"
     }
 }

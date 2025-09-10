@@ -6,9 +6,9 @@
 <wxs src="../common/common.wxs" module="common" />
 
 <view class="container">
-    <cw-tabs active="{{ activeTabIndex }}" bind:change="onTabChange">
-        <cw-tab title="未读消息">
-            <cw-list
+    <ipms-tabs active="{{ activeTabIndex }}" bind:change="onTabChange">
+        <ipms-tab title="未读消息">
+            <ipms-list
                 fetching="{{unread_fetching}}"
                 page_num="{{unread_page_num}}"
                 page_amount="{{unread_page_amount}}"
@@ -47,11 +47,11 @@
                         </navigator>
                     </view>
                 </view>
-            </cw-list>
-        </cw-tab>
+            </ipms-list>
+        </ipms-tab>
 
-        <cw-tab title="已读消息">
-            <cw-list
+        <ipms-tab title="已读消息">
+            <ipms-list
                 fetching="{{readed_fetching}}"
                 page_num="{{readed_page_num}}"
                 page_amount="{{readed_page_amount}}"
@@ -88,7 +88,7 @@
                         </navigator>
                     </view>
                 </view>
-            </cw-list>
-        </cw-tab>
-    </cw-tabs>
+            </ipms-list>
+        </ipms-tab>
+    </ipms-tabs>
 </view>

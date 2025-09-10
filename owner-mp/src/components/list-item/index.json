@@ -1,6 +1,6 @@
 {
     "component": true,
     "usingComponents": {
-        "cw-panel": "../panel"
+        "ipms-panel": "../panel"
     }
 }

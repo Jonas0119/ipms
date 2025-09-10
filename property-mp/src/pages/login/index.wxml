@@ -1,5 +1,5 @@
 <view class="container">
-    <cw-nav-bar
+    <ipms-nav-bar
         title="授权登录"
         fixed
         border="{{ false }}"
@@ -20,23 +20,23 @@
         <view class="txt">用心服务万千业主</view>
     </view>
 
-    <cw-button type="info" disabled="{{loading}}" custom-class="btn" block open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">
-        <cw-loading type="spinner" size="32rpx" custom-class="loading" wx:if="{{loading}}" />
+    <ipms-button type="info" disabled="{{loading}}" custom-class="btn" block open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">
+        <ipms-loading type="spinner" size="32rpx" custom-class="loading" wx:if="{{loading}}" />
         <text>{{loading ? '登录中' : '登录'}}</text>
-    </cw-button>
+    </ipms-button>
 
     <view class="notice">
         <view class="title">温馨提示：</view>
         <view class="item">
-            <cw-icon name="success" class="icon" />
+            <ipms-icon name="success" class="icon" />
             注意保护业主隐私，泄露公民隐私数据属于违法行为
         </view>
         <view class="item">
-            <cw-icon name="success" class="icon" />
+            <ipms-icon name="success" class="icon" />
             互联网不是法外之地，请对您的网络言行负责
         </view>
         <view class="item">
-            <cw-icon name="success" class="icon" />
+            <ipms-icon name="success" class="icon" />
             合理合法沟通，减少小区矛盾
         </view>
     </view>
@@ -50,5 +50,5 @@
         <image src="../../assets/login/welcome.jpg" mode="heightFix"></image>
     </view>
 
-    <cw-notify id="cw-notify" />
+    <ipms-notify id="ipms-notify" />
 </view>

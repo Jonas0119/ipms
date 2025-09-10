@@ -5,7 +5,7 @@
  */
 @import '../common/index.wxss';
 
-.cw-index-anchor {
+.ipms-index-anchor {
     padding: 0 16px;
     color: #323233;
     font-weight: 500;
@@ -14,7 +14,7 @@
     background-color: initial;
 }
 
-.cw-index-anchor--active {
+.ipms-index-anchor--active {
     right: 0;
     left: 0;
     color: #07c160;

@@ -5,8 +5,8 @@
  */
 
 import { useParent } from '../common/relation';
-import { CwComponent } from '../common/component';
-CwComponent({
+import { IpmsComponent } from '../common/component';
+IpmsComponent({
     field: true,
     relation: useParent('dropdown-menu', function() {
         this.updateDataFromParent();

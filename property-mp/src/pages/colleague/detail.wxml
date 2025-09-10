@@ -1,29 +1,29 @@
 <wxs src="../common/common.wxs" module="common" />
 
 <view class="container">
-    <cw-cell-group wx:if="{{fetching}}">
-        <cw-cell is-detail title="姓名：" border="{{false}}">
-            <cw-skeleton in-cell row="1" />
-        </cw-cell>
-        <cw-cell is-detail title="性别：" border="{{false}}">
-            <cw-skeleton in-cell row="1" />
-        </cw-cell>
-        <cw-cell is-detail title="联系电话：" border="{{false}}">
-            <cw-skeleton in-cell row="1" />
-        </cw-cell>
-        <cw-cell is-detail title="昵称：" border="{{false}}">
-            <cw-skeleton in-cell row="1" />
-        </cw-cell>
-        <cw-cell is-detail title="签名：" border="{{false}}">
-            <cw-skeleton in-cell row="1" />
-        </cw-cell>
-    </cw-cell-group>
+    <ipms-cell-group wx:if="{{fetching}}">
+        <ipms-cell is-detail title="姓名：" border="{{false}}">
+            <ipms-skeleton in-cell row="1" />
+        </ipms-cell>
+        <ipms-cell is-detail title="性别：" border="{{false}}">
+            <ipms-skeleton in-cell row="1" />
+        </ipms-cell>
+        <ipms-cell is-detail title="联系电话：" border="{{false}}">
+            <ipms-skeleton in-cell row="1" />
+        </ipms-cell>
+        <ipms-cell is-detail title="昵称：" border="{{false}}">
+            <ipms-skeleton in-cell row="1" />
+        </ipms-cell>
+        <ipms-cell is-detail title="签名：" border="{{false}}">
+            <ipms-skeleton in-cell row="1" />
+        </ipms-cell>
+    </ipms-cell-group>
 
     <view wx:else>
-        <cw-cell-group>
-            <cw-cell is-detail title="姓名：" border="{{false}}" value="{{detail.info.real_name}}" />
-            <cw-cell is-detail title="性别：" border="{{false}}" value="{{detail.info.gender === 1 ? '男' : '女'}}" />
-            <cw-cell
+        <ipms-cell-group>
+            <ipms-cell is-detail title="姓名：" border="{{false}}" value="{{detail.info.real_name}}" />
+            <ipms-cell is-detail title="性别：" border="{{false}}" value="{{detail.info.gender === 1 ? '男' : '女'}}" />
+            <ipms-cell
                 is-detail
                 title="联系电话："
                 border="{{false}}"
@@ -33,18 +33,18 @@
                 clickable
                 data-phone="{{detail.info.phone}}"
             />
-            <cw-cell is-detail title="部门：" border="{{false}}" value="{{detail.info.department}}" />
-            <cw-cell is-detail title="岗位：" border="{{false}}" value="{{detail.info.job}}" />
-            <cw-cell
+            <ipms-cell is-detail title="部门：" border="{{false}}" value="{{detail.info.department}}" />
+            <ipms-cell is-detail title="岗位：" border="{{false}}" value="{{detail.info.job}}" />
+            <ipms-cell
                 is-detail
                 title="入职时间："
                 border="{{false}}"
                 value="{{common.date(detail.info.join_company_at)}}"
             />
-        </cw-cell-group>
+        </ipms-cell-group>
     </view>
 
-    <cw-toast id="cw-toast" />
-    <cw-notify id="cw-notify" />
-    <cw-copyright />
+    <ipms-toast id="ipms-toast" />
+    <ipms-notify id="ipms-notify" />
+    <ipms-copyright />
 </view>

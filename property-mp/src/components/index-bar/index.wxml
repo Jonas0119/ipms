@@ -1,9 +1,9 @@
-<view class="cw-index-bar">
+<view class="ipms-index-bar">
     <slot />
 
     <view
         wx:if="{{ showSidebar }}"
-        class="cw-index-bar__sidebar"
+        class="ipms-index-bar__sidebar"
         catch:tap="onClick"
         catch:touchmove="onTouchMove"
         catch:touchend="onTouchStop"
@@ -12,7 +12,7 @@
         <view
             wx:for="{{ indexList }}"
             wx:key="index"
-            class="cw-index-bar__index"
+            class="ipms-index-bar__index"
             style="z-index: {{ zIndex + 1 }}; color: {{ activeAnchorIndex === index ? highlightColor : '' }}"
             data-index="{{ index }}"
         >

@@ -4,7 +4,7 @@
  +----------------------------------------------------------------------
 -->
 <view class="container">
-    <cw-rich-text detail="{{detail.content}}" />
-    <cw-skeleton wx:if="{{fetching}}" title row="{{10}}" />
-    <cw-copyright />
+    <ipms-rich-text detail="{{detail.content}}" />
+    <ipms-skeleton wx:if="{{fetching}}" title row="{{10}}" />
+    <ipms-copyright />
 </view>

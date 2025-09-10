@@ -5,7 +5,7 @@
  */
 
 <template>
-    <div class="cw-empty">
+    <div class="ipms-empty">
         {{ label }}
     </div>
 </template>
@@ -20,7 +20,7 @@ export default {
 </script>
 
 <style lang="less">
-.cw-empty {
+.ipms-empty {
     text-align: center;
     font-size: 12px;
     color: #999;

@@ -12,12 +12,12 @@
     style="{{ computed.rootStyle({ color, backgroundColor, background }) }}"
     bind:tap="onClick"
 >
-    <cw-icon wx:if="{{ leftIcon }}" size="16px" name="{{ leftIcon }}" class="cw-notice-bar__left-icon" />
+    <ipms-icon wx:if="{{ leftIcon }}" size="16px" name="{{ leftIcon }}" class="ipms-notice-bar__left-icon" />
     <slot wx:else name="left-icon" />
 
-    <view class="cw-notice-bar__wrap">
+    <view class="ipms-notice-bar__wrap">
         <view
-            class="cw-notice-bar__content {{ !scrollable && !wrapable ? 'cw-ellipsis' : '' }}"
+            class="ipms-notice-bar__content {{ !scrollable && !wrapable ? 'ipms-ellipsis' : '' }}"
             animation="{{ animationData }}"
         >
             {{ text }}
@@ -25,14 +25,14 @@
         </view>
     </view>
 
-    <cw-icon
+    <ipms-icon
         wx:if="{{ mode === 'closeable' }}"
-        class="cw-notice-bar__right-icon"
+        class="ipms-notice-bar__right-icon"
         name="cross"
         catch:tap="onClickIcon"
     />
     <navigator wx:elif="{{ mode === 'link' }}" url="{{ url }}" open-type="{{ openType }}">
-        <cw-icon class="cw-notice-bar__right-icon" name="arrow" />
+        <ipms-icon class="ipms-notice-bar__right-icon" name="arrow" />
     </navigator>
     <slot wx:else name="right-icon" />
 </view>

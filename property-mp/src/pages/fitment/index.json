@@ -5,12 +5,12 @@
     "navigationBarBackgroundColor": "#1989fa",
     "onReachBottomDistance": 50,
     "usingComponents": {
-        "cw-notify": "../../components/notify",
-        "cw-toast": "../../components/toast",
-        "cw-dialog": "../../components/dialog",
-        "cw-button": "../../components/button",
-        "cw-list": "../../components/list",
-        "cw-list-item": "../../components/list-item",
-        "cw-list-item-info": "../../components/list-item-info"
+        "ipms-notify": "../../components/notify",
+        "ipms-toast": "../../components/toast",
+        "ipms-dialog": "../../components/dialog",
+        "ipms-button": "../../components/button",
+        "ipms-list": "../../components/list",
+        "ipms-list-item": "../../components/list-item",
+        "ipms-list-item-info": "../../components/list-item-info"
     }
 }

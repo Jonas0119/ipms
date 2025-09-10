@@ -3,41 +3,41 @@
 
 <view class="container">
     <view wx:if="{{fetching}}">
-        <cw-timeline wx:for="{{5}}" wx:key="index" first="{{index === 0}}" last="{{index === 4}}">
-            <cw-skeleton title row="5" />
-        </cw-timeline>
+        <ipms-timeline wx:for="{{5}}" wx:key="index" first="{{index === 0}}" last="{{index === 4}}">
+            <ipms-skeleton title row="5" />
+        </ipms-timeline>
     </view>
 
     <view wx:esle>
-        <cw-timeline
+        <ipms-timeline
             wx:for="{{list}}"
             wx:key="index"
             title="{{item.local}}"
             first="{{index === 0}}"
             last="{{index === list.length - 1}}"
         >
-            <cw-row>
-                <cw-col span="6">
+            <ipms-row>
+                <ipms-col span="6">
                     是否正常：
-                </cw-col>
-                <cw-col span="18">
-                    <cw-tag color="{{ item.normal ? '#19be6b' : '#f90' }}">{{ item.normal ? '是' : '否' }}</cw-tag>
-                </cw-col>
-            </cw-row>
-            <cw-row>
-                <cw-col span="6">
+                </ipms-col>
+                <ipms-col span="18">
+                    <ipms-tag color="{{ item.normal ? '#19be6b' : '#f90' }}">{{ item.normal ? '是' : '否' }}</ipms-tag>
+                </ipms-col>
+            </ipms-row>
+            <ipms-row>
+                <ipms-col span="6">
                     巡检备注：
-                </cw-col>
-                <cw-col span="18">
+                </ipms-col>
+                <ipms-col span="18">
                     {{ item.remark ? item.remark : '-' }}
-                </cw-col>
-            </cw-row>
-            <cw-row>
-                <cw-col span="6">
+                </ipms-col>
+            </ipms-row>
+            <ipms-row>
+                <ipms-col span="6">
                     现场图片：
-                </cw-col>
-                <cw-col span="18">
-                    <cw-image
+                </ipms-col>
+                <ipms-col span="18">
+                    <ipms-image
                         wx:for="{{item.imgs}}"
                         wx:key="index"
                         src="{{ASSETS_HOST}}{{item}}"
@@ -48,29 +48,29 @@
                         data-id="{{item.id}}"
                         bind:click="showImg"
                     />
-                </cw-col>
-            </cw-row>
-            <cw-row>
-                <cw-col span="6">
+                </ipms-col>
+            </ipms-row>
+            <ipms-row>
+                <ipms-col span="6">
                     图片相似度：
-                </cw-col>
-                <cw-col span="18">
+                </ipms-col>
+                <ipms-col span="18">
                     {{ mission.like(item.like, item.imgs.length) }}%
-                </cw-col>
-            </cw-row>
-            <cw-row>
-                <cw-col span="6">
+                </ipms-col>
+            </ipms-row>
+            <ipms-row>
+                <ipms-col span="6">
                     巡检时间：
-                </cw-col>
-                <cw-col span="18">
+                </ipms-col>
+                <ipms-col span="18">
                     {{ common.date(item.created_at) }}
-                </cw-col>
-            </cw-row>
-        </cw-timeline>
+                </ipms-col>
+            </ipms-row>
+        </ipms-timeline>
     </view>
 
-    <cw-copyright />
+    <ipms-copyright />
 
     <!-- 全局提示 -->
-    <cw-notify id="cw-notify" />
+    <ipms-notify id="ipms-notify" />
 </view>

@@ -5,7 +5,7 @@
 -->
 <view class="container">
     <view class="brand">
-        <image src="../../assets/common/chowa.png" class="chowa" mode="widthFix"></image>
+        <image src="../../assets/common/ipms.png" class="ipms" mode="widthFix"></image>
         <image src="../../assets/common/logo.png" class="logo" mode="widthFix"></image>
     </view>
 
@@ -32,5 +32,5 @@
     </view>
     <view class="txt">受小区物业设备限制，部分小区可能无法支持全部功能，我们正在努力解决，望请谅解。</view>
     <view class="txt">如果您对我们的产品有意见或建议，请通过个人中心下方的反馈功能反馈，感谢您的支持。</view>
-    <cw-copyright />
+    <ipms-copyright />
 </view>

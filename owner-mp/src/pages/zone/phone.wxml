@@ -5,12 +5,12 @@
 -->
 <view class="container">
     <view class="identity {{ userInfo.phone ? '' : 'unable' }}">
-        <cw-icon name="identity" />
+        <ipms-icon name="identity" />
         <view wx:if="{{userInfo.phone}}" class="num">{{ userInfo.phone }}</view>
     </view>
     <view class="phone {{ userInfo.phone ? '' : 'unable' }}">
-        <cw-tag type="success" size="large" wx:if="{{userInfo.phone}}">手机号码已验证</cw-tag>
-        <cw-tag type="warning" size="large" wx:else>手机号码未验证</cw-tag>
+        <ipms-tag type="success" size="large" wx:if="{{userInfo.phone}}">手机号码已验证</ipms-tag>
+        <ipms-tag type="warning" size="large" wx:else>手机号码未验证</ipms-tag>
     </view>
 
     <view class="intro">
@@ -19,7 +19,7 @@
         <view class="text">我们只会将手机号码提供给物业公司</view>
     </view>
 
-    <cw-button
+    <ipms-button
         open-type="getPhoneNumber"
         type="info"
         custom-class="btn"
@@ -28,8 +28,8 @@
         bind:getphonenumber="bindPhone"
     >
         授权获取你的手机号码
-    </cw-button>
-    <cw-copyright />
-    <cw-toast id="cw-toast" />
-    <cw-notify id="cw-notify" />
+    </ipms-button>
+    <ipms-copyright />
+    <ipms-toast id="ipms-toast" />
+    <ipms-notify id="ipms-notify" />
 </view>

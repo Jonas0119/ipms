@@ -4,9 +4,9 @@
     "navigationBarTextStyle": "white",
     "navigationBarBackgroundColor": "#1989fa",
     "usingComponents": {
-        "cw-skeleton": "../../components/skeleton",
-        "cw-notify": "../../components/notify",
-        "cw-toast": "../../components/toast",
-        "cw-copyright": "../../components/copyright"
+        "ipms-skeleton": "../../components/skeleton",
+        "ipms-notify": "../../components/notify",
+        "ipms-toast": "../../components/toast",
+        "ipms-copyright": "../../components/copyright"
     }
 }

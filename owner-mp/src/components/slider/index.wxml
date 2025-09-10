@@ -11,16 +11,16 @@
     style="{{ inactiveColor ? 'background:' + inactiveColor : '' }}"
     bind:tap="onClick"
 >
-    <view class="cw-slider__bar" style="{{ barStyle }};{{ computed.barStyle(barHeight, activeColor) }}">
+    <view class="ipms-slider__bar" style="{{ barStyle }};{{ computed.barStyle(barHeight, activeColor) }}">
         <view
-            class="cw-slider__button-wrapper"
+            class="ipms-slider__button-wrapper"
             bind:touchstart="onTouchStart"
             catch:touchmove="onTouchMove"
             bind:touchend="onTouchEnd"
             bind:touchcancel="onTouchEnd"
         >
             <slot wx:if="{{ useButtonSlot }}" name="button" />
-            <view wx:else class="cw-slider__button" />
+            <view wx:else class="ipms-slider__button" />
         </view>
     </view>
 </view>

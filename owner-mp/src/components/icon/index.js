@@ -4,8 +4,8 @@
  * +----------------------------------------------------------------------
  */
 
-import { CwComponent } from '../common/component';
-CwComponent({
+import { IpmsComponent } from '../common/component';
+IpmsComponent({
     props: {
         dot: Boolean,
         info: null,
@@ -14,7 +14,7 @@ CwComponent({
         customStyle: String,
         classPrefix: {
             type: String,
-            value: 'cw-icon'
+            value: 'ipms-icon'
         },
         name: {
             type: String,

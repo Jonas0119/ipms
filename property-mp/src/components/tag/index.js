@@ -7,8 +7,8 @@
  * +----------------------------------------------------------------------
  */
 
-import { CwComponent } from '../common/component';
-CwComponent({
+import { IpmsComponent } from '../common/component';
+IpmsComponent({
     props: {
         size: String,
         mark: Boolean,

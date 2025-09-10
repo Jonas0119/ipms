@@ -1,14 +1,14 @@
 {
     "navigationBarTitleText": "问卷调查填写",
     "usingComponents": {
-        "cw-skeleton": "../../components/skeleton",
-        "cw-radio": "../../components/radio",
-        "cw-radio-group": "../../components/radio-group",
-        "cw-checkbox": "../../components/checkbox",
-        "cw-checkbox-group": "../../components/checkbox-group",
-        "cw-button": "../../components/button",
-        "cw-copyright": "../../components/copyright",
-        "cw-toast": "../../components/toast",
-        "cw-notify": "../../components/notify"
+        "ipms-skeleton": "../../components/skeleton",
+        "ipms-radio": "../../components/radio",
+        "ipms-radio-group": "../../components/radio-group",
+        "ipms-checkbox": "../../components/checkbox",
+        "ipms-checkbox-group": "../../components/checkbox-group",
+        "ipms-button": "../../components/button",
+        "ipms-copyright": "../../components/copyright",
+        "ipms-toast": "../../components/toast",
+        "ipms-notify": "../../components/notify"
     }
 }

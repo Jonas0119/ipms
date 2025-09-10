@@ -6,15 +6,15 @@
 <wxs src="../common/common.wxs" module="common" />
 
 <view class="container">
-    <cw-tabs active="{{ activeTab }}" bind:change="onTabChange" disabled="{{fetching}}">
-        <cw-tab title="门禁卡">
-            <cw-empty
+    <ipms-tabs active="{{ activeTab }}" bind:change="onTabChange" disabled="{{fetching}}">
+        <ipms-tab title="门禁卡">
+            <ipms-empty
                 icon="not-support"
                 wx:if="{{!communityInfo.current.access_nfc && !communityInfo.current.access_qrcode}}"
                 description="{{communityInfo.current.name}}小区暂不支持联网门禁系统"
                 fixed="{{false}}"
             />
-            <cw-empty
+            <ipms-empty
                 icon="access"
                 wx:elif="{{cardList.length === 0}}"
                 description="未查询到{{communityInfo.current.name}}小区门禁卡"
@@ -45,28 +45,28 @@
                 </view>
                 <view wx:else>
                     <view class="card" wx:for="{{2}}" wx:key="key">
-                        <view class="name"><cw-skeleton row="{{1}}" row-width="25%" /></view>
-                        <view class="house"><cw-skeleton row="{{1}}" row-width="42%" /></view>
+                        <view class="name"><ipms-skeleton row="{{1}}" row-width="25%" /></view>
+                        <view class="house"><ipms-skeleton row="{{1}}" row-width="42%" /></view>
                     </view>
                 </view>
             </view>
-        </cw-tab>
-        <cw-tab title="远程开门">
-            <cw-empty
+        </ipms-tab>
+        <ipms-tab title="远程开门">
+            <ipms-empty
                 fixed="{{false}}"
                 icon="not-support"
                 description="{{communityInfo.current.name}}小区暂不支持远程开门"
                 wx:if="{{!communityInfo.current.access_remote}}"
             />
-            <cw-empty
+            <ipms-empty
                 icon="access"
                 wx:elif="{{entranceList.length === 0}}"
                 description="未查询到{{communityInfo.current.name}}小区可远程开门门禁"
                 fixed="{{false}}"
             />
             <view wx:else>
-                <cw-cell-group title="可操控智能门禁">
-                    <cw-cell
+                <ipms-cell-group title="可操控智能门禁">
+                    <ipms-cell
                         wx:for="{{entranceList}}"
                         wx:key="index"
                         title="{{item.name}}"
@@ -76,12 +76,12 @@
                         bind:click="openDoor"
                         clickable
                     />
-                </cw-cell-group>
+                </ipms-cell-group>
             </view>
-        </cw-tab>
-    </cw-tabs>
+        </ipms-tab>
+    </ipms-tabs>
 
-    <cw-toast id="cw-toast" />
-    <cw-notify id="cw-notify" />
-    <cw-copyright />
+    <ipms-toast id="ipms-toast" />
+    <ipms-notify id="ipms-notify" />
+    <ipms-copyright />
 </view>

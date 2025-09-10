@@ -74,7 +74,7 @@
                     </Select>
                 </FormField>
 
-                <div class="cw-form-actions">
+                <div class="ipms-form-actions">
                     <Button type="primary" :loading="submiting" @click="submit" :disabled="disabled">
                         {{ update ? '修改人事信息' : '创建人事信息' }}
                     </Button>

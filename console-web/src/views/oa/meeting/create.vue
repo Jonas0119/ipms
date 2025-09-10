@@ -29,7 +29,7 @@
                     <Colleague v-model="participants" multiple />
                 </div>
 
-                <div class="cw-form-actions">
+                <div class="ipms-form-actions">
                     <Button type="primary" :loading="submiting" @click="submit">约定会议室</Button>
                 </div>
             </div>

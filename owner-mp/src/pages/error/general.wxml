@@ -4,15 +4,15 @@
  +----------------------------------------------------------------------
 -->
 <view class="container">
-    <cw-empty icon="errgeneral" description="{{ message }}" fixed="{{false}}" />
+    <ipms-empty icon="errgeneral" description="{{ message }}" fixed="{{false}}" />
 
-    <view class="hint">如需技术支持，请发送邮件至contact@chowa.cn</view>
+    <view class="hint">如需技术支持，请发送邮件至help@ipms.cn</view>
 
-    <cw-button type="info" round bind:tap="checkError" block custom-class="btn">检测问题</cw-button>
+    <ipms-button type="info" round bind:tap="checkError" block custom-class="btn">检测问题</ipms-button>
 
-    <cw-copyright />
+    <ipms-copyright />
     <!-- 全局提示 -->
-    <cw-toast id="cw-toast"></cw-toast>
+    <ipms-toast id="ipms-toast"></ipms-toast>
 
-    <cw-dialog id="cw-dialog"></cw-dialog>
+    <ipms-dialog id="ipms-dialog"></ipms-dialog>
 </view>

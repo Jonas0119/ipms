@@ -4,14 +4,14 @@
  * +----------------------------------------------------------------------
  */
 
-import { CwPage } from '../common/page';
+import { IpmsPage } from '../common/page';
 import $notify from '../../components/notify/notify';
 import $toast from '../../components/toast/toast';
 import utils from '../../utils/index';
 
 let timer = null;
 
-CwPage({
+IpmsPage({
     data: {
         loginCode: null
     },

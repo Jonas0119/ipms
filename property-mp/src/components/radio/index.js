@@ -7,9 +7,9 @@
  * +----------------------------------------------------------------------
  */
 
-import { CwComponent } from '../common/component';
+import { IpmsComponent } from '../common/component';
 import { useParent } from '../common/relation';
-CwComponent({
+IpmsComponent({
     field: true,
     relation: useParent('radio-group'),
     classes: ['icon-class', 'label-class'],

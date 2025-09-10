@@ -38,7 +38,7 @@
                 <Editor v-model="form.content" dir="party" />
             </FormField>
 
-            <div class="cw-form-actions">
+            <div class="ipms-form-actions">
                 <Button type="primary" :loading="submiting" @click="submit">
                     {{ !update ? '发布' : '更新' }}
                 </Button>

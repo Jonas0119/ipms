@@ -4,12 +4,12 @@
  * +----------------------------------------------------------------------
  */
 
-import { CwComponent } from '../common/component';
+import { IpmsComponent } from '../common/component';
 import { touch } from '../mixins/touch';
 import { range } from '../common/utils';
 const THRESHOLD = 0.3;
 let ARRAY = [];
-CwComponent({
+IpmsComponent({
     props: {
         disabled: Boolean,
         leftWidth: {

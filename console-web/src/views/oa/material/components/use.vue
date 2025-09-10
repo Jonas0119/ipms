@@ -10,7 +10,7 @@
         :title="`物料「${info.name}」领用`"
         transfer
         width="460"
-        class-name="cw-drawer-width-footer"
+        class-name="ipms-drawer-width-footer"
         :closable="false"
         :mask-closable="false"
     >
@@ -32,7 +32,7 @@
                 />
             </FormItem>
         </Form>
-        <div class="cw-drawer-footer">
+        <div class="ipms-drawer-footer">
             <Button @click="cancel">取消</Button>
             <Button type="primary" :loading="submiting" @click="save">确定</Button>
         </div>

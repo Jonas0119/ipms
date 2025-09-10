@@ -3,17 +3,17 @@
     "navigationBarTextStyle": "white",
     "navigationBarBackgroundColor": "#1989fa",
     "usingComponents": {
-        "cw-cell": "../../components/cell",
-        "cw-icon": "../../components/icon",
-        "cw-field": "../../components/field",
-        "cw-cell-group": "../../components/cell-group",
-        "cw-skeleton": "../../components/skeleton",
-        "cw-copyright": "../../components/copyright",
-        "cw-toast": "../../components/toast",
-        "cw-notify": "../../components/notify",
-        "cw-button": "../../components/button",
-        "cw-switch": "../../components/switch",
-        "cw-steps": "../../components/steps",
-        "cw-uploader": "../../components/uploader"
+        "ipms-cell": "../../components/cell",
+        "ipms-icon": "../../components/icon",
+        "ipms-field": "../../components/field",
+        "ipms-cell-group": "../../components/cell-group",
+        "ipms-skeleton": "../../components/skeleton",
+        "ipms-copyright": "../../components/copyright",
+        "ipms-toast": "../../components/toast",
+        "ipms-notify": "../../components/notify",
+        "ipms-button": "../../components/button",
+        "ipms-switch": "../../components/switch",
+        "ipms-steps": "../../components/steps",
+        "ipms-uploader": "../../components/uploader"
     }
 }

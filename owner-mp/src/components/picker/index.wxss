@@ -5,7 +5,7 @@
  */
 @import '../common/index.wxss';
 
-.cw-picker {
+.ipms-picker {
     position: relative;
     overflow: hidden;
     -webkit-text-size-adjust: 100%;
@@ -14,7 +14,7 @@
     background-color: #fff;
 }
 
-.cw-picker__toolbar {
+.ipms-picker__toolbar {
     display: -webkit-flex;
     display: flex;
     -webkit-justify-content: space-between;
@@ -23,45 +23,45 @@
     line-height: 44px;
 }
 
-.cw-picker__cancel,
-.cw-picker__confirm {
+.ipms-picker__cancel,
+.ipms-picker__confirm {
     padding: 0 16px;
     font-size: 14px;
 }
 
-.cw-picker__cancel--hover,
-.cw-picker__confirm--hover {
+.ipms-picker__cancel--hover,
+.ipms-picker__confirm--hover {
     opacity: 0.7;
 }
 
-.cw-picker__confirm {
+.ipms-picker__confirm {
     color: #576b95;
 }
 
-.cw-picker__cancel {
+.ipms-picker__cancel {
     color: #969799;
 }
 
-.cw-picker__title {
+.ipms-picker__title {
     max-width: 50%;
     text-align: center;
     font-weight: 500;
     font-size: 16px;
 }
 
-.cw-picker__columns {
+.ipms-picker__columns {
     position: relative;
     display: -webkit-flex;
     display: flex;
 }
 
-.cw-picker__column {
+.ipms-picker__column {
     -webkit-flex: 1 1;
     flex: 1 1;
     width: 0;
 }
 
-.cw-picker__loading {
+.ipms-picker__loading {
     position: absolute;
     top: 0;
     right: 0;
@@ -77,7 +77,7 @@
     background-color: hsla(0, 0%, 100%, 0.9);
 }
 
-.cw-picker__mask {
+.ipms-picker__mask {
     top: 0;
     left: 0;
     z-index: 2;
@@ -91,13 +91,13 @@
     backface-visibility: hidden;
 }
 
-.cw-picker__frame,
-.cw-picker__mask {
+.ipms-picker__frame,
+.ipms-picker__mask {
     position: absolute;
     pointer-events: none;
 }
 
-.cw-picker__frame {
+.ipms-picker__frame {
     top: 50%;
     right: 16px;
     left: 16px;

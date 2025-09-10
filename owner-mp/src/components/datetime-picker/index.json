@@ -1,6 +1,6 @@
 {
     "component": true,
     "usingComponents": {
-        "cw-picker": "../picker/index"
+        "ipms-picker": "../picker/index"
     }
 }

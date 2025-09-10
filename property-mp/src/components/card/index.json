@@ -1,6 +1,6 @@
 {
     "component": true,
     "usingComponents": {
-        "cw-tag": "../tag/index"
+        "ipms-tag": "../tag/index"
     }
 }

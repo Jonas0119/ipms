@@ -7,9 +7,9 @@
  * +----------------------------------------------------------------------
  */
 
-import { CwComponent } from '../common/component';
+import { IpmsComponent } from '../common/component';
 import { canIUseModel } from '../common/version';
-CwComponent({
+IpmsComponent({
     field: true,
     classes: ['field-class', 'input-class', 'cancel-class'],
     props: {

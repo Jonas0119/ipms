@@ -7,15 +7,15 @@
     bindtap="onClick"
 >
     <view
-        class="content-class {{ utils.bem('grid-item__content', [direction, { center, square, clickable, surround: border && gutter }]) }} {{ border ? 'cw-hairline--surround' : '' }}"
+        class="content-class {{ utils.bem('grid-item__content', [direction, { center, square, clickable, surround: border && gutter }]) }} {{ border ? 'ipms-hairline--surround' : '' }}"
         style="{{ computed.contentStyle({ square, gutter }) }}"
     >
         <block wx:if="{{ useSlot }}">
             <slot />
         </block>
         <block wx:else>
-            <view class="cw-grid-item__icon icon-class">
-                <cw-icon
+            <view class="ipms-grid-item__icon icon-class">
+                <ipms-icon
                     wx:if="{{ icon }}"
                     name="{{ icon }}"
                     color="{{ iconColor }}"
@@ -25,7 +25,7 @@
                 />
                 <slot wx:else name="icon"></slot>
             </view>
-            <view class="cw-grid-item__text text-class">
+            <view class="ipms-grid-item__text text-class">
                 <text wx:if="{{ text }}">{{ text }}</text>
                 <slot wx:else name="text"></slot>
             </view>

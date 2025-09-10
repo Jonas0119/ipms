@@ -6,7 +6,7 @@
 <wxs src="../common/common.wxs" module="common" />
 
 <view class="container">
-    <cw-nav-bar
+    <ipms-nav-bar
         title="访客码出示"
         fixed
         border="{{ false }}"
@@ -40,11 +40,11 @@
         </view>
     </view>
 
-    <cw-copyright dark />
+    <ipms-copyright dark />
 
     <view class="bg">
         <image src="../../assets/vistor/bg.jpg" mode="heightFix"></image>
     </view>
 
-    <cw-toast id="cw-toast" />
+    <ipms-toast id="ipms-toast" />
 </view>

@@ -1,12 +1,12 @@
 {
     "navigationBarTitleText": "添加住宅",
     "usingComponents": {
-        "cw-cell": "../../components/cell",
-        "cw-cell-group": "../../components/cell-group",
-        "cw-copyright": "../../components/copyright",
-        "cw-toast": "../../components/toast",
-        "cw-notify": "../../components/notify",
-        "cw-dialog": "../../components/dialog",
-        "cw-notice-bar": "../../components/notice-bar"
+        "ipms-cell": "../../components/cell",
+        "ipms-cell-group": "../../components/cell-group",
+        "ipms-copyright": "../../components/copyright",
+        "ipms-toast": "../../components/toast",
+        "ipms-notify": "../../components/notify",
+        "ipms-dialog": "../../components/dialog",
+        "ipms-notice-bar": "../../components/notice-bar"
     }
 }

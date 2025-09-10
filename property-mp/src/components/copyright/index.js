@@ -7,10 +7,10 @@
  * +----------------------------------------------------------------------
  */
 
-import { CwComponent } from '../common/component';
+import { IpmsComponent } from '../common/component';
 import * as config from '../../config';
 
-CwComponent({
+IpmsComponent({
     data: {
         version: config.VERSION
     },

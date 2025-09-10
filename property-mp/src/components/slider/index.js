@@ -7,11 +7,11 @@
  * +----------------------------------------------------------------------
  */
 
-import { CwComponent } from '../common/component';
+import { IpmsComponent } from '../common/component';
 import { touch } from '../mixins/touch';
 import { canIUseModel } from '../common/version';
 import { getRect } from '../common/utils';
-CwComponent({
+IpmsComponent({
     mixins: [touch],
     props: {
         disabled: Boolean,
@@ -61,7 +61,7 @@ CwComponent({
             }
             this.touchMove(event);
             this.dragStatus = 'draging';
-            getRect(this, '.cw-slider').then(rect => {
+            getRect(this, '.ipms-slider').then(rect => {
                 const diff = (this.deltaX / rect.width) * this.getRange();
                 this.newValue = this.startValue + diff;
                 this.updateValue(this.newValue, false, true);
@@ -77,7 +77,7 @@ CwComponent({
         onClick(event) {
             if (this.data.disabled) return;
             const { min } = this.data;
-            getRect(this, '.cw-slider').then(rect => {
+            getRect(this, '.ipms-slider').then(rect => {
                 const value = ((event.detail.x - rect.left) / rect.width) * this.getRange() + min;
                 this.updateValue(value, true);
             });

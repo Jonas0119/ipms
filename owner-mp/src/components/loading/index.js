@@ -4,8 +4,8 @@
  * +----------------------------------------------------------------------
  */
 
-import { CwComponent } from '../common/component';
-CwComponent({
+import { IpmsComponent } from '../common/component';
+IpmsComponent({
     props: {
         color: String,
         vertical: Boolean,

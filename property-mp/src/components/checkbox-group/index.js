@@ -8,8 +8,8 @@
  */
 
 import { useChildren } from '../common/relation';
-import { CwComponent } from '../common/component';
-CwComponent({
+import { IpmsComponent } from '../common/component';
+IpmsComponent({
     field: true,
     relation: useChildren('checkbox', function(target) {
         this.updateChild(target);

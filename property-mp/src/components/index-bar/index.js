@@ -8,7 +8,7 @@
  */
 
 import { GREEN } from '../common/color';
-import { CwComponent } from '../common/component';
+import { IpmsComponent } from '../common/component';
 import { useChildren } from '../common/relation';
 import { getRect } from '../common/utils';
 import { pageScrollMixin } from '../mixins/page-scroll';
@@ -20,7 +20,7 @@ const indexList = () => {
     }
     return indexList;
 };
-CwComponent({
+IpmsComponent({
     relation: useChildren('index-anchor', function() {
         this.updateData();
     }),
@@ -81,7 +81,7 @@ CwComponent({
         setAnchorsRect() {
             return Promise.all(
                 this.children.map(anchor =>
-                    getRect(anchor, '.cw-index-anchor-wrapper').then(rect => {
+                    getRect(anchor, '.ipms-index-anchor-wrapper').then(rect => {
                         Object.assign(anchor, {
                             height: rect.height,
                             top: rect.top + this.scrollTop
@@ -91,7 +91,7 @@ CwComponent({
             );
         },
         setListRect() {
-            return getRect(this, '.cw-index-bar').then(rect => {
+            return getRect(this, '.ipms-index-bar').then(rect => {
                 Object.assign(this, {
                     height: rect.height,
                     top: rect.top + this.scrollTop
@@ -99,7 +99,7 @@ CwComponent({
             });
         },
         setSiderbarRect() {
-            return getRect(this, '.cw-index-bar__sidebar').then(res => {
+            return getRect(this, '.ipms-index-bar__sidebar').then(res => {
                 this.sidebar = {
                     height: res.height,
                     top: res.top
@@ -118,7 +118,7 @@ CwComponent({
             }
         },
         getAnchorRect(anchor) {
-            return getRect(anchor, '.cw-index-anchor-wrapper').then(rect => ({
+            return getRect(anchor, '.ipms-index-anchor-wrapper').then(rect => ({
                 height: rect.height,
                 top: rect.top
             }));

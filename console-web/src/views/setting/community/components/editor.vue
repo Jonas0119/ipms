@@ -55,7 +55,7 @@
                 <Input type="number" v-model="form.carport_max_car" />
             </FormField>
 
-            <div class="cw-form-actions">
+            <div class="ipms-form-actions">
                 <Button type="primary" :loading="submiting" @click="submit">{{ !update ? '创建' : '修改' }}</Button>
             </div>
         </Form>

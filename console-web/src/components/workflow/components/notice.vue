@@ -6,12 +6,12 @@
 
 <template>
     <div class="notice" @click="showDrawer">
-        <div class="cw-workflow-node-title">
+        <div class="ipms-workflow-node-title">
             <Icon type="ios-paper-plane-outline" />
             抄送人
         </div>
 
-        <div class="cw-workflow-node-content">
+        <div class="ipms-workflow-node-content">
             <div :class="textClass">
                 {{ text }}
             </div>
@@ -23,13 +23,13 @@
             title="抄送人设置"
             transfer
             width="360"
-            class-name="cw-drawer-width-footer"
+            class-name="ipms-drawer-width-footer"
             :closable="false"
             :mask-closable="false"
         >
             <Colleague v-model="user_id" haveData :listData="options.list" />
 
-            <div class="cw-drawer-footer">
+            <div class="ipms-drawer-footer">
                 <Button @click="cancel">取消</Button>
                 <Button type="primary" @click="saveNode">确定</Button>
             </div>
@@ -116,7 +116,7 @@ export default {
 
 <style lang="less">
 .notice {
-    .cw-workflow-node-title {
+    .ipms-workflow-node-title {
         background: rgb(50, 150, 250);
     }
 }

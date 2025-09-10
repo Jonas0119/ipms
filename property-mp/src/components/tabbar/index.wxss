@@ -1,6 +1,6 @@
 @import '../common/index.wxss';
 
-.cw-tabbar {
+.ipms-tabbar {
     display: flex;
     box-sizing: initial;
     width: 100%;
@@ -8,12 +8,12 @@
     background-color: #fff;
 }
 
-.cw-tabbar--fixed {
+.ipms-tabbar--fixed {
     position: fixed;
     bottom: 0;
     left: 0;
 }
 
-.cw-tabbar--safe {
+.ipms-tabbar--safe {
     padding-bottom: env(safe-area-inset-bottom);
 }

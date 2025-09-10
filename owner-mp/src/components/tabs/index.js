@@ -4,12 +4,12 @@
  * +----------------------------------------------------------------------
  */
 
-import { CwComponent } from '../common/component';
+import { IpmsComponent } from '../common/component';
 import { touch } from '../mixins/touch';
 import { getAllRect, getRect, groupSetData, nextTick, requestAnimationFrame } from '../common/utils';
 import { isDef } from '../common/validator';
 import { useChildren } from '../common/relation';
-CwComponent({
+IpmsComponent({
     mixins: [touch],
     classes: ['nav-class', 'tab-class', 'tab-active-class', 'line-class'],
     relation: useChildren('tab', function() {
@@ -92,7 +92,7 @@ CwComponent({
     mounted() {
         requestAnimationFrame(() => {
             this.setData({
-                container: () => this.createSelectorQuery().select('.cw-tabs')
+                container: () => this.createSelectorQuery().select('.ipms-tabs')
             });
             this.resize(true);
             this.scrollIntoView();
@@ -177,7 +177,7 @@ CwComponent({
                 return;
             }
             const { currentIndex, ellipsis } = this.data;
-            Promise.all([getAllRect(this, '.cw-tab'), getRect(this, '.cw-tabs__line')]).then(
+            Promise.all([getAllRect(this, '.ipms-tab'), getRect(this, '.ipms-tabs__line')]).then(
                 ([rects = [], lineRect]) => {
                     const rect = rects[currentIndex];
                     if (rect == null) {
@@ -198,7 +198,7 @@ CwComponent({
             if (!scrollable) {
                 return;
             }
-            Promise.all([getAllRect(this, '.cw-tab'), getRect(this, '.cw-tabs__nav')]).then(([tabRects, navRect]) => {
+            Promise.all([getAllRect(this, '.ipms-tab'), getRect(this, '.ipms-tabs__nav')]).then(([tabRects, navRect]) => {
                 const tabRect = tabRects[currentIndex];
                 const offsetLeft = tabRects.slice(0, currentIndex).reduce((prev, curr) => prev + curr.width, 0);
                 this.setData({

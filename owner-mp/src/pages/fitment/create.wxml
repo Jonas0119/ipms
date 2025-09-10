@@ -7,13 +7,13 @@
 
 <view class="container">
     <view wx:if="{{fetching}}">
-        <cw-cell wx:for="{{6}}" wx:key="index" is-link>
-            <cw-skeleton in-cell slot="title" row="1" />
-        </cw-cell>
+        <ipms-cell wx:for="{{6}}" wx:key="index" is-link>
+            <ipms-skeleton in-cell slot="title" row="1" />
+        </ipms-cell>
     </view>
     <view wx:else>
         <view wx:if="{{communityInfo.current.houses.length + communityInfo.current.merchants.length > list.length}}">
-            <cw-cell
+            <ipms-cell
                 wx:for="{{communityInfo.current.houses}}"
                 wx:key="index"
                 wx:if="{{!common.includes(list, item.building_id)}}"
@@ -23,7 +23,7 @@
                 value="申请"
                 is-link
             />
-            <cw-cell
+            <ipms-cell
                 wx:for="{{communityInfo.current.merchants}}"
                 wx:key="index"
                 wx:if="{{!common.includes(list, item.building_id)}}"
@@ -34,17 +34,17 @@
                 is-link
             />
         </view>
-        <cw-empty
+        <ipms-empty
             description="暂无{{communityInfo.current.name}}小区可进行装备的房屋"
             icon="fitment"
             with-copyright
             wx:else
         >
             <navigator url="/pages/community/index" class="link">切换默认小区？</navigator>
-        </cw-empty>
+        </ipms-empty>
     </view>
 
-    <cw-popup show="{{showPopup}}" position="bottom">
+    <ipms-popup show="{{showPopup}}" position="bottom">
         <view class="header">装修告知书</view>
         <view class="wrapper">
             <view class="paragraph">尊敬的业主：</view>
@@ -105,14 +105,14 @@
             <view class="paragraph indent">让我们共同建设和谐小区、文明施工，感谢您对我们工作的支持与配合！</view>
         </view>
         <view class="footer">
-            <cw-button bind:click="hideNotice">取消</cw-button>
-            <cw-button type="info" disabled="{{countdown !== 0}}" loading="{{submiting}}" bind:click="submit">
+            <ipms-button bind:click="hideNotice">取消</ipms-button>
+            <ipms-button type="info" disabled="{{countdown !== 0}}" loading="{{submiting}}" bind:click="submit">
                 {{countdown === 0 ? '确认' : ('阅读剩余' + countdown + '秒')}}
-            </cw-button>
+            </ipms-button>
         </view>
-    </cw-popup>
+    </ipms-popup>
 
-    <cw-toast id="cw-toast" />
-    <cw-notify id="cw-notify" />
-    <cw-copyright fixed="{{!fetching && communityInfo.current.houses.length <= list.length}}" />
+    <ipms-toast id="ipms-toast" />
+    <ipms-notify id="ipms-notify" />
+    <ipms-copyright fixed="{{!fetching && communityInfo.current.houses.length <= list.length}}" />
 </view>

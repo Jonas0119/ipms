@@ -1,34 +1,34 @@
 <wxs src="../common/common.wxs" module="common" />
 
 <view class="container">
-    <cw-cell-group title="采购详细" wx:if="{{fetching}}">
-        <cw-cell is-detail title="流程编号：">
-            <cw-skeleton in-cell row="2" />
-        </cw-cell>
-        <cw-cell is-detail title="申请人：">
-            <cw-skeleton in-cell row="2" />
-        </cw-cell>
-        <cw-cell is-detail title="采购金额：">
-            <cw-skeleton in-cell row="2" />
-        </cw-cell>
-        <cw-cell is-detail title="采购备注：">
-            <cw-skeleton in-cell row="2" />
-        </cw-cell>
-        <cw-cell is-detail title="申请时间：">
-            <cw-skeleton in-cell row="2" />
-        </cw-cell>
-        <cw-cell is-detail title="申请结果：" border="{{false}}">
-            <cw-skeleton in-cell row="2" />
-        </cw-cell>
-    </cw-cell-group>
+    <ipms-cell-group title="采购详细" wx:if="{{fetching}}">
+        <ipms-cell is-detail title="流程编号：">
+            <ipms-skeleton in-cell row="2" />
+        </ipms-cell>
+        <ipms-cell is-detail title="申请人：">
+            <ipms-skeleton in-cell row="2" />
+        </ipms-cell>
+        <ipms-cell is-detail title="采购金额：">
+            <ipms-skeleton in-cell row="2" />
+        </ipms-cell>
+        <ipms-cell is-detail title="采购备注：">
+            <ipms-skeleton in-cell row="2" />
+        </ipms-cell>
+        <ipms-cell is-detail title="申请时间：">
+            <ipms-skeleton in-cell row="2" />
+        </ipms-cell>
+        <ipms-cell is-detail title="申请结果：" border="{{false}}">
+            <ipms-skeleton in-cell row="2" />
+        </ipms-cell>
+    </ipms-cell-group>
     <view wx:else>
-        <cw-cell-group title="采购详细">
-            <cw-cell
+        <ipms-cell-group title="采购详细">
+            <ipms-cell
                 is-detail
                 title="流程编号："
                 value="{{common.number('MF', detail.info.created_at, detail.info.id)}}"
             />
-            <cw-cell
+            <ipms-cell
                 is-detail
                 title="申请人："
                 is-link
@@ -37,35 +37,35 @@
                 wx:if="{{detail.info.created_by !== userInfo.id}}"
                 value="{{detail.info.real_name}}"
             />
-            <cw-cell is-detail title="采购金额：" value="{{detail.info.total}}元" />
-            <cw-cell is-detail title="采购备注：" value="{{detail.info.remark ? detail.info.remark : '-'}}" />
-            <cw-cell is-detail title="申请时间：" value="{{common.date(detail.info.created_at)}}" />
-            <cw-cell is-detail title="申请结果：" border="{{detail.canceled_at ? true : false}}">
+            <ipms-cell is-detail title="采购金额：" value="{{detail.info.total}}元" />
+            <ipms-cell is-detail title="采购备注：" value="{{detail.info.remark ? detail.info.remark : '-'}}" />
+            <ipms-cell is-detail title="申请时间：" value="{{common.date(detail.info.created_at)}}" />
+            <ipms-cell is-detail title="申请结果：" border="{{detail.canceled_at ? true : false}}">
                 <block wx:if="{{detail.info.cancel}}">
-                    <cw-tag round color="#ff976a">已撤销</cw-tag>
+                    <ipms-tag round color="#ff976a">已撤销</ipms-tag>
                 </block>
                 <block wx:elif="{{detail.info.success === null}}">
-                    <cw-tag round color="#91d5ff">审批中</cw-tag>
+                    <ipms-tag round color="#91d5ff">审批中</ipms-tag>
                 </block>
                 <block wx:elif="{{!detail.info.success}}">
-                    <cw-tag round color="#ed4014">驳回</cw-tag>
+                    <ipms-tag round color="#ed4014">驳回</ipms-tag>
                 </block>
                 <block wx:else>
-                    <cw-tag round color="#52c41a">成功</cw-tag>
+                    <ipms-tag round color="#52c41a">成功</ipms-tag>
                 </block>
-            </cw-cell>
-            <cw-cell
+            </ipms-cell>
+            <ipms-cell
                 is-detail
                 title="撤销时间："
                 wx:if="{{detail.info.cancel}}"
                 border="{{false}}"
                 value="{{common.date(detail.info.canceled_at)}}"
             />
-        </cw-cell-group>
+        </ipms-cell-group>
 
-        <cw-cell-group title="采购项目">
-            <cw-collapse value="{{ activeCollapse }}" bind:change="onCollapseChange">
-                <cw-collapse-item
+        <ipms-cell-group title="采购项目">
+            <ipms-collapse value="{{ activeCollapse }}" bind:change="onCollapseChange">
+                <ipms-collapse-item
                     wx:for="{{detail.items}}"
                     title="项目{{index + 1}}（{{item.fee}}元）"
                     wx:key="index"
@@ -107,21 +107,21 @@
                         <view class="label">供应商开户行地址：</view>
                         {{ item.bank_address ? item.bank_address : '-' }}
                     </view>
-                </cw-collapse-item>
-            </cw-collapse>
-        </cw-cell-group>
+                </ipms-collapse-item>
+            </ipms-collapse>
+        </ipms-cell-group>
 
         <view
             class="cancel-btn-box"
             wx:if="{{!detail.info.cancel && detail.info.success === null && detail.info.created_by === userInfo.id}}"
         >
-            <cw-button custom-class="cancel-btn" block type="warning" loading="{{canceling}}" bind:click="doCancel">
+            <ipms-button custom-class="cancel-btn" block type="warning" loading="{{canceling}}" bind:click="doCancel">
                 撤销申请
-            </cw-button>
+            </ipms-button>
         </view>
 
-        <cw-cell-group title="审批流程">
-            <cw-workflow
+        <ipms-cell-group title="审批流程">
+            <ipms-workflow
                 steps="{{detail.steps}}"
                 info="{{detail.info}}"
                 label="采购金额"
@@ -129,13 +129,13 @@
                 bind:approved="onApproved"
                 bind:relationed="onRelationed"
             />
-        </cw-cell-group>
+        </ipms-cell-group>
     </view>
 
-    <cw-copyright />
+    <ipms-copyright />
 
     <!-- 全局提示 -->
-    <cw-dialog id="cw-dialog" />
-    <cw-notify id="cw-notify" />
-    <cw-toast id="cw-toast" />
+    <ipms-dialog id="ipms-dialog" />
+    <ipms-notify id="ipms-notify" />
+    <ipms-toast id="ipms-toast" />
 </view>

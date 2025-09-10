@@ -1,7 +1,7 @@
 <wxs src="../wxs/utils.wxs" module="utils" />
 
 <view wx:if="{{ showWrapper }}" class="{{ utils.bem('dropdown-item', direction) }}" style="{{ wrapperStyle }}">
-    <cw-popup
+    <ipms-popup
         show="{{ showPopup }}"
         custom-style="position: absolute;{{ popupStyle }}"
         overlay-style="position: absolute;"
@@ -15,7 +15,7 @@
         bind:after-enter="onOpened"
         bind:after-leave="onClosed"
     >
-        <cw-cell
+        <ipms-cell
             wx:for="{{ options }}"
             wx:key="value"
             data-option="{{ item }}"
@@ -26,19 +26,19 @@
         >
             <view
                 slot="title"
-                class="cw-dropdown-item__title"
+                class="ipms-dropdown-item__title"
                 style="{{ item.value === value  ? 'color:' + activeColor : '' }}"
             >
                 {{ item.text }}
             </view>
-            <cw-icon
+            <ipms-icon
                 wx:if="{{ item.value === value }}"
                 name="success"
-                class="cw-dropdown-item__icon"
+                class="ipms-dropdown-item__icon"
                 color="{{ activeColor }}"
             />
-        </cw-cell>
+        </ipms-cell>
 
         <slot />
-    </cw-popup>
+    </ipms-popup>
 </view>

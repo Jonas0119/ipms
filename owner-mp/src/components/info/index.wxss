@@ -5,7 +5,7 @@
  */
 @import '../common/index.wxss';
 
-.cw-info {
+.ipms-info {
     position: absolute;
     top: 0;
     right: 0;
@@ -32,7 +32,7 @@
     border-radius: 16px;
 }
 
-.cw-info--dot {
+.ipms-info--dot {
     min-width: 0;
     border-radius: 100%;
     width: 8px;

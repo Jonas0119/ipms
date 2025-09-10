@@ -9,7 +9,7 @@ function tabClass(active, ellipsis) {
     }
 
     if (ellipsis) {
-        classes.push('cw-ellipsis');
+        classes.push('ipms-ellipsis');
     }
 
     return classes.join(' ');

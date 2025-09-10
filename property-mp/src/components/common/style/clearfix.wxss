@@ -1,4 +1,4 @@
-.cw-clearfix:after {
+.ipms-clearfix:after {
     display: table;
     clear: both;
     content: '';

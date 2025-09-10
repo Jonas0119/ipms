@@ -3,14 +3,14 @@
     "navigationBarTextStyle": "white",
     "navigationBarBackgroundColor": "#1989fa",
     "usingComponents": {
-        "cw-toast": "../../components/toast",
-        "cw-notify": "../../components/notify",
-        "cw-button": "../../components/button",
-        "cw-cell": "../../components/cell",
-        "cw-cell-group": "../../components/cell-group",
-        "cw-field": "../../components/field",
-        "cw-calendar": "../../components/calendar",
-        "cw-uploader": "../../components/uploader",
-        "cw-copyright": "../../components/copyright"
+        "ipms-toast": "../../components/toast",
+        "ipms-notify": "../../components/notify",
+        "ipms-button": "../../components/button",
+        "ipms-cell": "../../components/cell",
+        "ipms-cell-group": "../../components/cell-group",
+        "ipms-field": "../../components/field",
+        "ipms-calendar": "../../components/calendar",
+        "ipms-uploader": "../../components/uploader",
+        "ipms-copyright": "../../components/copyright"
     }
 }

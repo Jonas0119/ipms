@@ -6,8 +6,8 @@
 <wxs src="../common/common.wxs" module="common" />
 
 <view class="container">
-    <cw-cell-group>
-        <cw-cell
+    <ipms-cell-group>
+        <ipms-cell
             title="所在小区"
             title-width="100px"
             value="{{communityInfo.current.name}}小区"
@@ -15,50 +15,50 @@
             is-detail
             url="/pages/community/index"
         />
-        <cw-cell title="宠物种类" value="犬" is-detail />
-        <cw-field
+        <ipms-cell title="宠物种类" value="犬" is-detail />
+        <ipms-field
             label="宠物名"
             maxlength="{{ 12 }}"
             show-word-limit
             model:value="{{ name }}"
             placeholder="请输入宠物名"
         />
-        <cw-cell title="雌雄">
-            <cw-radio-group value="{{ sex }}" bind:change="onSexChange" direction="horizontal">
-                <cw-radio name="{{1}}">雄</cw-radio>
-                <cw-radio name="{{0}}">雌</cw-radio>
-            </cw-radio-group>
-        </cw-cell>
-        <cw-cell title="宠物照片">
+        <ipms-cell title="雌雄">
+            <ipms-radio-group value="{{ sex }}" bind:change="onSexChange" direction="horizontal">
+                <ipms-radio name="{{1}}">雄</ipms-radio>
+                <ipms-radio name="{{0}}">雌</ipms-radio>
+            </ipms-radio-group>
+        </ipms-cell>
+        <ipms-cell title="宠物照片">
             <view class="photo">
                 <navigator url="/pages/pet/photo">
                     <view class="uploader" wx:if="{{!photo}}">
-                        <cw-icon name="photograph" />
+                        <ipms-icon name="photograph" />
                     </view>
                     <view class="img" wx:else>
                         <image src="{{photo}}" mode="widthFix" />
                     </view>
                 </navigator>
             </view>
-        </cw-cell>
-        <cw-field
+        </ipms-cell>
+        <ipms-field
             label="宠物毛色"
             maxlength="{{ 12 }}"
             show-word-limit
             model:value="{{ coat_color }}"
             placeholder="请输入宠物毛色"
         />
-        <cw-field
+        <ipms-field
             label="宠物品种"
             maxlength="{{ 20 }}"
             show-word-limit
             model:value="{{ breed }}"
             placeholder="请输入宠物品种"
         />
-        <cw-cell title="是否已办理宠物登记证" border="{{ !haveLicense }}">
-            <cw-switch bind:change="updateHaveLicense" checked="{{haveLicense}}" />
-        </cw-cell>
-        <cw-field
+        <ipms-cell title="是否已办理宠物登记证" border="{{ !haveLicense }}">
+            <ipms-switch bind:change="updateHaveLicense" checked="{{haveLicense}}" />
+        </ipms-cell>
+        <ipms-field
             wx:if="{{haveLicense}}"
             label="证书编号"
             maxlength="{{ 40 }}"
@@ -66,7 +66,7 @@
             model:value="{{ pet_license }}"
             placeholder="请输入证书编号"
         />
-        <cw-cell
+        <ipms-cell
             wx:if="{{haveLicense}}"
             title="发证日期"
             value="{{!pet_license_award_at ? '请选择发证时间' : common.date(pet_license_award_at, false)}}"
@@ -75,7 +75,7 @@
             is-detail="{{pet_license_award_at ? true : false}}"
             bind:click="showlicenseCalendar"
         />
-        <cw-cell
+        <ipms-cell
             wx:if="{{haveLicense}}"
             title="最近一次接种疫苗日期"
             value="{{!vaccinated_at ? '请选择接种日期' : common.date(vaccinated_at, false)}}"
@@ -84,7 +84,7 @@
             clickable
             bind:click="showVaccinateCalendar"
         />
-        <cw-field
+        <ipms-field
             wx:if="{{haveLicense}}"
             label="疫苗类型"
             maxlength="{{ 32 }}"
@@ -92,15 +92,15 @@
             model:value="{{ vaccine_type }}"
             placeholder="请输入疫苗类型"
         />
-    </cw-cell-group>
+    </ipms-cell-group>
 
-    <cw-button custom-class="btn" block loading="{{submiting}}" type="info" bind:click="save">
+    <ipms-button custom-class="btn" block loading="{{submiting}}" type="info" bind:click="save">
         提交
-    </cw-button>
-    <cw-copyright />
-    <cw-toast id="cw-toast" />
-    <cw-notify id="cw-notify" />
-    <cw-calendar
+    </ipms-button>
+    <ipms-copyright />
+    <ipms-toast id="ipms-toast" />
+    <ipms-notify id="ipms-notify" />
+    <ipms-calendar
         title="发证日期"
         show="{{licenseCalendarVisible}}"
         max-date="{{stamp}}"
@@ -108,7 +108,7 @@
         bind:close="hidelicenseCalendar"
         bind:confirm="onLicenseDateChange"
     />
-    <cw-calendar
+    <ipms-calendar
         title="接种日期"
         show="{{accinateCalendarVisible}}"
         max-date="{{stamp}}"

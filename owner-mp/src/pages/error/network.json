@@ -1,9 +1,9 @@
 {
     "navigationBarTitleText": "网络错误",
     "usingComponents": {
-        "cw-button": "../../components/button",
-        "cw-toast": "../../components/toast",
-        "cw-copyright": "../../components/copyright",
-        "cw-empty": "../../components/empty"
+        "ipms-button": "../../components/button",
+        "ipms-toast": "../../components/toast",
+        "ipms-copyright": "../../components/copyright",
+        "ipms-empty": "../../components/empty"
     }
 }

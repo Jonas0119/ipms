@@ -73,7 +73,11 @@ const MpStorageConfigAction = <Action>{
             const service = StorageServiceFactory.getStorageService();
             console.log(`🔧 [MP-STORAGE-CONFIG-${requestId}] 获取存储服务实例完成`);
 
-            const uploadConfig = await service.getUploadConfig(filenameStr, mimetypeStr, dirStr);
+            // 检测是否为小程序请求
+            const isMiniProgram = ctx.request.header['wechat-mp-request'] === 'true';
+            console.log(`🔧 [MP-STORAGE-CONFIG-${requestId}] 小程序请求检测:`, isMiniProgram);
+
+            const uploadConfig = await service.getUploadConfig(filenameStr, mimetypeStr, dirStr, isMiniProgram);
             console.log(`🔧 [MP-STORAGE-CONFIG-${requestId}] 存储服务返回配置:`, uploadConfig);
 
             const resp: any = {

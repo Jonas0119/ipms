@@ -7,9 +7,9 @@
  * +----------------------------------------------------------------------
  */
 
-import { CwComponent } from '../common/component';
+import { IpmsComponent } from '../common/component';
 import { getRect, requestAnimationFrame } from '../common/utils';
-CwComponent({
+IpmsComponent({
     props: {
         text: {
             type: String,
@@ -68,7 +68,7 @@ CwComponent({
     methods: {
         init() {
             requestAnimationFrame(() => {
-                Promise.all([getRect(this, '.cw-notice-bar__content'), getRect(this, '.cw-notice-bar__wrap')]).then(
+                Promise.all([getRect(this, '.ipms-notice-bar__content'), getRect(this, '.ipms-notice-bar__wrap')]).then(
                     rects => {
                         const [contentRect, wrapRect] = rects;
                         if (contentRect == null || wrapRect == null || !contentRect.width || !wrapRect.width) {

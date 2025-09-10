@@ -4,8 +4,8 @@
  * +----------------------------------------------------------------------
  */
 
-import { CwComponent } from '../common/component';
-CwComponent({
+import { IpmsComponent } from '../common/component';
+IpmsComponent({
     classes: ['bar-class', 'price-class', 'button-class'],
     props: {
         tip: {

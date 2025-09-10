@@ -1,14 +1,14 @@
 {
     "navigationBarTitleText": "维修维护",
     "usingComponents": {
-        "cw-field": "../../components/field",
-        "cw-action-sheet": "../../components/action-sheet",
-        "cw-cell": "../../components/cell",
-        "cw-cell-group": "../../components/cell-group",
-        "cw-copyright": "../../components/copyright",
-        "cw-toast": "../../components/toast",
-        "cw-notify": "../../components/notify",
-        "cw-uploader": "../../components/uploader",
-        "cw-button": "../../components/button"
+        "ipms-field": "../../components/field",
+        "ipms-action-sheet": "../../components/action-sheet",
+        "ipms-cell": "../../components/cell",
+        "ipms-cell-group": "../../components/cell-group",
+        "ipms-copyright": "../../components/copyright",
+        "ipms-toast": "../../components/toast",
+        "ipms-notify": "../../components/notify",
+        "ipms-uploader": "../../components/uploader",
+        "ipms-button": "../../components/button"
     }
 }

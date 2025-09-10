@@ -23,7 +23,7 @@ interface RequestBody {
     fitment_pledge: typeof TRUE | typeof FALSE;
 }
 
-const CwCommunityManageUpdateAction = <Action>{
+const IpmsCommunityManageUpdateAction = <Action>{
     router: {
         path: '/community_manage/update',
         method: 'post',
@@ -147,4 +147,4 @@ const CwCommunityManageUpdateAction = <Action>{
     }
 };
 
-export default CwCommunityManageUpdateAction;
+export default IpmsCommunityManageUpdateAction;

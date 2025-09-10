@@ -4,10 +4,10 @@
  * +----------------------------------------------------------------------
  */
 
-import { CwPage } from '../common/page';
+import { IpmsPage } from '../common/page';
 import utils from '../../utils/index';
 
-CwPage({
+IpmsPage({
     data: {
         id: null,
         fetching: true,

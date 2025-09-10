@@ -1,44 +1,44 @@
 <wxs src="../wxs/utils.wxs" module="utils" />
 
 <view class="custom-class {{ utils.bem('steps', [direction]) }}">
-    <view class="cw-step__wrapper">
+    <view class="ipms-step__wrapper">
         <view
             wx:for="{{ steps }}"
             wx:key="index"
             bindtap="onClick"
             data-index="{{ index }}"
-            class="{{ utils.bem('step', [direction, status(index, active)]) }} cw-hairline"
+            class="{{ utils.bem('step', [direction, status(index, active)]) }} ipms-hairline"
             style="{{ status(index, active) === 'inactive' ? 'color: ' + inactiveColor: '' }}"
         >
-            <view class="cw-step__title" style="{{ index === active ? 'color: ' + activeColor : '' }}">
+            <view class="ipms-step__title" style="{{ index === active ? 'color: ' + activeColor : '' }}">
                 <view>{{ item.text }}</view>
                 <view class="desc-class">{{ item.desc }}</view>
             </view>
-            <view class="cw-step__circle-container">
+            <view class="ipms-step__circle-container">
                 <block wx:if="{{ index !== active }}">
-                    <cw-icon
+                    <ipms-icon
                         wx:if="{{ item.inactiveIcon || inactiveIcon }}"
                         color="{{ status(index, active) === 'inactive' ? inactiveColor: activeColor }}"
                         name="{{ item.inactiveIcon || inactiveIcon }}"
-                        custom-class="cw-step__icon"
+                        custom-class="ipms-step__icon"
                     />
                     <view
                         wx:else
-                        class="cw-step__circle"
+                        class="ipms-step__circle"
                         style="{{ 'background-color: ' + (index < active ? activeColor : inactiveColor) }}"
                     />
                 </block>
 
-                <cw-icon
+                <ipms-icon
                     wx:else
                     name="{{ item.activeIcon || activeIcon }}"
                     color="{{ activeColor }}"
-                    custom-class="cw-step__icon"
+                    custom-class="ipms-step__icon"
                 />
             </view>
             <view
                 wx:if="{{ index !== steps.length - 1 }}"
-                class="cw-step__line"
+                class="ipms-step__line"
                 style="{{ 'background-color: ' + (index < active ? activeColor : '#ebedf0') }}"
             />
         </view>

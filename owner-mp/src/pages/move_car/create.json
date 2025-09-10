@@ -1,16 +1,16 @@
 {
     "navigationBarTitleText": "小区挪车",
     "usingComponents": {
-        "cw-switch": "../../components/switch",
-        "cw-cell": "../../components/cell",
-        "cw-cell-group": "../../components/cell-group",
-        "cw-car-number": "../../components/car-number",
-        "cw-copyright": "../../components/copyright",
-        "cw-action-sheet": "../../components/action-sheet",
-        "cw-uploader": "../../components/uploader",
-        "cw-toast": "../../components/toast",
-        "cw-notify": "../../components/notify",
-        "cw-dialog": "../../components/dialog",
-        "cw-button": "../../components/button"
+        "ipms-switch": "../../components/switch",
+        "ipms-cell": "../../components/cell",
+        "ipms-cell-group": "../../components/cell-group",
+        "ipms-car-number": "../../components/car-number",
+        "ipms-copyright": "../../components/copyright",
+        "ipms-action-sheet": "../../components/action-sheet",
+        "ipms-uploader": "../../components/uploader",
+        "ipms-toast": "../../components/toast",
+        "ipms-notify": "../../components/notify",
+        "ipms-dialog": "../../components/dialog",
+        "ipms-button": "../../components/button"
     }
 }

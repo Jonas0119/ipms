@@ -2,7 +2,7 @@
 
 <view
     wx:if="{{ inited }}"
-    class="cw-transition custom-class {{ classes }}"
+    class="ipms-transition custom-class {{ classes }}"
     style="{{ computed.rootStyle({ currentDuration, display, customStyle }) }}"
     bind:transitionend="onTransitionEnd"
 >

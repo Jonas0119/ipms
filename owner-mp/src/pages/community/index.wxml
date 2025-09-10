@@ -10,7 +10,7 @@
         <view class="community-item" wx:for="{{ communityInfo.list }}" wx:key="index">
             <view class="community-body">
                 <view class="community-name">
-                    <cw-icon name="community" />
+                    <ipms-icon name="community" />
                     <text>{{ item.name }}</text>
                     <text class="community-local">{{ item.province }}{{ item.city }}{{ item.district }}</text>
                 </view>
@@ -19,7 +19,7 @@
                     <text>住宅：</text>
                     <view>
                         <view class="community-detail" wx:for="{{ item.houses }}" wx:key="index">
-                            <cw-icon name="approve" custom-class="{{ item.authenticated ? '' : 'unapprove' }}" />
+                            <ipms-icon name="approve" custom-class="{{ item.authenticated ? '' : 'unapprove' }}" />
                             {{ common.building(item, false)}}
                         </view>
                     </view>
@@ -29,7 +29,7 @@
                     <text>车位：</text>
                     <view>
                         <view class="community-detail" wx:for="{{ item.carports }}" wx:key="index">
-                            <cw-icon name="approve" custom-class="{{ item.authenticated ? '' : 'unapprove' }}" />
+                            <ipms-icon name="approve" custom-class="{{ item.authenticated ? '' : 'unapprove' }}" />
                             {{ common.building(item, false)}}
                         </view>
                     </view>
@@ -39,7 +39,7 @@
                     <text>仓房：</text>
                     <view>
                         <view class="community-detail" wx:for="{{ item.warehouses }}" wx:key="index">
-                            <cw-icon name="approve" custom-class="{{ item.authenticated ? '' : 'unapprove' }}" />
+                            <ipms-icon name="approve" custom-class="{{ item.authenticated ? '' : 'unapprove' }}" />
                             {{ common.building(item, false)}}
                         </view>
                     </view>
@@ -49,7 +49,7 @@
                     <text>商户：</text>
                     <view>
                         <view class="community-detail" wx:for="{{ item.merchants }}" wx:key="index">
-                            <cw-icon name="approve" custom-class="{{ item.authenticated ? '' : 'unapprove' }}" />
+                            <ipms-icon name="approve" custom-class="{{ item.authenticated ? '' : 'unapprove' }}" />
                             {{ common.building(item, false)}}
                         </view>
                     </view>
@@ -59,7 +59,7 @@
                     <text>车库：</text>
                     <view>
                         <view class="community-detail" wx:for="{{ item.garages }}" wx:key="index">
-                            <cw-icon name="approve" custom-class="{{ item.authenticated ? '' : 'unapprove' }}" />
+                            <ipms-icon name="approve" custom-class="{{ item.authenticated ? '' : 'unapprove' }}" />
                             {{ common.building(item, false)}}
                         </view>
                     </view>
@@ -68,7 +68,7 @@
 
             <view class="community-footer">
                 <view class="operate-box" data-id="{{ item.community_id }}" bind:tap="setDefaultCommunity">
-                    <cw-checkbox
+                    <ipms-checkbox
                         value="{{ communityInfo.current.community_id === item.community_id }}"
                         icon-size="14px"
                     />
@@ -77,12 +77,12 @@
 
                 <view class="operate-box">
                     <view class="operate-box" data-id="{{ item.community_id }}" bind:tap="familyRelation">
-                        <cw-icon name="family-relation" />
+                        <ipms-icon name="family-relation" />
                         <text>家人认证</text>
                     </view>
 
                     <view class="operate-box" data-id="{{ item.community_id }}" bind:tap="removeCommunity">
-                        <cw-icon name="edit-remove" />
+                        <ipms-icon name="edit-remove" />
                         <text>删除</text>
                     </view>
                 </view>
@@ -93,18 +93,18 @@
     <view class="community-list" wx:if="{{ globalFetching }}">
         <view class="community-item" wx:for="{{ systemInfo.safeArea.height / 280 }}" wx:key="index">
             <view class="community-body">
-                <cw-skeleton row="{{ 3 }}" title />
+                <ipms-skeleton row="{{ 3 }}" title />
             </view>
 
             <view class="community-footer" />
         </view>
     </view>
 
-    <cw-copyright />
+    <ipms-copyright />
 
-    <cw-button block type="info" custom-class="add-btn" bind:click="addCommunity">添加住宅</cw-button>
+    <ipms-button block type="info" custom-class="add-btn" bind:click="addCommunity">添加住宅</ipms-button>
     <view class="cover" />
 
-    <cw-dialog id="cw-dialog"></cw-dialog>
-    <cw-toast id="cw-toast"></cw-toast>
+    <ipms-dialog id="ipms-dialog"></ipms-dialog>
+    <ipms-toast id="ipms-toast"></ipms-toast>
 </view>

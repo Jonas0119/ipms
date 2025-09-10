@@ -7,9 +7,9 @@
  * +----------------------------------------------------------------------
  */
 
-import { CwComponent } from '../common/component';
+import { IpmsComponent } from '../common/component';
 import { transition } from '../mixins/transition';
-CwComponent({
+IpmsComponent({
     classes: [
         'enter-class',
         'enter-active-class',

@@ -7,7 +7,7 @@
  * +----------------------------------------------------------------------
  */
 
-import { CwComponent } from '../common/component';
+import { IpmsComponent } from '../common/component';
 import { isDef } from '../common/validator';
 import { pickerProps } from '../picker/shared';
 const currentYear = new Date().getFullYear();
@@ -41,7 +41,7 @@ function getMonthEndDay(year, month) {
     return 32 - new Date(year, month - 1, 32).getDate();
 }
 const defaultFormatter = (type, value) => value;
-CwComponent({
+IpmsComponent({
     classes: ['active-class', 'toolbar-class', 'column-class'],
     props: Object.assign(Object.assign({}, pickerProps), {
         value: {
@@ -112,7 +112,7 @@ CwComponent({
         },
         getPicker() {
             if (this.picker == null) {
-                this.picker = this.selectComponent('.cw-datetime-picker');
+                this.picker = this.selectComponent('.ipms-datetime-picker');
                 const { picker } = this;
                 const { setColumnValues } = picker;
                 picker.setColumnValues = (...args) => setColumnValues.apply(picker, [...args, false]);

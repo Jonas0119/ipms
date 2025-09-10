@@ -5,11 +5,11 @@
  */
 
 <template>
-    <Drawer v-model="visible" class="cw-layout-setting" transfer>
+    <Drawer v-model="visible" class="ipms-layout-setting" transfer>
         <Divider>主题风格设置</Divider>
-        <div class="cw-layout-setting-item">
+        <div class="ipms-layout-setting-item">
             <div
-                :class="['cw-layout-setting-item-raido', settings.siderTheme === 'dark' ? 'selected' : '']"
+                :class="['ipms-layout-setting-item-raido', settings.siderTheme === 'dark' ? 'selected' : '']"
                 @click="setDarkSiderTheme"
             >
                 <Tooltip content="暗色侧边栏" placement="top" transfer>
@@ -18,7 +18,7 @@
             </div>
 
             <div
-                :class="['cw-layout-setting-item-raido', settings.siderTheme === 'light' ? 'selected' : '']"
+                :class="['ipms-layout-setting-item-raido', settings.siderTheme === 'light' ? 'selected' : '']"
                 @click="setLightSiderTheme"
             >
                 <Tooltip content="亮色侧边栏" placement="top" transfer>
@@ -27,9 +27,9 @@
             </div>
         </div>
 
-        <div class="cw-layout-setting-item">
+        <div class="ipms-layout-setting-item">
             <div
-                :class="['cw-layout-setting-item-raido', settings.headerTheme === 'light' ? 'selected' : '']"
+                :class="['ipms-layout-setting-item-raido', settings.headerTheme === 'light' ? 'selected' : '']"
                 @click="setLightHeaderTheme"
             >
                 <Tooltip content="亮色顶栏" placement="top" transfer>
@@ -38,7 +38,7 @@
             </div>
 
             <div
-                :class="['cw-layout-setting-item-raido', settings.headerTheme === 'dark' ? 'selected' : '']"
+                :class="['ipms-layout-setting-item-raido', settings.headerTheme === 'dark' ? 'selected' : '']"
                 @click="setDarkHeaderTheme"
             >
                 <Tooltip content="暗色顶栏" placement="top" transfer>
@@ -47,7 +47,7 @@
             </div>
 
             <div
-                :class="['cw-layout-setting-item-raido', settings.headerTheme === 'primary' ? 'selected' : '']"
+                :class="['ipms-layout-setting-item-raido', settings.headerTheme === 'primary' ? 'selected' : '']"
                 @click="setPrimaryHeaderTheme"
             >
                 <Tooltip content="主色顶栏" placement="top" transfer>
@@ -58,65 +58,65 @@
 
         <Divider>导航设置</Divider>
 
-        <div class="cw-layout-setting-item">
-            <span class="cw-layout-setting-item-property">
+        <div class="ipms-layout-setting-item">
+            <span class="ipms-layout-setting-item-property">
                 固定侧边栏
             </span>
-            <span class="cw-layout-setting-item-action">
+            <span class="ipms-layout-setting-item-action">
                 <CSwitch size="small" :value="settings.siderFixed" @on-change="this.updateSiderFixed" />
             </span>
         </div>
 
-        <div class="cw-layout-setting-item">
-            <span class="cw-layout-setting-item-property">
+        <div class="ipms-layout-setting-item">
+            <span class="ipms-layout-setting-item-property">
                 固定顶栏
             </span>
-            <span class="cw-layout-setting-item-action">
+            <span class="ipms-layout-setting-item-action">
                 <CSwitch size="small" :value="settings.headerFixed" @on-change="this.updateHeaderFixed" />
             </span>
         </div>
 
-        <div class="cw-layout-setting-item">
-            <span class="cw-layout-setting-item-property">
+        <div class="ipms-layout-setting-item">
+            <span class="ipms-layout-setting-item-property">
                 侧边栏开启手风琴模式
             </span>
-            <span class="cw-layout-setting-item-action">
+            <span class="ipms-layout-setting-item-action">
                 <CSwitch size="small" :value="settings.siderAccordion" @on-change="this.updateSiderAccordion" />
             </span>
         </div>
 
-        <div class="cw-layout-setting-item">
-            <span class="cw-layout-setting-item-property">
+        <div class="ipms-layout-setting-item">
+            <span class="ipms-layout-setting-item-property">
                 显示全局面包屑导航
             </span>
-            <span class="cw-layout-setting-item-action">
+            <span class="ipms-layout-setting-item-action">
                 <CSwitch size="small" :value="settings.showBreadcurmd" @on-change="this.updateShowBreadcurmd" />
             </span>
         </div>
 
-        <div class="cw-layout-setting-item">
-            <span class="cw-layout-setting-item-property">
+        <div class="ipms-layout-setting-item">
+            <span class="ipms-layout-setting-item-property">
                 显示面包屑导航图标
             </span>
-            <span class="cw-layout-setting-item-action">
+            <span class="ipms-layout-setting-item-action">
                 <CSwitch size="small" :value="settings.showBreadcurmdIcon" @on-change="this.updateShowBreadcurmdIcon" />
             </span>
         </div>
 
-        <div class="cw-layout-setting-item">
-            <span class="cw-layout-setting-item-property">
+        <div class="ipms-layout-setting-item">
+            <span class="ipms-layout-setting-item-property">
                 显示全局刷新按钮
             </span>
-            <span class="cw-layout-setting-item-action">
+            <span class="ipms-layout-setting-item-action">
                 <CSwitch size="small" :value="settings.showRefresh" @on-change="this.updateShowRefresh" />
             </span>
         </div>
 
-        <div class="cw-layout-setting-item">
-            <span class="cw-layout-setting-item-property">
+        <div class="ipms-layout-setting-item">
+            <span class="ipms-layout-setting-item-property">
                 侧栏折叠时显示父级菜单名
             </span>
-            <span class="cw-layout-setting-item-action">
+            <span class="ipms-layout-setting-item-action">
                 <CSwitch
                     size="small"
                     :value="settings.collapsedShowParentMenu"
@@ -125,11 +125,11 @@
             </span>
         </div>
 
-        <div class="cw-layout-setting-item">
-            <span class="cw-layout-setting-item-property">
+        <div class="ipms-layout-setting-item">
+            <span class="ipms-layout-setting-item-property">
                 显示折叠侧栏按钮
             </span>
-            <span class="cw-layout-setting-item-action">
+            <span class="ipms-layout-setting-item-action">
                 <CSwitch size="small" :value="settings.showSiderBtn" @on-change="this.updateShowSideBtn" />
             </span>
         </div>
@@ -214,7 +214,7 @@ export default {
 </script>
 
 <style lang="less">
-.cw-layout-setting {
+.ipms-layout-setting {
     width: 280px;
 
     .ivu-drawer-close {

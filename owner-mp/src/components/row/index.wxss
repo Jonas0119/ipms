@@ -5,7 +5,7 @@
  */
 @import '../common/index.wxss';
 
-.cw-row:after {
+.ipms-row:after {
     display: table;
     clear: both;
     content: '';

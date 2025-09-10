@@ -1,6 +1,6 @@
 {
     "component": true,
     "usingComponents": {
-        "cw-transition": "../transition/index"
+        "ipms-transition": "../transition/index"
     }
 }

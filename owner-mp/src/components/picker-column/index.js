@@ -4,11 +4,11 @@
  * +----------------------------------------------------------------------
  */
 
-import { CwComponent } from '../common/component';
+import { IpmsComponent } from '../common/component';
 import { range } from '../common/utils';
 import { isObj } from '../common/validator';
 const DEFAULT_DURATION = 200;
-CwComponent({
+IpmsComponent({
     classes: ['active-class'],
     props: {
         valueKey: String,

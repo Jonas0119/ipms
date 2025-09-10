@@ -34,7 +34,7 @@
             :title="updateInfo ? '修改线路' : '添加线路'"
             transfer
             width="460"
-            class-name="cw-drawer-width-footer"
+            class-name="ipms-drawer-width-footer"
             :closable="false"
             :mask-closable="false"
         >
@@ -93,7 +93,7 @@
                 </FormItem>
             </Form>
 
-            <div class="cw-drawer-footer">
+            <div class="ipms-drawer-footer">
                 <Button @click="cancel">取消</Button>
                 <Button type="primary" :loading="submiting" @click="submit">{{ updateInfo ? '修改' : '添加' }}</Button>
             </div>

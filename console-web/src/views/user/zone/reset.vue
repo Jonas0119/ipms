@@ -24,7 +24,7 @@
                     <Input placeholder="请输入密码" type="password" v-model="form.password2" />
                 </FormField>
 
-                <div class="cw-form-actions">
+                <div class="ipms-form-actions">
                     <Button type="primary" :loading="submiting" @click="submit">
                         修改密码
                     </Button>

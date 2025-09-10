@@ -237,7 +237,7 @@
             v-if="detail.info.step === 1 && !detail.info.merge_id"
         >
             <Colleague v-model="dispose_user_id" />
-            <div class="cw-form-actions">
+            <div class="ipms-form-actions">
                 <Button type="primary" :loading="submiting" @click="allot">确定指派</Button>
             </div>
         </Card>
@@ -250,7 +250,7 @@
             v-if="detail.info.step === 1 && !detail.info.merge_id"
         >
             <ComplainMerge :list="mergeOption" v-model="merge_id" />
-            <div class="cw-form-actions">
+            <div class="ipms-form-actions">
                 <Button type="primary" :loading="merging" @click="merge">确认合并</Button>
             </div>
         </Card>

@@ -121,7 +121,7 @@
             </div>
         </Card>
 
-        <div class="cw-form-actions">
+        <div class="ipms-form-actions">
             <Button type="primary" :loading="submiting" @click="submit">{{ update ? '修改合同' : '创建合同' }}</Button>
         </div>
     </WaterMark>

@@ -1,6 +1,6 @@
 @import '../common/index.wxss';
 
-.cw-card {
+.ipms-card {
     position: relative;
     box-sizing: border-box;
     padding: 8px 16px;
@@ -9,19 +9,19 @@
     background-color: #fafafa;
 }
 
-.cw-card__header {
+.ipms-card__header {
     display: -webkit-flex;
     display: flex;
 }
 
-.cw-card__header--center {
+.ipms-card__header--center {
     -webkit-align-items: center;
     align-items: center;
     -webkit-justify-content: center;
     justify-content: center;
 }
 
-.cw-card__thumb {
+.ipms-card__thumb {
     position: relative;
     -webkit-flex: none;
     flex: none;
@@ -30,17 +30,17 @@
     margin-right: 8px;
 }
 
-.cw-card__thumb:empty {
+.ipms-card__thumb:empty {
     display: none;
 }
 
-.cw-card__img {
+.ipms-card__img {
     width: 100%;
     height: 100%;
     border-radius: 8px;
 }
 
-.cw-card__content {
+.ipms-card__content {
     position: relative;
     display: -webkit-flex;
     display: flex;
@@ -54,47 +54,47 @@
     min-height: 88px;
 }
 
-.cw-card__content--center {
+.ipms-card__content--center {
     -webkit-justify-content: center;
     justify-content: center;
 }
 
-.cw-card__desc,
-.cw-card__title {
+.ipms-card__desc,
+.ipms-card__title {
     word-wrap: break-word;
 }
 
-.cw-card__title {
+.ipms-card__title {
     font-weight: 700;
     line-height: 16px;
 }
 
-.cw-card__desc {
+.ipms-card__desc {
     line-height: 20px;
     color: #646566;
 }
 
-.cw-card__bottom {
+.ipms-card__bottom {
     line-height: 20px;
 }
 
-.cw-card__price {
+.ipms-card__price {
     display: inline-block;
     font-weight: 700;
     color: #ee0a24;
     font-size: 12px;
 }
 
-.cw-card__price-integer {
+.ipms-card__price-integer {
     font-size: 16px;
 }
 
-.cw-card__price-decimal,
-.cw-card__price-integer {
+.ipms-card__price-decimal,
+.ipms-card__price-integer {
     font-family: Avenir-Heavy, PingFang SC, Helvetica Neue, Arial, sans-serif;
 }
 
-.cw-card__origin-price {
+.ipms-card__origin-price {
     display: inline-block;
     margin-left: 5px;
     text-decoration: line-through;
@@ -102,17 +102,17 @@
     color: #646566;
 }
 
-.cw-card__num {
+.ipms-card__num {
     float: right;
 }
 
-.cw-card__tag {
+.ipms-card__tag {
     position: absolute !important;
     top: 2px;
     left: 0;
 }
 
-.cw-card__footer {
+.ipms-card__footer {
     -webkit-flex: none;
     flex: none;
     width: 100%;

@@ -1,11 +1,11 @@
 @import '../common/index.wxss';
 
-.cw-stepper {
+.ipms-stepper {
     font-size: 0;
 }
 
-.cw-stepper__minus,
-.cw-stepper__plus {
+.ipms-stepper__minus,
+.ipms-stepper__plus {
     position: relative;
     display: inline-block;
     box-sizing: border-box;
@@ -19,26 +19,26 @@
     padding: 4px;
 }
 
-.cw-stepper__minus:before,
-.cw-stepper__plus:before {
+.ipms-stepper__minus:before,
+.ipms-stepper__plus:before {
     width: 9px;
     height: 1px;
 }
 
-.cw-stepper__minus:after,
-.cw-stepper__plus:after {
+.ipms-stepper__minus:after,
+.ipms-stepper__plus:after {
     width: 1px;
     height: 9px;
 }
 
-.cw-stepper__minus:empty.cw-stepper__minus:after,
-.cw-stepper__minus:empty.cw-stepper__minus:before,
-.cw-stepper__minus:empty.cw-stepper__plus:after,
-.cw-stepper__minus:empty.cw-stepper__plus:before,
-.cw-stepper__plus:empty.cw-stepper__minus:after,
-.cw-stepper__plus:empty.cw-stepper__minus:before,
-.cw-stepper__plus:empty.cw-stepper__plus:after,
-.cw-stepper__plus:empty.cw-stepper__plus:before {
+.ipms-stepper__minus:empty.ipms-stepper__minus:after,
+.ipms-stepper__minus:empty.ipms-stepper__minus:before,
+.ipms-stepper__minus:empty.ipms-stepper__plus:after,
+.ipms-stepper__minus:empty.ipms-stepper__plus:before,
+.ipms-stepper__plus:empty.ipms-stepper__minus:after,
+.ipms-stepper__plus:empty.ipms-stepper__minus:before,
+.ipms-stepper__plus:empty.ipms-stepper__plus:after,
+.ipms-stepper__plus:empty.ipms-stepper__plus:before {
     position: absolute;
     top: 0;
     right: 0;
@@ -49,70 +49,70 @@
     content: '';
 }
 
-.cw-stepper__minus--hover,
-.cw-stepper__plus--hover {
+.ipms-stepper__minus--hover,
+.ipms-stepper__plus--hover {
     background-color: #e8e8e8;
 }
 
-.cw-stepper__minus--disabled,
-.cw-stepper__plus--disabled {
+.ipms-stepper__minus--disabled,
+.ipms-stepper__plus--disabled {
     color: #c8c9cc;
 }
 
-.cw-stepper__minus--disabled,
-.cw-stepper__minus--disabled.cw-stepper__minus--hover,
-.cw-stepper__minus--disabled.cw-stepper__plus--hover,
-.cw-stepper__plus--disabled,
-.cw-stepper__plus--disabled.cw-stepper__minus--hover,
-.cw-stepper__plus--disabled.cw-stepper__plus--hover {
+.ipms-stepper__minus--disabled,
+.ipms-stepper__minus--disabled.ipms-stepper__minus--hover,
+.ipms-stepper__minus--disabled.ipms-stepper__plus--hover,
+.ipms-stepper__plus--disabled,
+.ipms-stepper__plus--disabled.ipms-stepper__minus--hover,
+.ipms-stepper__plus--disabled.ipms-stepper__plus--hover {
     background-color: #f7f8fa;
 }
 
-.cw-stepper__minus {
+.ipms-stepper__minus {
     border-radius: 4px 0 0 4px;
 }
 
-.cw-stepper__minus:after {
+.ipms-stepper__minus:after {
     display: none;
 }
 
-.cw-stepper__plus {
+.ipms-stepper__plus {
     border-radius: 0 4px 4px 0;
 }
 
-.cw-stepper--round .cw-stepper__input {
+.ipms-stepper--round .ipms-stepper__input {
     background-color: initial !important;
 }
 
-.cw-stepper--round .cw-stepper__minus,
-.cw-stepper--round .cw-stepper__plus {
+.ipms-stepper--round .ipms-stepper__minus,
+.ipms-stepper--round .ipms-stepper__plus {
     border-radius: 100%;
 }
 
-.cw-stepper--round .cw-stepper__minus:active,
-.cw-stepper--round .cw-stepper__plus:active {
+.ipms-stepper--round .ipms-stepper__minus:active,
+.ipms-stepper--round .ipms-stepper__plus:active {
     opacity: 0.7;
 }
 
-.cw-stepper--round .cw-stepper__minus--disabled,
-.cw-stepper--round .cw-stepper__minus--disabled:active,
-.cw-stepper--round .cw-stepper__plus--disabled,
-.cw-stepper--round .cw-stepper__plus--disabled:active {
+.ipms-stepper--round .ipms-stepper__minus--disabled,
+.ipms-stepper--round .ipms-stepper__minus--disabled:active,
+.ipms-stepper--round .ipms-stepper__plus--disabled,
+.ipms-stepper--round .ipms-stepper__plus--disabled:active {
     opacity: 0.3;
 }
 
-.cw-stepper--round .cw-stepper__plus {
+.ipms-stepper--round .ipms-stepper__plus {
     color: #fff;
     background-color: #ee0a24;
 }
 
-.cw-stepper--round .cw-stepper__minus {
+.ipms-stepper--round .ipms-stepper__minus {
     color: #ee0a24;
     background-color: #fff;
     border: 1px solid #ee0a24;
 }
 
-.cw-stepper__input {
+.ipms-stepper__input {
     display: inline-block;
     box-sizing: border-box;
     min-height: 0;
@@ -131,7 +131,7 @@
     height: 28px;
 }
 
-.cw-stepper__input--disabled {
+.ipms-stepper__input--disabled {
     color: #c8c9cc;
     background-color: #f2f3f5;
 }

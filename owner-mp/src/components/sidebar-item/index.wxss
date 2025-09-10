@@ -5,7 +5,7 @@
  */
 @import '../common/index.wxss';
 
-.cw-sidebar-item {
+.ipms-sidebar-item {
     display: block;
     box-sizing: border-box;
     overflow: hidden;
@@ -19,35 +19,35 @@
     background-color: #f7f8fa;
 }
 
-.cw-sidebar-item__text {
+.ipms-sidebar-item__text {
     position: relative;
     display: inline-block;
     word-break: break-all;
 }
 
-.cw-sidebar-item--hover:not(.cw-sidebar-item--disabled) {
+.ipms-sidebar-item--hover:not(.ipms-sidebar-item--disabled) {
     background-color: #f2f3f5;
 }
 
-.cw-sidebar-item:after {
+.ipms-sidebar-item:after {
     border-bottom-width: 1px;
 }
 
-.cw-sidebar-item--selected {
+.ipms-sidebar-item--selected {
     color: #323233;
     font-weight: 500;
     border-color: #ee0a24;
 }
 
-.cw-sidebar-item--selected:after {
+.ipms-sidebar-item--selected:after {
     border-right-width: 1px;
 }
 
-.cw-sidebar-item--selected,
-.cw-sidebar-item--selected.cw-sidebar-item--hover {
+.ipms-sidebar-item--selected,
+.ipms-sidebar-item--selected.ipms-sidebar-item--hover {
     background-color: #fff;
 }
 
-.cw-sidebar-item--disabled {
+.ipms-sidebar-item--disabled {
     color: #c8c9cc;
 }

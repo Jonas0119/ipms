@@ -4,13 +4,13 @@
  * +----------------------------------------------------------------------
  */
 
-import { CwPage } from '../common/page';
+import { IpmsPage } from '../common/page';
 import $notify from '../../components/notify/notify';
 import $toast from '../../components/toast/toast';
 import $dialog from '../../components/dialog/dialog';
 import utils from '../../utils/index';
 
-CwPage({
+IpmsPage({
     data: {
         showNotice: false
     },

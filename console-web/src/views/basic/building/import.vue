@@ -33,7 +33,7 @@
                     模板文件下载
                 </a>
 
-                <div class="cw-form-actions">
+                <div class="ipms-form-actions">
                     <Button type="primary" :loading="parsing" @click="doParseFile">下一步</Button>
                 </div>
             </div>
@@ -45,7 +45,7 @@
                 <h3>不可导入数据{{ errorData.length }}条</h3>
                 <Table :data="errorData" height="220" class="error-table" :columns="errorColumns" />
 
-                <div class="cw-form-actions">
+                <div class="ipms-form-actions">
                     <Button @click="preStep">上一步</Button>
                     <Button type="primary" :loading="submiting" @click="submit">下一步</Button>
                 </div>

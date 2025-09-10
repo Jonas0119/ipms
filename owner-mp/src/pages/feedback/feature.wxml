@@ -4,8 +4,8 @@
  +----------------------------------------------------------------------
 -->
 <view class="container">
-    <cw-cell-group>
-        <cw-field
+    <ipms-cell-group>
+        <ipms-field
             label="功能主旨"
             maxlength="{{ 20 }}"
             auto-focus
@@ -13,7 +13,7 @@
             model:value="{{ subject }}"
             placeholder="请输入功能主旨"
         />
-        <cw-field
+        <ipms-field
             label="功能描述"
             type="textarea"
             maxlength="{{ 200 }}"
@@ -23,7 +23,7 @@
             placeholder="请输入功能描述"
             border="{{ false }}"
         />
-    </cw-cell-group>
+    </ipms-cell-group>
 
     <view class="notice">
         <view class="item">本功能每日限用一次。</view>
@@ -34,11 +34,11 @@
         <view class="item">发布恶意、不实信息将会冻结账号。</view>
     </view>
 
-    <cw-button custom-class="btn" loading="{{submiting}}" block type="info" bind:click="save">
+    <ipms-button custom-class="btn" loading="{{submiting}}" block type="info" bind:click="save">
         提交功能建议
-    </cw-button>
-    <cw-copyright />
-    <cw-notify id="cw-notify" />
-    <cw-toast id="cw-toast" />
-    <cw-dialog id="cw-dialog" />
+    </ipms-button>
+    <ipms-copyright />
+    <ipms-notify id="ipms-notify" />
+    <ipms-toast id="ipms-toast" />
+    <ipms-dialog id="ipms-dialog" />
 </view>

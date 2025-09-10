@@ -125,7 +125,7 @@ const PcStorageConfigAction = <Action>{
             kjhlog.info(`🔧 [STORAGE-CONFIG-DEBUG] [${requestType}] 开始生成上传配置...`);
             kjhlog.info(`📤 [STORAGE-CONFIG-DEBUG] [${requestType}] getUploadConfig参数: filename=${filenameStr}, mimetype=${mimetypeStr}, dir=${dirStr}`);
             
-            const uploadConfig = await storageService.getUploadConfig(filenameStr, mimetypeStr, dirStr);
+            const uploadConfig = await storageService.getUploadConfig(filenameStr, mimetypeStr, dirStr, isMiniProgram);
             
             kjhlog.info(`✅ [STORAGE-CONFIG-DEBUG] [${requestType}] 上传配置生成完成!`);
             kjhlog.info(`📋 [STORAGE-CONFIG-DEBUG] [${requestType}] 配置检查:`, {
@@ -252,7 +252,15 @@ const PcStorageConfigAction = <Action>{
                             kjhlog.info(`[${requestType}] MinIO presigned URL configured:`, {
                                 bucket: uploadConfig.bucket,
                                 key: uploadConfig.key,
-                                presignedUrl: uploadConfig.presignedUrl.substring(0, 100) + '...'
+                                presignedUrl: uploadConfig.presignedUrl.substring(0, 100) + '...',
+                                uploadStrategy: response.uploadStrategy
+                            });
+                            kjhlog.info(`[${requestType}] MinIO PUT上传配置详情:`, {
+                                presignedUrl: uploadConfig.presignedUrl,
+                                bucket: uploadConfig.bucket,
+                                key: uploadConfig.key,
+                                baseUrl: response.baseUrl,
+                                expire: response.expire
                             });
                         } else {
                             // 预签名URL生成失败时，回退到服务端上传
@@ -260,7 +268,8 @@ const PcStorageConfigAction = <Action>{
                             response.uploadUrl = '/pc/storage/upload';
                             kjhlog.warn(`[${requestType}] MinIO fallback to server upload for PC:`, {
                                 reason: 'Missing presigned URL',
-                                hasPresignedUrl: !!uploadConfig.presignedUrl
+                                hasPresignedUrl: !!uploadConfig.presignedUrl,
+                                uploadConfigKeys: Object.keys(uploadConfig)
                             });
                         }
                     }

@@ -65,7 +65,7 @@
             :title="`巡检路线「${detail.info.name}」详情`"
             transfer
             width="560"
-            class-name="cw-drawer-width-footer"
+            class-name="ipms-drawer-width-footer"
             :closable="false"
             :mask-closable="false"
         >
@@ -108,7 +108,7 @@
 
             <Spin size="large" fix v-if="detailFetching" />
 
-            <div class="cw-drawer-footer">
+            <div class="ipms-drawer-footer">
                 <Button @click="closeDrawer">关闭</Button>
                 <Button type="primary" :loading="submiting" @click="update">修改</Button>
             </div>

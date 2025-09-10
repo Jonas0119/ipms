@@ -4,12 +4,12 @@
  * +----------------------------------------------------------------------
  */
 
-import { CwPage } from '../common/page';
+import { IpmsPage } from '../common/page';
 import $notify from '../../components/notify/notify';
 import $toast from '../../components/toast/toast';
 import utils from '../../utils/index';
 
-CwPage({
+IpmsPage({
     data: {
         car_number: '',
         car_type: 1,

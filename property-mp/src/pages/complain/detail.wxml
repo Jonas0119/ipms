@@ -2,37 +2,37 @@
 <wxs src="./index.wxs" module="complain" />
 
 <view class="container">
-    <cw-steps steps="{{steps}}" active="{{detail.info.step - 1}}" />
+    <ipms-steps steps="{{steps}}" active="{{detail.info.step - 1}}" />
 
-    <cw-cell-group title="反馈信息" wx:if="{{fetching}}">
-        <cw-cell is-detail title="工单号码：">
-            <cw-skeleton in-cell row="2" />
-        </cw-cell>
-        <cw-cell is-detail title="反馈小区：">
-            <cw-skeleton in-cell row="2" />
-        </cw-cell>
-        <cw-cell is-detail title="工单来源：">
-            <cw-skeleton in-cell row="2" />
-        </cw-cell>
-        <cw-cell is-detail title="反馈类型：">
-            <cw-skeleton in-cell row="2" />
-        </cw-cell>
-        <cw-cell is-detail title="反馈分类：">
-            <cw-skeleton in-cell row="2" />
-        </cw-cell>
-        <cw-cell is-detail title="问题描述：">
-            <cw-skeleton in-cell row="2" />
-        </cw-cell>
-        <cw-cell is-detail title="现场图片：">
-            <cw-skeleton in-cell row="2" />
-        </cw-cell>
-        <cw-cell is-detail title="反馈时间：" border="{{false}}">
-            <cw-skeleton in-cell row="2" />
-        </cw-cell>
-    </cw-cell-group>
+    <ipms-cell-group title="反馈信息" wx:if="{{fetching}}">
+        <ipms-cell is-detail title="工单号码：">
+            <ipms-skeleton in-cell row="2" />
+        </ipms-cell>
+        <ipms-cell is-detail title="反馈小区：">
+            <ipms-skeleton in-cell row="2" />
+        </ipms-cell>
+        <ipms-cell is-detail title="工单来源：">
+            <ipms-skeleton in-cell row="2" />
+        </ipms-cell>
+        <ipms-cell is-detail title="反馈类型：">
+            <ipms-skeleton in-cell row="2" />
+        </ipms-cell>
+        <ipms-cell is-detail title="反馈分类：">
+            <ipms-skeleton in-cell row="2" />
+        </ipms-cell>
+        <ipms-cell is-detail title="问题描述：">
+            <ipms-skeleton in-cell row="2" />
+        </ipms-cell>
+        <ipms-cell is-detail title="现场图片：">
+            <ipms-skeleton in-cell row="2" />
+        </ipms-cell>
+        <ipms-cell is-detail title="反馈时间：" border="{{false}}">
+            <ipms-skeleton in-cell row="2" />
+        </ipms-cell>
+    </ipms-cell-group>
     <view wx:else>
-        <cw-cell-group title="工单完成确认" wx:if="{{detail.info.step === 3}}">
-            <cw-field
+        <ipms-cell-group title="工单完成确认" wx:if="{{detail.info.step === 3}}">
+            <ipms-field
                 label="反馈信息："
                 type="textarea"
                 maxlength="{{ 200 }}"
@@ -41,23 +41,23 @@
                 model:value="{{ dispose_content }}"
                 placeholder="请输入反馈信息"
             />
-            <cw-cell title="现场照片" border="{{ false }}">
-                <cw-uploader
+            <ipms-cell title="现场照片" border="{{ false }}">
+                <ipms-uploader
                     file-list="{{uploadImgList}}"
                     bind:delete="deleteImg"
                     bind:after-read="afterRead"
                     max-count="3"
                 />
-            </cw-cell>
-            <cw-cell is-detail>
-                <cw-button size="small" type="info" bind:click="finishSubmit" loading="{{submiting}}">
+            </ipms-cell>
+            <ipms-cell is-detail>
+                <ipms-button size="small" type="info" bind:click="finishSubmit" loading="{{submiting}}">
                     确认完成
-                </cw-button>
-            </cw-cell>
-        </cw-cell-group>
+                </ipms-button>
+            </ipms-cell>
+        </ipms-cell-group>
 
-        <cw-cell-group title="工单确认" wx:if="{{detail.info.step === 2}}">
-            <cw-field
+        <ipms-cell-group title="工单确认" wx:if="{{detail.info.step === 2}}">
+            <ipms-field
                 label="接单回复："
                 type="textarea"
                 maxlength="{{ 200 }}"
@@ -66,17 +66,17 @@
                 model:value="{{ dispose_reply }}"
                 placeholder="请输入回复内容"
             />
-            <cw-cell is-detail>
-                <cw-button size="small" type="info" bind:click="confirmSubmit" loading="{{submiting}}">
+            <ipms-cell is-detail>
+                <ipms-button size="small" type="info" bind:click="confirmSubmit" loading="{{submiting}}">
                     确认工单
-                </cw-button>
-            </cw-cell>
-        </cw-cell-group>
+                </ipms-button>
+            </ipms-cell>
+        </ipms-cell-group>
 
-        <cw-cell-group title="反馈回复" wx:if="{{detail.info.step === 4}}">
-            <cw-cell is-detail title="反馈信息：" value="{{ detail.info.dispose_content || '无内容' }}" />
-            <cw-cell is-detail title="现场图片：">
-                <cw-image
+        <ipms-cell-group title="反馈回复" wx:if="{{detail.info.step === 4}}">
+            <ipms-cell is-detail title="反馈信息：" value="{{ detail.info.dispose_content || '无内容' }}" />
+            <ipms-cell is-detail title="现场图片：">
+                <ipms-image
                     wx:for="{{detail.info.dispose_imgs}}"
                     wx:key="index"
                     src="{{ASSETS_HOST}}{{item}}"
@@ -87,22 +87,22 @@
                     bind:click="showDisposeImg"
                 />
                 <view wx:if="{{detail.info.dispose_imgs.length === 0}}" class="text-lighter">您未提供照片</view>
-            </cw-cell>
-            <cw-cell
+            </ipms-cell>
+            <ipms-cell
                 is-detail
                 title="工单完成时间："
                 border="{{false}}"
                 value="{{common.date(detail.info.finished_at)}}"
             />
-        </cw-cell-group>
+        </ipms-cell-group>
 
-        <cw-cell-group title="派单确认" wx:if="{{detail.info.step >= 3}}">
-            <cw-cell is-detail title="您的回复：" value="{{ detail.info.dispose_reply || '-' }}" />
-            <cw-cell is-detail title="确认时间：" border="{{false}}" value="{{common.date(detail.info.disposed_at)}}" />
-        </cw-cell-group>
+        <ipms-cell-group title="派单确认" wx:if="{{detail.info.step >= 3}}">
+            <ipms-cell is-detail title="您的回复：" value="{{ detail.info.dispose_reply || '-' }}" />
+            <ipms-cell is-detail title="确认时间：" border="{{false}}" value="{{common.date(detail.info.disposed_at)}}" />
+        </ipms-cell-group>
 
-        <cw-cell-group title="反馈受理" wx:if="{{detail.info.step >= 2}}">
-            <cw-cell
+        <ipms-cell-group title="反馈受理" wx:if="{{detail.info.step >= 2}}">
+            <ipms-cell
                 is-detail
                 title="派单人员："
                 border="{{false}}"
@@ -111,15 +111,15 @@
                 clickable
                 value="{{detail.allotInfo.real_name}}"
             />
-        </cw-cell-group>
+        </ipms-cell-group>
 
-        <cw-cell-group title="反馈信息">
-            <cw-cell
+        <ipms-cell-group title="反馈信息">
+            <ipms-cell
                 is-detail
                 title="工单号码："
                 value="{{common.number('C', detail.info.created_at, detail.info.id)}}"
             />
-            <cw-cell is-detail title="反馈小区：">
+            <ipms-cell is-detail title="反馈小区：">
                 <span
                     wx:for="{{postInfo.community_list}}"
                     wx:key="index"
@@ -127,9 +127,9 @@
                 >
                     {{ item.name }}
                 </span>
-            </cw-cell>
-            <cw-cell is-detail title="工单来源：" value="{{detail.info.refer === 'ower' ? '业主报修' : '公司指派'}}" />
-            <cw-cell
+            </ipms-cell>
+            <ipms-cell is-detail title="工单来源：" value="{{detail.info.refer === 'ower' ? '业主报修' : '公司指派'}}" />
+            <ipms-cell
                 is-detail
                 title="业主信息："
                 is-link
@@ -138,11 +138,11 @@
                 clickable
                 value="{{detail.referInfo.real_name}}"
             />
-            <cw-cell is-detail title="反馈类型：" value="{{detail.info.type === 1 ? '投诉' : '建议'}}" />
-            <cw-cell is-detail title="反馈分类：" value="{{complain.categoryName(detail.info.category)}}" />
-            <cw-cell is-detail title="问题描述：" value="{{detail.info.description}}" />
-            <cw-cell is-detail title="现场图片：">
-                <cw-image
+            <ipms-cell is-detail title="反馈类型：" value="{{detail.info.type === 1 ? '投诉' : '建议'}}" />
+            <ipms-cell is-detail title="反馈分类：" value="{{complain.categoryName(detail.info.category)}}" />
+            <ipms-cell is-detail title="问题描述：" value="{{detail.info.description}}" />
+            <ipms-cell is-detail title="现场图片：">
+                <ipms-image
                     wx:for="{{detail.info.complain_imgs}}"
                     wx:key="index"
                     src="{{ASSETS_HOST}}{{item}}"
@@ -153,12 +153,12 @@
                     bind:click="showComplainImg"
                 />
                 <view wx:if="{{detail.info.complain_imgs.length === 0}}" class="text-lighter">业主未提供</view>
-            </cw-cell>
-            <cw-cell is-detail title="反馈时间：" border="{{false}}" value="{{common.date(detail.info.created_at)}}" />
-        </cw-cell-group>
+            </ipms-cell>
+            <ipms-cell is-detail title="反馈时间：" border="{{false}}" value="{{common.date(detail.info.created_at)}}" />
+        </ipms-cell-group>
     </view>
 
-    <cw-toast id="cw-toast" />
-    <cw-notify id="cw-notify" />
-    <cw-copyright />
+    <ipms-toast id="ipms-toast" />
+    <ipms-notify id="ipms-notify" />
+    <ipms-copyright />
 </view>

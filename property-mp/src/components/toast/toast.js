@@ -18,7 +18,7 @@ const defaultOptions = {
     position: 'middle',
     forbidClick: false,
     loadingType: 'circular',
-    selector: '#cw-toast'
+    selector: '#ipms-toast'
 };
 let queue = [];
 let currentOptions = Object.assign({}, defaultOptions);
@@ -34,7 +34,7 @@ function Toast(toastOptions) {
     const context = options.context || getContext();
     const toast = context.selectComponent(options.selector);
     if (!toast) {
-        console.warn('未找到 cw-toast 节点，请确认 selector 及 context 是否正确');
+        console.warn('未找到 ipms-toast 节点，请确认 selector 及 context 是否正确');
         return;
     }
     delete options.context;

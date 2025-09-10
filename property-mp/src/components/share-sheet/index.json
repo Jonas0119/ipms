@@ -1,7 +1,7 @@
 {
     "component": true,
     "usingComponents": {
-        "cw-popup": "../popup/index",
+        "ipms-popup": "../popup/index",
         "options": "./options"
     }
 }

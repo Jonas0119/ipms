@@ -1,7 +1,7 @@
 {
     "component": true,
     "usingComponents": {
-        "cw-cell": "../cell/index",
-        "cw-icon": "../icon/index"
+        "ipms-cell": "../cell/index",
+        "ipms-icon": "../icon/index"
     }
 }

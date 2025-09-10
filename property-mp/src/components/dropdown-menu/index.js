@@ -7,11 +7,11 @@
  * +----------------------------------------------------------------------
  */
 
-import { CwComponent } from '../common/component';
+import { IpmsComponent } from '../common/component';
 import { useChildren } from '../common/relation';
 import { addUnit, getRect, getSystemInfoSync } from '../common/utils';
 let ARRAY = [];
-CwComponent({
+IpmsComponent({
     field: true,
     relation: useChildren('dropdown-item', function() {
         this.updateItemListData();
@@ -89,7 +89,7 @@ CwComponent({
         },
         getChildWrapperStyle() {
             const { zIndex, direction } = this.data;
-            return getRect(this, '.cw-dropdown-menu').then(rect => {
+            return getRect(this, '.ipms-dropdown-menu').then(rect => {
                 const { top = 0, bottom = 0 } = rect;
                 const offset = direction === 'down' ? bottom : this.windowHeight - top;
                 let wrapperStyle = `z-index: ${zIndex};`;

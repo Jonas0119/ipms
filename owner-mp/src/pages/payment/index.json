@@ -3,13 +3,13 @@
     "onReachBottomDistance": 50,
     "enablePullDownRefresh": true,
     "usingComponents": {
-        "cw-list": "../../components/list",
-        "cw-list-item": "../../components/list-item",
-        "cw-list-item-info": "../../components/list-item-info",
-        "cw-toast": "../../components/toast",
-        "cw-dialog": "../../components/dialog",
-        "cw-notify": "../../components/notify",
-        "cw-button": "../../components/button",
-        "cw-tag": "../../components/tag"
+        "ipms-list": "../../components/list",
+        "ipms-list-item": "../../components/list-item",
+        "ipms-list-item-info": "../../components/list-item-info",
+        "ipms-toast": "../../components/toast",
+        "ipms-dialog": "../../components/dialog",
+        "ipms-notify": "../../components/notify",
+        "ipms-button": "../../components/button",
+        "ipms-tag": "../../components/tag"
     }
 }

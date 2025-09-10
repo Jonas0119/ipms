@@ -111,13 +111,13 @@
                 </FormField>
             </Form>
 
-            <div class="cw-form-actions">
+            <div class="ipms-form-actions">
                 <Button type="primary" :loading="submiting" @click="agree">同意装修</Button>
             </div>
         </Card>
 
         <Card dis-hover :bordered="false" class="mt-16" v-if="detail.info.step === 3" title="装修完工验收">
-            <div class="cw-form-actions">
+            <div class="ipms-form-actions">
                 <Button type="primary" :loading="confirming" @click="confirm">验收合格</Button>
             </div>
         </Card>
@@ -192,7 +192,7 @@
             v-if="detail.info.step === 4 && detail.info.fitment_pledge && !detail.info.is_return_cash_deposit"
             title="确认返还装修保证金"
         >
-            <div class="cw-form-actions">
+            <div class="ipms-form-actions">
                 <Button type="primary" :loading="returning" @click="doReturn">确认返还</Button>
             </div>
         </Card>

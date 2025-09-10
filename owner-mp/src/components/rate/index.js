@@ -5,9 +5,9 @@
  */
 
 import { getAllRect } from '../common/utils';
-import { CwComponent } from '../common/component';
+import { IpmsComponent } from '../common/component';
 import { canIUseModel } from '../common/version';
-CwComponent({
+IpmsComponent({
     field: true,
     classes: ['icon-class'],
     props: {
@@ -79,7 +79,7 @@ CwComponent({
             const { touchable } = this.data;
             if (!touchable) return;
             const { clientX } = event.touches[0];
-            getAllRect(this, '.cw-rate__icon').then(list => {
+            getAllRect(this, '.ipms-rate__icon').then(list => {
                 const target = list
                     .sort(item => item.right - item.left)
                     .find(item => clientX >= item.left && clientX <= item.right);

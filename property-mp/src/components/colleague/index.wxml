@@ -1,6 +1,6 @@
-<cw-popup show="{{ show }}" closeable round position="bottom" custom-style="height: 80%" bind:close="onClose">
-    <cw-cell-group wx:for="{{map}}" wx:key="index" title="{{item.name}}">
-        <cw-cell
+<ipms-popup show="{{ show }}" closeable round position="bottom" custom-style="height: 80%" bind:close="onClose">
+    <ipms-cell-group wx:for="{{map}}" wx:key="index" title="{{item.name}}">
+        <ipms-cell
             wx:for="{{item.users}}"
             wx:for-index="key"
             wx:for-item="row"
@@ -13,5 +13,5 @@
             data-name="{{row.real_name}}"
             bind:click="select"
         />
-    </cw-cell-group>
-</cw-popup>
+    </ipms-cell-group>
+</ipms-popup>

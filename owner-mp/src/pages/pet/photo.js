@@ -4,14 +4,14 @@
  * +----------------------------------------------------------------------
  */
 
-import { CwPage } from '../common/page';
+import { IpmsPage } from '../common/page';
 import utils from '../../utils/index';
 import $toast from '../../components/toast/toast';
 import $notify from '../../components/notify/notify';
 
-CwPage({
+IpmsPage({
     onLoad() {
-        this.cropper = this.selectComponent('#cw-image-cropper');
+        this.cropper = this.selectComponent('#ipms-image-cropper');
 
         this.cropper.upload();
     },

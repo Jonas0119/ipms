@@ -43,19 +43,19 @@
         </view>
         <view class="main">
             <view class="detail">
-                <cw-cell title="小区名称" is-detail value="{{info.detail.community_name}}" />
-                <cw-cell title="收费年度" is-detail value="{{info.detail.start_year}}至{{info.detail.end_year}}年" />
-                <cw-cell
+                <ipms-cell title="小区名称" is-detail value="{{info.detail.community_name}}" />
+                <ipms-cell title="收费年度" is-detail value="{{info.detail.start_year}}至{{info.detail.end_year}}年" />
+                <ipms-cell
                     title="住宅物业费"
                     is-detail
                     value="{{payment.yuan(info.detail.house_fee)}}元/{{info.detail.computed_house_fee_by_area ? '平方米' : '单位建筑'}}"
                 />
-                <cw-cell
+                <ipms-cell
                     title="仓房物业费"
                     is-detail
                     value="{{payment.yuan(info.detail.warehoure_fee)}}元/{{info.detail.computed_warehouse_fee_by_area ? '平方米' : '单位建筑'}}"
                 />
-                <cw-cell
+                <ipms-cell
                     title="车位物业费"
                     is-detail
                     value="{{payment.yuan(info.detail.carport_fee)}}元/{{info.detail.computed_carport_fee_by_area ? '平方米' : '单位建筑'}}"
@@ -64,8 +64,8 @@
             </view>
         </view>
 
-        <cw-panel custom-class="section" title="收费信息">
-            <cw-cell
+        <ipms-panel custom-class="section" title="收费信息">
+            <ipms-cell
                 wx:for="{{info.items}}"
                 wx:key="key"
                 is-detail
@@ -74,42 +74,42 @@
                 value="{{item.refund ? '退款' : ''}}"
                 value-class="{{item.refund ? 'refound' : ''}}"
             />
-            <cw-cell title="应收" is-detail value="￥{{payment.yuan(info.detail.fee)}}元" />
-            <cw-cell
+            <ipms-cell title="应收" is-detail value="￥{{payment.yuan(info.detail.fee)}}元" />
+            <ipms-cell
                 title="实收"
                 is-detail
                 border="{{false}}"
                 value="￥{{payment.yuan(info.detail.paid_fee)}}元"
                 value-class="total"
             />
-        </cw-panel>
+        </ipms-panel>
 
-        <cw-panel title="订单信息" custom-class="section" use-footer-slot="{{status === 'needpay'}}">
-            <cw-cell
+        <ipms-panel title="订单信息" custom-class="section" use-footer-slot="{{status === 'needpay'}}">
+            <ipms-cell
                 title="订单编号："
                 is-detail
                 value="{{payment.tradeNo(info.detail.created_at, info.detail.order_id)}}"
             />
-            <cw-cell title="下单时间：" is-detail value="{{common.date(info.detail.created_at)}}" />
-            <cw-cell
+            <ipms-cell title="下单时间：" is-detail value="{{common.date(info.detail.created_at)}}" />
+            <ipms-cell
                 title="交易单号："
                 is-detail
                 value="{{info.detail.transaction_id}}"
                 wx:if="{{info.detail.transaction_id}}"
             />
-            <cw-cell
+            <ipms-cell
                 title="支付时间："
                 is-detail
                 value="{{common.date(info.detail.paid_at)}}"
                 wx:if="{{info.detail.paid_at}}"
             />
-            <cw-cell
+            <ipms-cell
                 title="支付方式："
                 is-detail
                 value="{{info.detail.is_cash ? '现金' : '微信'}}"
                 wx:if="{{info.detail.transaction_id}}"
             />
-            <cw-cell
+            <ipms-cell
                 value-class="total"
                 is-detail
                 value="待支付：￥{{payment.yuan(info.detail.fee)}}元"
@@ -117,60 +117,60 @@
                 border="{{false}}"
             />
             <view slot="footer" class="footer">
-                <cw-button size="small" round type="danger" class="btn" catch:tap="doPay">立即支付</cw-button>
+                <ipms-button size="small" round type="danger" class="btn" catch:tap="doPay">立即支付</ipms-button>
             </view>
-        </cw-panel>
+        </ipms-panel>
 
-        <cw-panel title="退款信息" custom-class="section" wx:if="{{info.detail.refunding}}">
-            <cw-cell-group
+        <ipms-panel title="退款信息" custom-class="section" wx:if="{{info.detail.refunding}}">
+            <ipms-cell-group
                 wx:for="{{info.items}}"
                 wx:if="{{item.refund_apply_at}}"
                 title="{{payment.tradeNo(info.detail.created_at, item.id)}}"
                 wx:key="key"
             >
-                <cw-cell title="退款房产：" is-detail value="{{ common.building(item) }}" />
-                <cw-cell title="申请时间：" is-detail value="{{common.date(item.refund_apply_at)}}" />
-                <cw-cell title="退款金额：" is-detail value="{{payment.yuan(item.fee)}}元" />
-                <cw-cell
+                <ipms-cell title="退款房产：" is-detail value="{{ common.building(item) }}" />
+                <ipms-cell title="申请时间：" is-detail value="{{common.date(item.refund_apply_at)}}" />
+                <ipms-cell title="退款金额：" is-detail value="{{payment.yuan(item.fee)}}元" />
+                <ipms-cell
                     title="退款状态："
                     is-detail
                     value="{{!item.refund ? '待退款' : (item.refund_status === 1 ? '成功' : '失败')}}"
                 />
-                <cw-cell title="退款单号：" is-detail wx:if="{{item.refund_id}}" value="{{item.refund_id}}" />
-                <cw-cell
+                <ipms-cell title="退款单号：" is-detail wx:if="{{item.refund_id}}" value="{{item.refund_id}}" />
+                <ipms-cell
                     title="退款账户："
                     is-detail
                     wx:if="{{item.refund_id}}"
                     value="{{item.refund_recv_accout ? item.refund_recv_accout : '-'}}"
                 />
-                <cw-cell
+                <ipms-cell
                     title="退款时间："
                     border="{{false}}"
                     is-detail
                     wx:if="{{item.refund_id}}"
                     value="{{common.date(item.refund_at)}}"
                 />
-            </cw-cell-group>
-        </cw-panel>
+            </ipms-cell-group>
+        </ipms-panel>
     </view>
     <view wx:else>
         <view class="status needpay" />
         <view class="description">
-            <cw-skeleton row="{{ 2 }}" />
+            <ipms-skeleton row="{{ 2 }}" />
         </view>
         <view class="main">
             <view class="detail">
-                <cw-skeleton row="{{ 5 }}" />
+                <ipms-skeleton row="{{ 5 }}" />
             </view>
         </view>
-        <cw-panel custom-class="section" title="收费信息">
-            <cw-skeleton row="{{ 3 }}" />
-        </cw-panel>
-        <cw-panel custom-class="section" title="订单信息">
-            <cw-skeleton row="{{ 3 }}" />
-        </cw-panel>
+        <ipms-panel custom-class="section" title="收费信息">
+            <ipms-skeleton row="{{ 3 }}" />
+        </ipms-panel>
+        <ipms-panel custom-class="section" title="订单信息">
+            <ipms-skeleton row="{{ 3 }}" />
+        </ipms-panel>
     </view>
-    <cw-copyright />
-    <cw-toast id="cw-toast" />
-    <cw-notify id="cw-notify" />
+    <ipms-copyright />
+    <ipms-toast id="ipms-toast" />
+    <ipms-notify id="ipms-notify" />
 </view>

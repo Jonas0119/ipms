@@ -2,67 +2,67 @@
 <wxs src="./index.wxs" module="mission" />
 
 <view class="container">
-    <cw-cell-group title="任务信息" wx:if="{{fetching}}">
-        <cw-cell is-detail title="任务编号：">
-            <cw-skeleton in-cell row="2" />
-        </cw-cell>
-        <cw-cell is-detail title="开始日期：">
-            <cw-skeleton in-cell row="2" />
-        </cw-cell>
-        <cw-cell is-detail title="结束日期：">
-            <cw-skeleton in-cell row="2" />
-        </cw-cell>
-        <cw-cell is-detail title="上报时间：">
-            <cw-skeleton in-cell row="2" />
-        </cw-cell>
-        <cw-cell is-detail title="任务分类：">
-            <cw-skeleton in-cell row="2" />
-        </cw-cell>
-        <cw-cell is-detail title="巡检线路：">
-            <cw-skeleton in-cell row="2" />
-        </cw-cell>
-        <cw-cell is-detail title="任务状态：">
-            <cw-skeleton in-cell row="2" />
-        </cw-cell>
-        <cw-cell is-detail title="创建时间：">
-            <cw-skeleton in-cell row="2" />
-        </cw-cell>
-        <cw-cell is-detail title="创建人：" border="{{false}}">
-            <cw-skeleton in-cell row="2" />
-        </cw-cell>
-    </cw-cell-group>
+    <ipms-cell-group title="任务信息" wx:if="{{fetching}}">
+        <ipms-cell is-detail title="任务编号：">
+            <ipms-skeleton in-cell row="2" />
+        </ipms-cell>
+        <ipms-cell is-detail title="开始日期：">
+            <ipms-skeleton in-cell row="2" />
+        </ipms-cell>
+        <ipms-cell is-detail title="结束日期：">
+            <ipms-skeleton in-cell row="2" />
+        </ipms-cell>
+        <ipms-cell is-detail title="上报时间：">
+            <ipms-skeleton in-cell row="2" />
+        </ipms-cell>
+        <ipms-cell is-detail title="任务分类：">
+            <ipms-skeleton in-cell row="2" />
+        </ipms-cell>
+        <ipms-cell is-detail title="巡检线路：">
+            <ipms-skeleton in-cell row="2" />
+        </ipms-cell>
+        <ipms-cell is-detail title="任务状态：">
+            <ipms-skeleton in-cell row="2" />
+        </ipms-cell>
+        <ipms-cell is-detail title="创建时间：">
+            <ipms-skeleton in-cell row="2" />
+        </ipms-cell>
+        <ipms-cell is-detail title="创建人：" border="{{false}}">
+            <ipms-skeleton in-cell row="2" />
+        </ipms-cell>
+    </ipms-cell-group>
     <view wx:else>
-        <cw-cell-group title="任务信息">
-            <cw-cell
+        <ipms-cell-group title="任务信息">
+            <ipms-cell
                 is-detail
                 title="任务编号："
                 value="{{common.number('MN', detail.info.created_at, detail.info.id)}}"
             />
-            <cw-cell is-detail title="开始日期：" value="{{common.date(detail.info.start_date, false)}}" />
-            <cw-cell is-detail title="结束日期：" value="{{common.date(detail.info.end_date, false)}}" />
-            <cw-cell
+            <ipms-cell is-detail title="开始日期：" value="{{common.date(detail.info.start_date, false)}}" />
+            <ipms-cell is-detail title="结束日期：" value="{{common.date(detail.info.end_date, false)}}" />
+            <ipms-cell
                 is-detail
                 title="上报时间："
                 value="{{common.hour(detail.info.start_hour)}}至{{common.hour(detail.info.end_hour)}}"
             />
-            <cw-cell is-detail title="任务分类：" value="{{detail.info.category}}" />
-            <cw-cell is-detail title="巡检线路：" value="{{detail.info.line}}" />
-            <cw-cell is-detail title="任务状态：">
+            <ipms-cell is-detail title="任务分类：" value="{{detail.info.category}}" />
+            <ipms-cell is-detail title="巡检线路：" value="{{detail.info.line}}" />
+            <ipms-cell is-detail title="任务状态：">
                 <block wx:if="{{detail.info.cancel}}">
-                    <cw-tag round color="#eb2f96">已取消</cw-tag>
+                    <ipms-tag round color="#eb2f96">已取消</ipms-tag>
                 </block>
                 <block wx:elif="{{detail.info.start_date > now}}">
-                    <cw-tag round color="#ffe58f">未开始</cw-tag>
+                    <ipms-tag round color="#ffe58f">未开始</ipms-tag>
                 </block>
                 <block wx:elif="{{detail.info.end_date < now}}">
-                    <cw-tag round color="#f90">已结束</cw-tag>
+                    <ipms-tag round color="#f90">已结束</ipms-tag>
                 </block>
                 <block wx:else>
-                    <cw-tag round color="#52c41a">进行中</cw-tag>
+                    <ipms-tag round color="#52c41a">进行中</ipms-tag>
                 </block>
-            </cw-cell>
-            <cw-cell is-detail title="创建时间：" value="{{common.date(detail.info.created_at)}}" />
-            <cw-cell
+            </ipms-cell>
+            <ipms-cell is-detail title="创建时间：" value="{{common.date(detail.info.created_at)}}" />
+            <ipms-cell
                 is-detail
                 title="创建人："
                 border="{{false}}"
@@ -71,12 +71,12 @@
                 clickable
                 value="{{detail.disposeInfo.real_name}}"
             />
-        </cw-cell-group>
+        </ipms-cell-group>
 
-        <cw-cell-group title="执行情况">
+        <ipms-cell-group title="执行情况">
             <view class="node-detail">
-                <cw-row>
-                    <cw-col
+                <ipms-row>
+                    <ipms-col
                         span="6"
                         wx:for="{{nodes}}"
                         wx:key="index"
@@ -96,14 +96,14 @@
                                 {{ item.date }}
                             </view>
                         </view>
-                    </cw-col>
-                </cw-row>
+                    </ipms-col>
+                </ipms-row>
             </view>
-        </cw-cell-group>
+        </ipms-cell-group>
     </view>
 
-    <cw-copyright />
+    <ipms-copyright />
 
     <!-- 全局提示 -->
-    <cw-notify id="cw-notify" />
+    <ipms-notify id="ipms-notify" />
 </view>

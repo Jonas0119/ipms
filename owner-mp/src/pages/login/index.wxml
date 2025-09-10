@@ -4,7 +4,7 @@
  +----------------------------------------------------------------------
 -->
 <view class="container">
-    <cw-nav-bar
+    <ipms-nav-bar
         title="授权登录"
         fixed
         border="{{ false }}"
@@ -25,13 +25,13 @@
         <view class="txt">用心服务万千业主</view>
     </view>
 
-    <cw-button type="info" disabled="{{loading}}" custom-class="btn" block bind:click="login">
-        <cw-loading type="spinner" size="32rpx" custom-class="loading" wx:if="{{loading}}" />
+    <ipms-button type="info" disabled="{{loading}}" custom-class="btn" block bind:click="login">
+        <ipms-loading type="spinner" size="32rpx" custom-class="loading" wx:if="{{loading}}" />
         <text>{{loading ? '登录中' : '登录'}}</text>
-    </cw-button>
+    </ipms-button>
 
     <view class="agreement">
-        <cw-checkbox shape="square" icon-size="16px" value="{{agree}}" bind:change="onAgreeChange" />
+        <ipms-checkbox shape="square" icon-size="16px" value="{{agree}}" bind:change="onAgreeChange" />
         <view class="agree">我已阅读并同意</view>
         <navigator url="/pages/about/agreement">《微信小程序用户协议》</navigator>
     </view>
@@ -39,15 +39,15 @@
     <view class="notice">
         <view class="title">温馨提示：</view>
         <view class="item">
-            <cw-icon name="success" class="icon" />
+            <ipms-icon name="success" class="icon" />
             注意账号安全，请勿将账号转借他人使用
         </view>
         <view class="item">
-            <cw-icon name="success" class="icon" />
+            <ipms-icon name="success" class="icon" />
             互联网不是法外之地，请对您的网络言行负责
         </view>
         <view class="item">
-            <cw-icon name="success" class="icon" />
+            <ipms-icon name="success" class="icon" />
             合理合法沟通，减少小区矛盾
         </view>
     </view>
@@ -61,5 +61,5 @@
         <image src="../../assets/login/welcome.jpg" mode="heightFix"></image>
     </view>
 
-    <cw-notify id="cw-notify" />
+    <ipms-notify id="ipms-notify" />
 </view>

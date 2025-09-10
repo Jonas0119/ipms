@@ -8,7 +8,7 @@ const app = getApp();
 import $toast from '../../components/toast/toast';
 import Validator from '../../libs/validator/index';
 
-function CwPage(cwOptions = {}) {
+function IpmsPage(cwOptions = {}) {
     const options = Object.assign({}, cwOptions, {
         data: {
             ...cwOptions.data,
@@ -99,4 +99,4 @@ function CwPage(cwOptions = {}) {
     Page(options);
 }
 
-export { CwPage };
+export { IpmsPage };

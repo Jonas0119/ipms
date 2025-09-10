@@ -1,8 +1,8 @@
 <view class="container">
-    <cw-cell-group>
-        <cw-cell title="物品名称" title-width="100px" value="{{info.name}}" wx:if="{{info.name}}" is-detail />
-        <cw-cell title="仓储数量" title-width="100px" value="{{info.total}}" wx:if="{{info.total}}" is-detail />
-        <cw-cell
+    <ipms-cell-group>
+        <ipms-cell title="物品名称" title-width="100px" value="{{info.name}}" wx:if="{{info.name}}" is-detail />
+        <ipms-cell title="仓储数量" title-width="100px" value="{{info.total}}" wx:if="{{info.total}}" is-detail />
+        <ipms-cell
             title="领用人"
             clickable
             is-link
@@ -11,8 +11,8 @@
             value="{{used_by ? used_by_name : '请选择'}}"
             bind:click="showColleague"
         />
-        <cw-field label="领用数量" type="number" model:value="{{ total }}" placeholder="请输入领用数量" />
-        <cw-field
+        <ipms-field label="领用数量" type="number" model:value="{{ total }}" placeholder="请输入领用数量" />
+        <ipms-field
             label="领用原因"
             type="textarea"
             maxlength="{{ 128 }}"
@@ -21,15 +21,15 @@
             placeholder="请输入领用原因"
             border="{{false}}"
         />
-    </cw-cell-group>
+    </ipms-cell-group>
 
-    <cw-button custom-class="btn" block loading="{{submiting}}" type="info" bind:click="submit">
+    <ipms-button custom-class="btn" block loading="{{submiting}}" type="info" bind:click="submit">
         领用
-    </cw-button>
+    </ipms-button>
 
-    <cw-colleague show="{{show}}" bind:close="hideColleague" bind:select="onSelectColleague" />
+    <ipms-colleague show="{{show}}" bind:close="hideColleague" bind:select="onSelectColleague" />
 
-    <cw-toast id="cw-toast" />
-    <cw-notify id="cw-notify" />
-    <cw-copyright />
+    <ipms-toast id="ipms-toast" />
+    <ipms-notify id="ipms-notify" />
+    <ipms-copyright />
 </view>

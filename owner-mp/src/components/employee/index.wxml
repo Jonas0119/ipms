@@ -3,7 +3,7 @@
  | 开源物业管理系统，敬请使用
  +----------------------------------------------------------------------
 -->
-<view class="cw-employee">
+<view class="ipms-employee">
     <view class="avatar">
         <image class="avatar-url" src="{{ ASSETS_HOST }}{{ info.avatar_url }}" lazy-load mode="scaleToFill" />
     </view>

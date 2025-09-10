@@ -6,12 +6,12 @@
 
 <template>
     <div class="approver" @click="showDrawer">
-        <div class="cw-workflow-node-title">
+        <div class="ipms-workflow-node-title">
             <Icon type="approver" />
             审批人
         </div>
 
-        <div class="cw-workflow-node-content">
+        <div class="ipms-workflow-node-content">
             <div :class="textClass">
                 {{ text }}
             </div>
@@ -23,18 +23,18 @@
             title="审批人设置"
             transfer
             width="360"
-            class-name="cw-drawer-width-footer"
+            class-name="ipms-drawer-width-footer"
             :closable="false"
             :mask-closable="false"
         >
-            <RadioGroup v-model="applicant_assign" class="cw-workflow-radio">
+            <RadioGroup v-model="applicant_assign" class="ipms-workflow-radio">
                 <Radio :label="0">指定成员</Radio>
                 <Radio :label="1">发起人自行选择</Radio>
             </RadioGroup>
 
             <Colleague v-model="user_id" haveData :listData="options.list" v-if="!applicant_assign" />
 
-            <div class="cw-drawer-footer">
+            <div class="ipms-drawer-footer">
                 <Button @click="cancel">取消</Button>
                 <Button type="primary" @click="saveNode">确定</Button>
             </div>
@@ -127,12 +127,12 @@ export default {
 
 <style lang="less">
 .approver {
-    .cw-workflow-node-title {
+    .ipms-workflow-node-title {
         background: rgb(255, 148, 62);
     }
 }
 
-.cw-workflow-radio .ivu-radio-wrapper {
+.ipms-workflow-radio .ivu-radio-wrapper {
     font-size: 12px;
 }
 </style>

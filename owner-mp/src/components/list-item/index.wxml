@@ -3,7 +3,7 @@
  | 开源物业管理系统，敬请使用
  +----------------------------------------------------------------------
 -->
-<cw-panel
+<ipms-panel
     title="{{title}}"
     bindtap="goToDetail"
     custom-class="list-item"
@@ -18,4 +18,4 @@
     <view slot="footer" class="list-item-footer">
         <slot name="footer" />
     </view>
-</cw-panel>
+</ipms-panel>

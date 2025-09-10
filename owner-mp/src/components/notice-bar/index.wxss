@@ -5,7 +5,7 @@
  */
 @import '../common/index.wxss';
 
-.cw-notice-bar {
+.ipms-notice-bar {
     display: -webkit-flex;
     display: flex;
     -webkit-align-items: center;
@@ -18,26 +18,26 @@
     background-color: #fffbe8;
 }
 
-.cw-notice-bar--withicon {
+.ipms-notice-bar--withicon {
     position: relative;
     padding-right: 40px;
 }
 
-.cw-notice-bar--wrapable {
+.ipms-notice-bar--wrapable {
     height: auto;
     padding: 8px 16px;
 }
 
-.cw-notice-bar--wrapable .cw-notice-bar__wrap {
+.ipms-notice-bar--wrapable .ipms-notice-bar__wrap {
     height: auto;
 }
 
-.cw-notice-bar--wrapable .cw-notice-bar__content {
+.ipms-notice-bar--wrapable .ipms-notice-bar__content {
     position: relative;
     white-space: normal;
 }
 
-.cw-notice-bar__left-icon {
+.ipms-notice-bar__left-icon {
     display: -webkit-flex;
     display: flex;
     -webkit-align-items: center;
@@ -46,19 +46,19 @@
     vertical-align: middle;
 }
 
-.cw-notice-bar__left-icon,
-.cw-notice-bar__right-icon {
+.ipms-notice-bar__left-icon,
+.ipms-notice-bar__right-icon {
     font-size: 16px;
     min-width: 22px;
 }
 
-.cw-notice-bar__right-icon {
+.ipms-notice-bar__right-icon {
     position: absolute;
     top: 10px;
     right: 15px;
 }
 
-.cw-notice-bar__wrap {
+.ipms-notice-bar__wrap {
     position: relative;
     -webkit-flex: 1;
     flex: 1;
@@ -66,11 +66,11 @@
     height: 24px;
 }
 
-.cw-notice-bar__content {
+.ipms-notice-bar__content {
     position: absolute;
     white-space: nowrap;
 }
 
-.cw-notice-bar__content.cw-ellipsis {
+.ipms-notice-bar__content.ipms-ellipsis {
     max-width: 100%;
 }

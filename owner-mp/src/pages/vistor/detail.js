@@ -4,13 +4,13 @@
  * +----------------------------------------------------------------------
  */
 
-import { CwPage } from '../common/page';
+import { IpmsPage } from '../common/page';
 import $toast from '../../components/toast/toast';
 import utils from '../../utils/index';
 import QRCode from '../../libs/qrcode';
 import * as common from '../common/common';
 
-CwPage({
+IpmsPage({
     data: {
         fetching: true,
         detail: {},

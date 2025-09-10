@@ -3,8 +3,8 @@
     "onReachBottomDistance": 50,
     "enablePullDownRefresh": true,
     "usingComponents": {
-        "cw-list": "../../components/list",
-        "cw-list-item": "../../components/list-item",
-        "cw-list-item-info": "../../components/list-item-info"
+        "ipms-list": "../../components/list",
+        "ipms-list-item": "../../components/list-item",
+        "ipms-list-item-info": "../../components/list-item-info"
     }
 }

@@ -4,12 +4,12 @@
  * +----------------------------------------------------------------------
  */
 
-import { CwPage } from '../common/page';
+import { IpmsPage } from '../common/page';
 import $notify from '../../components/notify/notify';
 import $dialog from '../../components/dialog/dialog';
 import utils from '../../utils/index';
 
-CwPage({
+IpmsPage({
     data: {
         list: [],
         fetching: true

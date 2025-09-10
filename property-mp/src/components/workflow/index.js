@@ -7,10 +7,10 @@
  * +----------------------------------------------------------------------
  */
 
-import { CwComponent } from '../common/component';
+import { IpmsComponent } from '../common/component';
 import $toast from '../toast/toast';
 
-CwComponent({
+IpmsComponent({
     props: {
         steps: {
             type: Array,

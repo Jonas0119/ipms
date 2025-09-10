@@ -7,9 +7,9 @@
  * +----------------------------------------------------------------------
  */
 
-import { CwComponent } from '../common/component';
+import { IpmsComponent } from '../common/component';
 import { pickerProps } from './shared';
-CwComponent({
+IpmsComponent({
     classes: ['active-class', 'toolbar-class', 'column-class'],
     props: Object.assign(Object.assign({}, pickerProps), {
         valueKey: {
@@ -37,7 +37,7 @@ CwComponent({
     }),
     beforeCreate() {
         Object.defineProperty(this, 'children', {
-            get: () => this.selectAllComponents('.cw-picker__column') || []
+            get: () => this.selectAllComponents('.ipms-picker__column') || []
         });
     },
     methods: {

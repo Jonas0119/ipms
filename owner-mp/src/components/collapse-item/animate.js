@@ -7,7 +7,7 @@
 import { canIUseAnimate } from '../common/version';
 import { getRect } from '../common/utils';
 function useAnimate(context, expanded, mounted, height) {
-    const selector = '.cw-collapse-item__wrapper';
+    const selector = '.ipms-collapse-item__wrapper';
     if (expanded) {
         context.animate(
             selector,
@@ -74,7 +74,7 @@ function useAnimation(context, expanded, mounted, height) {
     });
 }
 export function setContentAnimate(context, expanded, mounted) {
-    getRect(context, '.cw-collapse-item__content')
+    getRect(context, '.ipms-collapse-item__content')
         .then(rect => rect.height)
         .then(height => {
             canIUseAnimate()

@@ -16,18 +16,18 @@
         src="{{ src }}"
         mode="{{ computed.mode(fit) }}"
         lazy-load="{{ lazyLoad }}"
-        class="image-class cw-image__img"
+        class="image-class ipms-image__img"
         show-menu-by-longpress="{{ showMenuByLongpress }}"
         bind:load="onLoad"
         bind:error="onError"
     />
 
-    <view wx:if="{{ loading && showLoading }}" class="loading-class cw-image__loading">
+    <view wx:if="{{ loading && showLoading }}" class="loading-class ipms-image__loading">
         <slot wx:if="{{ useLoadingSlot }}" name="loading" />
-        <cw-icon wx:else name="photo" custom-class="cw-image__loading-icon" />
+        <ipms-icon wx:else name="photo" custom-class="ipms-image__loading-icon" />
     </view>
-    <view wx:if="{{ error && showError }}" class="error-class cw-image__error">
+    <view wx:if="{{ error && showError }}" class="error-class ipms-image__error">
         <slot wx:if="{{ useErrorSlot }}" name="error" />
-        <cw-icon wx:else name="photo-fail" custom-class="cw-image__error-icon" />
+        <ipms-icon wx:else name="photo-fail" custom-class="ipms-image__error-icon" />
     </view>
 </view>

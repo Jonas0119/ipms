@@ -1,32 +1,32 @@
 @import '../common/index.wxss';
 
-.cw-field__label {
+.ipms-field__label {
     color: #323233;
 }
 
-.cw-field__label--disabled {
+.ipms-field__label--disabled {
     color: #c8c9cc;
 }
 
-.cw-field__body {
+.ipms-field__body {
     display: -webkit-flex;
     display: flex;
     -webkit-align-items: center;
     align-items: center;
 }
 
-.cw-field__body--textarea {
+.ipms-field__body--textarea {
     box-sizing: border-box;
     padding: 3.6px 0;
     line-height: 1.2em;
     min-height: 24px;
 }
 
-.cw-field__control:empty + .cw-field__control {
+.ipms-field__control:empty + .ipms-field__control {
     display: block;
 }
 
-.cw-field__control {
+.ipms-field__control {
     position: relative;
     display: none;
     box-sizing: border-box;
@@ -43,34 +43,34 @@
     min-height: 24px;
 }
 
-.cw-field__control:empty {
+.ipms-field__control:empty {
     display: none;
 }
 
-.cw-field__control--textarea {
+.ipms-field__control--textarea {
     height: 18px;
     min-height: 18px;
 }
 
-.cw-field__control--error {
+.ipms-field__control--error {
     color: #ee0a24;
 }
 
-.cw-field__control--disabled {
+.ipms-field__control--disabled {
     background-color: initial;
     opacity: 1;
     color: #c8c9cc;
 }
 
-.cw-field__control--center {
+.ipms-field__control--center {
     text-align: center;
 }
 
-.cw-field__control--right {
+.ipms-field__control--right {
     text-align: right;
 }
 
-.cw-field__control--custom {
+.ipms-field__control--custom {
     display: -webkit-flex;
     display: flex;
     -webkit-align-items: center;
@@ -78,7 +78,7 @@
     min-height: 24px;
 }
 
-.cw-field__placeholder {
+.ipms-field__placeholder {
     position: absolute;
     top: 0;
     right: 0;
@@ -87,11 +87,11 @@
     color: #c8c9cc;
 }
 
-.cw-field__placeholder--error {
+.ipms-field__placeholder--error {
     color: #ee0a24;
 }
 
-.cw-field__icon-root {
+.ipms-field__icon-root {
     display: -webkit-flex;
     display: flex;
     -webkit-align-items: center;
@@ -99,58 +99,58 @@
     min-height: 24px;
 }
 
-.cw-field__clear-root,
-.cw-field__icon-container {
+.ipms-field__clear-root,
+.ipms-field__icon-container {
     line-height: inherit;
     vertical-align: middle;
     padding: 0 8px;
     margin-right: -8px;
 }
 
-.cw-field__button,
-.cw-field__clear-root,
-.cw-field__icon-container {
+.ipms-field__button,
+.ipms-field__clear-root,
+.ipms-field__icon-container {
     -webkit-flex-shrink: 0;
     flex-shrink: 0;
 }
 
-.cw-field__clear-root {
+.ipms-field__clear-root {
     font-size: 16px;
     color: #c8c9cc;
 }
 
-.cw-field__icon-container {
+.ipms-field__icon-container {
     font-size: 16px;
     color: #969799;
 }
 
-.cw-field__icon-container:empty {
+.ipms-field__icon-container:empty {
     display: none;
 }
 
-.cw-field__button {
+.ipms-field__button {
     padding-left: 8px;
 }
 
-.cw-field__button:empty {
+.ipms-field__button:empty {
     display: none;
 }
 
-.cw-field__error-message {
+.ipms-field__error-message {
     text-align: left;
     font-size: 12px;
     color: #ee0a24;
 }
 
-.cw-field__error-message--center {
+.ipms-field__error-message--center {
     text-align: center;
 }
 
-.cw-field__error-message--right {
+.ipms-field__error-message--right {
     text-align: right;
 }
 
-.cw-field__word-limit {
+.ipms-field__word-limit {
     text-align: right;
     margin-top: 4px;
     color: #646566;
@@ -158,10 +158,10 @@
     line-height: 16px;
 }
 
-.cw-field__word-num {
+.ipms-field__word-num {
     display: inline;
 }
 
-.cw-field__word-num--full {
+.ipms-field__word-num--full {
     color: #ee0a24;
 }

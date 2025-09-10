@@ -4,9 +4,9 @@
  * +----------------------------------------------------------------------
  */
 
-import { CwComponent } from '../common/component';
+import { IpmsComponent } from '../common/component';
 import { useChildren } from '../common/relation';
-CwComponent({
+IpmsComponent({
     field: true,
     relation: useChildren('radio', function(target) {
         this.updateChild(target);

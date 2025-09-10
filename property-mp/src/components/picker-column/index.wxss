@@ -1,21 +1,21 @@
 @import '../common/index.wxss';
 
-.cw-picker-column {
+.ipms-picker-column {
     overflow: hidden;
     text-align: center;
     color: #000;
     font-size: 16px;
 }
 
-.cw-picker-column__item {
+.ipms-picker-column__item {
     padding: 0 5px;
 }
 
-.cw-picker-column__item--selected {
+.ipms-picker-column__item--selected {
     font-weight: 500;
     color: #323233;
 }
 
-.cw-picker-column__item--disabled {
+.ipms-picker-column__item--disabled {
     opacity: 0.3;
 }

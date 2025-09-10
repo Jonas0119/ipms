@@ -7,9 +7,9 @@
  * +----------------------------------------------------------------------
  */
 
-import { CwComponent } from '../../../common/component';
+import { IpmsComponent } from '../../../common/component';
 import { getMonthEndDay, compareDay, getPrevDay, getNextDay } from '../../utils';
-CwComponent({
+IpmsComponent({
     props: {
         date: {
             type: null,

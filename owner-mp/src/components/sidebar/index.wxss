@@ -5,6 +5,6 @@
  */
 @import '../common/index.wxss';
 
-.cw-sidebar {
+.ipms-sidebar {
     width: 80px;
 }

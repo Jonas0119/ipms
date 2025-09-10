@@ -4,6 +4,6 @@
  * +----------------------------------------------------------------------
  */
 
-import { CwPage } from '../common/page';
+import { IpmsPage } from '../common/page';
 
-CwPage({});
+IpmsPage({});

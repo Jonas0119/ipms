@@ -4,13 +4,13 @@
  * +----------------------------------------------------------------------
  */
 
-import { CwPage } from '../common/page';
+import { IpmsPage } from '../common/page';
 import $toast from '../../components/toast/toast';
 import utils from '../../utils/index';
 import QRCode from '../../libs/qrcode';
 import { ASSETS_HOST } from '../../config';
 
-CwPage({
+IpmsPage({
     data: {
         ASSETS_HOST,
         stamp: Date.now(),

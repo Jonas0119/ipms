@@ -7,7 +7,7 @@
  * +----------------------------------------------------------------------
  */
 
-import { CwComponent } from '../common/component';
+import { IpmsComponent } from '../common/component';
 import {
     ROW_HEIGHT,
     getNextDay,
@@ -21,7 +21,7 @@ import {
 } from './utils';
 import Toast from '../toast/toast';
 import { requestAnimationFrame } from '../common/utils';
-CwComponent({
+IpmsComponent({
     props: {
         title: {
             type: String,
@@ -140,7 +140,7 @@ CwComponent({
                 observeAll: true
             });
             this.contentObserver = contentObserver;
-            contentObserver.relativeTo('.cw-calendar__body');
+            contentObserver.relativeTo('.ipms-calendar__body');
             contentObserver.observe('.month', res => {
                 if (res.boundingClientRect.top <= res.relativeRect.top) {
                     // @ts-ignore

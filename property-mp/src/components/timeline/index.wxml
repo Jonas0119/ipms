@@ -1,11 +1,11 @@
-<view class="cw-timeline {{last ? 'last' : ''}} {{first ? 'first' : ''}}">
-    <view class="cw-timeline-point" />
-    <view class="cw-timeline-content">
-        <view class="cw-timeline-title" wx:if="{{title}}">
+<view class="ipms-timeline {{last ? 'last' : ''}} {{first ? 'first' : ''}}">
+    <view class="ipms-timeline-point" />
+    <view class="ipms-timeline-content">
+        <view class="ipms-timeline-title" wx:if="{{title}}">
             {{ title }}
         </view>
 
-        <view class="cw-timeline-inner">
+        <view class="ipms-timeline-inner">
             <slot />
         </view>
     </view>

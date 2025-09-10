@@ -4,10 +4,10 @@
  * +----------------------------------------------------------------------
  */
 
-import { CwComponent } from '../common/component';
+import { IpmsComponent } from '../common/component';
 import { useParent } from '../common/relation';
 import { link } from '../mixins/link';
-CwComponent({
+IpmsComponent({
     relation: useParent('grid'),
     classes: ['content-class', 'icon-class', 'text-class'],
     mixins: [link],

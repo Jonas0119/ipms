@@ -55,7 +55,7 @@
                         <p>d).请业主点击「物业公司认证住宅」扫描稍后生成的二维码</p>
                     </Col>
                 </Row>
-                <div class="cw-form-actions">
+                <div class="ipms-form-actions">
                     <Button type="primary" :loading="getting" @click="getBuilding">下一步</Button>
                 </div>
             </div>
@@ -79,7 +79,7 @@
                     </FormField>
                 </Form>
 
-                <div class="cw-form-actions">
+                <div class="ipms-form-actions">
                     <Button @click="preStep">上一步</Button>
                     <Button type="primary" :loading="fetching" @click="getQrcode">下一步</Button>
                 </div>
@@ -93,7 +93,7 @@
                 <p>{{ expireText }}</p>
                 <p v-if="!expired">二维码有效期内，一码可供多位业主使用</p>
 
-                <div class="cw-form-actions">
+                <div class="ipms-form-actions">
                     <Button @click="preStep">上一步</Button>
                 </div>
             </div>

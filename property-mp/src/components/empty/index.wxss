@@ -1,5 +1,5 @@
 @import '../common/index.wxss';
-.cw-empty {
+.ipms-empty {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -7,7 +7,7 @@
     box-sizing: border-box;
 }
 
-.cw-empty.fixed {
+.ipms-empty.fixed {
     position: absolute;
     top: 0;
     left: 0;
@@ -16,17 +16,17 @@
     bottom: env(safe-area-inset-bottom);
 }
 
-.cw-empty.with-copyright {
+.ipms-empty.with-copyright {
     padding-bottom: 122px;
 }
 
-.cw-empty__icon {
+.ipms-empty__icon {
     font-size: 154px;
     color: #d8d8d8;
     line-height: 1;
 }
 
-.cw-empty__description {
+.ipms-empty__description {
     margin-top: 16px;
     padding: 0 60px;
     color: #989899;
@@ -34,6 +34,6 @@
     line-height: 20px;
 }
 
-.cw-empty__bottom {
+.ipms-empty__bottom {
     margin-top: 24px;
 }

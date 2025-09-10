@@ -5,7 +5,7 @@
  */
 @import '../common/index.wxss';
 
-.cw-grid {
+.ipms-grid {
     position: relative;
     box-sizing: border-box;
     overflow: hidden;

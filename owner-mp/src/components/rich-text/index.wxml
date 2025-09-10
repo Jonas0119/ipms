@@ -3,6 +3,6 @@
  | 开源物业管理系统，敬请使用
  +----------------------------------------------------------------------
 -->
-<view class="cw-rich-text">
+<view class="ipms-rich-text">
     <rich-text nodes="{{nodes}}" />
 </view>

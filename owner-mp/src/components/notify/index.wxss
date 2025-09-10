@@ -5,7 +5,7 @@
  */
 @import '../common/index.wxss';
 
-.cw-notify {
+.ipms-notify {
     text-align: center;
     word-wrap: break-word;
     padding: 6px 15px;
@@ -13,7 +13,7 @@
     line-height: 20px;
 }
 
-.cw-notify__container {
+.ipms-notify__container {
     position: fixed;
     top: 0;
     left: 0;
@@ -21,18 +21,18 @@
     width: 100%;
 }
 
-.cw-notify--primary {
+.ipms-notify--primary {
     background-color: #1989fa;
 }
 
-.cw-notify--success {
+.ipms-notify--success {
     background-color: #07c160;
 }
 
-.cw-notify--danger {
+.ipms-notify--danger {
     background-color: #ee0a24;
 }
 
-.cw-notify--warning {
+.ipms-notify--warning {
     background-color: #ff976a;
 }

@@ -4,15 +4,15 @@
     "navigationBarTextStyle": "white",
     "navigationBarBackgroundColor": "#1989fa",
     "usingComponents": {
-        "cw-button": "../../components/button",
-        "cw-dialog": "../../components/dialog",
-        "cw-notify": "../../components/notify",
-        "cw-toast": "../../components/toast",
-        "cw-cell": "../../components/cell",
-        "cw-cell-group": "../../components/cell-group",
-        "cw-skeleton": "../../components/skeleton",
-        "cw-tag": "../../components/tag",
-        "cw-workflow": "../../components/workflow",
-        "cw-copyright": "../../components/copyright"
+        "ipms-button": "../../components/button",
+        "ipms-dialog": "../../components/dialog",
+        "ipms-notify": "../../components/notify",
+        "ipms-toast": "../../components/toast",
+        "ipms-cell": "../../components/cell",
+        "ipms-cell-group": "../../components/cell-group",
+        "ipms-skeleton": "../../components/skeleton",
+        "ipms-tag": "../../components/tag",
+        "ipms-workflow": "../../components/workflow",
+        "ipms-copyright": "../../components/copyright"
     }
 }

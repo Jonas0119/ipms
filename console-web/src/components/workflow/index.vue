@@ -5,21 +5,21 @@
  */
 
 <template>
-    <section class="cw-workflow">
-        <Button type="primary" class="cw-workflow-save-btn" :loading="submiting" @click="triggerSave">保存</Button>
-        <div class="cw-workflow-zoom">
-            <button :class="'cw-workflow-zoom-out' + (scale == 50 ? ' disabled' : '')" @click="setZoom(1)">-</button>
+    <section class="ipms-workflow">
+        <Button type="primary" class="ipms-workflow-save-btn" :loading="submiting" @click="triggerSave">保存</Button>
+        <div class="ipms-workflow-zoom">
+            <button :class="'ipms-workflow-zoom-out' + (scale == 50 ? ' disabled' : '')" @click="setZoom(1)">-</button>
             <span>{{ scale }}%</span>
-            <button :class="'cw-workflow-zoom-in' + (scale == 300 ? ' disabled' : '')" @click="setZoom(2)">+</button>
+            <button :class="'ipms-workflow-zoom-in' + (scale == 300 ? ' disabled' : '')" @click="setZoom(2)">+</button>
         </div>
         <div
-            class="cw-workflow-drawer"
+            class="ipms-workflow-drawer"
             :style="'transform: scale(' + scale / 100 + '); transform-origin: 50% 0px 0px;'"
         >
             <WorkflowNode :node.sync="node" :options="options" />
-            <div class="cw-workflow-end-node" v-if="node.type === 1">
-                <div class="cw-workflow-end-node-circle"></div>
-                <div class="cw-workflow-end-node-text">流程结束</div>
+            <div class="ipms-workflow-end-node" v-if="node.type === 1">
+                <div class="ipms-workflow-end-node-circle"></div>
+                <div class="ipms-workflow-end-node-text">流程结束</div>
             </div>
         </div>
     </section>
@@ -132,7 +132,7 @@ export default {
 </script>
 
 <style lang="less">
-.cw-workflow {
+.ipms-workflow {
     width: 100%;
     min-height: calc(~'100vh - 260px');
     background-color: #f5f5f7;

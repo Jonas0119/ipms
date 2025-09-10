@@ -13,7 +13,7 @@ import { Role } from '~/constant/role_access';
 /**
  * 扩展的 WebSocket 接口，包含用户相关信息
  */
-export interface CwWebSocket extends WebSocket {
+export interface IpmsWebSocket extends WebSocket {
     access?: Role[];    // 用户权限角色列表
     user_id?: number;   // 用户ID
 }
@@ -52,7 +52,7 @@ class ws {
         this.ws = new WebSocket.Server({ server, path: '/cws' });
 
         // 监听客户端连接事件
-        this.ws.on('connection', async (ws: CwWebSocket, request: http.IncomingMessage) => {
+        this.ws.on('connection', async (ws: IpmsWebSocket, request: http.IncomingMessage) => {
             // 解析连接 URL 中的查询参数，获取认证 token
             const {
                 query: { token }
@@ -105,7 +105,7 @@ class ws {
         }
 
         // 遍历所有连接的客户端，将消息定向给具备 data.type 权限的在线用户
-        this.ws.clients.forEach((client: CwWebSocket) => {
+        this.ws.clients.forEach((client: IpmsWebSocket) => {
             // 检查客户端连接状态是否正常，且用户具有相应权限
             if (client.readyState === WebSocket.OPEN && client.access.includes(data.type)) {
                 // 发送 JSON 格式的消息给客户端

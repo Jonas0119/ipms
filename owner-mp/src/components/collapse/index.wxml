@@ -3,6 +3,6 @@
  | 开源物业管理系统，敬请使用
  +----------------------------------------------------------------------
 -->
-<view class="custom-class cw-collapse {{ border ? 'cw-hairline--top-bottom' : '' }}">
+<view class="custom-class ipms-collapse {{ border ? 'ipms-hairline--top-bottom' : '' }}">
     <slot />
 </view>

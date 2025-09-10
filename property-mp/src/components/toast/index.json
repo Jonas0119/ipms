@@ -1,9 +1,9 @@
 {
     "component": true,
     "usingComponents": {
-        "cw-icon": "../icon/index",
-        "cw-loading": "../loading/index",
-        "cw-overlay": "../overlay/index",
-        "cw-transition": "../transition/index"
+        "ipms-icon": "../icon/index",
+        "ipms-loading": "../loading/index",
+        "ipms-overlay": "../overlay/index",
+        "ipms-transition": "../transition/index"
     }
 }

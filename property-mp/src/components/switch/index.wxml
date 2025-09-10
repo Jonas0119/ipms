@@ -6,11 +6,11 @@
     style="{{ computed.rootStyle({ size, checked, activeColor, inactiveColor }) }}"
     bind:tap="onClick"
 >
-    <view class="cw-switch__node node-class">
-        <cw-loading
+    <view class="ipms-switch__node node-class">
+        <ipms-loading
             wx:if="{{ loading }}"
             color="{{ computed.loadingColor({ checked, activeColor, inactiveColor }) }}"
-            custom-class="cw-switch__loading"
+            custom-class="ipms-switch__loading"
         />
     </view>
 </view>

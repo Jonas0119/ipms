@@ -10,20 +10,20 @@
     style="color: {{ active ? activeColor : inactiveColor }}"
     bindtap="onClick"
 >
-    <view class="cw-tabbar-item__icon">
-        <cw-icon
+    <view class="ipms-tabbar-item__icon">
+        <ipms-icon
             wx:if="{{ icon }}"
             name="{{ icon }}"
             class-prefix="{{ iconPrefix }}"
-            custom-class="cw-tabbar-item__icon__inner"
+            custom-class="ipms-tabbar-item__icon__inner"
         />
         <block wx:else>
             <slot wx:if="{{ active }}" name="icon-active" />
             <slot wx:else name="icon" />
         </block>
-        <cw-info dot="{{ dot }}" info="{{ info }}" custom-class="cw-tabbar-item__info" />
+        <ipms-info dot="{{ dot }}" info="{{ info }}" custom-class="ipms-tabbar-item__info" />
     </view>
-    <view class="cw-tabbar-item__text">
+    <view class="ipms-tabbar-item__text">
         <slot />
     </view>
 </view>

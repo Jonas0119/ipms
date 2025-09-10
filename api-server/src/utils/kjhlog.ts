@@ -195,7 +195,6 @@ class KjhLog {
         this.logInternal(LogLevel.ERROR, 'ERROR', message, ...args);
     }
 
-    // 兼容 cwlog 的方法
     success(message: string, ...args: any[]): void {
         // 使用特殊的成功标记和绿色
         const successMessage = `${Colors.BRIGHT_GREEN}✓${Colors.RESET} ${message}`;

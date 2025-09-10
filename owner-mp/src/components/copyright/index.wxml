@@ -3,12 +3,12 @@
  | 开源物业管理系统，敬请使用
  +----------------------------------------------------------------------
 -->
-<view class="cw-copyright {{ fixed ? 'fixed' : ''}} {{ dark ? 'dark' : ''}} {{inTabPage ? 'in-tab-page' : ''}}">
-    <cw-icon name="chowa" custom-class="chowa"></cw-icon>
+<view class="ipms-copyright {{ fixed ? 'fixed' : ''}} {{ dark ? 'dark' : ''}} {{inTabPage ? 'in-tab-page' : ''}}">
+    <ipms-icon name="ipms" custom-class="ipms"></ipms-icon>
 
-    <view class="cw-company">
+    <view class="ipms-company">
         <text>IPMS v{{ version }}</text>
         <text>版权所有 保留所有权利</text>
-        <text>https://ipms.chowa.cn</text>
+        <text>https://ipms.cn</text>
     </view>
 </view>

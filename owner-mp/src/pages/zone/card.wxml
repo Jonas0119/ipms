@@ -26,5 +26,5 @@
 
     
 
-    <cw-toast id="cw-toast" />
+    <ipms-toast id="ipms-toast" />
 </view>

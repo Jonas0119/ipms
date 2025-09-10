@@ -4,7 +4,7 @@
  * +----------------------------------------------------------------------
  */
 
-import { CwPage } from '../common/page';
+import { IpmsPage } from '../common/page';
 import utils from '../../utils/index';
 import $notify from '../../components/notify/notify';
 import $toast from '../../components/toast/toast';
@@ -12,7 +12,7 @@ import $dialog from '../../components/dialog/dialog';
 
 let timer = null;
 
-CwPage({
+IpmsPage({
     data: {
         page_num: 1,
         page_amount: 0,

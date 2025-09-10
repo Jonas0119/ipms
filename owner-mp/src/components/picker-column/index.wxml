@@ -7,7 +7,7 @@
 <wxs src="./index.wxs" module="computed" />
 
 <view
-    class="cw-picker-column custom-class"
+    class="ipms-picker-column custom-class"
     style="{{ computed.rootStyle({ itemHeight, visibleItemCount }) }}"
     bind:touchstart="onTouchStart"
     catch:touchmove="onTouchMove"
@@ -21,7 +21,7 @@
             wx:key="index"
             data-index="{{ index }}"
             style="height: {{ itemHeight }}px"
-            class="cw-ellipsis {{ utils.bem('picker-column__item', { disabled: option && option.disabled, selected: index === currentIndex }) }} {{ index === currentIndex ? 'active-class' : '' }}"
+            class="ipms-ellipsis {{ utils.bem('picker-column__item', { disabled: option && option.disabled, selected: index === currentIndex }) }} {{ index === currentIndex ? 'active-class' : '' }}"
             bindtap="onClickItem"
         >
             {{ computed.optionText(option, valueKey) }}

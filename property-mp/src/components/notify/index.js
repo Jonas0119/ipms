@@ -7,13 +7,13 @@
  * +----------------------------------------------------------------------
  */
 
-import { CwComponent } from '../common/component';
+import { IpmsComponent } from '../common/component';
 import { WHITE } from '../common/color';
 import { getSystemInfoSync } from '../common/utils';
 
 const app = getApp();
 
-CwComponent({
+IpmsComponent({
     props: {
         message: String,
         background: String,

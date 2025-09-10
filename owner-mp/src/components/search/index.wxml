@@ -10,10 +10,10 @@
     style="background: {{ background }}"
 >
     <view class="{{ utils.bem('search__content', [shape]) }}">
-        <view class="cw-search__label" wx:if="{{ label }}">{{ label }}</view>
+        <view class="ipms-search__label" wx:if="{{ label }}">{{ label }}</view>
         <slot wx:else name="label" />
 
-        <cw-field
+        <ipms-field
             type="search"
             left-icon="{{ !useLeftIconSlot ? leftIcon : '' }}"
             right-icon="{{ !useRightIconSlot ? rightIcon : '' }}"
@@ -21,7 +21,7 @@
             error="{{ error }}"
             border="{{ false }}"
             confirm-type="search"
-            class="cw-search__field field-class"
+            class="ipms-search__field field-class"
             value="{{ value }}"
             disabled="{{ disabled }}"
             readonly="{{ readonly }}"
@@ -40,13 +40,13 @@
         >
             <slot wx:if="{{ useLeftIconSlot }}" name="left-icon" slot="left-icon" />
             <slot wx:if="{{ useRightIconSlot }}" name="right-icon" slot="right-icon" />
-        </cw-field>
+        </ipms-field>
     </view>
 
     <view
         wx:if="{{ showAction || useActionSlot }}"
-        class="cw-search__action"
-        hover-class="cw-search__action--hover"
+        class="ipms-search__action"
+        hover-class="ipms-search__action--hover"
         hover-stay-time="70"
     >
         <slot wx:if="{{ useActionSlot }}" name="action" />

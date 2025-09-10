@@ -5,9 +5,9 @@
  */
 
 import { nextTick } from '../common/utils';
-import { CwComponent } from '../common/component';
+import { IpmsComponent } from '../common/component';
 import { commonProps, inputProps, textareaProps } from './props';
-CwComponent({
+IpmsComponent({
     field: true,
     classes: ['input-class', 'right-icon-class', 'label-class'],
     props: Object.assign(Object.assign(Object.assign(Object.assign({}, commonProps), inputProps), textareaProps), {

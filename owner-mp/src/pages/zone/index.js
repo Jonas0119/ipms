@@ -4,10 +4,10 @@
  * +----------------------------------------------------------------------
  */
 
-import { CwPage } from '../common/page';
+import { IpmsPage } from '../common/page';
 import { ASSETS_HOST, VERSION } from '../../config';
 
-CwPage({
+IpmsPage({
     data: {
         ASSETS_HOST,
         VERSION

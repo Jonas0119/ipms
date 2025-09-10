@@ -4,14 +4,14 @@
     "backgroundTextStyle": "dark",
     "navigationBarTextStyle": "white",
     "usingComponents": {
-        "cw-nav-bar": "../../components/nav-bar",
-        "cw-icon": "../../components/icon",
-        "cw-row": "../../components/row",
-        "cw-col": "../../components/col",
-        "cw-panel": "../../components/panel",
-        "cw-divider": "../../components/divider",
-        "cw-tag": "../../components/tag",
-        "cw-toast": "../../components/toast",
-        "cw-skeleton": "../../components/skeleton"
+        "ipms-nav-bar": "../../components/nav-bar",
+        "ipms-icon": "../../components/icon",
+        "ipms-row": "../../components/row",
+        "ipms-col": "../../components/col",
+        "ipms-panel": "../../components/panel",
+        "ipms-divider": "../../components/divider",
+        "ipms-tag": "../../components/tag",
+        "ipms-toast": "../../components/toast",
+        "ipms-skeleton": "../../components/skeleton"
     }
 }

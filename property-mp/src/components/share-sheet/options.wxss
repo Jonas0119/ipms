@@ -1,6 +1,6 @@
 @import '../common/index.wxss';
 
-.cw-share-sheet__options {
+.ipms-share-sheet__options {
     position: relative;
     display: -webkit-flex;
     display: flex;
@@ -10,7 +10,7 @@
     -webkit-overflow-scrolling: touch;
 }
 
-.cw-share-sheet__options--border:before {
+.ipms-share-sheet__options--border:before {
     position: absolute;
     box-sizing: border-box;
     -webkit-transform-origin: center;
@@ -24,11 +24,11 @@
     transform: scaleY(0.5);
 }
 
-.cw-share-sheet__options::-webkit-scrollbar {
+.ipms-share-sheet__options::-webkit-scrollbar {
     height: 0;
 }
 
-.cw-share-sheet__option {
+.ipms-share-sheet__option {
     display: -webkit-flex;
     display: flex;
     flex-direction: column;
@@ -36,11 +36,11 @@
     user-select: none;
 }
 
-.cw-share-sheet__option:active {
+.ipms-share-sheet__option:active {
     opacity: 0.7;
 }
 
-.cw-share-sheet__button {
+.ipms-share-sheet__button {
     height: auto;
     padding: 0;
     line-height: inherit;
@@ -48,24 +48,24 @@
     border: 0;
 }
 
-.cw-share-sheet__button:after {
+.ipms-share-sheet__button:after {
     border: 0;
 }
 
-.cw-share-sheet__icon {
+.ipms-share-sheet__icon {
     width: 48px;
     height: 48px;
     margin: 0 16px;
 }
 
-.cw-share-sheet__name {
+.ipms-share-sheet__name {
     margin-top: 8px;
     padding: 0 4px;
     color: #646566;
     font-size: 12px;
 }
 
-.cw-share-sheet__option-description {
+.ipms-share-sheet__option-description {
     padding: 0 4px;
     color: #c8c9cc;
     font-size: 12px;

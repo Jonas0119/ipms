@@ -4,9 +4,9 @@
  * +----------------------------------------------------------------------
  */
 
-import { CwComponent } from '../common/component';
+import { IpmsComponent } from '../common/component';
 import { getRect, getSystemInfoSync } from '../common/utils';
-CwComponent({
+IpmsComponent({
     classes: ['title-class'],
     props: {
         title: String,
@@ -60,7 +60,7 @@ CwComponent({
                 return;
             }
             wx.nextTick(() => {
-                getRect(this, '.cw-nav-bar').then(res => {
+                getRect(this, '.ipms-nav-bar').then(res => {
                     if (res && 'height' in res) {
                         this.setData({ height: res.height });
                     }

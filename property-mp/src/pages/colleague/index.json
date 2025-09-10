@@ -4,11 +4,11 @@
     "navigationBarBackgroundColor": "#1989fa",
     "enablePullDownRefresh": true,
     "usingComponents": {
-        "cw-cell": "../../components/cell",
-        "cw-divider": "../../components/divider",
-        "cw-cell-group": "../../components/cell-group",
-        "cw-skeleton": "../../components/skeleton",
-        "cw-loading": "../../components/loading",
-        "cw-notify": "../../components/notify"
+        "ipms-cell": "../../components/cell",
+        "ipms-divider": "../../components/divider",
+        "ipms-cell-group": "../../components/cell-group",
+        "ipms-skeleton": "../../components/skeleton",
+        "ipms-loading": "../../components/loading",
+        "ipms-notify": "../../components/notify"
     }
 }

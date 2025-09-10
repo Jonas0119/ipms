@@ -1,6 +1,6 @@
 @import '../common/index.wxss';
 
-.cw-submit-bar {
+.ipms-submit-bar {
     position: fixed;
     bottom: 0;
     left: 0;
@@ -11,7 +11,7 @@
     background-color: #fff;
 }
 
-.cw-submit-bar__tip {
+.ipms-submit-bar__tip {
     padding: 10px;
     color: #f56723;
     font-size: 12px;
@@ -19,11 +19,11 @@
     background-color: #fff7cc;
 }
 
-.cw-submit-bar__tip:empty {
+.ipms-submit-bar__tip:empty {
     display: none;
 }
 
-.cw-submit-bar__tip-icon {
+.ipms-submit-bar__tip-icon {
     width: 12px;
     height: 12px;
     margin-right: 4px;
@@ -32,12 +32,12 @@
     min-width: 18px;
 }
 
-.cw-submit-bar__tip-text {
+.ipms-submit-bar__tip-text {
     display: inline;
     vertical-align: middle;
 }
 
-.cw-submit-bar__bar {
+.ipms-submit-bar__bar {
     display: -webkit-flex;
     display: flex;
     -webkit-align-items: center;
@@ -50,12 +50,12 @@
     background-color: #fff;
 }
 
-.cw-submit-bar__safe {
+.ipms-submit-bar__safe {
     height: constant(safe-area-inset-bottom);
     height: env(safe-area-inset-bottom);
 }
 
-.cw-submit-bar__text {
+.ipms-submit-bar__text {
     -webkit-flex: 1;
     flex: 1;
     text-align: right;
@@ -63,30 +63,30 @@
     padding-right: 12px;
 }
 
-.cw-submit-bar__price,
-.cw-submit-bar__text {
+.ipms-submit-bar__price,
+.ipms-submit-bar__text {
     font-weight: 500;
 }
 
-.cw-submit-bar__price {
+.ipms-submit-bar__price {
     color: #ee0a24;
     font-size: 12px;
 }
 
-.cw-submit-bar__price-integer {
+.ipms-submit-bar__price-integer {
     font-size: 20px;
     font-family: Avenir-Heavy, PingFang SC, Helvetica Neue, Arial, sans-serif;
 }
 
-.cw-submit-bar__currency {
+.ipms-submit-bar__currency {
     font-size: 12px;
 }
 
-.cw-submit-bar__suffix-label {
+.ipms-submit-bar__suffix-label {
     margin-left: 5px;
 }
 
-.cw-submit-bar__button {
+.ipms-submit-bar__button {
     width: 110px;
     font-weight: 500;
 }

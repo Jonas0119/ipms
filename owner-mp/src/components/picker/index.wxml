@@ -5,20 +5,20 @@
 -->
 <wxs src="./index.wxs" module="computed" />
 
-<view class="cw-picker custom-class">
+<view class="ipms-picker custom-class">
     <include wx:if="{{ toolbarPosition === 'top' }}" src="toolbar.wxml" />
 
-    <view wx:if="{{ loading }}" class="cw-picker__loading">
+    <view wx:if="{{ loading }}" class="ipms-picker__loading">
         <loading color="#1989fa" />
     </view>
 
     <view
-        class="cw-picker__columns"
+        class="ipms-picker__columns"
         style="{{ computed.columnsStyle({ itemHeight, visibleItemCount }) }}"
         catch:touchmove="noop"
     >
         <picker-column
-            class="cw-picker__column"
+            class="ipms-picker__column"
             wx:for="{{ computed.columns(columns) }}"
             wx:key="index"
             data-index="{{ index }}"
@@ -31,8 +31,8 @@
             active-class="active-class"
             bind:change="onChange"
         />
-        <view class="cw-picker__mask" style="{{ computed.maskStyle({ itemHeight, visibleItemCount }) }}" />
-        <view class="cw-picker__frame cw-hairline--top-bottom" style="{{ computed.frameStyle({ itemHeight }) }}" />
+        <view class="ipms-picker__mask" style="{{ computed.maskStyle({ itemHeight, visibleItemCount }) }}" />
+        <view class="ipms-picker__frame ipms-hairline--top-bottom" style="{{ computed.frameStyle({ itemHeight }) }}" />
     </view>
 
     <include wx:if="{{ toolbarPosition === 'bottom' }}" src="toolbar.wxml" />

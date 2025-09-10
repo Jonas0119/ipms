@@ -1,6 +1,6 @@
 {
     "component": true,
     "usingComponents": {
-        "cw-button": "../button"
+        "ipms-button": "../button"
     }
 }

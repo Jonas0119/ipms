@@ -3,6 +3,6 @@
  | 开源物业管理系统，敬请使用
  +----------------------------------------------------------------------
 -->
-<view class="cw-sidebar custom-class">
+<view class="ipms-sidebar custom-class">
     <slot />
 </view>

@@ -121,7 +121,7 @@
                         placeholder="请输入处理结果"
                     />
                 </FormField>
-                <div class="cw-form-actions">
+                <div class="ipms-form-actions">
                     <Button type="primary" :loading="submiting" @click="submit">确认</Button>
                 </div>
             </Form>

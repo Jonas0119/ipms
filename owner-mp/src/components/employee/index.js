@@ -4,10 +4,10 @@
  * +----------------------------------------------------------------------
  */
 
-import { CwComponent } from '../common/component';
+import { IpmsComponent } from '../common/component';
 import { ASSETS_HOST } from '../../config';
 
-CwComponent({
+IpmsComponent({
     props: {
         info: Object
     },

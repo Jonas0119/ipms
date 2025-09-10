@@ -1,5 +1,5 @@
 @import '../common/index.wxss';
-.cw-radio-group--horizontal {
+.ipms-radio-group--horizontal {
     display: -webkit-flex;
     display: flex;
     -webkit-flex-wrap: wrap;

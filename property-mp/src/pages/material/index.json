@@ -4,13 +4,13 @@
     "navigationBarTextStyle": "white",
     "navigationBarBackgroundColor": "#1989fa",
     "usingComponents": {
-        "cw-button": "../../components/button",
-        "cw-copyright": "../../components/copyright",
-        "cw-field": "../../components/field",
-        "cw-toast": "../../components/toast",
-        "cw-notify": "../../components/notify",
-        "cw-cell": "../../components/cell",
-        "cw-colleague": "../../components/colleague",
-        "cw-cell-group": "../../components/cell-group"
+        "ipms-button": "../../components/button",
+        "ipms-copyright": "../../components/copyright",
+        "ipms-field": "../../components/field",
+        "ipms-toast": "../../components/toast",
+        "ipms-notify": "../../components/notify",
+        "ipms-cell": "../../components/cell",
+        "ipms-colleague": "../../components/colleague",
+        "ipms-cell-group": "../../components/cell-group"
     }
 }

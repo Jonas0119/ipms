@@ -23,7 +23,7 @@
     line-height: 20px;
 }
 
-.community-name cw-icon {
+.community-name ipms-icon {
     color: #1989fa;
     margin-right: 6px;
 }
@@ -57,7 +57,7 @@
     color: #454543;
 }
 
-.community-detail cw-icon {
+.community-detail ipms-icon {
     margin-right: 6px;
     color: #ff9900;
 }

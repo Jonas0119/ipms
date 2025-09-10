@@ -5,7 +5,7 @@
  */
 @import '../common/index.wxss';
 
-.cw-dialog {
+.ipms-dialog {
     top: 45% !important;
     overflow: hidden;
     width: 320px;
@@ -15,23 +15,23 @@
 }
 
 @media (max-width: 321px) {
-    .cw-dialog {
+    .ipms-dialog {
         width: 90%;
     }
 }
 
-.cw-dialog__header {
+.ipms-dialog__header {
     text-align: center;
     padding-top: 24px;
     font-weight: 500;
     line-height: 24px;
 }
 
-.cw-dialog__header--isolated {
+.ipms-dialog__header--isolated {
     padding: 24px 0;
 }
 
-.cw-dialog__message {
+.ipms-dialog__message {
     overflow-y: auto;
     text-align: center;
     -webkit-overflow-scrolling: touch;
@@ -41,54 +41,54 @@
     padding: 24px;
 }
 
-.cw-dialog__message-text {
+.ipms-dialog__message-text {
     word-wrap: break-word;
 }
 
-.cw-dialog__message--hasTitle {
+.ipms-dialog__message--hasTitle {
     padding-top: 8px;
     color: #646566;
 }
 
-.cw-dialog__message--round-button {
+.ipms-dialog__message--round-button {
     padding-bottom: 16px;
     color: #323233;
 }
 
-.cw-dialog__message--left {
+.ipms-dialog__message--left {
     text-align: left;
 }
 
-.cw-dialog__message--right {
+.ipms-dialog__message--right {
     text-align: right;
 }
 
-.cw-dialog__footer {
+.ipms-dialog__footer {
     display: -webkit-flex;
     display: flex;
 }
 
-.cw-dialog__footer--round-button {
+.ipms-dialog__footer--round-button {
     position: relative !important;
     padding: 8px 24px 16px !important;
 }
 
-.cw-dialog__button {
+.ipms-dialog__button {
     -webkit-flex: 1;
     flex: 1;
 }
 
-.cw-dialog__cancel,
-.cw-dialog__confirm {
+.ipms-dialog__cancel,
+.ipms-dialog__confirm {
     border: 0 !important;
 }
 
-.cw-dialog-bounce-enter {
+.ipms-dialog-bounce-enter {
     transform: translate3d(-50%, -50%, 0) scale(0.7);
     opacity: 0;
 }
 
-.cw-dialog-bounce-leave-active {
+.ipms-dialog-bounce-leave-active {
     transform: translate3d(-50%, -50%, 0) scale(0.9);
     opacity: 0;
 }

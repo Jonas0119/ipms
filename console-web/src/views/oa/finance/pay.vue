@@ -49,7 +49,7 @@
                         </li>
                         <li class="right">总计：{{ total }}元</li>
                     </ul>
-                    <div class="cw-form-actions">
+                    <div class="ipms-form-actions">
                         <Button @click="preStep">上一步</Button>
                         <Button type="primary" :loading="submiting" @click="submit">下一步</Button>
                     </div>

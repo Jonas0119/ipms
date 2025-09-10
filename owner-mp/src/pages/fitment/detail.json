@@ -2,16 +2,16 @@
     "navigationBarTitleText": "装修报备详情",
     "enablePullDownRefresh": true,
     "usingComponents": {
-        "cw-cell": "../../components/cell",
-        "cw-field": "../../components/field",
-        "cw-cell-group": "../../components/cell-group",
-        "cw-copyright": "../../components/copyright",
-        "cw-toast": "../../components/toast",
-        "cw-notify": "../../components/notify",
-        "cw-button": "../../components/button",
-        "cw-skeleton": "../../components/skeleton",
-        "cw-steps": "../../components/steps",
-        "cw-employee": "../../components/employee",
-        "cw-notice-bar": "../../components/notice-bar"
+        "ipms-cell": "../../components/cell",
+        "ipms-field": "../../components/field",
+        "ipms-cell-group": "../../components/cell-group",
+        "ipms-copyright": "../../components/copyright",
+        "ipms-toast": "../../components/toast",
+        "ipms-notify": "../../components/notify",
+        "ipms-button": "../../components/button",
+        "ipms-skeleton": "../../components/skeleton",
+        "ipms-steps": "../../components/steps",
+        "ipms-employee": "../../components/employee",
+        "ipms-notice-bar": "../../components/notice-bar"
     }
 }

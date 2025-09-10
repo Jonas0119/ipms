@@ -7,12 +7,12 @@
  * +----------------------------------------------------------------------
  */
 
-import { CwComponent } from '../common/component';
+import { IpmsComponent } from '../common/component';
 import { isImageFile, chooseFile, isVideoFile } from './utils';
 import { chooseImageProps, chooseVideoProps } from './shared';
 import { isBoolean, isPromise } from '../common/validator';
 import unifiedStorage from '../../utils/unified-storage';
-CwComponent({
+IpmsComponent({
     props: Object.assign(
         Object.assign(
             {

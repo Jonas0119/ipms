@@ -13,9 +13,9 @@
     >
         <slot />
     </view>
-    <view class="cw-radio__icon-wrap" style="font-size: {{ utils.addUnit(iconSize) }};" bindtap="onChange">
+    <view class="ipms-radio__icon-wrap" style="font-size: {{ utils.addUnit(iconSize) }};" bindtap="onChange">
         <slot wx:if="{{ useIconSlot }}" name="icon" />
-        <cw-icon
+        <ipms-icon
             wx:else
             name="success"
             class="{{ utils.bem('radio__icon', [shape, { disabled, checked: value === name }]) }}"

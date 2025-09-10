@@ -16,8 +16,8 @@
         show-compass
         enable-overlooking
         enable-building/> -->
-    <cw-cell-group>
-        <cw-cell
+    <ipms-cell-group>
+        <ipms-cell
             title="所在小区"
             title-width="100px"
             value="{{communityInfo.current.name}}小区"
@@ -25,7 +25,7 @@
             is-detail
             url="/pages/community/index"
         />
-        <cw-cell
+        <ipms-cell
             title="挪车原因"
             clickable
             is-link
@@ -33,28 +33,28 @@
             value="{{move_reason_text ? move_reason_text : '请选择'}}"
             bind:click="showAction"
         />
-        <cw-cell title="是否新能源">
-            <cw-switch bind:change="updateNewEnergy" checked="{{is_new_energy}}" />
-        </cw-cell>
-        <cw-cell custom-class="number-cell">
+        <ipms-cell title="是否新能源">
+            <ipms-switch bind:change="updateNewEnergy" checked="{{is_new_energy}}" />
+        </ipms-cell>
+        <ipms-cell custom-class="number-cell">
             <view slot="title">车牌号码</view>
-            <cw-car-number is-new-energy="{{is_new_energy}}" id="car-number" bind:change="onCarNumberChange" />
-        </cw-cell>
-        <cw-cell title="现场照片" border="{{ false }}" title-class="upload-title" value-class="upload-cell">
-            <cw-uploader
+            <ipms-car-number is-new-energy="{{is_new_energy}}" id="car-number" bind:change="onCarNumberChange" />
+        </ipms-cell>
+        <ipms-cell title="现场照片" border="{{ false }}" title-class="upload-title" value-class="upload-cell">
+            <ipms-uploader
                 file-list="{{uploadImgList}}"
                 bind:delete="deleteImg"
                 bind:after-read="afterRead"
                 max-count="{{1}}"
             />
-        </cw-cell>
-    </cw-cell-group>
+        </ipms-cell>
+    </ipms-cell-group>
 
-    <cw-button custom-class="btn" block loading="{{submiting}}" type="info" bind:click="submit">
+    <ipms-button custom-class="btn" block loading="{{submiting}}" type="info" bind:click="submit">
         立即挪车
-    </cw-button>
+    </ipms-button>
 
-    <cw-action-sheet
+    <ipms-action-sheet
         title="挪车原因"
         close-on-click-overlay="{{true}}"
         show="{{actionVisible}}"
@@ -62,8 +62,8 @@
         bind:select="onReasonChange"
         actions="{{actions}}"
     />
-    <cw-toast id="cw-toast" />
-    <cw-dialog id="cw-dialog" />
-    <cw-notify id="cw-notify" />
-    <cw-copyright />
+    <ipms-toast id="ipms-toast" />
+    <ipms-dialog id="ipms-dialog" />
+    <ipms-notify id="ipms-notify" />
+    <ipms-copyright />
 </view>

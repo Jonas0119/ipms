@@ -5,9 +5,9 @@
 -->
 <wxs src="./index.wxs" module="computed" />
 
-<cw-popup
+<ipms-popup
     round
-    class="cw-share-sheet"
+    class="ipms-share-sheet"
     show="{{ show }}"
     position="bottom"
     overlay="{{ overlay }}"
@@ -19,16 +19,16 @@
     bind:close="onClose"
     bind:click-overlay="onClickOverlay"
 >
-    <view class="cw-share-sheet__header">
-        <view class="cw-share-sheet__title">
+    <view class="ipms-share-sheet__header">
+        <view class="ipms-share-sheet__title">
             <slot name="title" />
         </view>
-        <view wx:if="{{ title }}" class="cw-share-sheet__title">{{ title }}</view>
+        <view wx:if="{{ title }}" class="ipms-share-sheet__title">{{ title }}</view>
 
-        <view class="cw-share-sheet__description">
+        <view class="ipms-share-sheet__description">
             <slot name="description" />
         </view>
-        <view wx:if="{{ description }}" class="cw-share-sheet__description">
+        <view wx:if="{{ description }}" class="ipms-share-sheet__description">
             {{ description }}
         </view>
     </view>
@@ -45,7 +45,7 @@
 
     <options wx:else options="{{ options }}" bind:select="onSelect" />
 
-    <button type="button" class="cw-share-sheet__cancel" bindtap="onCancel">
+    <button type="button" class="ipms-share-sheet__cancel" bindtap="onCancel">
         {{ cancelText }}
     </button>
-</cw-popup>
+</ipms-popup>

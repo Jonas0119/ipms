@@ -4,10 +4,10 @@
  * +----------------------------------------------------------------------
  */
 
-import { CwComponent } from '../common/component';
+import { IpmsComponent } from '../common/component';
 import { BLUE } from '../common/color';
 import { getRect } from '../common/utils';
-CwComponent({
+IpmsComponent({
     props: {
         inactive: Boolean,
         percentage: {
@@ -42,7 +42,7 @@ CwComponent({
     },
     methods: {
         setLeft() {
-            Promise.all([getRect(this, '.cw-progress'), getRect(this, '.cw-progress__pivot')]).then(
+            Promise.all([getRect(this, '.ipms-progress'), getRect(this, '.ipms-progress__pivot')]).then(
                 ([portion, pivot]) => {
                     if (portion && pivot) {
                         this.setData({

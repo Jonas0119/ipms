@@ -2,13 +2,13 @@
     "navigationBarTitleText": "缴费详情",
     "enablePullDownRefresh": true,
     "usingComponents": {
-        "cw-panel": "../../components/panel",
-        "cw-cell": "../../components/cell",
-        "cw-cell-group": "../../components/cell-group",
-        "cw-toast": "../../components/toast",
-        "cw-notify": "../../components/notify",
-        "cw-button": "../../components/button",
-        "cw-copyright": "../../components/copyright",
-        "cw-skeleton": "../../components/skeleton"
+        "ipms-panel": "../../components/panel",
+        "ipms-cell": "../../components/cell",
+        "ipms-cell-group": "../../components/cell-group",
+        "ipms-toast": "../../components/toast",
+        "ipms-notify": "../../components/notify",
+        "ipms-button": "../../components/button",
+        "ipms-copyright": "../../components/copyright",
+        "ipms-skeleton": "../../components/skeleton"
     }
 }

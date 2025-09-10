@@ -4,7 +4,7 @@
  * +----------------------------------------------------------------------
  */
 
-import { CwPage } from '../common/page';
+import { IpmsPage } from '../common/page';
 import $toast from '../../components/toast/toast';
 import request from '../../utils/request';
 import QRCode from '../../libs/qrcode';
@@ -14,7 +14,7 @@ function buf2hex(buffer) {
     return Array.prototype.map.call(new Uint8Array(buffer), x => ('00' + x.toString(16)).slice(-2)).join('');
 }
 
-CwPage({
+IpmsPage({
     data: {
         uid: null,
         building_id: 0,

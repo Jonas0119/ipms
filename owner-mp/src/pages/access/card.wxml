@@ -6,7 +6,7 @@
 <wxs src="../common/common.wxs" module="common" />
 
 <view class="container">
-    <cw-nav-bar
+    <ipms-nav-bar
         title="使用门禁卡"
         fixed
         border="{{ false }}"
@@ -41,7 +41,7 @@
     >
         <view wx:if="{{!nfcopen}}" bindtap="startHCE" class="open">NFC未开启，点击开启NFC</view>
         <view wx:else>
-            <cw-icon name="use-nfc" custom-class="icon" />
+            <ipms-icon name="use-nfc" custom-class="icon" />
             <view>请将手机背面顶部靠近刷卡区域</view>
         </view>
     </view>
@@ -56,10 +56,10 @@
 
     <view class="tab" wx:if="{{communityInfo.current.access_nfc && communityInfo.current.access_qrcode && nfcable}}">
         <view class="nfc {{activeTab === 'nfc' ? 'active': ''}}" bindtap="changeTab" data-tab="nfc">
-            <cw-icon name="nfc" />
+            <ipms-icon name="nfc" />
         </view>
         <view class="qrcode {{activeTab === 'qrcode' ? 'active': ''}}" bindtap="changeTab" data-tab="qrcode">
-            <cw-icon name="qrcode" />
+            <ipms-icon name="qrcode" />
         </view>
     </view>
 
@@ -67,5 +67,5 @@
         <image src="../../assets/access/bg.jpg" mode="heightFix"></image>
     </view>
 
-    <cw-toast id="cw-toast" />
+    <ipms-toast id="ipms-toast" />
 </view>

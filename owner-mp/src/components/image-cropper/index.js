@@ -160,7 +160,7 @@ Component({
         }
     },
     data: {
-        el: 'cw-image-cropper', //暂时无用
+        el: 'ipms-image-cropper', //暂时无用
         info: wx.getSystemInfoSync(),
         MOVE_THROTTLE: null, //触摸移动节流settimeout
         MOVE_THROTTLE_FLAG: true, //节流标识
@@ -552,7 +552,7 @@ Component({
         _initCanvas() {
             //初始化canvas
             if (!this.data.ctx) {
-                this.data.ctx = wx.createCanvasContext('cw-image-cropper', this);
+                this.data.ctx = wx.createCanvasContext('ipms-image-cropper', this);
             }
         },
         /**

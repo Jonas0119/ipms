@@ -7,10 +7,10 @@
  * +----------------------------------------------------------------------
  */
 
-import { CwComponent } from '../common/component';
+import { IpmsComponent } from '../common/component';
 import { useChildren } from '../common/relation';
 import { getRect } from '../common/utils';
-CwComponent({
+IpmsComponent({
     relation: useChildren('tabbar-item', function() {
         this.updateChildren();
     }),
@@ -65,7 +65,7 @@ CwComponent({
                 return;
             }
             wx.nextTick(() => {
-                getRect(this, '.cw-tabbar').then(res => {
+                getRect(this, '.ipms-tabbar').then(res => {
                     this.setData({ height: res.height });
                 });
             });

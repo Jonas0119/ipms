@@ -5,14 +5,14 @@
  */
 
 <template>
-    <div class="cw-workflow-append-wrapper">
-        <div class="cw-workflow-append">
+    <div class="ipms-workflow-append-wrapper">
+        <div class="ipms-workflow-append">
             <Poptip v-model="visible" placement="right-start">
-                <button type="button" class="cw-workflow-append-btn">
+                <button type="button" class="ipms-workflow-append-btn">
                     <Icon type="ios-add" />
                 </button>
                 <div slot="content">
-                    <ul class="cw-workflow-append-case">
+                    <ul class="ipms-workflow-append-case">
                         <li @click="appendNode(2)">
                             <div>
                                 <Icon type="ios-medal-outline" />
@@ -102,7 +102,7 @@ export default {
 </script>
 
 <style lang="less">
-.cw-workflow-append {
+.ipms-workflow-append {
     user-select: none;
     width: 240px;
     padding: 20px 0 32px;

@@ -1,6 +1,6 @@
 {
     "component": true,
     "usingComponents": {
-        "cw-field": "../field/index"
+        "ipms-field": "../field/index"
     }
 }

@@ -4,12 +4,12 @@
  * +----------------------------------------------------------------------
  */
 
-import { CwPage } from '../common/page';
+import { IpmsPage } from '../common/page';
 import utils from '../../utils/index';
 import $toast from '../../components/toast/toast';
 import { ASSETS_HOST } from '../../config';
 
-CwPage({
+IpmsPage({
     data: {
         ASSETS_HOST,
         // form data start

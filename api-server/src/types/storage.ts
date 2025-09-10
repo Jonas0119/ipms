@@ -46,7 +46,7 @@ export interface UploadResult {
 // 统一存储服务接口
 export interface IStorageService {
     // 获取上传配置
-    getUploadConfig(filename?: string, mimetype?: string, directory?: string): Promise<StorageConfig> | StorageConfig;
+    getUploadConfig(filename?: string, mimetype?: string, directory?: string, isMiniProgram?: boolean): Promise<StorageConfig> | StorageConfig;
 
     // 处理文件上传
     handleFileUpload?(ctx: any): Promise<UploadResult>;

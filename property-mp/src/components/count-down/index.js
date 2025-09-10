@@ -7,12 +7,12 @@
  * +----------------------------------------------------------------------
  */
 
-import { CwComponent } from '../common/component';
+import { IpmsComponent } from '../common/component';
 import { isSameSecond, parseFormat, parseTimeData } from './utils';
 function simpleTick(fn) {
     return setTimeout(fn, 30);
 }
-CwComponent({
+IpmsComponent({
     props: {
         useSlot: Boolean,
         millisecond: Boolean,

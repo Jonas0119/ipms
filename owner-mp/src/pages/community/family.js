@@ -4,14 +4,14 @@
  * +----------------------------------------------------------------------
  */
 
-import { CwPage } from '../common/page';
+import { IpmsPage } from '../common/page';
 import $toast from '../../components/toast/toast';
 import utils from '../../utils/index';
 import QRCode from '../../libs/qrcode';
 
 let timer = null;
 
-CwPage({
+IpmsPage({
     data: {
         navBarClass: 'nav-bar',
         community_id: null,

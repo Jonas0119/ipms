@@ -1,4 +1,4 @@
-<view class="cw-image-cropper" catchtouchmove="_preventTouchMove">
+<view class="ipms-image-cropper" catchtouchmove="_preventTouchMove">
     <view class="main" bindtouchend="_cutTouchEnd" bindtouchstart="_cutTouchStart" bindtouchmove="_cutTouchMove">
         <view class="content">
             <view
@@ -44,12 +44,12 @@
         />
     </view>
     <canvas
-        canvas-id="cw-image-cropper"
+        canvas-id="ipms-image-cropper"
         disable-scroll="true"
         style="width:{{_canvas_width * export_scale}}px;height:{{_canvas_height * export_scale}}px;left:{{canvas_left}}px;top:{{canvas_top}}px"
-        class="cw-image-cropper-canvas"
+        class="ipms-image-cropper-canvas"
     />
-    <cw-button custom-class="btn" block type="info" bind:click="_click">
+    <ipms-button custom-class="btn" block type="info" bind:click="_click">
         确认
-    </cw-button>
+    </ipms-button>
 </view>

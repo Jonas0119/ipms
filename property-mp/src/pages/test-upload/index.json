@@ -1,7 +1,7 @@
 {
     "navigationBarTitleText": "文件上传测试",
     "usingComponents": {
-        "cw-uploader": "../../components/uploader/index",
-        "cw-button": "../../components/button/index"
+        "ipms-uploader": "../../components/uploader/index",
+        "ipms-button": "../../components/button/index"
     }
 }

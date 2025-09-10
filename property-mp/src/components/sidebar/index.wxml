@@ -1,3 +1,3 @@
-<view class="cw-sidebar custom-class">
+<view class="ipms-sidebar custom-class">
     <slot />
 </view>

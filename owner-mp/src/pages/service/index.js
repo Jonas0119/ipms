@@ -4,11 +4,11 @@
  * +----------------------------------------------------------------------
  */
 
-import { CwPage } from '../common/page';
+import { IpmsPage } from '../common/page';
 import utils from '../../utils/index';
 import $notify from '../../components/notify/notify';
 
-CwPage({
+IpmsPage({
     data: {
         categoryOptions: [
             { text: '全部服务', value: '家政' },

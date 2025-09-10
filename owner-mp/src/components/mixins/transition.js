@@ -8,10 +8,10 @@
 import { requestAnimationFrame } from '../common/utils';
 import { isObj } from '../common/validator';
 const getClassNames = name => ({
-    enter: `cw-${name}-enter cw-${name}-enter-active enter-class enter-active-class`,
-    'enter-to': `cw-${name}-enter-to cw-${name}-enter-active enter-to-class enter-active-class`,
-    leave: `cw-${name}-leave cw-${name}-leave-active leave-class leave-active-class`,
-    'leave-to': `cw-${name}-leave-to cw-${name}-leave-active leave-to-class leave-active-class`
+    enter: `ipms-${name}-enter ipms-${name}-enter-active enter-class enter-active-class`,
+    'enter-to': `ipms-${name}-enter-to ipms-${name}-enter-active enter-to-class enter-active-class`,
+    leave: `ipms-${name}-leave ipms-${name}-leave-active leave-class leave-active-class`,
+    'leave-to': `ipms-${name}-leave-to ipms-${name}-leave-active leave-to-class leave-active-class`
 });
 export function transition(showDefaultValue) {
     return Behavior({

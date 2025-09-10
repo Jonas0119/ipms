@@ -1,8 +1,8 @@
 <wxs src="../common/common.wxs" module="common" />
 
 <view class="container">
-    <cw-cell-group>
-        <cw-cell
+    <ipms-cell-group>
+        <ipms-cell
             title="采购物料"
             value="{{!material_id ? '请选采购物料' : materialName}}"
             is-link
@@ -10,7 +10,7 @@
             is-detail="{{material_id ? true : false}}"
             bind:click="showMaterialAction"
         />
-        <cw-cell
+        <ipms-cell
             title="供应商"
             value="{{!supplier_id ? '请选供应商' : supplierName}}"
             is-link
@@ -18,22 +18,22 @@
             is-detail="{{supplier_id ? true : false}}"
             bind:click="showSupplierAction"
         />
-        <cw-field label="采购数量" type="number" model:value="{{ total }}" placeholder="请输入采购数量" />
-        <cw-field
+        <ipms-field label="采购数量" type="number" model:value="{{ total }}" placeholder="请输入采购数量" />
+        <ipms-field
             label="采购总金额"
             type="digit"
             model:value="{{ fee }}"
             border="{{false}}"
             placeholder="请输入采购总金额"
         />
-    </cw-cell-group>
+    </ipms-cell-group>
 
     <view class="btns-box">
-        <cw-button block bind:click="cancel">取消</cw-button>
-        <cw-button custom-class="btn" block type="info" bind:click="submit">确认</cw-button>
+        <ipms-button block bind:click="cancel">取消</ipms-button>
+        <ipms-button custom-class="btn" block type="info" bind:click="submit">确认</ipms-button>
     </view>
 
-    <cw-action-sheet
+    <ipms-action-sheet
         title="选择采购物料"
         show="{{ showMaterial }}"
         actions="{{ materialActions }}"
@@ -41,7 +41,7 @@
         bind:select="onMaterialSelectAction"
     />
 
-    <cw-action-sheet
+    <ipms-action-sheet
         title="选择采购商"
         show="{{ showSupplier }}"
         actions="{{ supplierActions }}"
@@ -49,8 +49,8 @@
         bind:select="onSupplierSelectAction"
     />
 
-    <cw-copyright />
+    <ipms-copyright />
 
-    <cw-toast id="cw-toast" />
-    <cw-notify id="cw-notify" />
+    <ipms-toast id="ipms-toast" />
+    <ipms-notify id="ipms-notify" />
 </view>

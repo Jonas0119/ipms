@@ -5,9 +5,9 @@
  */
 
 import { getRect } from '../common/utils';
-import { CwComponent } from '../common/component';
+import { IpmsComponent } from '../common/component';
 import { useParent } from '../common/relation';
-CwComponent({
+IpmsComponent({
     relation: useParent('index-bar'),
     props: {
         useSlot: Boolean,
@@ -20,7 +20,7 @@ CwComponent({
     },
     methods: {
         scrollIntoView(scrollTop) {
-            getRect(this, '.cw-index-anchor-wrapper').then(rect => {
+            getRect(this, '.ipms-index-anchor-wrapper').then(rect => {
                 wx.pageScrollTo({
                     duration: 0,
                     scrollTop: scrollTop + rect.top - this.parent.data.stickyOffsetTop

@@ -4,7 +4,7 @@
  * +----------------------------------------------------------------------
  */
 
-import { CwComponent } from '../common/component';
+import { IpmsComponent } from '../common/component';
 import { button } from '../mixins/button';
 import { openType } from '../mixins/open-type';
 import { canIUseFormFieldButton } from '../common/version';
@@ -12,7 +12,7 @@ const mixins = [button, openType];
 if (canIUseFormFieldButton()) {
     mixins.push('wx://form-field-button');
 }
-CwComponent({
+IpmsComponent({
     mixins,
     classes: ['hover-class', 'loading-class'],
     data: {
@@ -23,7 +23,7 @@ CwComponent({
         icon: String,
         classPrefix: {
             type: String,
-            value: 'cw-icon'
+            value: 'ipms-icon'
         },
         plain: Boolean,
         block: Boolean,

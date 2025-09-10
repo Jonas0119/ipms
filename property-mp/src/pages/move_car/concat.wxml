@@ -1,26 +1,26 @@
 <wxs src="../common/common.wxs" module="common" />
 
 <view class="container">
-    <cw-cell-group title="{{car_number}}联系电话" wx:if="{{fetching}}">
-        <cw-cell is-link>
-            <cw-skeleton in-cell row="1" />
-        </cw-cell>
-        <cw-cell is-link>
-            <cw-skeleton in-cell row="1" />
-        </cw-cell>
-        <cw-cell is-link>
-            <cw-skeleton in-cell row="1" />
-        </cw-cell>
-        <cw-cell is-link>
-            <cw-skeleton in-cell row="1" />
-        </cw-cell>
-        <cw-cell is-link>
-            <cw-skeleton in-cell row="1" />
-        </cw-cell>
-    </cw-cell-group>
+    <ipms-cell-group title="{{car_number}}联系电话" wx:if="{{fetching}}">
+        <ipms-cell is-link>
+            <ipms-skeleton in-cell row="1" />
+        </ipms-cell>
+        <ipms-cell is-link>
+            <ipms-skeleton in-cell row="1" />
+        </ipms-cell>
+        <ipms-cell is-link>
+            <ipms-skeleton in-cell row="1" />
+        </ipms-cell>
+        <ipms-cell is-link>
+            <ipms-skeleton in-cell row="1" />
+        </ipms-cell>
+        <ipms-cell is-link>
+            <ipms-skeleton in-cell row="1" />
+        </ipms-cell>
+    </ipms-cell-group>
     <view wx:else>
-        <cw-cell-group title="{{car_number}}联系电话" wx:if="{{list.length > 0}}">
-            <cw-cell
+        <ipms-cell-group title="{{car_number}}联系电话" wx:if="{{list.length > 0}}">
+            <ipms-cell
                 wx:for="{{list}}"
                 wx:key="index"
                 title="{{item.phone}}"
@@ -29,11 +29,11 @@
                 is-link
                 bind:click="makeCell"
             >
-                <cw-icon name="phone" />
-            </cw-cell>
-        </cw-cell-group>
-        <cw-empty wx:if="{{list.length === 0}}" with-copyright description="未查询到任何联系方式" />
+                <ipms-icon name="phone" />
+            </ipms-cell>
+        </ipms-cell-group>
+        <ipms-empty wx:if="{{list.length === 0}}" with-copyright description="未查询到任何联系方式" />
     </view>
 
-    <cw-copyright />
+    <ipms-copyright />
 </view>

@@ -15,7 +15,7 @@ function mapKeys(source, target, map) {
         }
     });
 }
-function CwComponent(cwtOptions) {
+function IpmsComponent(cwtOptions) {
     const options = {};
     mapKeys(cwtOptions, options, {
         data: 'data',
@@ -51,4 +51,4 @@ function CwComponent(cwtOptions) {
     };
     Component(options);
 }
-export { CwComponent };
+export { IpmsComponent };

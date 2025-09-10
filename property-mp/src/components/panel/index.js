@@ -7,8 +7,8 @@
  * +----------------------------------------------------------------------
  */
 
-import { CwComponent } from '../common/component';
-CwComponent({
+import { IpmsComponent } from '../common/component';
+IpmsComponent({
     classes: ['header-class', 'footer-class'],
     props: {
         desc: String,

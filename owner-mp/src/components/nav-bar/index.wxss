@@ -5,7 +5,7 @@
  */
 @import '../common/index.wxss';
 
-.cw-nav-bar {
+.ipms-nav-bar {
     position: relative;
     text-align: center;
     -webkit-user-select: none;
@@ -15,12 +15,12 @@
     background-color: #fff;
 }
 
-.cw-nav-bar__content {
+.ipms-nav-bar__content {
     position: relative;
     height: 100%;
 }
 
-.cw-nav-bar__text {
+.ipms-nav-bar__text {
     display: inline-block;
     vertical-align: middle;
     margin: 0 -16px;
@@ -28,29 +28,29 @@
     color: #232323;
 }
 
-.cw-nav-bar__text--hover {
+.ipms-nav-bar__text--hover {
     background-color: #f2f3f5;
 }
 
-.cw-nav-bar__arrow {
+.ipms-nav-bar__arrow {
     vertical-align: middle;
     font-size: 16px !important;
     color: #232323 !important;
 }
 
-.cw-nav-bar__arrow + .cw-nav-bar__text {
+.ipms-nav-bar__arrow + .ipms-nav-bar__text {
     margin-left: -20px;
     padding-left: 25px;
 }
 
-.cw-nav-bar--fixed {
+.ipms-nav-bar--fixed {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
 }
 
-.cw-nav-bar__title {
+.ipms-nav-bar__title {
     max-width: 60%;
     margin: 0 auto;
     color: #323233;
@@ -58,8 +58,8 @@
     font-size: 16px;
 }
 
-.cw-nav-bar__left,
-.cw-nav-bar__right {
+.ipms-nav-bar__left,
+.ipms-nav-bar__right {
     position: absolute;
     top: 0;
     bottom: 0;
@@ -70,10 +70,10 @@
     font-size: 14px;
 }
 
-.cw-nav-bar__left {
+.ipms-nav-bar__left {
     left: 16px;
 }
 
-.cw-nav-bar__right {
+.ipms-nav-bar__right {
     right: 16px;
 }

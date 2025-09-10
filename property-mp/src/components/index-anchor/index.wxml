@@ -1,6 +1,6 @@
-<view class="cw-index-anchor-wrapper" style="{{ wrapperStyle }}">
+<view class="ipms-index-anchor-wrapper" style="{{ wrapperStyle }}">
     <view
-        class="cw-index-anchor {{ active ? 'cw-index-anchor--active cw-hairline--bottom' : '' }}"
+        class="ipms-index-anchor {{ active ? 'ipms-index-anchor--active ipms-hairline--bottom' : '' }}"
         style="{{ anchorStyle }}"
     >
         <slot wx:if="{{ useSlot }}" />

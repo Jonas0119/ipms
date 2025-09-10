@@ -11,5 +11,5 @@
     style="{{ computed.rootStyle({ plain, color, textColor }) }}"
 >
     <slot />
-    <cw-icon wx:if="{{ closeable }}" name="cross" custom-class="cw-tag__close" bind:click="onClose" />
+    <ipms-icon wx:if="{{ closeable }}" name="cross" custom-class="ipms-tag__close" bind:click="onClose" />
 </view>

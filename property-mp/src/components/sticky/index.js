@@ -8,10 +8,10 @@
  */
 
 import { getRect } from '../common/utils';
-import { CwComponent } from '../common/component';
+import { IpmsComponent } from '../common/component';
 import { pageScrollMixin } from '../mixins/page-scroll';
-const ROOT_ELEMENT = '.cw-sticky';
-CwComponent({
+const ROOT_ELEMENT = '.ipms-sticky';
+IpmsComponent({
     props: {
         zIndex: {
             type: Number,

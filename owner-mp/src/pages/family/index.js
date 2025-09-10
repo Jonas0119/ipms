@@ -4,12 +4,12 @@
  * +----------------------------------------------------------------------
  */
 
-import { CwPage } from '../common/page';
+import { IpmsPage } from '../common/page';
 import $notify from '../../components/notify/notify';
 import utils from '../../utils/index';
 import { ASSETS_HOST } from '../../config';
 
-CwPage({
+IpmsPage({
     data: {
         ASSETS_HOST,
         fetching: true,

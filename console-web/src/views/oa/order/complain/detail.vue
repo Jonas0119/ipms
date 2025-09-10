@@ -170,7 +170,7 @@
                     />
                 </FormField>
 
-                <div class="cw-form-actions">
+                <div class="ipms-form-actions">
                     <Button type="primary" :loading="confirming" @click="confirm">确认工单</Button>
                 </div>
             </Form>
@@ -214,7 +214,7 @@
                     <MultipleImageUpload v-model="finishForm.dispose_imgs" dir="complain" />
                 </FormField>
 
-                <div class="cw-form-actions">
+                <div class="ipms-form-actions">
                     <Button type="primary" :loading="finishing" @click="finish">确认完工</Button>
                 </div>
             </Form>

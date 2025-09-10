@@ -57,7 +57,7 @@
                     <Input v-model="form.car_number" placeholder="请输入车牌号码" />
                 </FormField>
 
-                <div class="cw-form-actions">
+                <div class="ipms-form-actions">
                     <Button @click="preStep">上一步</Button>
                     <Button type="primary" :loading="submiting" @click="submit">下一步</Button>
                 </div>

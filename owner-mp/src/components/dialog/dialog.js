@@ -13,7 +13,7 @@ const defaultOptions = {
     message: '',
     zIndex: 100,
     overlay: true,
-    selector: '#cw-dialog',
+    selector: '#ipms-dialog',
     className: '',
     asyncClose: false,
     beforeClose: null,
@@ -56,7 +56,7 @@ const Dialog = options => {
             });
             queue.push(dialog);
         } else {
-            console.warn('未找到 cw-dialog 节点，请确认 selector 及 context 是否正确');
+            console.warn('未找到 ipms-dialog 节点，请确认 selector 及 context 是否正确');
         }
     });
 };

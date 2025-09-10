@@ -6,7 +6,7 @@
 <wxs src="./index.wxs" module="computed" />
 
 <view
-    class="cw-grid custom-class {{ border && !gutter ? 'cw-hairline--top' : '' }}"
+    class="ipms-grid custom-class {{ border && !gutter ? 'ipms-hairline--top' : '' }}"
     style="{{ computed.rootStyle({ gutter }) }}"
 >
     <slot />

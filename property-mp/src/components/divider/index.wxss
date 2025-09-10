@@ -1,6 +1,6 @@
 @import '../common/index.wxss';
 
-.cw-divider {
+.ipms-divider {
     display: -webkit-flex;
     display: flex;
     -webkit-align-items: center;
@@ -12,8 +12,8 @@
     border: 0 solid #ebedf0;
 }
 
-.cw-divider:after,
-.cw-divider:before {
+.ipms-divider:after,
+.ipms-divider:before {
     display: block;
     -webkit-flex: 1;
     flex: 1;
@@ -24,37 +24,37 @@
     border-width: 1px 0 0;
 }
 
-.cw-divider:before {
+.ipms-divider:before {
     content: '';
 }
 
-.cw-divider--hairline:after,
-.cw-divider--hairline:before {
+.ipms-divider--hairline:after,
+.ipms-divider--hairline:before {
     -webkit-transform: scaleY(0.5);
     transform: scaleY(0.5);
 }
 
-.cw-divider--dashed {
+.ipms-divider--dashed {
     border-style: dashed;
 }
 
-.cw-divider--center:before,
-.cw-divider--left:before,
-.cw-divider--right:before {
+.ipms-divider--center:before,
+.ipms-divider--left:before,
+.ipms-divider--right:before {
     margin-right: 16px;
 }
 
-.cw-divider--center:after,
-.cw-divider--left:after,
-.cw-divider--right:after {
+.ipms-divider--center:after,
+.ipms-divider--left:after,
+.ipms-divider--right:after {
     content: '';
     margin-left: 16px;
 }
 
-.cw-divider--left:before {
+.ipms-divider--left:before {
     max-width: 10%;
 }
 
-.cw-divider--right:after {
+.ipms-divider--right:after {
     max-width: 10%;
 }

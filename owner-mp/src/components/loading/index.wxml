@@ -8,12 +8,12 @@
 
 <view class="custom-class {{ utils.bem('loading', { vertical }) }}">
     <view
-        class="cw-loading__spinner cw-loading__spinner--{{ type }}"
+        class="ipms-loading__spinner ipms-loading__spinner--{{ type }}"
         style="{{ computed.spinnerStyle({ color, size }) }}"
     >
-        <view wx:if="{{ type === 'spinner' }}" wx:for="{{ array12 }}" wx:key="index" class="cw-loading__dot" />
+        <view wx:if="{{ type === 'spinner' }}" wx:for="{{ array12 }}" wx:key="index" class="ipms-loading__dot" />
     </view>
-    <view class="cw-loading__text" style="{{ computed.textStyle({ textSize }) }}">
+    <view class="ipms-loading__text" style="{{ computed.textStyle({ textSize }) }}">
         <slot />
     </view>
 </view>

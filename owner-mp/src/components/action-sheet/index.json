@@ -1,8 +1,8 @@
 {
     "component": true,
     "usingComponents": {
-        "cw-icon": "../icon/index",
-        "cw-popup": "../popup/index",
-        "cw-loading": "../loading/index"
+        "ipms-icon": "../icon/index",
+        "ipms-popup": "../popup/index",
+        "ipms-loading": "../loading/index"
     }
 }

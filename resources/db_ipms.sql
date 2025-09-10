@@ -1,5 +1,3 @@
-CREATE DATABASE IF NOT EXISTS `ipms` DEFAULT CHARACTER SET utf8mb4
-USE `ipms`;
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -713,9 +711,10 @@ CREATE TABLE `ipms_property_company_access` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `ipms_property_company_auth` (
-  `id` bigint(20) NOT NULL,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `property_company_user_id` bigint(20) NOT NULL,
-  `token` varchar(32) DEFAULT NULL
+  `token` varchar(32) DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `ipms_property_company_building_registered` (
@@ -741,7 +740,7 @@ CREATE TABLE `ipms_property_company_job` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `ipms_property_company_user` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `account` varchar(32) DEFAULT NULL,
   `password` varchar(32) DEFAULT NULL,
   `open_id` varchar(28) DEFAULT NULL,
@@ -758,35 +757,40 @@ CREATE TABLE `ipms_property_company_user` (
   `join_company_at` bigint(13) DEFAULT NULL,
   `leave_office` tinyint(1) NOT NULL DEFAULT 0,
   `created_by` bigint(20) DEFAULT NULL,
-  `created_at` bigint(13) NOT NULL
+  `created_at` bigint(13) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `ipms_property_company_user_access_community` (
-  `id` bigint(20) NOT NULL,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `property_company_user_id` bigint(20) NOT NULL,
-  `community_id` bigint(20) DEFAULT NULL
+  `community_id` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `ipms_property_company_user_default_community` (
-  `id` bigint(20) NOT NULL,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `property_company_user_id` bigint(20) NOT NULL,
-  `community_id` bigint(20) DEFAULT NULL
+  `community_id` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `ipms_property_company_user_join_record` (
-  `id` bigint(20) NOT NULL,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `property_company_user_id` bigint(20) NOT NULL,
   `status` tinyint(1) NOT NULL,
   `created_by` bigint(20) NOT NULL,
-  `created_at` bigint(13) NOT NULL
+  `created_at` bigint(13) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `ipms_property_company_user_login` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `property_company_user_id` bigint(20) NOT NULL,
   `ip` varchar(64) NOT NULL,
   `user_agent` varchar(512) DEFAULT NULL,
-  `login_at` bigint(13) NOT NULL
+  `login_at` bigint(13) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `ipms_property_fee` (
@@ -1075,9 +1079,9 @@ CREATE TABLE `ipms_wechat_mp_auth` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `ipms_wechat_mp_user` (
-  `id` bigint(20) NOT NULL,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `open_id` varchar(28) NOT NULL,
-  `union_id` varchar(28) NOT NULL,
+  `union_id` varchar(28) DEFAULT NULL,
   `nick_name` varchar(12) DEFAULT NULL,
   `real_name` varchar(8) DEFAULT NULL,
   `idcard` varchar(18) DEFAULT NULL,
@@ -1086,7 +1090,8 @@ CREATE TABLE `ipms_wechat_mp_user` (
   `gender` tinyint(1) NOT NULL DEFAULT 0 COMMENT '1 男 2女	',
   `signature` varchar(56) NOT NULL DEFAULT '不一定每天都很好，但每天都会有些小美好在等你',
   `intact` tinyint(4) NOT NULL DEFAULT 0 COMMENT '0 身份信息未补全； 1补全',
-  `created_at` bigint(13) NOT NULL
+  `created_at` bigint(13) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `ipms_wechat_mp_user_login` (
@@ -1101,11 +1106,12 @@ CREATE TABLE `ipms_wechat_mp_user_login` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `ipms_wechat_official_accounts_user` (
-  `id` bigint(20) NOT NULL,
-  `union_id` varchar(56) NOT NULL,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `union_id` varchar(56) DEFAULT NULL,
   `open_id` varchar(56) NOT NULL,
   `subscribed` tinyint(1) NOT NULL DEFAULT 0,
-  `created_at` bigint(13) NOT NULL
+  `created_at` bigint(13) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `ipms_workflow` (
@@ -1194,10 +1200,6 @@ ALTER TABLE `ipms_employee_sign_record`
 
 ALTER TABLE `ipms_employee_sign_setting`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `community_id` (`community_id`);
-
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `wechat_mp_user_id` (`wechat_mp_user_id`),
   ADD KEY `community_id` (`community_id`);
 
 ALTER TABLE `ipms_feedback`
@@ -1393,7 +1395,6 @@ ALTER TABLE `ipms_property_company_access`
   ADD PRIMARY KEY (`id`);
 
 ALTER TABLE `ipms_property_company_auth`
-  ADD PRIMARY KEY (`id`),
   ADD KEY `property_company_user_id` (`property_company_user_id`);
 
 ALTER TABLE `ipms_property_company_building_registered`
@@ -1408,25 +1409,20 @@ ALTER TABLE `ipms_property_company_job`
   ADD PRIMARY KEY (`id`);
 
 ALTER TABLE `ipms_property_company_user`
-  ADD PRIMARY KEY (`id`),
   ADD KEY `phone` (`phone`),
   ADD KEY `account` (`account`),
   ADD KEY `open_id` (`open_id`);
 
 ALTER TABLE `ipms_property_company_user_access_community`
-  ADD PRIMARY KEY (`id`),
   ADD KEY `property_company_user_id` (`property_company_user_id`);
 
 ALTER TABLE `ipms_property_company_user_default_community`
-  ADD PRIMARY KEY (`id`),
   ADD KEY `property_company_user_id` (`property_company_user_id`);
 
 ALTER TABLE `ipms_property_company_user_join_record`
-  ADD PRIMARY KEY (`id`),
   ADD KEY `property_company_user_id` (`property_company_user_id`);
 
 ALTER TABLE `ipms_property_company_user_login`
-  ADD PRIMARY KEY (`id`),
   ADD KEY `property_company_user_id` (`property_company_user_id`);
 
 ALTER TABLE `ipms_property_fee`
@@ -1549,8 +1545,6 @@ ALTER TABLE `ipms_user_default_community`
   ADD KEY `wechat_mp_user_id` (`wechat_mp_user_id`),
   ADD KEY `community_id` (`community_id`);
 
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `success` (`success`);
 
 ALTER TABLE `ipms_vistor`
   ADD PRIMARY KEY (`id`),
@@ -1566,7 +1560,6 @@ ALTER TABLE `ipms_wechat_mp_auth`
   ADD KEY `token` (`token`);
 
 ALTER TABLE `ipms_wechat_mp_user`
-  ADD PRIMARY KEY (`id`),
   ADD KEY `mobile` (`phone`),
   ADD KEY `open_id` (`open_id`);
 
@@ -1575,7 +1568,6 @@ ALTER TABLE `ipms_wechat_mp_user_login`
   ADD KEY `wechat_mp_user_id` (`wechat_mp_user_id`);
 
 ALTER TABLE `ipms_wechat_official_accounts_user`
-  ADD PRIMARY KEY (`id`),
   ADD KEY `open_id` (`union_id`);
 
 ALTER TABLE `ipms_workflow`
@@ -1625,8 +1617,6 @@ ALTER TABLE `ipms_employee_sign_record`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE `ipms_employee_sign_setting`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
-
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE `ipms_feedback`
@@ -1767,8 +1757,6 @@ ALTER TABLE `ipms_pet_vaccinate`
 ALTER TABLE `ipms_property_company_access`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ipms_property_company_auth`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE `ipms_property_company_building_registered`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
@@ -1779,20 +1767,6 @@ ALTER TABLE `ipms_property_company_department`
 ALTER TABLE `ipms_property_company_job`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ipms_property_company_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
-ALTER TABLE `ipms_property_company_user_access_community`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
-
-ALTER TABLE `ipms_property_company_user_default_community`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
-
-ALTER TABLE `ipms_property_company_user_join_record`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
-
-ALTER TABLE `ipms_property_company_user_login`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE `ipms_property_fee`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
@@ -1863,7 +1837,6 @@ ALTER TABLE `ipms_user_car_sync`
 ALTER TABLE `ipms_user_default_community`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE `ipms_vistor`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
@@ -1871,14 +1844,10 @@ ALTER TABLE `ipms_vistor`
 ALTER TABLE `ipms_wechat_mp_auth`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ipms_wechat_mp_user`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE `ipms_wechat_mp_user_login`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ipms_wechat_official_accounts_user`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE `ipms_workflow`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;

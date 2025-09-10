@@ -6,7 +6,7 @@
 
 <template>
     <section :class="wrapperClasses">
-        <div class="cw-layout-nav-inner-logo">
+        <div class="ipms-layout-nav-inner-logo">
             <router-link to="/">
                 <img src="../../../assets/logo.svg" class="logo-img" />
                 <span v-show="!siderCollapsed">
@@ -21,7 +21,7 @@
             :open-names="openSubmenu"
             width="auto"
             :accordion="settings.siderAccordion"
-            class="cw-layout-nav-inner-menu"
+            class="ipms-layout-nav-inner-menu"
             ref="siderMenu"
             :theme="theme"
         >
@@ -40,9 +40,9 @@
                                     :name="url(item)"
                                     :to="url(item)"
                                     :class="[
-                                        'cw-layout-nav-inner-menu-collapsed-item',
+                                        'ipms-layout-nav-inner-menu-collapsed-item',
                                         openSubmenu.includes(item.path)
-                                            ? 'cw-layout-nav-inner-menu-collapsed-item-active'
+                                            ? 'ipms-layout-nav-inner-menu-collapsed-item-active'
                                             : ''
                                     ]"
                                 >
@@ -65,9 +65,9 @@
                                     :name="url(item)"
                                     :to="url(item)"
                                     :class="[
-                                        'cw-layout-nav-inner-menu-collapsed-item',
+                                        'ipms-layout-nav-inner-menu-collapsed-item',
                                         openSubmenu.includes(item.path)
-                                            ? 'cw-layout-nav-inner-menu-collapsed-item-active'
+                                            ? 'ipms-layout-nav-inner-menu-collapsed-item-active'
                                             : ''
                                     ]"
                                 >
@@ -79,7 +79,7 @@
 
                                 <DropdownMenu slot="list">
                                     <div
-                                        class="cw-layout-nav-inner-collapsed-submenu-title"
+                                        class="ipms-layout-nav-inner-collapsed-submenu-title"
                                         v-if="settings.collapsedShowParentMenu"
                                     >
                                         <Icon :type="item.meta.icon" v-if="item.meta.icon" />
@@ -215,14 +215,14 @@ export default {
         },
         wrapperClasses() {
             return {
-                'cw-layout-nav-inner': true,
-                [`cw-layout-nav-inner-${this.theme}`]: true
+                'ipms-layout-nav-inner': true,
+                [`ipms-layout-nav-inner-${this.theme}`]: true
             };
         },
         submenuClasses() {
             return [
-                'cw-layout-nav-inner-collapsed-submenu',
-                `cw-layout-nav-inner-collapsed-submenu-${this.theme}`
+                'ipms-layout-nav-inner-collapsed-submenu',
+                `ipms-layout-nav-inner-collapsed-submenu-${this.theme}`
             ].join(' ');
         },
         module() {
@@ -262,7 +262,7 @@ export default {
 </script>
 
 <style lang="less">
-.cw-layout-nav-inner {
+.ipms-layout-nav-inner {
     overflow: hidden;
 
     &-logo {
@@ -338,7 +338,7 @@ export default {
         &-dark {
             background-color: #191a23 !important;
 
-            .cw-layout-nav-inner-collapsed-submenu {
+            .ipms-layout-nav-inner-collapsed-submenu {
                 &-title {
                     color: hsla(0, 0%, 100%, 0.7);
                     border-bottom: 1px solid #101117;
@@ -363,7 +363,7 @@ export default {
         }
 
         &-light {
-            .cw-layout-nav-inner-collapsed-submenu {
+            .ipms-layout-nav-inner-collapsed-submenu {
                 &-title {
                     border-bottom: 1px solid #f8f8f9;
                 }
@@ -372,7 +372,7 @@ export default {
     }
 
     &-dark {
-        .cw-layout-nav-inner {
+        .ipms-layout-nav-inner {
             &-logo {
                 border-bottom: 1px solid #101117;
                 background: #191a23;
@@ -405,7 +405,7 @@ export default {
     }
 
     &-light {
-        .cw-layout-nav-inner {
+        .ipms-layout-nav-inner {
             &-logo {
                 border-bottom: 1px solid #f8f8f9;
 

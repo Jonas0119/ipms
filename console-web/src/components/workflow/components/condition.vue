@@ -5,12 +5,12 @@
  */
 
 <template>
-    <div class="cw-workflow-condition-item-inner" @click="showDrawer">
-        <div class="cw-workflow-condition-item-header">
-            <div class="cw-workflow-condition-item-header-name" v-if="!editing" @click.stop="showUpdateName">
+    <div class="ipms-workflow-condition-item-inner" @click="showDrawer">
+        <div class="ipms-workflow-condition-item-header">
+            <div class="ipms-workflow-condition-item-header-name" v-if="!editing" @click.stop="showUpdateName">
                 {{ node.name }}
             </div>
-            <div class="cw-workflow-condition-item-header-level" v-if="!editing">优先级{{ index + 1 }}</div>
+            <div class="ipms-workflow-condition-item-header-level" v-if="!editing">优先级{{ index + 1 }}</div>
             <Input
                 placeholder="请输入条件名称"
                 @click.native.stop
@@ -21,30 +21,30 @@
             />
         </div>
 
-        <div :class="['cw-workflow-condition-item-content', isEmpty ? 'empty' : '']">
+        <div :class="['ipms-workflow-condition-item-content', isEmpty ? 'empty' : '']">
             {{ text }}
         </div>
 
-        <div class="cw-workflow-condition-item-sort-left" v-if="index !== 0" @click.stop="moveLeft">&lt;</div>
-        <div class="cw-workflow-condition-item-sort-right" v-if="index !== len - 1" @click.stop="moveRight">&gt;</div>
+        <div class="ipms-workflow-condition-item-sort-left" v-if="index !== 0" @click.stop="moveLeft">&lt;</div>
+        <div class="ipms-workflow-condition-item-sort-right" v-if="index !== len - 1" @click.stop="moveRight">&gt;</div>
 
         <Drawer
             v-model="visible"
             title="条件设置"
             transfer
             width="460"
-            class-name="cw-drawer-width-footer"
+            class-name="ipms-drawer-width-footer"
             :closable="false"
             :mask-closable="false"
         >
-            <RadioGroup v-model="category" class="cw-workflow-radio">
+            <RadioGroup v-model="category" class="ipms-workflow-radio">
                 <Radio v-for="item in options.conditions" :key="item.category" :label="item.category">
                     {{ item.label }}
                 </Radio>
             </RadioGroup>
 
             <div v-if="category === 1">
-                <ul class="cw-workflow-condition-choice-list">
+                <ul class="ipms-workflow-condition-choice-list">
                     <li v-for="item in deparments" :key="item.id" @click="setDeparment(item.id)">
                         <Checkbox size="small" :value="deparment_id === item.id" disabled />
                         <span>{{ item.name }}</span>
@@ -52,7 +52,7 @@
                 </ul>
             </div>
             <div v-if="category === 2">
-                <div class="cw-workflow-condition-number">
+                <div class="ipms-workflow-condition-number">
                     <Row :gutter="opt !== 6 ? 10 : 0">
                         <Col :span="opt !== 6 ? 8 : 24">
                             <Select v-model="opt" placeholder="判断逻辑">
@@ -94,7 +94,7 @@
                 </div>
             </div>
 
-            <div class="cw-drawer-footer">
+            <div class="ipms-drawer-footer">
                 <Button @click="cancel">取消</Button>
                 <Button type="primary" @click="saveNode">确定</Button>
             </div>
@@ -302,7 +302,7 @@ export default {
 </script>
 
 <style lang="less">
-.cw-workflow-condition-choice-list {
+.ipms-workflow-condition-choice-list {
     list-style: none;
     padding-top: 20px;
 
@@ -332,7 +332,7 @@ export default {
     }
 }
 
-.cw-workflow-condition-number {
+.ipms-workflow-condition-number {
     padding-top: 20px;
     font-size: 12px;
 

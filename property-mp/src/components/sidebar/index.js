@@ -7,9 +7,9 @@
  * +----------------------------------------------------------------------
  */
 
-import { CwComponent } from '../common/component';
+import { IpmsComponent } from '../common/component';
 import { useChildren } from '../common/relation';
-CwComponent({
+IpmsComponent({
     relation: useChildren('sidebar-item', function() {
         this.setActive(this.data.activeKey);
     }),

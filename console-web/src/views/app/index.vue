@@ -13,7 +13,7 @@
             <source src="../../assets/notice.mp3" type="audio/mpeg" />
         </audio>
         <!-- 主布局容器，当布局类型为侧边栏时显示 -->
-        <Layout v-if="layout === 'sider'" class="cw-layout">
+        <Layout v-if="layout === 'sider'" class="ipms-layout">
             <!-- 左侧边栏，宽度216px，支持折叠功能 -->
             <Sider
                 :width="216"
@@ -297,9 +297,9 @@ export default {
             const { siderTheme, siderFixed } = this.settings;
 
             return {
-                'cw-layout-sider': true, // 基础类名
-                [`cw-layout-sider-${siderTheme}`]: true, // 主题类名
-                'cw-layout-sider-fixed': siderFixed // 固定定位类名
+                'ipms-layout-sider': true, // 基础类名
+                [`ipms-layout-sider-${siderTheme}`]: true, // 主题类名
+                'ipms-layout-sider-fixed': siderFixed // 固定定位类名
             };
         },
         // 头部的CSS类名
@@ -307,11 +307,11 @@ export default {
             const { headerTheme, headerFixed, siderCollapsed } = this.settings;
 
             return {
-                'cw-layout-header': true, // 基础类名
-                'cw-layout-header-fixed': headerFixed, // 固定定位
-                'cw-layout-header-fixed-collapsed': headerFixed && siderCollapsed, // 固定且侧边栏折叠
-                'cw-layout-header-fixed-mobile': headerFixed && this.mediaQuery === 'xs', // 移动端固定
-                [`cw-layout-header-${headerTheme}`]: true // 主题类名
+                'ipms-layout-header': true, // 基础类名
+                'ipms-layout-header-fixed': headerFixed, // 固定定位
+                'ipms-layout-header-fixed-collapsed': headerFixed && siderCollapsed, // 固定且侧边栏折叠
+                'ipms-layout-header-fixed-mobile': headerFixed && this.mediaQuery === 'xs', // 移动端固定
+                [`ipms-layout-header-${headerTheme}`]: true // 主题类名
             };
         },
         // 内容布局的CSS类名
@@ -320,9 +320,9 @@ export default {
 
             return {
                 // 非移动端且侧边栏固定时的布局类名
-                'cw-layout-content-layout': siderFixed && this.mediaQuery !== 'xs',
+                'ipms-layout-content-layout': siderFixed && this.mediaQuery !== 'xs',
                 // 侧边栏折叠时的布局类名
-                'cw-layout-content-layout-collapsed': siderFixed && siderCollapsed && this.mediaQuery !== 'xs'
+                'ipms-layout-content-layout-collapsed': siderFixed && siderCollapsed && this.mediaQuery !== 'xs'
             };
         },
         // 内容区域的CSS类名
@@ -330,8 +330,8 @@ export default {
             const { headerFixed } = this.settings;
 
             return {
-                'cw-layout-content': true, // 基础类名
-                'cw-layout-content-fill': headerFixed // 头部固定时的填充类名
+                'ipms-layout-content': true, // 基础类名
+                'ipms-layout-content-fill': headerFixed // 头部固定时的填充类名
             };
         },
         // 移动端菜单的CSS类名
@@ -339,8 +339,8 @@ export default {
             const { siderTheme } = this.settings;
 
             return {
-                'cw-layout-mobile-menu': true, // 基础类名
-                [`cw-layout-mobile-menu-${siderTheme}`]: true // 主题类名（注意这里有拼写错误mobile写成了moible）
+                'ipms-layout-mobile-menu': true, // 基础类名
+                [`ipms-layout-mobile-menu-${siderTheme}`]: true // 主题类名（注意这里有拼写错误mobile写成了moible）
             };
         }
     },
@@ -403,11 +403,11 @@ export default {
 #app,
 body,
 html,
-.cw-layout {
+.ipms-layout {
     height: 100%;
 }
 
-.cw-layout {
+.ipms-layout {
     // 侧边栏样式
     &-sider {
         min-height: 100vh; /* 最小高度为视口高度 */
@@ -520,7 +520,7 @@ html,
 
 /* 小屏设备媒体查询 */
 @media screen and (max-width: 586px) {
-    .cw-layout {
+    .ipms-layout {
         /* 移动端内容区域减少内边距 */
         &-content {
             padding: 12px;

@@ -41,8 +41,8 @@ export { default as PcConvenientUpdateAction } from './controller/convenient/cre
 export { default as PcConvenientDeleteAction } from './controller/convenient/delete';
 
 // 社区管理相关功能导出
-export { default as CwCommunityManageCreateAction } from './controller/community_manage/create';
-export { default as CwCommunityManageUpdateAction } from './controller/community_manage/update';
+export { default as IpmsCommunityManageCreateAction } from './controller/community_manage/create';
+export { default as IpmsCommunityManageUpdateAction } from './controller/community_manage/update';
 export { default as PcCommunityManageListAction } from './controller/community_manage/list';
 export { default as PcCommunityManageDetailAction } from './controller/community_manage/detail';
 

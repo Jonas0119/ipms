@@ -4,12 +4,12 @@
  * +----------------------------------------------------------------------
  */
 
-import { CwPage } from '../common/page';
+import { IpmsPage } from '../common/page';
 import $dialog from '../../components/dialog/dialog';
 import $toast from '../../components/toast/toast';
 import utils from '../../utils/index';
 
-CwPage({
+IpmsPage({
     findCommunityInfoById(id) {
         const { list } = this.data.communityInfo;
         const index = list.findIndex(item => item.community_id === id);

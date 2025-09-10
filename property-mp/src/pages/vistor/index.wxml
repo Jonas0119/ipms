@@ -1,35 +1,35 @@
 <wxs src="../common/common.wxs" module="common" />
 
 <view class="container">
-    <cw-cell-group wx:if="{{fetching}}">
-        <cw-cell is-detail title="访客称呼：">
-            <cw-skeleton in-cell row="2" />
-        </cw-cell>
-        <cw-cell is-detail title="访客电话：">
-            <cw-skeleton in-cell row="2" />
-        </cw-cell>
-        <cw-cell is-detail title="到访地点：">
-            <cw-skeleton in-cell row="2" />
-        </cw-cell>
-        <cw-cell is-detail title="登记时间：">
-            <cw-skeleton in-cell row="2" />
-        </cw-cell>
-        <cw-cell is-detail title="业主名称" border="false">
-            <cw-skeleton in-cell row="2" />
-        </cw-cell>
-    </cw-cell-group>
+    <ipms-cell-group wx:if="{{fetching}}">
+        <ipms-cell is-detail title="访客称呼：">
+            <ipms-skeleton in-cell row="2" />
+        </ipms-cell>
+        <ipms-cell is-detail title="访客电话：">
+            <ipms-skeleton in-cell row="2" />
+        </ipms-cell>
+        <ipms-cell is-detail title="到访地点：">
+            <ipms-skeleton in-cell row="2" />
+        </ipms-cell>
+        <ipms-cell is-detail title="登记时间：">
+            <ipms-skeleton in-cell row="2" />
+        </ipms-cell>
+        <ipms-cell is-detail title="业主名称" border="false">
+            <ipms-skeleton in-cell row="2" />
+        </ipms-cell>
+    </ipms-cell-group>
 
-    <cw-cell-group wx:else>
-        <cw-cell is-detail title="访客称呼：" value="{{detail.info.vistor_name}}" />
-        <cw-cell is-detail title="访客电话：" value="{{detail.info.vistor_phone}}" />
-        <cw-cell is-detail title="到访地点：" value="{{common.building(detail.info)}}" />
-        <cw-cell
+    <ipms-cell-group wx:else>
+        <ipms-cell is-detail title="访客称呼：" value="{{detail.info.vistor_name}}" />
+        <ipms-cell is-detail title="访客电话：" value="{{detail.info.vistor_phone}}" />
+        <ipms-cell is-detail title="到访地点：" value="{{common.building(detail.info)}}" />
+        <ipms-cell
             is-detail
             title="登记时间："
             border="{{common.haveAccess(userInfo.access, ROLES.YZDA) && detail.referInfo ? true : false}}"
             value="{{common.date(detail.info.created_at)}}"
         />
-        <cw-cell
+        <ipms-cell
             is-detail
             title="业主名称："
             is-link
@@ -39,7 +39,7 @@
             border="{{false}}"
             value="{{detail.referInfo.real_name}}"
         />
-    </cw-cell-group>
+    </ipms-cell-group>
 
-    <cw-copyright />
+    <ipms-copyright />
 </view>

@@ -4,8 +4,8 @@
 <button
     id="{{ id }}"
     data-detail="{{ dataset }}"
-    class="custom-class {{ utils.bem('button', [type, size, { block, round, plain, square, loading, disabled, hairline, unclickable: disabled || loading }]) }} {{ hairline ? 'cw-hairline--surround' : '' }}"
-    hover-class="cw-button--active hover-class"
+    class="custom-class {{ utils.bem('button', [type, size, { block, round, plain, square, loading, disabled, hairline, unclickable: disabled || loading }]) }} {{ hairline ? 'ipms-hairline--surround' : '' }}"
+    hover-class="ipms-button--active hover-class"
     lang="{{ lang }}"
     form-type="{{ formType }}"
     style="{{ computed.rootStyle({ plain, color, customStyle }) }}"
@@ -27,26 +27,26 @@
     bindopensetting="bindOpenSetting"
 >
     <block wx:if="{{ loading }}">
-        <cw-loading
+        <ipms-loading
             custom-class="loading-class"
             size="{{ loadingSize }}"
             type="{{ loadingType }}"
             color="{{ computed.loadingColor({ type, color, plain }) }}"
         />
-        <view wx:if="{{ loadingText }}" class="cw-button__loading-text">
+        <view wx:if="{{ loadingText }}" class="ipms-button__loading-text">
             {{ loadingText }}
         </view>
     </block>
     <block wx:else>
-        <cw-icon
+        <ipms-icon
             wx:if="{{ icon }}"
             size="1.2em"
             name="{{ icon }}"
             class-prefix="{{ classPrefix }}"
-            class="cw-button__icon"
+            class="ipms-button__icon"
             custom-style="line-height: inherit;"
         />
-        <view class="cw-button__text">
+        <view class="ipms-button__text">
             <slot />
         </view>
     </block>

@@ -5,6 +5,6 @@
 -->
 <wxs src="./index.wxs" module="computed" />
 
-<view class="cw-row custom-class" style="{{ computed.rootStyle({ gutter }) }}">
+<view class="ipms-row custom-class" style="{{ computed.rootStyle({ gutter }) }}">
     <slot />
 </view>

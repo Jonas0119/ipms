@@ -6,7 +6,7 @@
 <wxs src="../common/common.wxs" module="common" />
 
 <view class="container">
-    <cw-list
+    <ipms-list
         fetching="{{fetching}}"
         page_num="{{page_num}}"
         page_amount="{{page_amount}}"
@@ -14,26 +14,26 @@
         empty="暂无通行信息"
         icon="vistor"
     >
-        <cw-list-item
+        <ipms-list-item
             wx:for="{{list}}"
             title="{{common.number('U', item.expire, item.id)}}"
             status="{{item.community_name}}小区"
             wx:key="index"
             url="/pages/vistor/use?id={{item.id}}"
         >
-            <cw-list-item-info label="到访日期">{{common.date(item.expire, false)}}</cw-list-item-info>
-            <cw-list-item-info label="到访位置">{{common.building(item)}}</cw-list-item-info>
-            <cw-list-item-info label="使用状态">
+            <ipms-list-item-info label="到访日期">{{common.date(item.expire, false)}}</ipms-list-item-info>
+            <ipms-list-item-info label="到访位置">{{common.building(item)}}</ipms-list-item-info>
+            <ipms-list-item-info label="使用状态">
                 <block wx:if="{{item.used_at}}">
-                    <cw-tag round color="#13c2c2">已使用</cw-tag>
+                    <ipms-tag round color="#13c2c2">已使用</ipms-tag>
                 </block>
                 <block wx:elif="{{item.expire < now}}">
-                    <cw-tag round color="#ed4014">已过期</cw-tag>
+                    <ipms-tag round color="#ed4014">已过期</ipms-tag>
                 </block>
                 <block wx:else>
-                    <cw-tag round color="#eb2f96">未使用</cw-tag>
+                    <ipms-tag round color="#eb2f96">未使用</ipms-tag>
                 </block>
-            </cw-list-item-info>
-        </cw-list-item>
-    </cw-list>
+            </ipms-list-item-info>
+        </ipms-list-item>
+    </ipms-list>
 </view>

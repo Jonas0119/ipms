@@ -2,8 +2,8 @@
     "navigationBarTitleText": "宠物相片裁剪",
     "disableScroll": true,
     "usingComponents": {
-        "cw-toast": "../../components/toast",
-        "cw-notify": "../../components/notify",
-        "cw-image-cropper": "../../components/image-cropper"
+        "ipms-toast": "../../components/toast",
+        "ipms-notify": "../../components/notify",
+        "ipms-image-cropper": "../../components/image-cropper"
     }
 }

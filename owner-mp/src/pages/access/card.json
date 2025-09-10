@@ -2,8 +2,8 @@
     "navigationBarTitleText": "使用门禁卡",
     "navigationStyle": "custom",
     "usingComponents": {
-        "cw-nav-bar": "../../components/nav-bar",
-        "cw-icon": "../../components/icon",
-        "cw-toast": "../../components/toast"
+        "ipms-nav-bar": "../../components/nav-bar",
+        "ipms-icon": "../../components/icon",
+        "ipms-toast": "../../components/toast"
     }
 }

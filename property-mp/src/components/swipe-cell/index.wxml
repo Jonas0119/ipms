@@ -1,5 +1,5 @@
 <view
-    class="cw-swipe-cell custom-class"
+    class="ipms-swipe-cell custom-class"
     data-key="cell"
     catchtap="onClick"
     bindtouchstart="startDrag"
@@ -9,11 +9,11 @@
     bindtouchcancel="endDrag"
 >
     <view style="{{ wrapperStyle }}">
-        <view wx:if="{{ leftWidth }}" class="cw-swipe-cell__left" data-key="left" catch:tap="onClick">
+        <view wx:if="{{ leftWidth }}" class="ipms-swipe-cell__left" data-key="left" catch:tap="onClick">
             <slot name="left" />
         </view>
         <slot />
-        <view wx:if="{{ rightWidth }}" class="cw-swipe-cell__right" data-key="right" catch:tap="onClick">
+        <view wx:if="{{ rightWidth }}" class="ipms-swipe-cell__right" data-key="right" catch:tap="onClick">
             <slot name="right" />
         </view>
     </view>

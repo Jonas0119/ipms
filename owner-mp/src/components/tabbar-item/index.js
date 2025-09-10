@@ -4,9 +4,9 @@
  * +----------------------------------------------------------------------
  */
 
-import { CwComponent } from '../common/component';
+import { IpmsComponent } from '../common/component';
 import { useParent } from '../common/relation';
-CwComponent({
+IpmsComponent({
     props: {
         info: null,
         name: null,
@@ -14,7 +14,7 @@ CwComponent({
         dot: Boolean,
         iconPrefix: {
             type: String,
-            value: 'cw-icon'
+            value: 'ipms-icon'
         }
     },
     relation: useParent('tabbar'),

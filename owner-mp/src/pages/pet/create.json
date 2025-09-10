@@ -1,17 +1,17 @@
 {
     "navigationBarTitleText": "宠物登记",
     "usingComponents": {
-        "cw-notify": "../../components/notify",
-        "cw-toast": "../../components/toast",
-        "cw-button": "../../components/button",
-        "cw-copyright": "../../components/copyright",
-        "cw-cell-group": "../../components/cell-group",
-        "cw-field": "../../components/field",
-        "cw-cell": "../../components/cell",
-        "cw-switch": "../../components/switch",
-        "cw-icon": "../../components/icon",
-        "cw-radio": "../../components/radio",
-        "cw-radio-group": "../../components/radio-group",
-        "cw-calendar": "../../components/calendar"
+        "ipms-notify": "../../components/notify",
+        "ipms-toast": "../../components/toast",
+        "ipms-button": "../../components/button",
+        "ipms-copyright": "../../components/copyright",
+        "ipms-cell-group": "../../components/cell-group",
+        "ipms-field": "../../components/field",
+        "ipms-cell": "../../components/cell",
+        "ipms-switch": "../../components/switch",
+        "ipms-icon": "../../components/icon",
+        "ipms-radio": "../../components/radio",
+        "ipms-radio-group": "../../components/radio-group",
+        "ipms-calendar": "../../components/calendar"
     }
 }

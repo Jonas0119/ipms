@@ -4,14 +4,14 @@
  * +----------------------------------------------------------------------
  */
 
-import { CwPage } from '../common/page';
+import { IpmsPage } from '../common/page';
 import utils from '../../utils/index';
 import $toast from '../../components/toast/toast';
 import $notify from '../../components/notify/notify';
 
-CwPage({
+IpmsPage({
     onLoad() {
-        this.cropper = this.selectComponent('#cw-image-cropper');
+        this.cropper = this.selectComponent('#ipms-image-cropper');
 
         this.cropper.upload();
     },
@@ -41,7 +41,7 @@ CwPage({
             //获取所需页面
             const prePage = pages[pages.length - 2];
             prePage.setData({
-                avatar_url: result.key
+                avatar_url: result.url
             });
 
             $toast.clear();

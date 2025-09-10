@@ -7,7 +7,7 @@
  * +----------------------------------------------------------------------
  */
 
-import { CwComponent } from '../common/component';
+import { IpmsComponent } from '../common/component';
 import { isDef } from '../common/validator';
 const LONG_PRESS_START_TIME = 600;
 const LONG_PRESS_INTERVAL = 200;
@@ -19,7 +19,7 @@ function add(num1, num2) {
 function equal(value1, value2) {
     return String(value1) === String(value2);
 }
-CwComponent({
+IpmsComponent({
     field: true,
     classes: ['input-class', 'plus-class', 'minus-class'],
     props: {

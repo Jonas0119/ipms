@@ -3,12 +3,12 @@
     "navigationBarTextStyle": "white",
     "navigationBarBackgroundColor": "#1989fa",
     "usingComponents": {
-        "cw-notify": "../../components/notify",
-        "cw-icon": "../../components/icon",
-        "cw-cell": "../../components/cell",
-        "cw-cell-group": "../../components/cell-group",
-        "cw-skeleton": "../../components/skeleton",
-        "cw-empty": "../../components/empty",
-        "cw-copyright": "../../components/copyright"
+        "ipms-notify": "../../components/notify",
+        "ipms-icon": "../../components/icon",
+        "ipms-cell": "../../components/cell",
+        "ipms-cell-group": "../../components/cell-group",
+        "ipms-skeleton": "../../components/skeleton",
+        "ipms-empty": "../../components/empty",
+        "ipms-copyright": "../../components/copyright"
     }
 }

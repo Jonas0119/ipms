@@ -6,12 +6,12 @@
 
 <template>
     <div class="initiate" @click="showDrawer">
-        <div class="cw-workflow-node-title">
+        <div class="ipms-workflow-node-title">
             <Icon type="md-people" />
             发起人
         </div>
 
-        <div class="cw-workflow-node-content">
+        <div class="ipms-workflow-node-content">
             <div class="text">
                 {{ text }}
             </div>
@@ -23,7 +23,7 @@
             title="发起人设置"
             transfer
             width="360"
-            class-name="cw-drawer-width-footer"
+            class-name="ipms-drawer-width-footer"
             :closable="false"
             :mask-closable="false"
         >
@@ -36,7 +36,7 @@
                 :deparment_ids.sync="deparment_ids"
             />
 
-            <div class="cw-drawer-footer">
+            <div class="ipms-drawer-footer">
                 <Button @click="cancel">取消</Button>
                 <Button type="primary" @click="saveNode">确定</Button>
             </div>
@@ -122,7 +122,7 @@ export default {
 
 <style lang="less">
 .initiate {
-    .cw-workflow-node-title {
+    .ipms-workflow-node-title {
         background: rgb(87, 106, 149);
     }
 }

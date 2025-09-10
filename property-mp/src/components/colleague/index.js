@@ -7,12 +7,12 @@
  * +----------------------------------------------------------------------
  */
 
-import { CwComponent } from '../common/component';
+import { IpmsComponent } from '../common/component';
 import utils from '../../utils/index';
 
 const app = getApp();
 
-CwComponent({
+IpmsComponent({
     props: {
         show: Boolean
     },

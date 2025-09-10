@@ -1,15 +1,15 @@
 {
     "component": true,
     "usingComponents": {
-        "cw-icon": "../icon",
-        "cw-button": "../button",
-        "cw-field": "../field",
-        "cw-toast": "../toast",
-        "cw-panel": "../panel",
-        "cw-cell": "../cell",
-        "cw-cell-group": "../cell-group",
-        "cw-colleague": "../colleague",
-        "cw-radio": "../radio",
-        "cw-radio-group": "../radio-group"
+        "ipms-icon": "../icon",
+        "ipms-button": "../button",
+        "ipms-field": "../field",
+        "ipms-toast": "../toast",
+        "ipms-panel": "../panel",
+        "ipms-cell": "../cell",
+        "ipms-cell-group": "../cell-group",
+        "ipms-colleague": "../colleague",
+        "ipms-radio": "../radio",
+        "ipms-radio-group": "../radio-group"
     }
 }

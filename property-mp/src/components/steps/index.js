@@ -7,9 +7,9 @@
  * +----------------------------------------------------------------------
  */
 
-import { CwComponent } from '../common/component';
+import { IpmsComponent } from '../common/component';
 import { BLUE, GRAY_DARK } from '../common/color';
-CwComponent({
+IpmsComponent({
     classes: ['desc-class'],
     props: {
         icon: String,
