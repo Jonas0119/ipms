@@ -28,7 +28,14 @@
                 <view class="icon">
                     <ipms-icon name="approve" custom-class="approve"></ipms-icon>
                 </view>
-                <view class="txt">{{ communityInfo.list.length }}小区</view>
+                <view class="txt">
+                    <block wx:if="{{ communityInfo.list.length === 1 }}">
+                        {{ communityInfo.list[0].name }}
+                    </block>
+                    <block wx:else>
+                        {{ communityInfo.list.length }}小区
+                    </block>
+                </view>
             </view>
 
             <view class="info">

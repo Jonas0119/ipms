@@ -30,12 +30,13 @@
     position: absolute;
 }
 
-.ipms-copyright .ipms {
-    font-size: 42px;
+.ipms-copyright .ipms-logo {
+    width: 42px;
+    height: 42px;
     flex: none;
 }
 
-.ipms-copyright .ipms {
+.ipms-copyright .ipms-logo {
     margin-right: 8px;
 }
 

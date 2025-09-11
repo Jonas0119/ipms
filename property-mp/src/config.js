@@ -15,8 +15,8 @@ export const TOKEN_NAME = 'IPMS-TOKEN';
 
 export const USER_ID = 'USER_ID';
 
-export const WECHAT_VERSION = '7.0.0';
+export const WECHAT_VERSION = '8.1.0';
 
-export const SDK_VERSION = '2.16.0';
+export const SDK_VERSION = '3.10.0';
 
-export const VERSION = '1.1.12';
+export const VERSION = '1.0.0';

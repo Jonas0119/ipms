@@ -5,32 +5,32 @@
 -->
 <view class="container">
     <view class="brand">
-        <image src="../../assets/common/ipms.png" class="ipms" mode="widthFix"></image>
+        <!-- <image src="../../assets/common/ipms.png" class="ipms" mode="widthFix"></image> -->
         <image src="../../assets/common/logo.png" class="logo" mode="widthFix"></image>
     </view>
 
     <view class="solgan">助力物业服务升级</view>
     <view class="solgan mb">用心服务万千业主</view>
 
-    <view class="txt">「IPMS」是我们的物业服务产品。</view>
+    <view class="txt">「IPMS」是智慧物业服务产品。</view>
     <view class="txt">
-        我们致力于打造物业saas生态，利用信息技术助力物业服务再次升级，解决传统物业痛点问题，帮助物业公司解决服务监管难、用户满意度跟踪难、响应不及时、通知不及时等问题，努力充实软件功能让业主少跑腿、少张嘴、少操心，一部手机把事都办了。
+        我们专注于构建智能物业服务平台，以数字化SaaS生态系统驱动物业服务全面升级。针对传统物业存在的服务监管难、业主满意度难追踪、响应滞后、信息传达效率低等痛点，我们提供一站式智慧解决方案，助力物业企业实现精细化、数字化运营。我们持续丰富平台功能，让业主真正实现“少跑腿、少开口、少操心”，通过手机就能轻松办理各项事务，享受更便捷、更舒心的智慧生活体验。
     </view>
     <view class="txt">我们正在同物业公司为业主提供以下服务：</view>
     <view class="list">
-        <view class="item">装修报备</view>
+        <view class="item">装修报备（在线解决客户痛点）</view>
         <view class="item">维修维护（全流程监控、调度，满意度评价）</view>
-        <view class="item">投诉意见（自动客服响应）</view>
-        <view class="item">物业缴费</view>
+        <view class="item">投诉意见（及时触达用户问题）</view>
+        <view class="item">物业缴费（线上快捷支付，减少业主奔波）</view>
         <view class="item">访客登记（NFC、二维码入园）</view>
-        <view class="item">小区挪车</view>
-        <view class="item">小区论坛</view>
+        <view class="item">小区挪车（切实解决道路阻塞问题）</view>
+        <view class="item">小区论坛（促进邻里交流，共建和谐社区）</view>
         <view class="item">周边服务（家政、水暖、维修）</view>
         <view class="item">即时通知（公众号、小程序实时推送）</view>
-        <view class="item">宠物登记</view>
-        <view class="item">投票系统（业主意见征询）</view>
+        <view class="item">宠物登记（完善宠物信息，促进文明养宠）</view>
+        <view class="item">投票系统（高效征集民意，推动社区共治）</view>
     </view>
-    <view class="txt">受小区物业设备限制，部分小区可能无法支持全部功能，我们正在努力解决，望请谅解。</view>
-    <view class="txt">如果您对我们的产品有意见或建议，请通过个人中心下方的反馈功能反馈，感谢您的支持。</view>
+    <view class="txt">温馨提示：受限于各小区硬件设备，部分功能可能无法全面开通。我们正在努力推动解决，敬请谅解！</view>
+    <view class="txt">如果您有任何意见或建议，欢迎通过个人中心的“功能建议”告诉我们，您的每一个声音都至关重要。诚挚感谢您的理解与支持！。</view>
     <ipms-copyright />
 </view>

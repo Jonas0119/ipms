@@ -17,3 +17,5 @@ api-server/uploads/
 api-server/dist/
 console-web/dist.tar.gz
 api-server/README.md
+docker-compose.yml.backup
+*.bak

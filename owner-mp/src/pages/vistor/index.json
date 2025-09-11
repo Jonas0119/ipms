@@ -5,6 +5,7 @@
     "usingComponents": {
         "ipms-list": "../../components/list",
         "ipms-list-item": "../../components/list-item",
-        "ipms-list-item-info": "../../components/list-item-info"
+        "ipms-list-item-info": "../../components/list-item-info",
+        "ipms-copyright": "../../components/copyright"
     }
 }

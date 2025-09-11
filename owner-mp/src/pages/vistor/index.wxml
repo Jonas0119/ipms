@@ -28,4 +28,7 @@
             <ipms-list-item-info label="登记来源">{{item.check_in ? '物业登记' : '业主登记'}}</ipms-list-item-info>
         </ipms-list-item>
     </ipms-list>
+    
+    <!-- 添加copyright组件 -->
+    <ipms-copyright />
 </view>

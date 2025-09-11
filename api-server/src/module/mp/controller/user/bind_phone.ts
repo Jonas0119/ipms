@@ -27,7 +27,7 @@ const MpUserBindPhoneAction = <Action>{
             {
                 name: 'code',
                 required: true,
-                regex: /^[0-9a-zA-Z]{32}$/
+                regex: /^[0-9a-zA-Z-_$]{32}$/
             },
             {
                 name: 'encryptedData',

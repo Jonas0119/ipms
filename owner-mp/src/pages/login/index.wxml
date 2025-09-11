@@ -21,8 +21,8 @@
             <image src="../../assets/common/logo.png" mode="scaleToFill"></image>
         </view>
 
-        <view class="txt">助力物业服务升级</view>
-        <view class="txt">用心服务万千业主</view>
+        <view class="txt" style="color: #333;">助力物业服务升级</view>
+        <view class="txt" style="color: #333;">用心服务万千业主</view>
     </view>
 
     <ipms-button type="info" disabled="{{loading}}" custom-class="btn" block bind:click="login">
@@ -30,35 +30,35 @@
         <text>{{loading ? '登录中' : '登录'}}</text>
     </ipms-button>
 
-    <view class="agreement">
+    <view class="agreement" style="color: #333;">
         <ipms-checkbox shape="square" icon-size="16px" value="{{agree}}" bind:change="onAgreeChange" />
-        <view class="agree">我已阅读并同意</view>
-        <navigator url="/pages/about/agreement">《微信小程序用户协议》</navigator>
+        <view class="agree" style="color: #333;">我已阅读并同意</view>
+        <navigator url="/pages/about/agreement" style="color: #333;">《微信小程序用户协议》</navigator>
     </view>
 
-    <view class="notice">
-        <view class="title">温馨提示：</view>
-        <view class="item">
+    <view class="notice" style="color: #333;">
+        <view class="title" style="color: #333;">温馨提示：</view>
+        <view class="item" style="color: #333;">
             <ipms-icon name="success" class="icon" />
             注意账号安全，请勿将账号转借他人使用
         </view>
-        <view class="item">
+        <view class="item" style="color: #333;">
             <ipms-icon name="success" class="icon" />
             互联网不是法外之地，请对您的网络言行负责
         </view>
-        <view class="item">
+        <view class="item" style="color: #333;">
             <ipms-icon name="success" class="icon" />
             合理合法沟通，减少小区矛盾
         </view>
     </view>
 
-    <view class="who-can-use">
-        <view>仅供本小区业主使用</view>
-        <view>版权所有</view>
+    <view class="who-can-use" style="color: #333;">
+        <view style="color: #333;">仅供本小区业主使用</view>
+        <view style="color: #333;">版权所有</view>
     </view>
 
     <view class="welcome">
-        <image src="../../assets/login/welcome.jpg" mode="heightFix"></image>
+        <image src="../../assets/login/welcome.png" mode="heightFix"></image>
     </view>
 
     <ipms-notify id="ipms-notify" />

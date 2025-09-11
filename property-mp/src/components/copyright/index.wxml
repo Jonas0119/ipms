@@ -1,5 +1,5 @@
 <view class="ipms-copyright {{ fixed ? 'fixed' : ''}} {{ dark ? 'dark' : ''}} {{inTabPage ? 'in-tab-page' : ''}}">
-    <ipms-icon name="ipms" custom-class="ipms"></ipms-icon>
+    <image src="../../assets/common/logo-gray.png" class="ipms-logo" mode="widthFix"></image>
 
     <view class="ipms-company">
         <text>IPMS v{{ version }}</text>
