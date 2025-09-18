@@ -43,6 +43,14 @@ IpmsPage({
         timer = null;
     },
     bindPhone(e) {
+        try {
+            console.log('[phone.bindPhone] event detail flags', {
+                hasEncryptedData: !!(e && e.detail && e.detail.encryptedData),
+                hasIv: !!(e && e.detail && e.detail.iv),
+                hasLoginCode: !!this.data.loginCode,
+                loginCodeLen: this.data.loginCode ? String(this.data.loginCode).length : 0
+            });
+        } catch (err) {}
         if (!e.detail.iv) {
             return $notify({
                 type: 'danger',
@@ -82,6 +90,13 @@ IpmsPage({
                     });
                 },
                 () => {
+                    try {
+                        console.log('[phone.bindPhone] bind_phone failed', {
+                            hasEncryptedData: !!(e && e.detail && e.detail.encryptedData),
+                            hasIv: !!(e && e.detail && e.detail.iv),
+                            hasLoginCode: !!this.data.loginCode
+                        });
+                    } catch (err) {}
                     $toast.clear();
                 }
             );

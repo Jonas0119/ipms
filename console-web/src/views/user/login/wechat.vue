@@ -9,7 +9,7 @@
         <div class="wechat-verify-body">
             <div class="hands">
                 <span class="logo">
-                    <img src="~@/assets/logo.svg" alt="logo" />
+                    <img src="~@/assets/logo.png" alt="logo" />
                 </span>
 
                 <b>&</b>

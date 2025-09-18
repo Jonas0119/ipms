@@ -19,3 +19,5 @@ console-web/dist.tar.gz
 api-server/README.md
 docker-compose.yml.backup
 *.bak
+docker-compose copyV2.yml
+docker-compose-centos.yml

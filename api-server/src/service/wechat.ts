@@ -125,8 +125,21 @@ export async function getUserMpSession(js_code: string): Promise<WechatMpSession
             grant_type: 'authorization_code'
         }
     });
-    console.log('getUserMpSession config:', config.wechat.ump);
-    console.log('getUserMpSession res:', res.data);
+    try {
+        // 关键路径日志（避免泄露敏感数据）
+        console.log('[wechat.getUserMpSession] request', {
+            appid: config.wechat.ump && config.wechat.ump.appid,
+            hasSecret: !!(config.wechat.ump && config.wechat.ump.secret),
+            jsCodeLen: js_code ? String(js_code).length : 0
+        });
+        console.log('[wechat.getUserMpSession] response', {
+            hasErrCode: !!res.data.errcode,
+            errcode: res.data.errcode,
+            errmsg: res.data.errmsg,
+            hasOpenid: !!res.data.openid,
+            hasSessionKey: !!res.data.session_key
+        });
+    } catch (err) {}
 
     if (res.data.errcode) {
         return {
@@ -182,6 +195,14 @@ export async function getUserMpPhone(
     iv: string,
     encryptedData: string
 ): Promise<WechatMpPhoneInfoResponse> {
+    try {
+        console.log('[wechat.getUserMpPhone] begin', {
+            jsCodeLen: js_code ? String(js_code).length : 0,
+            hasIv: !!iv,
+            hasEncryptedData: !!encryptedData
+        });
+    } catch (err) {}
+
     const mpSessionInfo = await getUserMpSession(js_code);
 
     if (!mpSessionInfo.success) {
@@ -192,6 +213,13 @@ export async function getUserMpPhone(
     }
 
     const ret = decode(mpSessionInfo.data.session_key, iv, encryptedData);
+
+    try {
+        console.log('[wechat.getUserMpPhone] decode result', {
+            success: ret.success,
+            hasData: !!ret.data
+        });
+    } catch (err) {}
 
     return {
         success: ret.success,

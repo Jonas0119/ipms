@@ -8,7 +8,7 @@
     <section class="login">
         <div class="login-form">
             <div class="logo">
-                <img src="../../../assets/logo.svg" alt="logo" class="img-logo" />
+                <img src="../../../assets/logo.png" alt="logo" class="img-logo" />
                 <div class="title"></div>
             </div>
 

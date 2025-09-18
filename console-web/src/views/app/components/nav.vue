@@ -8,11 +8,11 @@
     <section :class="wrapperClasses">
         <div class="ipms-layout-nav-inner-logo">
             <router-link to="/">
-                <img src="../../../assets/logo.svg" class="logo-img" />
-                <span v-show="!siderCollapsed">
+                <img src="../../../assets/logo.png" class="logo-img" />
+                <!-- <span v-show="!siderCollapsed">
                     <img src="../../../assets/logo_txt_white.svg" v-if="theme === 'dark'" class="logo-txt" />
                     <img src="../../../assets/logo_txt.svg" v-else class="logo-txt" />
-                </span>
+                </span> -->
             </router-link>
         </div>
 

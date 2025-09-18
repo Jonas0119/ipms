@@ -41,22 +41,27 @@ const MpUserBindPhoneAction = <Action>{
     },
     response: async ctx => {
         const { code, encryptedData, iv } = <RequestBody>ctx.request.body;
-        
-        kjhlog.info('用户绑定手机号请求开始', {
-            userId: ctx.mpUserInfo.id,
-            code: code.substring(0, 8) + '...',
-            hasEncryptedData: !!encryptedData,
-            hasIv: !!iv
-        });
+
+        try {
+            kjhlog.info('用户绑定手机号请求开始', {
+                userId: ctx.mpUserInfo.id,
+                codePrefix: typeof code === 'string' ? code.substring(0, 8) + '...' : String(code),
+                hasEncryptedData: !!encryptedData,
+                hasIv: !!iv,
+                ua: ctx.headers['user-agent']
+            });
+        } catch (err) {}
 
         const phoneInfo = await wechatService.getUserMpPhone(code, iv, encryptedData);
 
         if (!phoneInfo.success) {
-            kjhlog.error('获取微信手机号失败', {
-                userId: ctx.mpUserInfo.id,
-                error: phoneInfo.message,
-                code: code.substring(0, 8) + '...'
-            });
+            try {
+                kjhlog.error('获取微信手机号失败', {
+                    userId: ctx.mpUserInfo.id,
+                    error: phoneInfo.message,
+                    codePrefix: typeof code === 'string' ? code.substring(0, 8) + '...' : String(code)
+                });
+            } catch (err) {}
             return (ctx.body = {
                 code: WEHCAT_MP_GET_PHONE_ERROR,
                 message: '获取手机号码失败'

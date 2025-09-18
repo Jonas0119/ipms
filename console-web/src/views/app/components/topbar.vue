@@ -8,7 +8,7 @@
     <section :class="wrapperClasses">
         <div class="ipms-layout-topbar-left">
             <router-link to="/" v-if="mediaQuery === 'xs'">
-                <img src="../../../assets/logo.svg" class="ipms-layout-topbar-logo" />
+                <img src="../../../assets/logo.png" class="ipms-layout-topbar-logo" />
             </router-link>
 
             <button @click="updateCollapse">

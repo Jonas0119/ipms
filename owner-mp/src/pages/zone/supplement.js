@@ -85,6 +85,19 @@ IpmsPage({
         });
     },
     getPhoneNumber(e) {
+        try {   
+            // 调试日志（不包含敏感数据）
+            console.log('[supplement.getPhoneNumber] event detail flags', {
+                hasEncryptedData: !!(e && e.detail && e.detail.encryptedData),
+                hasIv: !!(e && e.detail && e.detail.iv),
+                hasLoginCode: !!this.data.loginCode,
+                loginCodeLen: this.data.loginCode ? String(this.data.loginCode).length : 0,
+                errMsg: e.detail.errMsg,
+                encryptedData: e.detail.encryptedData,
+                iv: e.detail.iv
+            });
+        } catch (err) {}
+
         $toast.loading({
             duration: 0,
             forbidClick: true,
@@ -113,6 +126,13 @@ IpmsPage({
                     });
                 },
                 () => {
+                    try {
+                        console.log('[supplement.getPhoneNumber] bind_phone failed', {
+                            hasEncryptedData: !!(e && e.detail && e.detail.encryptedData),
+                            hasIv: !!(e && e.detail && e.detail.iv),
+                            hasLoginCode: !!this.data.loginCode
+                        });
+                    } catch (err) {}
                     $toast.clear();
                 }
             );

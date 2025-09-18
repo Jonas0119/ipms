@@ -7,8 +7,8 @@
 <template>
     <header class="simple-header">
         <div class="container">
-            <img src="../../assets/logo.svg" alt="logo" class="img-logo" />
-            <img src="../../assets/logo_txt.svg" alt="logo" class="text-logo" />
+            <img src="../../assets/logo.png" alt="logo" class="img-logo" />
+            <!-- <img src="../../assets/logo_txt.svg" alt="logo" class="text-logo" /> -->
 
             <h2 class="title" v-if="$slots.title">
                 <slot name="title" />
