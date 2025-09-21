@@ -172,7 +172,14 @@ export default {
             console.log('🔗 [WEBSOCKET-DEBUG] Token for WebSocket:', token ? token.substring(0, 10) + '...' : 'undefined');
             console.log('🔗 [WEBSOCKET-DEBUG] Is logged in:', utils.auth.isLogin());
             
+            // 根据环境选择WebSocket连接方式
+            // 开发环境：直接连接后端（绕过Vue CLI代理问题）
+            // 生产环境：通过nginx代理
             const wsUrl = `${location.protocol === 'https:' ? 'wss' : 'ws'}://${location.host}/cws?token=${token}`;
+            // const isDevelopment = process.env.NODE_ENV === 'development';
+            // const wsUrl = isDevelopment 
+            //     ? `${location.protocol === 'https:' ? 'wss' : 'ws'}://${location.hostname}:6688/cws?token=${token}`
+            //     : `${location.protocol === 'https:' ? 'wss' : 'ws'}://${location.host}/cws?token=${token}`;
             console.log('🔗 [WEBSOCKET-DEBUG] WebSocket URL:', wsUrl);
             
             const ws = new WebSocket(wsUrl);
