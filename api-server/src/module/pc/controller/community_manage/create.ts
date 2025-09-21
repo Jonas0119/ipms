@@ -38,8 +38,7 @@ const IpmsCommunityManageCreateAction = <Action>{
             {
                 name: 'banner',
                 required: true,
-                max: 128,
-                regex: /^\/community_banner\/[a-z0-9]{32}\.(jpg|jpeg|png)$/
+                max: 128
             },
             {
                 name: 'province',

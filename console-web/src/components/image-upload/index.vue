@@ -12,7 +12,6 @@
         </div>
         <Upload
             :disabled="uploading"
-            accept="image/*"
             :show-upload-list="false"
             action="data:,"
             :before-upload="onBeforeUpload"
@@ -87,14 +86,7 @@ export default {
                     throw new Error('无法获取存储配置，请确保后端存储服务已正确配置');
                 }
 
-                // 图片尺寸验证
-                if (this.width || this.height) {
-                    const isValid = await this.validateImageSize(file);
-                    if (!isValid) {
-                        this.uploading = false;
-                        return false;
-                    }
-                }
+                // 图片尺寸验证已移除，支持任意尺寸图片
 
                 // 使用统一上传服务
                 console.log('start to upload file');

@@ -58,7 +58,7 @@ import { mapGetters } from 'vuex';
 import { Header } from '@/components';
 import { Spin, Input, Form, FormItem, Row, Col, Button, Message } from 'view-design';
 import * as utils from '@/utils';
-import { MAP_KEY } from '@/config';
+import mapConfigManager from '@/utils/map-manager';
 
 export default {
     name: 'SettingSign',
@@ -84,14 +84,36 @@ export default {
             this.getDetail();
         }
     },
-    created() {
-        this.script = document.createElement('script');
-
-        this.script.type = 'text/javascript';
-        this.script.src = `//map.qq.com/api/js?v=2.exp&key=${MAP_KEY}&callback=initMap`;
-        document.head.appendChild(this.script);
-
-        window.initMap = this.initMap;
+    async created() {
+        try {
+            console.log('[MAP-DEBUG] 打卡设置页面开始加载腾讯地图，从后端获取配置...');
+            
+            // 从后端获取地图配置
+            const mapConfig = await mapConfigManager.getMapConfig();
+            console.log('[MAP-DEBUG] 打卡设置页面地图配置获取成功:', mapConfig);
+            
+            // 检查地图配置是否有效
+            if (!mapConfig.key || mapConfig.key === '' || mapConfig.key.length < 10) {
+                console.error('[MAP-DEBUG] 打卡设置页面地图API Key无效或未配置，地图将无法正常显示');
+                return;
+            }
+            
+            this.script = document.createElement('script');
+            this.script.type = 'text/javascript';
+            
+            // 使用配置管理器构建API脚本URL
+            this.script.src = await mapConfigManager.buildMapScriptUrl({
+                callback: 'initMap'
+            });
+            
+            console.log('[MAP-DEBUG] 打卡设置页面地图API脚本URL:', this.script.src);
+            
+            document.head.appendChild(this.script);
+            window.initMap = this.initMap;
+            
+        } catch (error) {
+            console.error('[MAP-DEBUG] 打卡设置页面获取地图配置失败:', error);
+        }
     },
     beforeDestroy() {
         document.head.removeChild(this.script);

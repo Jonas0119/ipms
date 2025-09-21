@@ -58,7 +58,9 @@ wechat:
     secret: "your_property_miniprogram_secret"
 
 map:
-  key: "your_tencent_map_key"
+  key: "1mIUwO9rpLWVa3hJFqYIArLxu3JagNgS"
+  secretKey: "1mIUwO9rpLWVa3hJFqYIArLxu3JagNgS"
+  enableSignature: true  # 是否启用签名验证
 
 session:
   key: "ipms:session"

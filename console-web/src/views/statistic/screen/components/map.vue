@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import { MAP_KEY } from '@/config';
+import mapConfigManager from '@/utils/map-manager';
 
 export default {
     name: 'MapChart',
@@ -42,14 +42,36 @@ export default {
             }
         }
     },
-    created() {
-        this.script = document.createElement('script');
-
-        this.script.type = 'text/javascript';
-        this.script.src = `//map.qq.com/api/gljs?v=1.exp&key=${MAP_KEY}&libraries=visualization&callback=initMap`;
-        document.head.appendChild(this.script);
-
-        window.initMap = this.initMap;
+    async created() {
+        try {
+            console.log('[MAP-DEBUG] 智慧大屏开始加载腾讯地图，从后端获取配置...');
+            
+            // 从后端获取地图配置
+            const mapConfig = await mapConfigManager.getMapConfig();
+            console.log('[MAP-DEBUG] 智慧大屏地图配置获取成功:', mapConfig);
+            
+            // 检查地图配置是否有效
+            if (!mapConfig.key || mapConfig.key === '' || mapConfig.key.length < 10) {
+                console.error('[MAP-DEBUG] 智慧大屏地图API Key无效或未配置，地图将无法正常显示');
+                return;
+            }
+            
+            this.script = document.createElement('script');
+            this.script.type = 'text/javascript';
+            
+            // 使用配置管理器构建GL API脚本URL
+            this.script.src = await mapConfigManager.buildMapGlScriptUrl({
+                callback: 'initMap'
+            });
+            
+            console.log('[MAP-DEBUG] 智慧大屏地图API脚本URL:', this.script.src);
+            
+            document.head.appendChild(this.script);
+            window.initMap = this.initMap;
+            
+        } catch (error) {
+            console.error('[MAP-DEBUG] 智慧大屏获取地图配置失败:', error);
+        }
     },
     beforeDestroy() {
         document.head.removeChild(this.script);
@@ -57,6 +79,7 @@ export default {
     },
     methods: {
         initMap() {
+            console.log('[MAP-DEBUG] 智慧大屏初始化腾讯地图');
             this.arc = null;
             this.map = new window.TMap.Map(this.$refs.map, {
                 zoom: 19,
@@ -65,15 +88,20 @@ export default {
                 showControl: false
             });
 
+            console.log('[MAP-DEBUG] 智慧大屏地图初始化完成');
             document.querySelector('.logo-text').parentElement.style = 'display: none!important;';
 
             this.resetMap();
         },
         resetMap() {
+            console.log('[MAP-DEBUG] 智慧大屏重置地图，detail.center:', this.detail.center);
+            
             if (!this.detail.center.lat || !this.detail.center.lng || !this.map) {
+                console.warn('[MAP-DEBUG] 智慧大屏缺少必要的地图数据或地图未初始化');
                 return;
             }
 
+            console.log('[MAP-DEBUG] 智慧大屏设置地图中心:', { lat: this.detail.center.lat, lng: this.detail.center.lng });
             this.map.setCenter(new window.TMap.LatLng(this.detail.center.lat, this.detail.center.lng));
 
             if (this.arc) {

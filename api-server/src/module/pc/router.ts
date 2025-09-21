@@ -17,6 +17,9 @@ export { default as PcUserResetAction } from './controller/user/reset';
 export { default as PcStorageConfigAction } from './controller/storage/config';
 export { default as PcStorageUploadAction } from './controller/storage/upload';
 
+// 地图相关功能导出
+export { default as PcMapConfigAction } from './controller/map/config';
+
 // 部门管理相关功能导出
 export { default as PcDepartmentCreateAction } from './controller/department/create';
 export { default as PcDepartmentUpdateAction } from './controller/department/update';

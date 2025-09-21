@@ -84,6 +84,8 @@ interface Config {
     };
     map: {
         key: string;
+        secretKey?: string;     // SecretKey (SK) 用于签名计算
+        enableSignature?: boolean; // 是否启用签名验证
     };
     session: {
         key: string;
@@ -248,6 +250,8 @@ function generateConfig(): Config {
         // 地图
         map: {
             key: '',
+            secretKey: '',
+            enableSignature: false,
             ...customConfig.map
         },
         session: {
