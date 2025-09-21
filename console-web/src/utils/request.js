@@ -45,6 +45,7 @@ service.interceptors.request.use(
                 options.data = data;
                 // 设置multipart请求头，告诉服务器这是文件上传
                 options.headers = {
+                    ...options.headers, // 保留已有的headers（如token）
                     'Content-Type': 'multipart/form-data'
                 };
 
@@ -55,6 +56,7 @@ service.interceptors.request.use(
                 options.data = JSON.stringify(options.data);
                 // 设置JSON请求头，告诉服务器发送的是JSON数据
                 options.headers = {
+                    ...options.headers, // 保留已有的headers（如token）
                     'Content-Type': 'application/json'
                 };
             }
@@ -64,6 +66,9 @@ service.interceptors.request.use(
         const token = utils.auth.getToken();
         console.log('🌐 [REQUEST-DEBUG] Request interceptor - getting token for:', options.url);
         console.log('🌐 [REQUEST-DEBUG] Token for request:', token ? token.substring(0, 10) + '...' : 'undefined');
+        console.log('🌐 [REQUEST-DEBUG] Is user logged in:', utils.auth.isLogin());
+        console.log('🌐 [REQUEST-DEBUG] User ID:', utils.auth.getUserId());
+        console.log('🌐 [REQUEST-DEBUG] Current headers before token:', JSON.stringify(options.headers));
 
         // 如果存在token，添加到请求头中进行身份认证
         if (token) {
@@ -72,6 +77,8 @@ service.interceptors.request.use(
         } else {
             console.log('🌐 [REQUEST-DEBUG] No token available, request will be sent without auth header');
         }
+        
+        console.log('🌐 [REQUEST-DEBUG] Final headers:', JSON.stringify(options.headers));
 
         // 为所有请求URL添加'/pc'前缀，匹配后端API路由规则
         options.url = `/pc${options.url}`;

@@ -16,14 +16,26 @@ const PcOaTplAction = <Action>{
         roles: []
     },
     response: async ctx => {
-        const { template_list: list } = await wechatService.getOaTplList();
+        try {
+            const { template_list: list } = await wechatService.getOaTplList();
 
-        ctx.body = {
-            code: SUCCESS,
-            data: {
-                list
-            }
-        };
+            ctx.body = {
+                code: SUCCESS,
+                data: {
+                    list
+                }
+            };
+        } catch (error) {
+            console.error('[OA-TPL] 获取模板列表失败:', error.message);
+            
+            ctx.body = {
+                code: 500,
+                message: '获取模板列表失败，请稍后重试',
+                data: {
+                    list: []
+                }
+            };
+        }
     }
 };
 
